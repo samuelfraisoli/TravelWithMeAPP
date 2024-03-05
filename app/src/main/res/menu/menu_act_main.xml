@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/explorarFragment"
+        android:icon="@drawable/compass_icon"
+        android:title="explorar"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/buscarFragment"
+        android:icon="@drawable/explore_icon"
+        android:title="buscar"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/planificarFragment"
+        android:icon="@drawable/plane_icon"
+        android:title="planificar"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/opinionFragment"
+        android:icon="@drawable/write_icon"
+        android:title="opinion"
+        app:showAsAction="always">
+    </item>
+
+    <item
+        android:id="@+id/cuentaFragment"
+        android:icon="@drawable/account_icon"
+        android:title="cuenta"
+        app:showAsAction="always">
+    </item>
+
+
+</menu>
