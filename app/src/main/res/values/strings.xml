@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">TravelWithMeApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="texto_principal_login">Travel With Me App</string>
+    <string name="texto_boton_login">Login</string>
+    <string name="texto_boton_registrarse">Registrar nuevo usuario</string>
+
 </resources>
