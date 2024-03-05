@@ -25,7 +25,7 @@
     <item
         android:id="@+id/opinionFragment"
         android:icon="@drawable/write_icon"
-        android:title="opinion"
+        android:title="reseña"
         app:showAsAction="always">
     </item>
 
