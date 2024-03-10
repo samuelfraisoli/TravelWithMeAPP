@@ -37,11 +37,11 @@
     </androidx.cardview.widget.CardView>
 
     <EditText
-        android:id="@+id/edit_username"
+        android:id="@+id/correo_editText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/account_icon"
-        android:hint="Introduce tu nombre de usuario"
+        android:hint="Introduce tu correo"
         android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -50,7 +50,7 @@
 
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/password_editText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -59,7 +59,7 @@
         android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_username" />
+        app:layout_constraintTop_toBottomOf="@+id/correo_editText" />
 
 
     <Button
@@ -88,6 +88,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.776" />
 
+    <Button
+        android:id="@+id/boton_login_google"
+        android:layout_width="166dp"
+        android:layout_height="45dp"
+        android:text="Login con google"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.877" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -108,5 +120,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

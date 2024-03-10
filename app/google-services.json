@@ -12,7 +12,20 @@
           "package_name": "com.example.travelwithmeapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "84148490364-h6l1aq6o6dtmblqappfqtb56o0engaf1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.travelwithmeapp",
+            "certificate_hash": "310126e0ca047da8a5d92155f23e73f48abea7fc"
+          }
+        },
+        {
+          "client_id": "84148490364-am2a8g7bgk8qopgm7g3qv402pvvvgs66.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDbc5n_hFH-DXL3ONhKPj7pyBgixG5wPd4"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84148490364-am2a8g7bgk8qopgm7g3qv402pvvvgs66.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
