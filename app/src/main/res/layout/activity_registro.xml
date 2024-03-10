@@ -106,7 +106,7 @@
         android:id="@+id/imageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:src="@drawable/icono_app"
+        android:src="@drawable/app_icon"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toStartOf="@+id/mensajeBienvenida"
         app:layout_constraintStart_toStartOf="parent"
