@@ -1,6 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    //google services (firebase)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -52,4 +55,11 @@ dependencies {
     //grafico navegación
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+
+    //firebase BoM
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+
+    //google analytics
+    implementation("com.google.firebase:firebase-analytics")
 }

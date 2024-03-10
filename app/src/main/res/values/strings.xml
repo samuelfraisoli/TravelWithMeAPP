@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">TravelWithMeApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="explorar">explorar</string>
+    <string name="buscar">buscar</string>
+    <string name="planificar">planificar</string>
+    <string name="resena">reseñas</string>
+    <string name="cuenta">cuenta</string>
 </resources>

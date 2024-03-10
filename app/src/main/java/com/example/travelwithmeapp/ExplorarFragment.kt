@@ -18,7 +18,5 @@ class ExplorarFragment : Fragment() {
         ): View? {
             binding = FragmentExplorarBinding.inflate(inflater, container, false)
             return binding.root
-
         }
-
     }
