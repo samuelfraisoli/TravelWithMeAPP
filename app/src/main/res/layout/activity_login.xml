@@ -33,7 +33,7 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/icon_login" />
+            android:src="@drawable/app_icon" />
     </androidx.cardview.widget.CardView>
 
     <EditText
