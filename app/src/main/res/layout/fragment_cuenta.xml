@@ -11,4 +11,10 @@
         android:layout_height="match_parent"
         android:text="fragment cuenta" />
 
+    <Button
+        android:id="@+id/cerrar_sesion"
+        android:layout_width="91dp"
+        android:layout_height="58dp"
+        android:text="cerrar sesión" />
+
 </FrameLayout>
