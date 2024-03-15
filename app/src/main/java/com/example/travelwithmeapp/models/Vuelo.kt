@@ -1,7 +1,7 @@
 package com.example.travelwithmeapp.models
 
 import java.util.Date
-
+import java.io.Serializable
 data class Vuelo(
     var id: String,
     var aerolinea: String,
@@ -10,4 +10,4 @@ data class Vuelo(
     var fechaSalida: Date,
     var fechaLlegada: Date,
     var precio: Double
-)
+) : Serializable

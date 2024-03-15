@@ -20,7 +20,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@drawable/location_icon" />
+        tools:src="@drawable/location_icon"
+        />
 
     <TextView
         android:id="@+id/textview_nombre"
@@ -37,11 +38,12 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView_provincia_pais"
+        android:id="@+id/textView_origen_destino"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:text="provincia, pais"
+        android:text="origen -> destino"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

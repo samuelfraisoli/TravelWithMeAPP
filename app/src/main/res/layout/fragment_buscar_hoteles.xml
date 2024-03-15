@@ -10,13 +10,72 @@
         android:id="@+id/searchView_busquedaFrag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryBackground="@android:color/transparent"
-        android:iconifiedByDefault="false"
-        android:queryHint="Introduce un hotel o vuelo"
 
+
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="Introduce destino o nombre del hotel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageView_calendar_icon"
+        android:layout_width="27dp"
+        android:layout_height="32dp"
+        android:src="@drawable/calendar_icon"
+        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline6"
+        app:layout_constraintTop_toBottomOf="@+id/searchView_busquedaFrag"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView_entrada_label"
+        android:layout_width="69dp"
+        android:layout_height="31dp"
+
+        android:hint="Entrada"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintStart_toEndOf="@+id/imageView_calendar_icon"
+        app:layout_constraintTop_toBottomOf="@+id/searchView_busquedaFrag" />
+
+    <TextView
+        android:id="@+id/textView_salida_label"
+        android:layout_width="69dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="44dp"
+        android:hint="Salida"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView_entrada_label"
+        app:layout_constraintTop_toBottomOf="@+id/searchView_busquedaFrag" />
+
+    <Button
+        android:id="@+id/button_fecha_entrada"
+        android:layout_width="203dp"
+        android:layout_height="37dp"
+        android:text="00/00/0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toEndOf="@+id/textView_entrada_label"
+        app:layout_constraintTop_toBottomOf="@+id/searchView_busquedaFrag" />
+
+    <Button
+        android:id="@+id/button_fecha_salida"
+        android:layout_width="205dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="44dp"
+        android:text="00/00/0000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/button_fecha_entrada"
+        app:layout_constraintTop_toBottomOf="@+id/searchView_busquedaFrag" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_busquedaFrag"
@@ -26,6 +85,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchView_busquedaFrag" />
+        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="133dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

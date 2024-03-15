@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- Navegación menú principal -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
+    android:id="@+id/menu_principal"
+    android:name="menu principal"
     app:startDestination="@id/explorarFragment">
 
     <fragment
@@ -12,26 +15,48 @@
         tools:layout="@layout/fragment_buscar" />
 
     <fragment
-    android:id="@+id/buscarFragment"
-    android:name="com.example.travelwithmeapp.BuscarFragment"
-    android:label="fragment_busqueda"
-    tools:layout="@layout/fragment_buscar" />
+        android:id="@+id/buscarFragment"
+        android:name="com.example.travelwithmeapp.BuscarFragment"
+        android:label="fragment_busqueda"
+        tools:layout="@layout/fragment_buscar" >
+        <action
+            android:id="@+id/action_buscarFragment_to_hotelFragment"
+            app:destination="@id/hotelFragment" />
+        <action
+            android:id="@+id/action_buscarFragment_to_vueloFragment"
+            app:destination="@id/vueloFragment" />
+    </fragment>
 
     <fragment
-    android:id="@+id/planificarFragment"
-    android:name="com.example.travelwithmeapp.PlanificarFragment"
-    android:label="fragment_busqueda"
-    tools:layout="@layout/fragment_buscar" />
+        android:id="@+id/planificarFragment"
+        android:name="com.example.travelwithmeapp.PlanificarFragment"
+        android:label="fragment_busqueda"
+        tools:layout="@layout/fragment_buscar" />
 
     <fragment
-    android:id="@+id/opinionFragment"
-    android:name="com.example.travelwithmeapp.ResenaFragment"
-    android:label="fragment_busqueda"
-    tools:layout="@layout/fragment_buscar" />
+        android:id="@+id/opinionFragment"
+        android:name="com.example.travelwithmeapp.ResenaFragment"
+        android:label="fragment_busqueda"
+        tools:layout="@layout/fragment_buscar" />
 
     <fragment
-    android:id="@+id/cuentaFragment"
-    android:name="com.example.travelwithmeapp.CuentaFragment"
-    android:label="fragment_busqueda"
-    tools:layout="@layout/fragment_buscar" />
+        android:id="@+id/cuentaFragment"
+        android:name="com.example.travelwithmeapp.CuentaFragment"
+        android:label="fragment_busqueda"
+        tools:layout="@layout/fragment_buscar" />
+    <fragment
+        android:id="@+id/hotelFragment"
+        android:name="com.example.travelwithmeapp.HotelFragment"
+        android:label="fragment_hotel"
+        tools:layout="@layout/fragment_hotel" />
+    <fragment
+        android:id="@+id/vueloFragment"
+        android:name="com.example.travelwithmeapp.VueloFragment"
+        android:label="fragment_vuelo"
+        tools:layout="@layout/fragment_vuelo" />
+
+
 </navigation>
+
+
+
