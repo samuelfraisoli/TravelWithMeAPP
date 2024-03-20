@@ -117,7 +117,7 @@ class BuscarHotelesFragment : Fragment() {
     }
 
     fun buscarHoteles() {
-        //buscar con el nombre y las fechas proporcionadas
+        //todo buscar con el nombre y las fechas proporcionadas
     }
 
 
@@ -163,7 +163,7 @@ class BuscarHotelesFragment : Fragment() {
     fun cambiarFragment(hotel: Hotel) {
         val bundle = Bundle()
         bundle.putSerializable("hotel",hotel)
-        parentFragment?.findNavController()?.navigate(R.id.action_buscarFragment_to_hotelFragment)
+        findNavController()?.navigate(R.id.action_buscarHotelesFragment_to_hotelFragment)
 
     }
 }

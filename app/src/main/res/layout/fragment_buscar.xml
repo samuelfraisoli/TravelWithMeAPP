@@ -18,48 +18,52 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/buscar"
-            android:textSize="20dp"
             android:layout_gravity="center"
-            android:id="@+id/toolbar_title" />
+            android:text="@string/buscar"
+            android:textSize="20dp" />
 
     </androidx.appcompat.widget.Toolbar>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout_buscarFrag"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.0">
 
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hoteles" />
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Vuelos" />
-
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager_buscarFrag"
+    <ImageButton
+        android:id="@+id/hotelesImageButton"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@+id/tabLayout_buscarFrag"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/buscar_hotel_imagen"
+        android:scaleType="fitCenter"
+
+        app:layout_constraintBottom_toTopOf="@+id/vuelosImageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+    </ImageButton>
+
+    <ImageButton
+        android:id="@+id/vuelosImageButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/buscar_vuelo_foto"
+        android:scaleType="fitCenter"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout_buscarFrag" />
+        app:layout_constraintTop_toBottomOf="@+id/hotelesImageButton">
+
+    </ImageButton>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

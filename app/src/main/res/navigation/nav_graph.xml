@@ -18,13 +18,14 @@
         android:id="@+id/buscarFragment"
         android:name="com.example.travelwithmeapp.BuscarFragment"
         android:label="fragment_busqueda"
-        tools:layout="@layout/fragment_buscar" >
+        tools:layout="@layout/fragment_buscar">
         <action
-            android:id="@+id/action_buscarFragment_to_hotelFragment"
-            app:destination="@id/hotelFragment" />
+            android:id="@+id/action_buscarFragment_to_buscarVuelosFragment"
+            app:destination="@id/buscarVuelosFragment" />
         <action
-            android:id="@+id/action_buscarFragment_to_vueloFragment"
-            app:destination="@id/vueloFragment" />
+            android:id="@+id/action_buscarFragment_to_buscarHotelesFragment"
+            app:destination="@id/buscarHotelesFragment" />
+
     </fragment>
 
     <fragment
@@ -54,6 +55,26 @@
         android:name="com.example.travelwithmeapp.VueloFragment"
         android:label="fragment_vuelo"
         tools:layout="@layout/fragment_vuelo" />
+
+    <fragment
+        android:id="@+id/buscarHotelesFragment"
+        android:name="com.example.travelwithmeapp.BuscarHotelesFragment"
+        android:label="fragment_buscar_hoteles"
+        tools:layout="@layout/fragment_buscar_hoteles">
+        <action
+            android:id="@+id/action_buscarHotelesFragment_to_hotelFragment"
+            app:destination="@id/hotelFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/buscarVuelosFragment"
+        android:name="com.example.travelwithmeapp.BuscarVuelosFragment"
+        android:label="fragment_buscar_vuelos"
+        tools:layout="@layout/fragment_buscar_vuelos">
+        <action
+            android:id="@+id/action_buscarVuelosFragment_to_vueloFragment"
+            app:destination="@id/vueloFragment" />
+    </fragment>
 
 
 </navigation>

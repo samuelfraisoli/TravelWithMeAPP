@@ -68,4 +68,7 @@ dependencies {
 
     //firebase auth
     implementation ("com.firebaseui:firebase-ui-auth:7.2.0")
+
+    //carousel material design3
+    implementation("io.coil-kt:coil:2.5.0")
 }
