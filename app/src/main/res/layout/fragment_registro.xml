@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".RegistroActivity">
+    tools:context=".RegistroFragment">
 
     <TextView
         android:id="@+id/mensajeBienvenida"
@@ -41,6 +41,8 @@
 
     <EditText
         android:id="@+id/fecha_nacimiento"
+        android:editable="false"
+        android:inputType="none"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -51,6 +53,7 @@
 
     <EditText
         android:id="@+id/telefono"
+        android:inputType="number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

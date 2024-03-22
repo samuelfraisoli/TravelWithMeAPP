@@ -3,7 +3,7 @@
     <string name="prefs_file" translatable="false">com.example.firebaseprueba.PREFERENCE_FILE_KEY</string>
     <string name="texto_principal_login" translatable="false">Travel With Me App</string>
     <string name="texto_boton_login">Login</string>
-    <string name="texto_boton_registrarse">Registrar nuevo usuario</string>
+    <string name="texto_boton_registrarse">Registrar usuario</string>
     <string name="explorar">explorar</string>
     <string name="buscar">buscar</string>
     <string name="planificar">planificar</string>
