@@ -71,4 +71,7 @@ dependencies {
 
     //carousel material design3
     implementation("io.coil-kt:coil:2.5.0")
+
+    //openNPL - Procesador de lenguaje natural
+    implementation("org.apache.opennlp:opennlp-tools:1.9.3")
 }

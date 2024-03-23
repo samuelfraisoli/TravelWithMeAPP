@@ -1,4 +1,4 @@
-package com.example.travelwithmeapp
+package com.example.travelwithmeapp.activities
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ActivityMainBinding
 
 enum class ProviderType {

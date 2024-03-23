@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
-import com.example.travelwithmeapp.MainActivity
-import com.example.travelwithmeapp.ProviderType
+import com.example.travelwithmeapp.activities.MainActivity
+import com.example.travelwithmeapp.activities.ProviderType
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn

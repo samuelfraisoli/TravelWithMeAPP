@@ -13,8 +13,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import com.example.travelwithmeapp.MainActivity
-import com.example.travelwithmeapp.ProviderType
+import com.example.travelwithmeapp.activities.MainActivity
+import com.example.travelwithmeapp.activities.ProviderType
 import com.example.travelwithmeapp.databinding.FragmentRegistroBinding
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale

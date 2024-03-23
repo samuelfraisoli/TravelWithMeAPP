@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.travelwithmeapp.LoginActivity
+import com.example.travelwithmeapp.activities.LoginActivity
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentCuentaBinding
 import com.google.firebase.auth.FirebaseAuth
