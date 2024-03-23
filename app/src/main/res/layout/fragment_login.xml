@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:paddingLeft="25dp"
     android:paddingRight="25dp"
-    tools:context=".LoginFragment">
+    tools:context=".fragments.LoginFragment">
 
 
     <TextView

@@ -1,6 +1,5 @@
-package com.example.travelwithmeapp
+package com.example.travelwithmeapp.fragments
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,6 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
+import com.example.travelwithmeapp.MainActivity
+import com.example.travelwithmeapp.ProviderType
+import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

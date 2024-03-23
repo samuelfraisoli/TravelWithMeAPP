@@ -1,4 +1,4 @@
-package com.example.travelwithmeapp
+package com.example.travelwithmeapp.fragments
 
 import android.app.DatePickerDialog
 import android.icu.text.SimpleDateFormat
@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.adapters.HotelesAdapter
 import com.example.travelwithmeapp.databinding.FragmentBuscarHotelesBinding
 import com.example.travelwithmeapp.models.Hotel

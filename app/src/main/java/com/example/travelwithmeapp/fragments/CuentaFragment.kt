@@ -1,13 +1,14 @@
-package com.example.travelwithmeapp
+package com.example.travelwithmeapp.fragments
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.travelwithmeapp.LoginActivity
+import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentCuentaBinding
 import com.google.firebase.auth.FirebaseAuth
 

@@ -1,4 +1,4 @@
-package com.example.travelwithmeapp
+package com.example.travelwithmeapp.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentBuscarBinding
 
 

@@ -1,4 +1,4 @@
-package com.example.travelwithmeapp
+package com.example.travelwithmeapp.fragments
 
 import android.app.DatePickerDialog
 import android.content.Context
@@ -6,16 +6,15 @@ import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
-import android.text.Editable
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
+import com.example.travelwithmeapp.MainActivity
+import com.example.travelwithmeapp.ProviderType
 import com.example.travelwithmeapp.databinding.FragmentRegistroBinding
 import com.google.firebase.auth.FirebaseAuth
 import java.util.Locale

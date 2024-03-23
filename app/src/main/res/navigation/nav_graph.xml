@@ -10,13 +10,13 @@
 
     <fragment
         android:id="@+id/explorarFragment"
-        android:name="com.example.travelwithmeapp.ExplorarFragment"
+        android:name="com.example.travelwithmeapp.fragments.ExplorarFragment"
         android:label="fragment_busqueda"
         tools:layout="@layout/fragment_buscar" />
 
     <fragment
         android:id="@+id/buscarFragment"
-        android:name="com.example.travelwithmeapp.BuscarFragment"
+        android:name="com.example.travelwithmeapp.fragments.BuscarFragment"
         android:label="fragment_busqueda"
         tools:layout="@layout/fragment_buscar">
         <action
@@ -30,35 +30,35 @@
 
     <fragment
         android:id="@+id/planificarFragment"
-        android:name="com.example.travelwithmeapp.PlanificarFragment"
+        android:name="com.example.travelwithmeapp.fragments.PlanificarFragment"
         android:label="fragment_busqueda"
         tools:layout="@layout/fragment_buscar" />
 
     <fragment
         android:id="@+id/opinionFragment"
-        android:name="com.example.travelwithmeapp.ResenaFragment"
+        android:name="com.example.travelwithmeapp.fragments.ResenaFragment"
         android:label="fragment_busqueda"
         tools:layout="@layout/fragment_buscar" />
 
     <fragment
         android:id="@+id/cuentaFragment"
-        android:name="com.example.travelwithmeapp.CuentaFragment"
+        android:name="com.example.travelwithmeapp.fragments.CuentaFragment"
         android:label="fragment_busqueda"
         tools:layout="@layout/fragment_buscar" />
     <fragment
         android:id="@+id/hotelFragment"
-        android:name="com.example.travelwithmeapp.HotelFragment"
+        android:name="com.example.travelwithmeapp.fragments.HotelFragment"
         android:label="fragment_hotel"
         tools:layout="@layout/fragment_hotel" />
     <fragment
         android:id="@+id/vueloFragment"
-        android:name="com.example.travelwithmeapp.VueloFragment"
+        android:name="com.example.travelwithmeapp.fragments.VueloFragment"
         android:label="fragment_vuelo"
         tools:layout="@layout/fragment_vuelo" />
 
     <fragment
         android:id="@+id/buscarHotelesFragment"
-        android:name="com.example.travelwithmeapp.BuscarHotelesFragment"
+        android:name="com.example.travelwithmeapp.fragments.BuscarHotelesFragment"
         android:label="fragment_buscar_hoteles"
         tools:layout="@layout/fragment_buscar_hoteles">
         <action
@@ -68,7 +68,7 @@
 
     <fragment
         android:id="@+id/buscarVuelosFragment"
-        android:name="com.example.travelwithmeapp.BuscarVuelosFragment"
+        android:name="com.example.travelwithmeapp.fragments.BuscarVuelosFragment"
         android:label="fragment_buscar_vuelos"
         tools:layout="@layout/fragment_buscar_vuelos">
         <action

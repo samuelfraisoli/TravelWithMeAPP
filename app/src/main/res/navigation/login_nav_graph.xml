@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.travelwithmeapp.LoginFragment"
+        android:name="com.example.travelwithmeapp.fragments.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_registroFragment"
@@ -14,6 +14,6 @@
     </fragment>
     <fragment
         android:id="@+id/registroFragment"
-        android:name="com.example.travelwithmeapp.RegistroFragment"
+        android:name="com.example.travelwithmeapp.fragments.RegistroFragment"
         android:label="RegistroFragment" />
 </navigation>
