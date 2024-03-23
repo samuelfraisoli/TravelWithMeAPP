@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,19 +18,23 @@ import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.adapters.HotelesAdapter
 import com.example.travelwithmeapp.databinding.FragmentBuscarHotelesBinding
 import com.example.travelwithmeapp.models.Hotel
+import com.example.travelwithmeapp.utils.OpenNLPManager
 import java.util.Locale
 
 
 class BuscarHotelesFragment : Fragment() {
     private lateinit var binding: FragmentBuscarHotelesBinding
     private lateinit var searchView: SearchView
-    private lateinit var busqueda: String
     private lateinit var fechaEntradaTextView: Button
     private lateinit var fechaSalidaTextView: Button
-    private lateinit var fechaEntrada: Calendar
-    private lateinit var fechaSalida:Calendar
     private lateinit var recyclerView: RecyclerView
     private lateinit var adaptadorRecycler: HotelesAdapter
+
+    private var openNPLManager = OpenNLPManager()
+
+    private lateinit var busqueda: String
+    private lateinit var fechaEntrada: Calendar
+    private lateinit var fechaSalida:Calendar
     private lateinit var hotelClicado: Hotel
     private var listaHoteles = ArrayList<Hotel>()
 
@@ -118,6 +123,12 @@ class BuscarHotelesFragment : Fragment() {
     }
 
     fun buscarHoteles() {
+        var tokens = openNPLManager.tokenize(searchView.query.toString())
+
+        for(token in tokens) {
+            Log.v("", token)
+        }
+
         //todo buscar con el nombre y las fechas proporcionadas
     }
 

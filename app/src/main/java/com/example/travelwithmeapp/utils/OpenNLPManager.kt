@@ -3,6 +3,7 @@ package com.example.travelwithmeapp.utils
 import opennlp.tools.tokenize.TokenizerME
 import opennlp.tools.tokenize.TokenizerModel
 import java.io.FileInputStream
+import java.io.InputStream
 
 /**
  * OpenNLP (Open Natural Language Processing) es una biblioteca de procesamiento de lenguaje.
@@ -16,7 +17,7 @@ class OpenNLPManager {
      * Pide un String, que es la cadena de texto que introduce el usuario, extrae los tokens usando un modelo, y luego los devuelve. */
     fun tokenize(sentence: String): Array<String> {
         // Cargar el modelo del tokenizer
-        val modelIn = FileInputStream("es-token.bin")
+        val modelIn: InputStream = this::class.java.getResourceAsStream("es-ner-location.bin")
         val model = TokenizerModel(modelIn)
 
         // Inicializar el TokenizerME
