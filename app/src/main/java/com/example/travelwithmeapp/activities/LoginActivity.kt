@@ -7,6 +7,8 @@ import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ActivityLoginBinding
+import com.example.travelwithmeapp.models.User
+import com.example.travelwithmeapp.utils.FirebaseAuthManager
 
 class LoginActivity : AppCompatActivity() {
 
@@ -14,35 +16,33 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var email: Editable
     private lateinit var password: Editable
+    private lateinit var firebaseAuthManager: FirebaseAuthManager
 
-    private val CODIGO_GOOGLE = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        inicializar()
         comprobarSesion()
+    }
 
+    fun inicializar() {
+        firebaseAuthManager = FirebaseAuthManager(this)
 
     }
 
     fun comprobarSesion() {
-        val sharedPreferences = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
-        val email = sharedPreferences.getString("email", null)
-        val provider = sharedPreferences.getString("provider", null)
-
-        //todo hacer que pase el uid también
-        if(email != null && provider != null) {
-            intentAMainAct(email, ProviderType.valueOf(provider))
+        val user = firebaseAuthManager.comprobarSesion()
+        if(user != null) {
+            intentAMainAct(user)
         }
     }
 
 
-    fun intentAMainAct(email: String, provider: ProviderType) {
+    fun intentAMainAct(user: User) {
         var intent = Intent(this, MainActivity::class.java).apply {
-            putExtra("email", email)
-            putExtra("provider", provider.name)
+            putExtra("user", user)
         }
         startActivity(intent)
     }

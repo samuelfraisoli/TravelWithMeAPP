@@ -10,11 +10,13 @@ import android.view.ViewGroup
 import com.example.travelwithmeapp.activities.LoginActivity
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentCuentaBinding
+import com.example.travelwithmeapp.utils.FirebaseAuthManager
 import com.google.firebase.auth.FirebaseAuth
 
 
 class CuentaFragment : Fragment() {
         private lateinit var binding: FragmentCuentaBinding
+        private var firebaseAuthManager = FirebaseAuthManager(requireContext())
 
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -28,16 +30,15 @@ class CuentaFragment : Fragment() {
             return binding.root
         }
 
-
-    //borra los datos guardados en sharedpreferences, te deslogea de firebase y te devuelve a la pantalla de login
     fun cerrarSesion() {
-        var sharedPrefEditor = requireContext().getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE).edit()
-        sharedPrefEditor.clear()
-        sharedPrefEditor.apply()
-
-        FirebaseAuth.getInstance().signOut()
+        firebaseAuthManager.cerrarSesion()
 
         val intentALogin = Intent(requireContext(), LoginActivity::class.java)
         startActivity(intentALogin)
-        }
+    }
+
+
+
+
+
     }

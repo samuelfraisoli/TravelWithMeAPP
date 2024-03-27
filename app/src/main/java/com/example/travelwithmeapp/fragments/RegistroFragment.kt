@@ -1,34 +1,30 @@
 package com.example.travelwithmeapp.fragments
 
-import android.app.DatePickerDialog
-import android.content.Context
+
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
 import com.example.travelwithmeapp.activities.MainActivity
-import com.example.travelwithmeapp.activities.ProviderType
 import com.example.travelwithmeapp.databinding.FragmentRegistroBinding
-import com.google.firebase.auth.FirebaseAuth
-import java.util.Locale
+import com.example.travelwithmeapp.models.User
+import com.example.travelwithmeapp.utils.FirebaseAuthManager
+import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
+import com.example.travelwithmeapp.utils.Utilities
+
 
 
 class RegistroFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentRegistroBinding
 
-    private lateinit var nombre: String
-    private lateinit var apellidos: String
-    private lateinit var fechaNacimiento: String
-    private lateinit var telefono: String
-    private lateinit var email: String
-    private lateinit var password: String
+    private lateinit var firebaseAuthManager: FirebaseAuthManager
+    private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
+    private var utilities = Utilities()
+
+    private lateinit var user: User
 
 
 
@@ -45,13 +41,14 @@ class RegistroFragment : Fragment(), View.OnClickListener {
     }
 
     fun inicializar() {
+        firebaseAuthManager = FirebaseAuthManager(requireContext())
+        firebaseFirestoreManager = FirebaseFirestoreManager(requireContext())
+
         binding.botonLimpiar.setOnClickListener(this)
         binding.botonRegistrar.setOnClickListener(this)
-
         binding.fechaNacimiento.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
-                cerrarTeclado(view)
-                lanzarDatePickerDialog(view)
+                utilities.lanzarDatePickerDialog(view, requireContext())
             }
         }
     }
@@ -68,11 +65,17 @@ class RegistroFragment : Fragment(), View.OnClickListener {
      * - Primero comprueba si los datos son correctos, y si sí lo son, llamará a las otras funciones*/
     fun realizarRegistro() {
         if (verificarDatosCorrectos()) {
-            recogerDatosYSubirlosADB()
-            registrarConCorreo()
+            var correo = binding.correo.toString()
+            var password = binding.contraseA.toString()
+            val user = firebaseAuthManager.registrarConCorreo(correo, password)
+            if(user != null) {
+                if(recogerDatosYSubirlosADB(user)) {
+                    IntentAMainAct(user)
+                }
+
+            }
         }
     }
-
 
     /**
      * Función que verifica si los datos se han introducido correctamente */
@@ -85,77 +88,43 @@ class RegistroFragment : Fragment(), View.OnClickListener {
             binding.contraseA.text.isEmpty() ||
             binding.confirmacionContraseA.text.isEmpty()
            ) {
-            mostrarAlertaDialog("Por favor complete todos los campos.")
+            firebaseAuthManager.mostrarAlertaDialog("Por favor complete todos los campos.")
             return false
         }
         if(binding.contraseA.text.equals(binding.confirmacionContraseA.text)) {
-            mostrarAlertaDialog("Las contraseñas no coinciden")
+            firebaseAuthManager.mostrarAlertaDialog("Las contraseñas no coinciden")
             return false
         }
         if (!binding.terminos.isChecked) {
-            mostrarAlertaDialog("Por favor acepte los términos y condiciones.")
+            firebaseAuthManager.mostrarAlertaDialog("Por favor acepte los términos y condiciones.")
             return false
         }
         return true
     }
 
-    //todo completar
+
     /**
-     * Función que recoge los datos introducidos y los sube a la base de datos */
-    fun recogerDatosYSubirlosADB() {
-        nombre = binding.nombre.text.toString()
-        apellidos = binding.nombre.text.toString()
-        fechaNacimiento = binding.fechaNacimiento.text.toString()
-        telefono = binding.telefono.text.toString()
-        email = binding.correo.text.toString()
-        password = binding.contraseA.toString()
+     * Función que recoge los datos introducidos y los sube a la base de datos
+     * Llama a la función guardarDatosUsuario, a la que le pasa un callback, dependiendo de
+     * si esa función devuelve true o false, se determina si esta devuelve true or false.
+     * Eso determina si se han podido subir los datos a la DB correctamente o no*/
+    fun recogerDatosYSubirlosADB(user: User): Boolean {
+        user.name = binding.nombre.text.toString()
+        user.surname = binding.nombre.text.toString()
+        user.birthdate = binding.fechaNacimiento.text.toString()
+        user.telephone = binding.telefono.text.toString()
 
-        //recoge los datos de los usuarios y los sube a la BD
-
-    }
-
-
-
-
-    fun registrarConCorreo() {
-        if(email.isNotEmpty() && password.isNotEmpty()) {
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.toString(), password.toString())
-                .addOnCompleteListener {
-                    if(it.isSuccessful) {
-                        IntentAMainAct(it.result?.user?.email ?: "", ProviderType.BASIC)
-                    }
-
-                    else {
-                        mostrarAlertaDialog(it.exception?.message ?:"Error")
-                    }
-                }
+        var boolean = false
+        firebaseFirestoreManager.guardarDatosUsuario(user) {
+            booleanCallback ->
+            if(booleanCallback == true) {
+                boolean = true
+            }
+            else {boolean = false
+            }
         }
-    }
 
-
-    /**
-     * Lanza un diálogo con un selector de fecha */
-    fun lanzarDatePickerDialog(view: View) : Calendar {
-        var fechaSeleccionada = Calendar.getInstance()
-        var calendar = Calendar.getInstance()
-        var ano = calendar.get(Calendar.YEAR)
-        var mes = calendar.get(Calendar.MONTH)
-        var dia = calendar.get(Calendar.DAY_OF_MONTH)
-
-        var datePickerDialog = DatePickerDialog(
-            requireContext(),
-            DatePickerDialog.OnDateSetListener { _, anoSeleccionado, mesSeleccionado, diaSeleccionado ->
-                fechaSeleccionada = Calendar.getInstance()
-                fechaSeleccionada.set(anoSeleccionado, mesSeleccionado, diaSeleccionado)
-                view as EditText
-                view.setText(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(fechaSeleccionada.time))
-            },
-            ano,
-            mes,
-            dia
-        )
-        datePickerDialog.show()
-        return fechaSeleccionada
+        return boolean
     }
 
 
@@ -168,32 +137,18 @@ class RegistroFragment : Fragment(), View.OnClickListener {
         binding.contraseA.setText("")
         binding.confirmacionContraseA.setText("")
         binding.terminos.isChecked = false
-
     }
 
-    fun IntentAMainAct(email: String, provider: ProviderType) {
+    fun IntentAMainAct(user: User) {
         var intent = Intent(requireContext(), MainActivity::class.java).apply {
-            putExtra("email", email)
-            putExtra("provider", provider.name)
+            putExtra("user", user)
         }
         startActivity(intent)
     }
 
-    /**
-     * Muestra un diálogo de alerta con los datos necesarios */
-    fun mostrarAlertaDialog(datos: String) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Error de autenticacion")
-            .setMessage(datos)
-            .setPositiveButton("Aceptar", null)
-            .create()
-            .show()
-    }
 
-    private fun cerrarTeclado(view: View) {
-        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
-    }
+
+
 
 
 

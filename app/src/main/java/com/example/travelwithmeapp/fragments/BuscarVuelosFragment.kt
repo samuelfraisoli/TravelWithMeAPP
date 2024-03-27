@@ -37,15 +37,7 @@ class BuscarVuelosFragment : Fragment() {
     }
 
     fun inicializar() {
-            /*textviewOrigen = binding.textviewOrigen
-            textviewDestino = binding.textviewDestino
-            fechaButton = binding.buttonFecha
 
-            fechaButton.setOnClickListener {view ->
-                var fecha = lanzarDatePickerDialog(view)
-                fechaVuelo = fecha
-                buscarVuelos()
-            }*/
 
 
     }

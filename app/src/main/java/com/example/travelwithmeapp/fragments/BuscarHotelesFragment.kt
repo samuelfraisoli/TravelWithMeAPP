@@ -1,8 +1,6 @@
 package com.example.travelwithmeapp.fragments
 
-import android.app.DatePickerDialog
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,7 +16,8 @@ import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.adapters.HotelesAdapter
 import com.example.travelwithmeapp.databinding.FragmentBuscarHotelesBinding
 import com.example.travelwithmeapp.models.Hotel
-import com.example.travelwithmeapp.utils.OpenNLPManager
+import com.example.travelwithmeapp.utils.TripadvisorAPIManager
+import com.example.travelwithmeapp.utils.Utilities
 import java.util.Locale
 
 
@@ -30,11 +29,11 @@ class BuscarHotelesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adaptadorRecycler: HotelesAdapter
 
-    private var openNPLManager = OpenNLPManager()
+    private var tripadvisorAPIManager = TripadvisorAPIManager()
+    private var utilities = Utilities()
+
 
     private lateinit var busqueda: String
-    private lateinit var fechaEntrada: Calendar
-    private lateinit var fechaSalida:Calendar
     private lateinit var hotelClicado: Hotel
     private var listaHoteles = ArrayList<Hotel>()
 
@@ -57,99 +56,75 @@ class BuscarHotelesFragment : Fragment() {
         fechaSalidaTextView = binding.buttonFechaSalida
         recyclerView = binding.recyclerBusquedaFrag
 
-        //se pasa la view, que es el propio botón, para que cuando el usuario seleccione una fecha en el datepicker, la fecha que aparece en el botón cambie
-        // - lanzan la función buscarHoteles, que hará una petición a la API para cargar los hoteles
-        fechaEntradaTextView.setOnClickListener {view ->
-            var fecha = lanzarDatePickerDialog(view)
-            fechaEntrada = fecha
-            buscarHoteles()
+        binding.buttonFechaSalida.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                utilities.lanzarDatePickerDialog(view, requireContext())
+            }
         }
-        fechaSalidaTextView.setOnClickListener { view ->
-            var fecha = lanzarDatePickerDialog(view)
-            fechaSalida = fecha
-            buscarHoteles()
+        binding.buttonFechaEntrada.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                utilities.lanzarDatePickerDialog(view, requireContext())
+            }
         }
 
-        //se crea un objeto que instancia la interfaz onquerytextlistener, la cual obliga a implementar 2 métodos
-        // - onquerytextsubmit -> Es el método que se ejecuta cuando el usuario le da a enter, ejecutará la función buscarHoteles
-        // - onquerytextchange -> Se ejecuta cuando el texto se modifica, no le he dado funcionalidad
+        /**se crea un objeto que instancia la interfaz onquerytextlistener, la cual obliga a implementar 2 métodos
+         * - onquerytextsubmit -> Es el método que se ejecuta cuando el usuario le da a enter, ejecutará la función buscarHoteles
+         * - onquerytextchange -> Se ejecuta cuando el texto se modifica, no le he dado funcionalidad
+        */
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String): Boolean {
-                buscarHoteles()
+                Log.v("", "presionado enter")
+                //buscarHoteles()
+                buscarHotelesDatosPorDefecto()
                 return true
             }
-
             override fun onQueryTextChange(newText: String): Boolean {
                 return false
             }
-
         })
-
-        rellenarListaRecycler()
         configurarRecycler()
     }
 
 
-    /** Primero crea el objeto fechaSeleccionada, que almacenará la fecha que el usuario seleccione
-     * (por ahora se inicializa con el valor del día actual para que no tenga valor null)
-     * Luego usa la clase Calendar para coger el año, mes y día actuales.
-     * Luego crea un datePickerDialog, un diálogo con un calendario para seleccionar una fecha
-     * Inicializa ese calendario con el año, mes y día que había recogido
-     * Le añade un OnDateSetListener, que escucha cuándo el usuario selecciona una fecha
-     * Guarda el año, mes y día que selecciona en la variable fechaSeleccionada
-     * Finalmente retorna la fecha que ha seleccionado el usuario en el dialog
-    */
-    fun lanzarDatePickerDialog(view: View) : Calendar {
-        var fechaSeleccionada = Calendar.getInstance()
-        var calendar = Calendar.getInstance()
-        var ano = calendar.get(Calendar.YEAR)
-        var mes = calendar.get(Calendar.MONTH)
-        var dia = calendar.get(Calendar.DAY_OF_MONTH)
-
-        var datePickerDialog = DatePickerDialog(
-            requireContext(),
-            DatePickerDialog.OnDateSetListener { _, anoSeleccionado, mesSeleccionado, diaSeleccionado ->
-                fechaSeleccionada = Calendar.getInstance()
-                fechaSeleccionada.set(anoSeleccionado, mesSeleccionado, diaSeleccionado)
-                view as Button
-                view.setText(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(fechaSeleccionada.time))
-            },
-            ano,
-            mes,
-            dia
-        )
-        datePickerDialog.show()
-        return fechaSeleccionada
-    }
-
+    /**
+     * Crea un thread que va a ejecutar en segundo plano la función de búsqueda de la API de tripadvisor
+     * Si recibe datos, actualizará el recyclerview con esos datos
+     */
     fun buscarHoteles() {
-        var tokens = openNPLManager.tokenize(searchView.query.toString())
-
-        for(token in tokens) {
-            Log.v("", token)
+        val thread = Thread {
+            var respuesta = tripadvisorAPIManager.locationSearch(searchView.query.toString(), Locale.getDefault().language)
+            Log.v("", "respuesta recibida")
+            if(!respuesta.isNullOrEmpty()) {
+                Log.v("", "Datos api recibidos, modificando recycler")
+                listaHoteles = respuesta
+                adaptadorRecycler.notifyDataSetChanged()
+            }
         }
-
-        //todo buscar con el nombre y las fechas proporcionadas
+        thread.start()
     }
 
 
-
-    //todo cambiar por datos recogidos de la API
-    fun rellenarListaRecycler() {
-        for (i in 1..10) {
-            val hotel = Hotel(
-                id = i.toLong(),
-                nombre = "nombre $i",
-                descripcion = "descripcion $i",
-                direccion = "direccionl $i",
-                provincia = "provincia $i",
-                pais = "pais $i",
-                telefono = "telefono $i",
-                web = "web $i",
-                imagenes = arrayListOf("imagen $i", "imagen $i")
-            )
+    @SuppressLint("NotifyDataSetChanged")
+    fun buscarHotelesDatosPorDefecto() {
+        for(i in 0 until 10) {
+            var hotel = Hotel()
+            hotel.name = ("hotel ${i}")
+            hotel.address.city = ("ciudad ${i}")
+            hotel.address.country = ("pais ${i}")
             listaHoteles.add(hotel)
         }
+        listaHoteles.get(0).photos.mediumPhotos.add("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/37/69/93/four-seasons-hotel-madrid.jpg?w=700&h=-1&s=1")
+        listaHoteles.get(1).photos.mediumPhotos.add("https://www.momondo.es/himg/65/a8/5b/expediav2-4288651-6d557b-453569.jpg")
+        listaHoteles.get(2).photos.mediumPhotos.add("https://upload.wikimedia.org/wikipedia/commons/7/7d/The_Westin_Palace_Madrid.jpg")
+        listaHoteles.get(3).photos.mediumPhotos.add("https://www.hotelmadridpraga.com/wp-content/uploads/sites/2490/nggallery/content-img//Praga_39-1.jpg")
+        listaHoteles.get(4).photos.mediumPhotos.add("https://www.ahstatic.com/photos/7438_ho_00_p_1024x768.jpg")
+        listaHoteles.get(5).photos.mediumPhotos.add("https://media.timeout.com/images/105965911/750/562/image.jpg")
+        listaHoteles.get(6).photos.mediumPhotos.add("https://cf.bstatic.com/xdata/images/hotel/max1024x768/470960002.jpg?k=a70e747872b27bbb5093759421705a033ff9522988c9d5668d4543aee721b45d&o=&hp=1")
+        listaHoteles.get(7).photos.mediumPhotos.add("https://www.ahstatic.com/photos/9298_ho_00_p_1024x768.jpg")
+        listaHoteles.get(8).photos.mediumPhotos.add("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/43/22/1e/only-you-boutique-hotel.jpg?w=1200&h=-1&s=1")
+        listaHoteles.get(9).photos.mediumPhotos.add("https://www.indigomadrid.com/wp-content/uploads/pool.jpg")
+
+        adaptadorRecycler.notifyDataSetChanged()
     }
 
     /**
@@ -171,7 +146,6 @@ class BuscarHotelesFragment : Fragment() {
     /**pasa al fragment HotelFragment, y le pasa los datos del hotel seleccionado para mostrarlos en el fragment
      * No llama a su propio navegador, si no al del fragment padre "BuscarFragment". De esta forma es capaz de salir del tablayout en el que
      * está este fragment y buscarVuelosFragment*/
-    //todo arreglar, no funciona
     fun cambiarFragment(hotel: Hotel) {
         val bundle = Bundle()
         bundle.putSerializable("hotel",hotel)
