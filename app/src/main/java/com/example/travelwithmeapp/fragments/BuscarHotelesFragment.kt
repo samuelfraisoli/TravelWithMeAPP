@@ -29,7 +29,7 @@ class BuscarHotelesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adaptadorRecycler: HotelesAdapter
 
-    private var tripadvisorAPIManager = TripadvisorAPIManager()
+
     private var utilities = Utilities()
 
 

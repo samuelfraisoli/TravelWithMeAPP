@@ -4,59 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+
+    android:padding="10dp">
 
 
     <ImageView
         android:id="@+id/imagen"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.016"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:src="@drawable/location_icon"
-        />
+        tools:src="@drawable/location_icon" />
 
     <TextView
-        android:id="@+id/textview_nombre"
+        android:id="@+id/hora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="nombre"
-        android:textStyle="bold"
 
+        android:text="12:00 - 18:00"
+        android:textSize="20dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toEndOf="@+id/imagen"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView_origen_destino"
+        android:id="@+id/precio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Precio"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.988"
+        app:layout_constraintStart_toEndOf="@+id/hora"
+        app:layout_constraintTop_toBottomOf="@+id/ciudadYAerolinea"
+        app:layout_constraintVertical_bias="1.0" />
 
-        android:text="origen -> destino"
-        android:textStyle="bold"
+    <TextView
+        android:id="@+id/ciudadYAerolinea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:text="MDR-NY, Vueling airlines"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.318" />
+        app:layout_constraintStart_toStartOf="@+id/hora"
+        app:layout_constraintTop_toBottomOf="@+id/hora"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
+    <TextView
+        android:id="@+id/escala"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="135dp" />
+        android:text="Escala"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.988"
+        app:layout_constraintStart_toEndOf="@+id/hora"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tiempoVuelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="2h 20m"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.988"
+        app:layout_constraintStart_toEndOf="@+id/hora"
+        app:layout_constraintTop_toBottomOf="@+id/escala" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

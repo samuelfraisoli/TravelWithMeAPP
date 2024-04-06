@@ -10,8 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travelwithmeapp.R
+import com.example.travelwithmeapp.adapters.VuelosAdapter
 import com.example.travelwithmeapp.databinding.FragmentBuscarVuelosBinding
+import com.example.travelwithmeapp.models.Hotel
+import com.example.travelwithmeapp.models.Vuelo
+import com.example.travelwithmeapp.utils.Utilities
 import java.util.Date
 import java.util.Locale
 
@@ -23,6 +30,11 @@ class BuscarVuelosFragment : Fragment() {
     private lateinit var fechaButton: Button
     private lateinit var fechaVuelo: Date
     private lateinit var recyclerView: RecyclerView
+
+    private var utilities = Utilities()
+
+    private lateinit var adaptadorRecycler: VuelosAdapter
+    private var listaVuelos = ArrayList<Vuelo>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,46 +49,30 @@ class BuscarVuelosFragment : Fragment() {
     }
 
     fun inicializar() {
-
-
-
+       fechaButton.setOnFocusChangeListener { view, hasFocus ->
+            if (hasFocus) {
+                fechaVuelo = utilities.lanzarDatePickerDialog(view, requireContext()).time
+            }
+        }
     }
 
     fun configurarRecycler() {
+        adaptadorRecycler = VuelosAdapter(listaVuelos) {
+            vuelo -> cambiarFragment(vuelo)
+        }
 
-
-
-
+        recyclerView.adapter = adaptadorRecycler
+        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
     fun buscarVuelos() {
         //todo rellenar
     }
 
-
-    fun lanzarDatePickerDialog(view: View) : Calendar {
-        var fechaSeleccionada = Calendar.getInstance()
-        var calendar = Calendar.getInstance()
-        var ano = calendar.get(Calendar.YEAR)
-        var mes = calendar.get(Calendar.MONTH)
-        var dia = calendar.get(Calendar.DAY_OF_MONTH)
-
-        var datePickerDialog = DatePickerDialog(
-            requireContext(),
-            DatePickerDialog.OnDateSetListener { _, anoSeleccionado, mesSeleccionado, diaSeleccionado ->
-                fechaSeleccionada = Calendar.getInstance()
-                fechaSeleccionada.set(anoSeleccionado, mesSeleccionado, diaSeleccionado)
-                view as Button
-                view.setText(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(fechaSeleccionada.time))
-            },
-            ano,
-            mes,
-            dia
-        )
-        datePickerDialog.show()
-        return fechaSeleccionada
+    fun cambiarFragment(vuelo: Vuelo) {
+        val bundle = Bundle()
+        bundle.putSerializable("vuelo", vuelo)
+        findNavController()?.navigate(R.id.action_buscarVuelosFragment_to_vueloFragment)
     }
-
-
 }
 
