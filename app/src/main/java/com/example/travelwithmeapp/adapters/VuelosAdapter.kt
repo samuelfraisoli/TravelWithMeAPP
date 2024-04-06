@@ -3,6 +3,7 @@ package com.example.travelwithmeapp.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ViewholderVueloBinding
 import com.example.travelwithmeapp.models.Vuelo
 import java.time.LocalTime
@@ -20,10 +21,13 @@ class VuelosAdapter(
 
             var escalasText = ""
             if(vuelo.escalas.size == 0) {
-                "Sin escalas"
+                escalasText = "Sin escalas"
+            }
+            else if(vuelo.escalas.size == 1) {
+                escalasText = "1 escala"
             }
             else {
-                "${vuelo.escalas.size} escalas"
+                escalasText = "${vuelo.escalas.size} escalas"
             }
 
             var horas: Int = 0
@@ -41,15 +45,15 @@ class VuelosAdapter(
 
             var imagenId = 0
             if(horaLlegada.isBefore(LocalTime.of(19,0)) && horaSalida.isAfter(LocalTime.of(7,0))) {
-                //poner la imagen de dia
+                itemBinding.imagen.setImageResource(R.drawable.sun_icon)
             }
 
             else if(horaLlegada.isAfter(LocalTime.of(19,0)) && horaSalida.isBefore(LocalTime.of(7,0))) {
-                //poner la imagen de noche
+                itemBinding.imagen.setImageResource(R.drawable.moon_icon)
             }
 
             else {
-                //poner imagen de dia y noche
+                itemBinding.imagen.setImageResource(R.drawable.sun_moon_icon)
             }
 
 
@@ -62,7 +66,7 @@ class VuelosAdapter(
             //todo poner imagen solecito de dia, y luna de noche
             //itemBinding.imagen.setImageResource(imagenId)
 
-            itemBinding.precio.text = vuelo.precio.toString()
+            itemBinding.precio.text = "${vuelo.precio.toString()} € "
 
 
             itemBinding.root.setOnClickListener {

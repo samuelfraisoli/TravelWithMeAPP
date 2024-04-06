@@ -16,7 +16,6 @@ import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.example.travelwithmeapp.utils.Utilities
 
 
-
 class RegistroFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentRegistroBinding
 
@@ -25,7 +24,6 @@ class RegistroFragment : Fragment(), View.OnClickListener {
     private var utilities = Utilities()
 
     private lateinit var user: User
-
 
 
     override fun onCreateView(
@@ -54,9 +52,14 @@ class RegistroFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v?.id) {
-            binding.botonLimpiar.id->{limpiar() }
-            binding.botonRegistrar.id -> { realizarRegistro() }
+        when (v?.id) {
+            binding.botonLimpiar.id -> {
+                limpiar()
+            }
+
+            binding.botonRegistrar.id -> {
+                realizarRegistro()
+            }
         }
     }
 
@@ -67,19 +70,20 @@ class RegistroFragment : Fragment(), View.OnClickListener {
         if (verificarDatosCorrectos()) {
             var correo = binding.correo.toString()
             var password = binding.contraseA.toString()
-            val user = firebaseAuthManager.registrarConCorreo(correo, password)
-            if(user != null) {
-                if(recogerDatosYSubirlosADB(user)) {
-                    IntentAMainAct(user)
+            firebaseAuthManager.registrarConCorreo(correo, password) { userRegistrado ->
+                if (userRegistrado != null) {
+                    user = userRegistrado
+                    if (recogerDatosYSubirlosADB(user)) {
+                        IntentAMainAct(user)
+                    }
                 }
-
             }
         }
     }
 
     /**
      * Función que verifica si los datos se han introducido correctamente */
-    fun verificarDatosCorrectos() : Boolean {
+    fun verificarDatosCorrectos(): Boolean {
         if (binding.nombre.text.isEmpty() ||
             binding.apellidos.text.isEmpty() ||
             binding.fechaNacimiento.text.isEmpty() ||
@@ -87,11 +91,11 @@ class RegistroFragment : Fragment(), View.OnClickListener {
             binding.correo.text.isEmpty() ||
             binding.contraseA.text.isEmpty() ||
             binding.confirmacionContraseA.text.isEmpty()
-           ) {
+        ) {
             firebaseAuthManager.mostrarAlertaDialog("Por favor complete todos los campos.")
             return false
         }
-        if(binding.contraseA.text.equals(binding.confirmacionContraseA.text)) {
+        if (binding.contraseA.text.equals(binding.confirmacionContraseA.text)) {
             firebaseAuthManager.mostrarAlertaDialog("Las contraseñas no coinciden")
             return false
         }
@@ -115,12 +119,11 @@ class RegistroFragment : Fragment(), View.OnClickListener {
         user.telephone = binding.telefono.text.toString()
 
         var boolean = false
-        firebaseFirestoreManager.guardarDatosUsuario(user) {
-            booleanCallback ->
-            if(booleanCallback == true) {
+        firebaseFirestoreManager.guardarDatosUsuario(user) { booleanCallback ->
+            if (booleanCallback == true) {
                 boolean = true
-            }
-            else {boolean = false
+            } else {
+                boolean = false
             }
         }
 
@@ -145,11 +148,6 @@ class RegistroFragment : Fragment(), View.OnClickListener {
         }
         startActivity(intent)
     }
-
-
-
-
-
 
 
 }

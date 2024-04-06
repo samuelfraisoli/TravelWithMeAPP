@@ -2,17 +2,28 @@ package com.example.travelwithmeapp.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat.startActivityForResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.models.ProviderType
 import com.example.travelwithmeapp.models.User
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 
 
+/**
+ * Se encarga de gestionar las operaciones de FirebaseAuth, nuestro sistema de autenticación de usuarios
+ * @param context - El contexto de la activity en la que se instancia esta clase. Es necesario para que las funciones puedan hacer modificaciones del layout de la actividad.
+ */
 class FirebaseAuthManager(val context: Context) {
     private val CODIGO_GOOGLE = 100
+    private val utilities = Utilities()
 
 
     //SESIÓN
@@ -76,66 +87,87 @@ class FirebaseAuthManager(val context: Context) {
 
     //LOGIN
     /**
-     * Registra al usuario en firebase.
-     * Si el registro se realiza correctamente, devuelve la id, el email y el tipo de proveedor del usuario
-     * Si no se realiza correctamente, devuelve null
+     * Logea al usuario en firebase.
+     * Si el usuario se logea correctamente realiza un callback al que se le pasa como parámetro el usuario. Este callback va a ser una función que se va a crear en la actividad, y va a realizar una operación con el usuario. Lo que haremos será únicamente retornar el usuario
+     *
+     * Hay que retornar el usuario con un callback en vez de con un return, porque las llamadas a firebase son asíncronas, entonces, si se pone un return, puede ser que se ejecute antes de que se haya recuperado el usuario, por lo que devolvería el usuario vacío
+     *
+     * Si hay un error, mostrará un AlertDialog con el mensaje de error
      */
-    fun logearConCorreo(email: String, password: String): User? {
-        lateinit var user: User
+    fun logearConCorreo(email: String, password: String, callback: (User) -> Unit) {
         FirebaseAuth.getInstance()
             .signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    user = User()
-                    val uid = it.result.user?.uid ?: null
-                    val email = it.result?.user?.email ?: null
-                    val provider = ProviderType.BASIC
-                    if (uid != null && email != null) {
-                        user = User(uid, email, provider)
-                    }
+            .addOnSuccessListener {
+                var user = User()
+                val uid = it.user?.uid ?: null
+                val email = it.user?.email ?: null
+                val provider = ProviderType.BASIC
+                if (uid != null && email != null) {
+                    user = User(uid, email, provider)
+                    callback(user)
+                } else {
+                    mostrarAlertaDialog("No se pudo completar el login")
                 }
-                mostrarAlertaDialog(it.exception?.message ?: "Error")
             }
-        return user
+            .addOnFailureListener {
+                mostrarAlertaDialog(it?.message ?: "Error")
+            }
     }
 
-    /**
-     *
-     */
-    fun logearConGoogle() {
-        val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(context.getString(com.firebase.ui.auth.R.string.default_web_client_id))
-            .requestEmail()
-            .build()
 
-        val googleClient = GoogleSignIn.getClient(context, googleConf)
-        //para que cuando el usuario vuelva a dar al botón de google se haga logout del usuario anterior que estaba registrado con google
-        googleClient.signOut()
-        (context as Activity).startActivityForResult(googleClient.signInIntent, CODIGO_GOOGLE)
+    fun procesarDatosActivityLoginGoogle(data: Intent?, callback: (User) -> Unit) {
+        try {
+            Log.v("", "procesarDatosActivityLoginGoogle")
+            //recoge la cuenta de google del usuario a partir del Intent llamado data
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val account = task.getResult(ApiException::class.java)
 
+            //si la cuenta recuperada no es null. Registrará al usuario en firebase con los datos que coge de la cuenta de google.
+            //Luego lo devolverá mediante un callback
+            if (account != null) {
+                val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+                FirebaseAuth.getInstance().signInWithCredential(credential)
+                    .addOnSuccessListener {
+                        var user = User()
+                        var uid = it.user?.uid
+                        var email = account.email
+                        var provider = ProviderType.GOOGLE
+                        if (uid != null && email != null && email != null) {
+                            user = User(uid, email, provider)
+                            Log.v("", user.toString())
+                            callback(user)
+                        }
+                    }
+                    .addOnFailureListener {
+                        mostrarAlertaDialog(it?.message ?: "Error")
+                    }
+
+            }
+        } catch (e: ApiException) {
+
+        }
     }
 
 
     //REGISTRO
-    fun registrarConCorreo(email: String, password: String): User? {
-        lateinit var user: User
+    fun registrarConCorreo(email: String, password: String, callback: (User) -> Unit) {
         FirebaseAuth.getInstance()
-            .createUserWithEmailAndPassword(email.toString(), password.toString())
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val uid = it.result.user?.uid ?: null
-                    val email = it.result?.user?.email ?: null
-                    val provider = ProviderType.BASIC
-                    if (uid != null && email != null) {
-                        user = User(uid, email, provider)
-                    }
-
-
+            .createUserWithEmailAndPassword(email, password)
+            .addOnSuccessListener {
+                var user = User()
+                val uid = it.user?.uid ?: null
+                val email = it.user?.email ?: null
+                val provider = ProviderType.BASIC
+                if (uid != null && email != null) {
+                    user = User(uid, email, provider)
+                    callback(user)
                 } else {
-                    mostrarAlertaDialog(it.exception?.message ?: "Error")
+                    mostrarAlertaDialog("No se pudo completar el registro")
                 }
             }
-        return user
+            .addOnFailureListener {
+                mostrarAlertaDialog(it?.message ?: "Error")
+            }
     }
 
 
@@ -144,7 +176,6 @@ class FirebaseAuthManager(val context: Context) {
     fun restablecerContraseña() {
 
     }
-
 
 
     fun mostrarAlertaDialog(datos: String) {

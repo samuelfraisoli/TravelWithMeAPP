@@ -1,7 +1,6 @@
 package com.example.travelwithmeapp.utils
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import com.example.travelwithmeapp.models.User
 import com.google.firebase.firestore.FirebaseFirestore

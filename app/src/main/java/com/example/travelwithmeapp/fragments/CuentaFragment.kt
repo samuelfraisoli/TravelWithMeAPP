@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class CuentaFragment : Fragment() {
         private lateinit var binding: FragmentCuentaBinding
-        private var firebaseAuthManager = FirebaseAuthManager(requireContext())
+        private lateinit var firebaseAuthManager : FirebaseAuthManager
 
         override fun onCreateView(
             inflater: LayoutInflater,
@@ -25,10 +25,15 @@ class CuentaFragment : Fragment() {
         ): View? {
             binding = FragmentCuentaBinding.inflate(inflater, container, false)
 
-            binding.cerrarSesion.setOnClickListener { cerrarSesion() }
+            inicializar()
 
             return binding.root
         }
+
+    fun inicializar() {
+        firebaseAuthManager = FirebaseAuthManager(requireContext())
+        binding.cerrarSesion.setOnClickListener { cerrarSesion() }
+    }
 
     fun cerrarSesion() {
         firebaseAuthManager.cerrarSesion()

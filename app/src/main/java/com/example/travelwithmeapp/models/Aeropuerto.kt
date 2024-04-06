@@ -2,7 +2,7 @@ package com.example.travelwithmeapp.models
 
 import java.io.Serializable
 
-class Aeropuerto (
+data class Aeropuerto (
     var id: String,
     var nombre: String,
     var ciudad: String,

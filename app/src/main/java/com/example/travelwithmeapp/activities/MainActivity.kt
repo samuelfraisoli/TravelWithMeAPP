@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         inicializar()
 
         recogerIntent()
-        recogerDatosUsuario()
+        //recogerDatosUsuario()
         guardarSesion()
         iniciarBottonNavView()
     }
@@ -49,10 +49,7 @@ class MainActivity : AppCompatActivity() {
      */
     fun recogerIntent() {
         val bundle = intent.extras
-        user.uid = bundle?.getString("uid") ?: ""
-        user.email = bundle?.getString("email") ?: ""
-        var provider = bundle?.getString("provider") ?: ""
-        user.provider = ProviderType.valueOf(provider)
+        user = bundle?.getSerializable("user") as? User ?: User()
     }
 
     /**
