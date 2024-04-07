@@ -48,9 +48,6 @@ class BuscarVuelosFragment : Fragment() {
     }
 
     fun inicializar() {
-        binding.buttonFecha.setOnClickListener {view ->
-            utilities.lanzarDatePickerDialog(view, requireContext())
-        }
         listaPruebaVuelos()
         configurarRecycler()
     }

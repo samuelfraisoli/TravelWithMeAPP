@@ -7,6 +7,7 @@ import android.icu.util.Calendar
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.EditText
 import com.google.android.material.snackbar.Snackbar
 import java.util.Locale
 
@@ -34,7 +35,7 @@ class Utilities {
             DatePickerDialog.OnDateSetListener { _, anoSeleccionado, mesSeleccionado, diaSeleccionado ->
                 fechaSeleccionada = Calendar.getInstance()
                 fechaSeleccionada.set(anoSeleccionado, mesSeleccionado, diaSeleccionado)
-                view as Button
+                view as EditText
                 view.setText(
                     SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(
                         fechaSeleccionada.time

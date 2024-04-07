@@ -17,51 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <SearchView
-                android:id="@+id/searchView_busquedaFrag"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-
-
-                android:iconifiedByDefault="false"
-                android:queryBackground="@android:color/white"
-                android:queryHint="Introduce destino o nombre del hotel"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <Button
-                android:id="@+id/button_fecha_entrada"
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:hint="Entrada"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button_fecha_salida"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchView_busquedaFrag" />
-
-            <Button
-                android:id="@+id/button_fecha_salida"
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:layout_margin="10dp"
-                android:hint="Salida"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/button_fecha_entrada"
-                app:layout_constraintTop_toBottomOf="@+id/searchView_busquedaFrag" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.appcompat.widget.Toolbar>

@@ -49,59 +49,13 @@ class BuscarHotelesFragment : Fragment() {
         return binding.root
     }
 
-
     fun inicializar() {
-        searchView = binding.searchViewBusquedaFrag
-        fechaEntradaTextView = binding.buttonFechaEntrada
-        fechaSalidaTextView = binding.buttonFechaSalida
         recyclerView = binding.recyclerBusquedaFrag
-
-
-        binding.buttonFechaEntrada.setOnClickListener { view ->
-            utilities.lanzarDatePickerDialog(view, requireContext())
-        }
-        binding.buttonFechaSalida.setOnClickListener { view ->
-            utilities.lanzarDatePickerDialog(view, requireContext())
-        }
-
-
-    /**se crea un objeto que instancia la interfaz onquerytextlistener, la cual obliga a implementar 2 métodos
-     * - onquerytextsubmit -> Es el método que se ejecuta cuando el usuario le da a enter, ejecutará la función buscarHoteles
-     * - onquerytextchange -> Se ejecuta cuando el texto se modifica, no le he dado funcionalidad
-     */
-    searchView.setOnQueryTextListener(
-    object : SearchView.OnQueryTextListener {
-        override fun onQueryTextSubmit(query: String): Boolean {
-            Log.v("", "presionado enter")
-            //buscarHoteles()
-            buscarHotelesDatosPorDefecto()
-            return true
-        }
-
-        override fun onQueryTextChange(newText: String): Boolean {
-            return false
-        }
-    })
-    configurarRecycler()
+        configurarRecycler()
+        buscarHotelesDatosPorDefecto()
 }
 
 
-/**
- * Crea un thread que va a ejecutar en segundo plano la función de búsqueda de la API de tripadvisor
- * Si recibe datos, actualizará el recyclerview con esos datos
- */
-/*fun buscarHoteles() {
-    val thread = Thread {
-        var respuesta = tripadvisorAPIManager.locationSearch(searchView.query.toString(), Locale.getDefault().language)
-        Log.v("", "respuesta recibida")
-        if(!respuesta.isNullOrEmpty()) {
-            Log.v("", "Datos api recibidos, modificando recycler")
-            listaHoteles = respuesta
-            adaptadorRecycler.notifyDataSetChanged()
-        }
-    }
-    thread.start()
-}*/
 
 
 @SuppressLint("NotifyDataSetChanged")

@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.BuscarFragment">
+    tools:context=".fragments.BuscarFragment"
+    android:id="@+id/constraintLayout"
+    >
 
+    <ImageView
+        android:id="@+id/backgroundVuelos"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/buscar_vuelo_foto"
+        android:visibility="invisible"/>
+
+
+    <ImageView
+        android:id="@+id/backgroundHoteles"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/buscar_hotel_imagen"
+        android:visibility="invisible"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -37,42 +58,155 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ImageButton
-        android:id="@+id/hotelesImageButton"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:src="@drawable/buscar_hotel_imagen"
-        android:scaleType="fitCenter"
-
-        app:layout_constraintBottom_toTopOf="@+id/vuelosImageButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar">
-
-    </ImageButton>
-
-    <ImageButton
-        android:id="@+id/vuelosImageButton"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/buscar_vuelo_foto"
-        android:scaleType="fitCenter"
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/constraint_layout_bordes_redondeados"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hotelesImageButton">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.266">
 
-    </ImageButton>
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/buttonVuelos"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vuelos" />
+
+            <Button
+                android:id="@+id/buttonHoteles"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hoteles" />
 
 
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <Button
+            android:id="@+id/button_comenzar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="comenzar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggleButton"
+            app:layout_constraintVertical_bias="0.0"></Button>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_Vuelos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/constraint_layout_bordes_redondeados"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <EditText
+            android:id="@+id/origen_vuelos"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:hint="Origen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"></EditText>
+
+        <EditText
+            android:id="@+id/destino_vuelos"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Destino"
+            app:layout_constraintStart_toStartOf="@+id/origen_vuelos"
+            app:layout_constraintTop_toBottomOf="@+id/origen_vuelos"></EditText>
+
+        <EditText
+            android:id="@+id/fecha_vuelos"
+            android:editable="false"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="fecha"
+            app:layout_constraintStart_toStartOf="@+id/destino_vuelos"
+            app:layout_constraintTop_toBottomOf="@+id/destino_vuelos">
+
+        </EditText>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout_Hoteles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/constraint_layout_bordes_redondeados"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <EditText
+            android:id="@+id/ciudad_hotel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Introduce hotel o destino"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"></EditText>
+
+        <EditText
+            android:id="@+id/fecha_entrada_hotel"
+            android:editable="false"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Fecha entrada"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ciudad_hotel"></EditText>
+
+        <EditText
+            android:id="@+id/fecha_salida_hotel"
+            android:editable="false"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:hint="Fecha salida"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fecha_entrada_hotel"></EditText>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
