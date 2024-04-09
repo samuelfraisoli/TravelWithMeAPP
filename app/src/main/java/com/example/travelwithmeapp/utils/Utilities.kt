@@ -2,12 +2,19 @@ package com.example.travelwithmeapp.utils
 
 import android.app.DatePickerDialog
 import android.content.Context
+import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
+import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.FragmentActivity
+import com.example.travelwithmeapp.R
 import com.google.android.material.snackbar.Snackbar
 import java.util.Locale
 
@@ -54,6 +61,18 @@ class Utilities {
         val inputMethodManager =
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
+
+    fun crearToolbar(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        val actionBar = (activity).supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
+        actionBar?.setDisplayShowTitleEnabled(false)
+        textView.text = titulo
+        toolbar.setNavigationOnClickListener {
+            activity.onBackPressed()
+        }
     }
 
 

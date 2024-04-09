@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.adapters.CarouselAdapter
 import com.example.travelwithmeapp.databinding.FragmentHotelBinding
 import com.example.travelwithmeapp.databinding.FragmentResenaBinding
+import com.example.travelwithmeapp.utils.Utilities
 import com.google.android.material.carousel.CarouselSnapHelper
 
 
@@ -16,6 +18,7 @@ class HotelFragment : Fragment() {
     private lateinit var binding: FragmentHotelBinding
     private lateinit var carouselRecyclerView: RecyclerView
     private lateinit var listaImagenes: ArrayList<String>
+    private lateinit var utilities: Utilities
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,10 +33,14 @@ class HotelFragment : Fragment() {
     }
 
     private fun inicializar() {
+        utilities = Utilities()
+        utilities.crearToolbar(binding.toolbar, "nombre Hotel", binding.toolbarTitle, activity as AppCompatActivity)
         carouselRecyclerView = binding.carouselRecyclerView
         listaImagenes = ArrayList()
         inicializarListaImagenes()
         inicializarCarouselRecyclerView()
+
+
     }
 
     private fun inicializarCarouselRecyclerView() {

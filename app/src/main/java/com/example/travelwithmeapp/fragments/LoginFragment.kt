@@ -1,7 +1,6 @@
 package com.example.travelwithmeapp.fragments
 
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
@@ -10,13 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat
 import androidx.navigation.fragment.findNavController
 import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentLoginBinding
 import com.example.travelwithmeapp.models.User
 import com.example.travelwithmeapp.utils.FirebaseAuthManager
+import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
@@ -27,6 +26,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private lateinit var password: Editable
 
     private lateinit var firebaseAuthManager: FirebaseAuthManager
+    private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
     private val CODIGO_GOOGLE = 100
 
 
@@ -45,39 +45,46 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     fun inicializar() {
         firebaseAuthManager = FirebaseAuthManager(requireContext())
+        firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
 
         email = binding.edittextCorreo.text
         password = binding.edittextPassword.text
+
         binding.botonRegistrar.setOnClickListener(this)
         binding.botonLogin.setOnClickListener(this)
         binding.botonLoginGoogle.setOnClickListener(this)
         binding.botonRestablecerContraseA.setOnClickListener(this)
-
-
     }
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            binding.botonRegistrar.id -> {
-                intentARegistroFrag()
-            }
-
-            binding.botonLogin.id -> {
-                logearConCorreo()
-            }
-
-            binding.botonLoginGoogle.id -> {
-                configurarActivityLoginGoogle()
-
-            }
-
-            binding.botonRestablecerContraseA.id -> {
-                firebaseAuthManager.restablecerContraseña()
-            }
+            binding.botonRegistrar.id -> { intentARegistroFrag() }
+            binding.botonLogin.id -> { logearConCorreo() }
+            binding.botonLoginGoogle.id -> { lanzarActivityLoginGoogle() }
+            binding.botonRestablecerContraseA.id -> { firebaseAuthManager.restablecerContraseña() }
         }
     }
 
-    fun configurarActivityLoginGoogle() {
+
+    /**
+     * Comprueba que el correo y la contraseña no estén vacíos. Si no lo están, llama al gestor de firebase para que registre al usuario.
+     */
+    fun logearConCorreo() {
+        if (email.isNotEmpty() && password.isNotEmpty()) {
+            val user =
+                firebaseAuthManager.logearConCorreo(email.toString(), password.toString()) { user ->
+                    if (user != null) {
+                        intentAMainAct(user)
+                    }
+                }
+        }
+    }
+
+    /**
+     * Primero crea y configura la activity que se va a lanzar para que el usuario se registre con su cuenta de google.
+     * Luego la lanza
+     */
+    fun lanzarActivityLoginGoogle() {
         try {
             //se configura el cliente de login de google
             val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -90,24 +97,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
             //se llama a este método para asegurarse de que no hay ningún usuario logeado antes de iniciar sesión
             googleClient.signOut()
             startActivityForResult(googleClient.signInIntent, CODIGO_GOOGLE)
-
         } catch (e: Exception) {
             firebaseAuthManager.mostrarAlertaDialog(e.message ?: "Error de autenticacion")
 
-
-
-
-        }
-    }
-
-    fun logearConCorreo() {
-        if (email.isNotEmpty() && password.isNotEmpty()) {
-            val user =
-                firebaseAuthManager.logearConCorreo(email.toString(), password.toString()) { user ->
-                    if (user != null) {
-                        intentAMainAct(user)
-                    }
-                }
         }
     }
 
@@ -115,7 +107,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
     /**
      * Se llama a esta función cuando la actividad que se ha lanzado con el login de google finaliza. Esta función se encarga de procesar los datos que ha recibido.
      * Los datos los ha recogido a través de un Intent, al que llama data.
-     *
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         Log.v("", "onActivityResult")
@@ -124,7 +115,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
         if (requestCode == CODIGO_GOOGLE) {
             firebaseAuthManager.procesarDatosActivityLoginGoogle(data) { user ->
                 if (user != null) {
-                    intentAMainAct(user)
+                    firebaseFirestoreManager.guardarDatosUsuario(user) {
+                        if(it == true) {
+                            intentAMainAct(user)
+                        }
+                    }
                 }
             }
         }
@@ -140,7 +135,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     fun intentARegistroFrag() {
         findNavController()?.navigate(R.id.action_loginFragment_to_registroFragment)
-
     }
 
 

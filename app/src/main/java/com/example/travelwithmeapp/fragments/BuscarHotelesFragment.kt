@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -51,8 +52,10 @@ class BuscarHotelesFragment : Fragment() {
 
     fun inicializar() {
         recyclerView = binding.recyclerBusquedaFrag
+        utilities.crearToolbar(binding.toolbar, "hoteles", binding.toolbarTitle, activity as AppCompatActivity)
         configurarRecycler()
         buscarHotelesDatosPorDefecto()
+
 }
 
 

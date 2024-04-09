@@ -6,7 +6,7 @@ import com.example.travelwithmeapp.models.User
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FieldValue
 
-class FirebaseFirestoreManager(var context: Context) {
+class FirebaseFirestoreManager(var context: Context, var view: View) {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
     private val utilities = Utilities()
 
@@ -25,12 +25,12 @@ class FirebaseFirestoreManager(var context: Context) {
             .addOnSuccessListener {
                 utilities.lanzarSnackBarCorto(
                     "Datos guardados correctamente en la BD",
-                    context as View
+                    view
                 )
                 callback(true)
             }
             .addOnFailureListener { e ->
-                utilities.lanzarSnackBarCorto("Error al guardar los datos", context as View)
+                utilities.lanzarSnackBarCorto("Error al guardar los datos", view)
                 callback(false)
             }
     }
@@ -47,7 +47,7 @@ class FirebaseFirestoreManager(var context: Context) {
                 callback(user)
             }
             .addOnFailureListener { e ->
-                utilities.lanzarSnackBarCorto("Error al recuperar los datos. ${e}", context as View)
+                utilities.lanzarSnackBarCorto("Error al recuperar los datos. ${e}",view)
                 callback(null)
             }
     }
@@ -69,12 +69,12 @@ class FirebaseFirestoreManager(var context: Context) {
             .addOnSuccessListener {
                 utilities.lanzarSnackBarCorto(
                     "Campo ${dato} eliminado correctamente",
-                    context as View
+                    view
                 )
                 callback(true)
             }
             .addOnFailureListener { e ->
-                utilities.lanzarSnackBarCorto("Error al eliminar ${dato}. ${e}", context as View)
+                utilities.lanzarSnackBarCorto("Error al eliminar ${dato}. ${e}", view)
                 callback(false)
             }
 

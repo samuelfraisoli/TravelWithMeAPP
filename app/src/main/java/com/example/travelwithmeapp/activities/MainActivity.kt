@@ -16,7 +16,7 @@ import com.example.travelwithmeapp.utils.FirebaseAuthManager
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var user = User()
+    var user = User()
 
 
     private lateinit var firebaseAuthManager: FirebaseAuthManager
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     fun inicializar() {
         firebaseAuthManager = FirebaseAuthManager(this)
-        firebaseFirestoreManager = FirebaseFirestoreManager(this)
+        firebaseFirestoreManager = FirebaseFirestoreManager(this, binding.root)
     }
 
     /**
@@ -52,28 +52,9 @@ class MainActivity : AppCompatActivity() {
         user = bundle?.getSerializable("user") as? User ?: User()
     }
 
-    /**
-     * Recoge los datos del usuario de la base de datos
-     * Si los coge, actualiza el User creado
-     * Si no los recoge, hace un intent a la pantalla de Login para que el usuario se vuelva a logear
-     */
-    fun recogerDatosUsuario() {
-       firebaseFirestoreManager.recogerDatosUsuario(user.uid) {
-           userRecogido ->
-           if(userRecogido != null) {
-               user = userRecogido
-           }
-           else {
-               var intent = Intent(this, LoginActivity::class.java)
-           }
-       }
-    }
-
     fun guardarSesion() {
         firebaseAuthManager.guardarSesion(user)
     }
-
-
 
     /**
      * Inicia la barra de navegación inferior y la enlaza con el navController

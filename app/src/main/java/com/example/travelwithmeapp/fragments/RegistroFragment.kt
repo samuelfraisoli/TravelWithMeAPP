@@ -4,16 +4,23 @@ package com.example.travelwithmeapp.fragments
 import android.content.Intent
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.databinding.FragmentRegistroBinding
+import com.example.travelwithmeapp.models.ProviderType
 import com.example.travelwithmeapp.models.User
 import com.example.travelwithmeapp.utils.FirebaseAuthManager
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.example.travelwithmeapp.utils.Utilities
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 
 class RegistroFragment : Fragment(), View.OnClickListener {
@@ -40,7 +47,7 @@ class RegistroFragment : Fragment(), View.OnClickListener {
 
     fun inicializar() {
         firebaseAuthManager = FirebaseAuthManager(requireContext())
-        firebaseFirestoreManager = FirebaseFirestoreManager(requireContext())
+        firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
 
         binding.botonLimpiar.setOnClickListener(this)
         binding.botonRegistrar.setOnClickListener(this)
@@ -51,6 +58,7 @@ class RegistroFragment : Fragment(), View.OnClickListener {
         }
     }
 
+
     override fun onClick(v: View?) {
         when (v?.id) {
             binding.botonLimpiar.id -> {
@@ -58,25 +66,30 @@ class RegistroFragment : Fragment(), View.OnClickListener {
             }
 
             binding.botonRegistrar.id -> {
-                realizarRegistro()
+                //como realizar registro es una función con una corrutina, hay que agregar el contexto de corrutina.
+                //En este caso lifecycleScope, genera un contexto de corrutina mientras el fragment sigue activo
+                lifecycleScope.launch {
+                realizarRegistro() }
+
             }
         }
     }
 
     /**
      * Función que llama a las demás funciones para realizar el registro
-     * - Primero comprueba si los datos son correctos, y si sí lo son, llamará a las otras funciones*/
-    fun realizarRegistro() {
+     * La función tiene una corrutina suspend, para que la función se suspenda cuando se están recuperando los datos de la bd.
+     * - Primero comprueba si los datos son correctos. Si lo son, crea un objeto usuario sin uid. Registra ese usuario en la db y devuelve la uid que firebase le asigna, y la añade al objeto usuario. Luego lo sube a la base de datos, y hace un intent a activity main
+     * */
+    suspend fun realizarRegistro() {
         if (verificarDatosCorrectos()) {
-            var correo = binding.correo.toString()
-            var password = binding.contraseA.toString()
-            firebaseAuthManager.registrarConCorreo(correo, password) { userRegistrado ->
-                if (userRegistrado != null) {
-                    user = userRegistrado
-                    if (recogerDatosYSubirlosADB(user)) {
-                        IntentAMainAct(user)
-                    }
-                }
+            crearUsuarioSinUid()
+            var uid = registrarUsuarioConCorreo()
+            Log.v("uid realizarRegistro()", "${uid}")
+            if(uid != null) {
+                user.uid = uid
+                Log.v("user con uid", "${user.toString()}")
+                subirUsuarioADB()
+                IntentAMainAct(user)
             }
         }
     }
@@ -106,28 +119,45 @@ class RegistroFragment : Fragment(), View.OnClickListener {
         return true
     }
 
+    /**
+     * Crea el usuario pero sin uid, porque no la conseguirá hasta que no registre al usuario en firebase auth
+     */
+    fun crearUsuarioSinUid() {
+        user = User(
+            uid = "",
+            email = binding.correo.text.toString(),
+            provider = ProviderType.BASIC,
+            name = binding.nombre.text.toString(),
+            surname = binding.apellidos.text.toString(),
+            birthdate = binding.fechaNacimiento.text.toString(),
+            telephone = binding.telefono.text.toString()
+        )
+        Log.v("user", "${user.toString()}")
+    }
 
     /**
-     * Función que recoge los datos introducidos y los sube a la base de datos
-     * Llama a la función guardarDatosUsuario, a la que le pasa un callback, dependiendo de
-     * si esa función devuelve true o false, se determina si esta devuelve true or false.
-     * Eso determina si se han podido subir los datos a la DB correctamente o no*/
-    fun recogerDatosYSubirlosADB(user: User): Boolean {
-        user.name = binding.nombre.text.toString()
-        user.surname = binding.nombre.text.toString()
-        user.birthdate = binding.fechaNacimiento.text.toString()
-        user.telephone = binding.telefono.text.toString()
-
-        var boolean = false
-        firebaseFirestoreManager.guardarDatosUsuario(user) { booleanCallback ->
-            if (booleanCallback == true) {
-                boolean = true
-            } else {
-                boolean = false
+     * Registra al usuario con correo en firebase. Si el hay un error, devolverá null. Si se realiza correctamente, devolverá la uid.
+     * Utiliza una corrutina que permite suspender la ejecución de la función hasta que se recupere el dato de la bd. Si no, podría ser que el dato fuera nulo
+     */
+    suspend fun registrarUsuarioConCorreo(): String? = suspendCoroutine { continuation ->
+            firebaseAuthManager.registrarConCorreo(user.email, binding.contraseA.text.toString()) { user ->
+                continuation.resume(user.uid)
             }
         }
 
-        return boolean
+
+
+    /**
+     * Función que recoge el usuario y lo sube a la base de datos
+     * Llama a la función guardarDatosUsuario, a la que le pasa un callback, dependiendo de
+     * si esa función devuelve true o false, se determina si esta devuelve true or false.
+     * Eso determina si se han podido subir los datos a la DB correctamente o no*/
+    suspend fun subirUsuarioADB(): Boolean {
+        return suspendCancellableCoroutine { continuation ->
+            firebaseFirestoreManager.guardarDatosUsuario(user) { booleanCallback ->
+                continuation.resume(booleanCallback == true)
+            }
+        }
     }
 
 
@@ -143,6 +173,7 @@ class RegistroFragment : Fragment(), View.OnClickListener {
     }
 
     fun IntentAMainAct(user: User) {
+        Log.v("funcion", "IntentAMainAct()")
         var intent = Intent(requireContext(), MainActivity::class.java).apply {
             putExtra("user", user)
         }

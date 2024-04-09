@@ -131,9 +131,10 @@ class FirebaseAuthManager(val context: Context) {
                         var user = User()
                         var uid = it.user?.uid
                         var email = account.email
+                        var name = account.displayName
                         var provider = ProviderType.GOOGLE
-                        if (uid != null && email != null && email != null) {
-                            user = User(uid, email, provider)
+                        if (uid != null && email != null && email != null && name != null) {
+                            user = User(uid, email, provider, name)
                             Log.v("", user.toString())
                             callback(user)
                         }

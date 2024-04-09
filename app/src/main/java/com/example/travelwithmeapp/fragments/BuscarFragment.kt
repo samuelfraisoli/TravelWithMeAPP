@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentBuscarBinding
@@ -40,6 +41,7 @@ class BuscarFragment : Fragment() {
         utilities = Utilities()
         cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 0)
         cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 0)
+        utilities.crearToolbar(binding.toolbar, "Buscar", binding.toolbarTitle, activity as AppCompatActivity)
 
         binding.toggleButton.addOnButtonCheckedListener { toggleButtonGroup, checkedId, isChecked ->
             if(isChecked) {
@@ -60,7 +62,7 @@ class BuscarFragment : Fragment() {
                 }
             }
         }
-        binding.fechaVuelos.setOnFocusChangeListener { view, hasFocus ->
+        binding.fechaVuelo.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
                 utilities.lanzarDatePickerDialog(view, requireContext())
             }
@@ -75,22 +77,12 @@ class BuscarFragment : Fragment() {
                 utilities.lanzarDatePickerDialog(view, requireContext())
             }
         }
-
-
         binding.buttonComenzar.setOnClickListener() {
             when(busquedaFlag) {
                 1 ->  findNavController()?.navigate(R.id.action_buscarFragment_to_buscarVuelosFragment)
                 2 -> findNavController()?.navigate(R.id.action_buscarFragment_to_buscarHotelesFragment)
             }
-
         }
-
-
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-       binding.toolbar.setNavigationOnClickListener() {
-           requireActivity().onBackPressedDispatcher.onBackPressed()
-       }
-
     }
 
     fun cambiarVisibilidadChildrenViewGroup(viewGroup: ViewGroup, funcionalidad: Int) {
@@ -105,7 +97,6 @@ class BuscarFragment : Fragment() {
                 1 -> child.visibility = View.VISIBLE
             }
         }
-
     }
 
     fun cambiarFondo(tipo: String) {
@@ -135,6 +126,19 @@ class BuscarFragment : Fragment() {
         }
 
     }
+
+    /**fun crearToolbar() {
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        val actionBar = (activity as AppCompatActivity).supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        actionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
+        actionBar?.setDisplayShowTitleEnabled(false)
+        binding.toolbar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }*/
+
+
 
 
 

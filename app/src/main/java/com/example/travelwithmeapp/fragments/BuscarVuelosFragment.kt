@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -50,6 +51,7 @@ class BuscarVuelosFragment : Fragment() {
     fun inicializar() {
         listaPruebaVuelos()
         configurarRecycler()
+        utilities.crearToolbar(binding.toolbar, "vuelos", binding.toolbarTitle, activity as AppCompatActivity)
     }
 
     fun configurarRecycler() {
