@@ -1,5 +1,6 @@
 package com.example.travelwithmeapp.activities
 
+import CarouselAdapter
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +8,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ActivityMainBinding
+import com.google.android.material.carousel.CarouselSnapHelper
 
 enum class ProviderType {
     BASIC,
@@ -20,7 +23,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sharedPrefEditor: SharedPreferences.Editor
     private lateinit var email: String
     private lateinit var provider: String
-    //private lateinit var uid: String
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +36,13 @@ class MainActivity : AppCompatActivity() {
         recogerIntent()
         abrirEditorSharedPref()
         iniciarBottonNavView()
+
     }
 
     //Recoge datos del intent
     // - Si no existieran mete un string vacío (pero siempre van a existir en esta pantalla)
     fun recogerIntent() {
-        //todo añaddir ID usuario
+        //todo añadir ID usuario
         val bundle = intent.extras
         email = bundle?.getString("email") ?: ""
         provider = bundle?.getString("provider") ?: ""
