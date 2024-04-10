@@ -7,6 +7,8 @@ import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ActivityLoginBinding
+import com.example.travelwithmeapp.models.User
+import com.example.travelwithmeapp.utils.FirebaseAuthManager
 
 class LoginActivity : AppCompatActivity() {
 

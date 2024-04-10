@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.travelwithmeapp.activities.MainActivity
-import com.example.travelwithmeapp.activities.ProviderType
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentLoginBinding
 import com.example.travelwithmeapp.models.User
@@ -60,10 +59,21 @@ class LoginFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when (v?.id) {
-            binding.botonRegistrar.id -> { intentARegistroFrag() }
-            binding.botonLogin.id -> { logearConCorreo() }
-            binding.botonLoginGoogle.id -> { lanzarActivityLoginGoogle() }
-            binding.botonRestablecerContraseA.id -> { firebaseAuthManager.restablecerContraseña() }
+            binding.botonRegistrar.id -> {
+                intentARegistroFrag()
+            }
+
+            binding.botonLogin.id -> {
+                logearConCorreo()
+            }
+
+            binding.botonLoginGoogle.id -> {
+                lanzarActivityLoginGoogle()
+            }
+
+            binding.botonRestablecerContraseA.id -> {
+                firebaseAuthManager.restablecerContraseña()
+            }
         }
     }
 
@@ -103,10 +113,12 @@ class LoginFragment : Fragment(), View.OnClickListener {
         } catch (e: Exception) {
             firebaseAuthManager.mostrarAlertaDialog(e.message ?: "Error de autenticacion")
 
+        }
     }
 
     //todo completar
     fun restablecerContraseña() {
+    }
 
     /**
      * Se llama a esta función cuando la actividad que se ha lanzado con el login de google finaliza. Esta función se encarga de procesar los datos que ha recibido.
@@ -120,7 +132,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
             firebaseAuthManager.procesarDatosActivityLoginGoogle(data) { user ->
                 if (user != null) {
                     firebaseFirestoreManager.guardarDatosUsuario(user) {
-                        if(it == true) {
+                        if (it == true) {
                             intentAMainAct(user)
                         }
                     }
