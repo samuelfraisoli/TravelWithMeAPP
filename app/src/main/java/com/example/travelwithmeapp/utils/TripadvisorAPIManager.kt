@@ -130,9 +130,6 @@ class TripadvisorAPIManager {
             hotel.details.description = jsonObject.getString("description")
             hotel.details.web = jsonObject.getString("web_url")
             hotel.details.telephone = jsonObject.getString("phone")
-            hotel.details.writeReviewTripAdvisor = jsonObject.getString("write_review")
-            hotel.details.rating = jsonObject.getString("rating")
-            hotel.details.numReviewsTripadvisor = jsonObject.getString("num_reviews")
             val amenitiesArray = jsonObject.getJSONArray("amenities")
 
             for (i in 0 until amenitiesArray.length()) {

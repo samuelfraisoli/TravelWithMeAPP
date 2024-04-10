@@ -25,6 +25,30 @@
         <action
             android:id="@+id/action_buscarFragment_to_buscarHotelesFragment"
             app:destination="@id/buscarHotelesFragment" />
+        <argument
+            android:name="destino_hotel"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fecha_entrada_hotel"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fecha_salida_hotel"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="origen_vuelo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="destino_vuelo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fecha_vuelo"
+            app:argType="string"
+            app:nullable="true" />
 
     </fragment>
 
@@ -64,6 +88,18 @@
         <action
             android:id="@+id/action_buscarHotelesFragment_to_hotelFragment"
             app:destination="@id/hotelFragment" />
+        <argument
+            android:name="destino_hotel"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fecha_entrada_hotel"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fecha_salida_hotel"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
     <fragment
@@ -74,6 +110,18 @@
         <action
             android:id="@+id/action_buscarVuelosFragment_to_vueloFragment"
             app:destination="@id/vueloFragment" />
+        <argument
+            android:name="origen_vuelo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="destino_vuelo"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="fecha_vuelo"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
 

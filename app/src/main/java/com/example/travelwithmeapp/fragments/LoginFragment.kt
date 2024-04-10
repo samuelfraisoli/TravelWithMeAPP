@@ -42,7 +42,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
-
     fun inicializar() {
         firebaseAuthManager = FirebaseAuthManager(requireContext())
         firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
@@ -79,6 +78,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
                 }
         }
     }
+
 
     /**
      * Primero crea y configura la activity que se va a lanzar para que el usuario se registre con su cuenta de google.
@@ -136,8 +136,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
     fun intentARegistroFrag() {
         findNavController()?.navigate(R.id.action_loginFragment_to_registroFragment)
     }
-
-
 }
 
 

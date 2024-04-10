@@ -15,20 +15,20 @@ import com.google.firebase.auth.FirebaseAuth
 
 
 class CuentaFragment : Fragment() {
-        private lateinit var binding: FragmentCuentaBinding
-        private lateinit var firebaseAuthManager : FirebaseAuthManager
+    private lateinit var binding: FragmentCuentaBinding
+    private lateinit var firebaseAuthManager: FirebaseAuthManager
 
-        override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
-        ): View? {
-            binding = FragmentCuentaBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCuentaBinding.inflate(inflater, container, false)
 
-            inicializar()
+        inicializar()
 
-            return binding.root
-        }
+        return binding.root
+    }
 
     fun inicializar() {
         firebaseAuthManager = FirebaseAuthManager(requireContext())
@@ -41,9 +41,4 @@ class CuentaFragment : Fragment() {
         val intentALogin = Intent(requireContext(), LoginActivity::class.java)
         startActivity(intentALogin)
     }
-
-
-
-
-
-    }
+}

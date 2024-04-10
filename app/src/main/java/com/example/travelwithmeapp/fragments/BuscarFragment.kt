@@ -1,6 +1,7 @@
 package com.example.travelwithmeapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,19 +23,18 @@ class BuscarFragment : Fragment() {
     private var busquedaFlag = 0
     private lateinit var utilities: Utilities
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBuscarBinding.inflate(inflater, container, false)
-
-        inicializar()
-
         return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        inicializar()
     }
 
     fun inicializar() {
@@ -79,8 +79,20 @@ class BuscarFragment : Fragment() {
         }
         binding.buttonComenzar.setOnClickListener() {
             when(busquedaFlag) {
-                1 ->  findNavController()?.navigate(R.id.action_buscarFragment_to_buscarVuelosFragment)
-                2 -> findNavController()?.navigate(R.id.action_buscarFragment_to_buscarHotelesFragment)
+                1 -> {
+                    val bundle = Bundle()
+                    bundle.putString("origen_vuelo", binding.origenVuelo.text.toString())
+                    bundle.putString("destino_vuelo", binding.destinoVuelo.text.toString())
+                    bundle.putString("fecha_vuelo", binding.fechaVuelo.text.toString())
+                    findNavController()?.navigate(R.id.action_buscarFragment_to_buscarVuelosFragment, bundle)
+                }
+                2 -> {
+                    val bundle = Bundle()
+                    bundle.putString("destino_hotel", binding.destinoHotel.text.toString())
+                    bundle.putString("fecha_entrada_hotel", binding.fechaEntradaHotel.text.toString())
+                    bundle.putString("fecha_salida_hotel", binding.fechaSalidaHotel.text.toString())
+                    findNavController()?.navigate(R.id.action_buscarFragment_to_buscarHotelesFragment, bundle)
+                }
             }
         }
     }
@@ -126,24 +138,6 @@ class BuscarFragment : Fragment() {
         }
 
     }
-
-    /**fun crearToolbar() {
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
-        actionBar?.setDisplayShowTitleEnabled(false)
-        binding.toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
-        }
-    }*/
-
-
-
-
-
-
-
 }
 
 

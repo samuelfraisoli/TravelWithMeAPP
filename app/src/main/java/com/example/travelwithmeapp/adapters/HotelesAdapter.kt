@@ -21,7 +21,7 @@ class HotelesAdapter(
             itemBinding.textViewProvinciaPais.text = "${hotel.address.city}, ${hotel.address.country}"
 
 
-            itemBinding.imagen.load(hotel.photos?.mediumPhotos?.get(0)) {
+            itemBinding.imagen.load(hotel.photos?.get(0)) {
                 transformations(RoundedCornersTransformation(8f))
             }
 
