@@ -1,6 +1,5 @@
 package com.example.travelwithmeapp.activities
 
-import CarouselAdapter
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity

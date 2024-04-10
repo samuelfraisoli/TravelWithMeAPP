@@ -1,6 +1,5 @@
 package com.example.travelwithmeapp.fragments
 
-import CarouselAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

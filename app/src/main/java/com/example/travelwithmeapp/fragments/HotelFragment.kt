@@ -1,12 +1,13 @@
 package com.example.travelwithmeapp.fragments
 
-import CarouselAdapter
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travelwithmeapp.adapters.CarouselAdapter
 
 import com.example.travelwithmeapp.databinding.FragmentHotelBinding
 import com.google.android.material.carousel.CarouselSnapHelper
@@ -35,7 +36,7 @@ class HotelFragment : Fragment() {
 
     private fun inicializarCarouselRecyclerView() {
         CarouselSnapHelper().attachToRecyclerView(carouselRecyclerView)
-        carouselRecyclerView.adapter = CarouselAdapter(images = listaImagenes)
+        carouselRecyclerView.adapter = CarouselAdapter(listaImagenes)
     }
 
     private fun inicializarListaImagenes() {
