@@ -51,6 +51,7 @@ dependencies {
     implementation("androidx.activity:activity:1.8.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.11.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -66,12 +67,19 @@ dependencies {
     //google analytics
     implementation("com.google.firebase:firebase-analytics")
 
-    //firebase auth
+    //firebase auth -> autenticacion firebase
     implementation ("com.firebaseui:firebase-ui-auth:7.2.0")
+
+    //firebase firestore -> bbdd firebase
+    implementation("com.google.firebase:firebase-firestore")
 
     //carousel material design3
     implementation("io.coil-kt:coil:2.5.0")
 
-    //openNPL - Procesador de lenguaje natural
-    implementation("org.apache.opennlp:opennlp-tools:1.9.3")
+
+
+
+
+
+
 }

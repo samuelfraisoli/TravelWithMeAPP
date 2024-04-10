@@ -1,35 +1,36 @@
 package com.example.travelwithmeapp.fragments
 
-import android.app.DatePickerDialog
-import android.content.Context
+
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
+
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.lifecycleScope
 import com.example.travelwithmeapp.activities.MainActivity
-import com.example.travelwithmeapp.activities.ProviderType
 import com.example.travelwithmeapp.databinding.FragmentRegistroBinding
-import com.google.firebase.auth.FirebaseAuth
-import java.util.Locale
+import com.example.travelwithmeapp.models.ProviderType
+import com.example.travelwithmeapp.models.User
+import com.example.travelwithmeapp.utils.FirebaseAuthManager
+import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
+import com.example.travelwithmeapp.utils.Utilities
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 
 class RegistroFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentRegistroBinding
 
-    private lateinit var nombre: String
-    private lateinit var apellidos: String
-    private lateinit var fechaNacimiento: String
-    private lateinit var telefono: String
-    private lateinit var email: String
-    private lateinit var password: String
+    private lateinit var firebaseAuthManager: FirebaseAuthManager
+    private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
+    private var utilities = Utilities()
 
+    private lateinit var user: User
 
 
     override fun onCreateView(
@@ -45,38 +46,57 @@ class RegistroFragment : Fragment(), View.OnClickListener {
     }
 
     fun inicializar() {
+        firebaseAuthManager = FirebaseAuthManager(requireContext())
+        firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
+
         binding.botonLimpiar.setOnClickListener(this)
         binding.botonRegistrar.setOnClickListener(this)
-
         binding.fechaNacimiento.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
-                cerrarTeclado(view)
-                lanzarDatePickerDialog(view)
+                utilities.lanzarDatePickerDialog(view, requireContext())
             }
         }
     }
 
+
     override fun onClick(v: View?) {
-        when(v?.id) {
-            binding.botonLimpiar.id->{limpiar() }
-            binding.botonRegistrar.id -> { realizarRegistro() }
+        when (v?.id) {
+            binding.botonLimpiar.id -> {
+                limpiar()
+            }
+
+            binding.botonRegistrar.id -> {
+                //como realizar registro es una función con una corrutina, hay que agregar el contexto de corrutina.
+                //En este caso lifecycleScope, genera un contexto de corrutina mientras el fragment sigue activo
+                lifecycleScope.launch {
+                realizarRegistro() }
+
+            }
         }
     }
 
     /**
      * Función que llama a las demás funciones para realizar el registro
-     * - Primero comprueba si los datos son correctos, y si sí lo son, llamará a las otras funciones*/
-    fun realizarRegistro() {
+     * La función tiene una corrutina suspend, para que la función se suspenda cuando se están recuperando los datos de la bd.
+     * - Primero comprueba si los datos son correctos. Si lo son, crea un objeto usuario sin uid. Registra ese usuario en la db y devuelve la uid que firebase le asigna, y la añade al objeto usuario. Luego lo sube a la base de datos, y hace un intent a activity main
+     * */
+    suspend fun realizarRegistro() {
         if (verificarDatosCorrectos()) {
-            recogerDatosYSubirlosADB()
-            registrarConCorreo()
+            crearUsuarioSinUid()
+            var uid = registrarUsuarioConCorreo()
+            Log.v("uid realizarRegistro()", "${uid}")
+            if(uid != null) {
+                user.uid = uid
+                Log.v("user con uid", "${user.toString()}")
+                subirUsuarioADB()
+                IntentAMainAct(user)
+            }
         }
     }
 
-
     /**
      * Función que verifica si los datos se han introducido correctamente */
-    fun verificarDatosCorrectos() : Boolean {
+    fun verificarDatosCorrectos(): Boolean {
         if (binding.nombre.text.isEmpty() ||
             binding.apellidos.text.isEmpty() ||
             binding.fechaNacimiento.text.isEmpty() ||
@@ -84,78 +104,60 @@ class RegistroFragment : Fragment(), View.OnClickListener {
             binding.correo.text.isEmpty() ||
             binding.contraseA.text.isEmpty() ||
             binding.confirmacionContraseA.text.isEmpty()
-           ) {
-            mostrarAlertaDialog("Por favor complete todos los campos.")
+        ) {
+            firebaseAuthManager.mostrarAlertaDialog("Por favor complete todos los campos.")
             return false
         }
-        if(binding.contraseA.text.equals(binding.confirmacionContraseA.text)) {
-            mostrarAlertaDialog("Las contraseñas no coinciden")
+        if (binding.contraseA.text.equals(binding.confirmacionContraseA.text)) {
+            firebaseAuthManager.mostrarAlertaDialog("Las contraseñas no coinciden")
             return false
         }
         if (!binding.terminos.isChecked) {
-            mostrarAlertaDialog("Por favor acepte los términos y condiciones.")
+            firebaseAuthManager.mostrarAlertaDialog("Por favor acepte los términos y condiciones.")
             return false
         }
         return true
     }
 
-    //todo completar
     /**
-     * Función que recoge los datos introducidos y los sube a la base de datos */
-    fun recogerDatosYSubirlosADB() {
-        nombre = binding.nombre.text.toString()
-        apellidos = binding.nombre.text.toString()
-        fechaNacimiento = binding.fechaNacimiento.text.toString()
-        telefono = binding.telefono.text.toString()
-        email = binding.correo.text.toString()
-        password = binding.contraseA.toString()
-
-        //recoge los datos de los usuarios y los sube a la BD
-
-    }
-
-
-
-
-    fun registrarConCorreo() {
-        if(email.isNotEmpty() && password.isNotEmpty()) {
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email.toString(), password.toString())
-                .addOnCompleteListener {
-                    if(it.isSuccessful) {
-                        IntentAMainAct(it.result?.user?.email ?: "", ProviderType.BASIC)
-                    }
-
-                    else {
-                        mostrarAlertaDialog(it.exception?.message ?:"Error")
-                    }
-                }
-        }
-    }
-
-
-    /**
-     * Lanza un diálogo con un selector de fecha */
-    fun lanzarDatePickerDialog(view: View) : Calendar {
-        var fechaSeleccionada = Calendar.getInstance()
-        var calendar = Calendar.getInstance()
-        var ano = calendar.get(Calendar.YEAR)
-        var mes = calendar.get(Calendar.MONTH)
-        var dia = calendar.get(Calendar.DAY_OF_MONTH)
-
-        var datePickerDialog = DatePickerDialog(
-            requireContext(),
-            DatePickerDialog.OnDateSetListener { _, anoSeleccionado, mesSeleccionado, diaSeleccionado ->
-                fechaSeleccionada = Calendar.getInstance()
-                fechaSeleccionada.set(anoSeleccionado, mesSeleccionado, diaSeleccionado)
-                view as EditText
-                view.setText(SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(fechaSeleccionada.time))
-            },
-            ano,
-            mes,
-            dia
+     * Crea el usuario pero sin uid, porque no la conseguirá hasta que no registre al usuario en firebase auth
+     */
+    fun crearUsuarioSinUid() {
+        user = User(
+            uid = "",
+            email = binding.correo.text.toString(),
+            provider = ProviderType.BASIC,
+            name = binding.nombre.text.toString(),
+            surname = binding.apellidos.text.toString(),
+            birthdate = binding.fechaNacimiento.text.toString(),
+            telephone = binding.telefono.text.toString()
         )
-        datePickerDialog.show()
-        return fechaSeleccionada
+        Log.v("user", "${user.toString()}")
+    }
+
+    /**
+     * Registra al usuario con correo en firebase. Si el hay un error, devolverá null. Si se realiza correctamente, devolverá la uid.
+     * Utiliza una corrutina que permite suspender la ejecución de la función hasta que se recupere el dato de la bd. Si no, podría ser que el dato fuera nulo
+     */
+    suspend fun registrarUsuarioConCorreo(): String? = suspendCoroutine { continuation ->
+            firebaseAuthManager.registrarConCorreo(user.email, binding.contraseA.text.toString()) { user ->
+                continuation.resume(user.uid)
+            }
+        }
+
+
+
+    /**
+     * Función que recoge el usuario y lo sube a la base de datos
+     * Llama a la función guardarDatosUsuario, a la que le pasa un callback, dependiendo de
+     * si esa función devuelve true o false, se determina si esta devuelve true or false.
+     * Eso determina si se han podido subir los datos a la DB correctamente o no*/
+    suspend fun subirUsuarioADB(): Boolean {
+        return suspendCancellableCoroutine { continuation ->
+            firebaseFirestoreManager.guardarDatosUsuario(user) { booleanCallback ->
+                continuation.resume(booleanCallback == true)
+            }
+        }
     }
 
 
@@ -168,33 +170,15 @@ class RegistroFragment : Fragment(), View.OnClickListener {
         binding.contraseA.setText("")
         binding.confirmacionContraseA.setText("")
         binding.terminos.isChecked = false
-
     }
 
-    fun IntentAMainAct(email: String, provider: ProviderType) {
+    fun IntentAMainAct(user: User) {
+        Log.v("funcion", "IntentAMainAct()")
         var intent = Intent(requireContext(), MainActivity::class.java).apply {
-            putExtra("email", email)
-            putExtra("provider", provider.name)
+            putExtra("user", user)
         }
         startActivity(intent)
     }
-
-    /**
-     * Muestra un diálogo de alerta con los datos necesarios */
-    fun mostrarAlertaDialog(datos: String) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Error de autenticacion")
-            .setMessage(datos)
-            .setPositiveButton("Aceptar", null)
-            .create()
-            .show()
-    }
-
-    private fun cerrarTeclado(view: View) {
-        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
-    }
-
 
 
 }

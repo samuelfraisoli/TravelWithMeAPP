@@ -3,6 +3,7 @@ package com.example.travelwithmeapp.fragments
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,9 @@ import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.activities.ProviderType
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentLoginBinding
+import com.example.travelwithmeapp.models.User
+import com.example.travelwithmeapp.utils.FirebaseAuthManager
+import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -22,10 +26,12 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentLoginBinding
-    
 
     private lateinit var email: Editable
     private lateinit var password: Editable
+
+    private lateinit var firebaseAuthManager: FirebaseAuthManager
+    private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
     private val CODIGO_GOOGLE = 100
 
     override fun onCreateView(
@@ -40,9 +46,10 @@ class LoginFragment : Fragment(), View.OnClickListener {
         return binding.root
     }
 
-
-
     fun inicializar() {
+        firebaseAuthManager = FirebaseAuthManager(requireContext())
+        firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
+
         email = binding.edittextCorreo.text
         password = binding.edittextPassword.text
         binding.botonRegistrar.setOnClickListener(this)
@@ -55,97 +62,84 @@ class LoginFragment : Fragment(), View.OnClickListener {
         when (v?.id) {
             binding.botonRegistrar.id -> { intentARegistroFrag() }
             binding.botonLogin.id -> { logearConCorreo() }
-            binding.botonLoginGoogle.id -> { logearConGoogle() }
-            binding.botonRestablecerContraseA.id -> { restablecerContraseña() }
+            binding.botonLoginGoogle.id -> { lanzarActivityLoginGoogle() }
+            binding.botonRestablecerContraseA.id -> { firebaseAuthManager.restablecerContraseña() }
         }
     }
 
+
+    /**
+     * Comprueba que el correo y la contraseña no estén vacíos. Si no lo están, llama al gestor de firebase para que registre al usuario.
+     */
     fun logearConCorreo() {
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            FirebaseAuth.getInstance()
-                .signInWithEmailAndPassword(email.toString(), password.toString())
-                .addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        intentAMainAct(it.result?.user?.email ?: "", ProviderType.BASIC)
-                    } else {
-                        mostrarAlertaDialog(it.exception?.message ?: "Error")
+            val user =
+                firebaseAuthManager.logearConCorreo(email.toString(), password.toString()) { user ->
+                    if (user != null) {
+                        intentAMainAct(user)
                     }
                 }
         }
     }
 
-    fun logearConGoogle() {
-        val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(com.firebase.ui.auth.R.string.default_web_client_id))
-            .requestEmail()
-            .build()
 
-        val googleClient = GoogleSignIn.getClient(requireContext(), googleConf)
-        //para que cuando el usuario vuelva a dar al botón de google se haga logout del usuario anterior que estaba registrado con google
-        googleClient.signOut()
-        startActivityForResult(googleClient.signInIntent, CODIGO_GOOGLE)
+    /**
+     * Primero crea y configura la activity que se va a lanzar para que el usuario se registre con su cuenta de google.
+     * Luego la lanza
+     */
+    fun lanzarActivityLoginGoogle() {
+        try {
+            //se configura el cliente de login de google
+            val googleConf = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(requireContext().getString(com.firebase.ui.auth.R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+            val googleClient = GoogleSignIn.getClient(requireActivity(), googleConf)
+
+            //se llama a este método para asegurarse de que no hay ningún usuario logeado antes de iniciar sesión
+            googleClient.signOut()
+            startActivityForResult(googleClient.signInIntent, CODIGO_GOOGLE)
+        } catch (e: Exception) {
+            firebaseAuthManager.mostrarAlertaDialog(e.message ?: "Error de autenticacion")
 
     }
 
     //todo completar
     fun restablecerContraseña() {
 
-    }
-
-    //lanza una activity para que el usuario introduzca unos datos, y luego devuelve los datos que procesa esa actividad.
-    // - Se usa para lanzar los distintos tipos de login que tendrá la aplicación
+    /**
+     * Se llama a esta función cuando la actividad que se ha lanzado con el login de google finaliza. Esta función se encarga de procesar los datos que ha recibido.
+     * Los datos los ha recogido a través de un Intent, al que llama data.
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        Log.v("", "onActivityResult")
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == CODIGO_GOOGLE) {
-            try {
-                //primero se logea con el usuario en la API de google, y coge sus datos
-                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-                val account = task.getResult(ApiException::class.java)
-
-                //después, si esos datos no son nulos, logea al usuario con esos datos en firebase
-                if (account != null) {
-                    val credential = GoogleAuthProvider.getCredential(account.idToken, null)
-                    FirebaseAuth.getInstance().signInWithCredential(credential)
-                        .addOnCompleteListener {
-                            if (it.isSuccessful) {
-                                intentAMainAct(account.email ?: "", ProviderType.GOOGLE)
-                            } else {
-                                mostrarAlertaDialog(it.exception?.message ?: "Error")
-                            }
+            firebaseAuthManager.procesarDatosActivityLoginGoogle(data) { user ->
+                if (user != null) {
+                    firebaseFirestoreManager.guardarDatosUsuario(user) {
+                        if(it == true) {
+                            intentAMainAct(user)
                         }
+                    }
                 }
-            } catch (e: ApiException) {
-                mostrarAlertaDialog(e.message ?: "Error")
             }
         }
     }
 
-    fun mostrarAlertaDialog(datos: String) {
-        AlertDialog.Builder(requireContext())
-            .setTitle("Error de autenticacion")
-            .setMessage(datos)
-            .setPositiveButton("Aceptar", null)
-            .create()
-            .show()
-    }
 
-    fun intentAMainAct(email: String, provider: ProviderType) {
+    fun intentAMainAct(user: User) {
         var intent = Intent(requireContext(), MainActivity::class.java).apply {
-            putExtra("email", email)
-            putExtra("provider", provider.name)
+            putExtra("user", user)
         }
         startActivity(intent)
     }
 
     fun intentARegistroFrag() {
         findNavController()?.navigate(R.id.action_loginFragment_to_registroFragment)
-
     }
-
-
-
-
 }
 
 
