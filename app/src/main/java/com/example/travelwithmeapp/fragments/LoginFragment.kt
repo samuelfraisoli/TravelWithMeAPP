@@ -22,6 +22,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentLoginBinding
+    
 
     private lateinit var email: Editable
     private lateinit var password: Editable
@@ -35,7 +36,6 @@ class LoginFragment : Fragment(), View.OnClickListener {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         inicializar()
-
 
         return binding.root
     }
@@ -142,6 +142,8 @@ class LoginFragment : Fragment(), View.OnClickListener {
         findNavController()?.navigate(R.id.action_loginFragment_to_registroFragment)
 
     }
+
+
 
 
 }

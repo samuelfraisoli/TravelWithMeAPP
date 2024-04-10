@@ -13,11 +13,11 @@ class CarouselAdapter(
     inner class CarouselViewHolder(val itemBinding: ViewholderCarouselBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
-            fun bindItem(imageUrl: String) {
-                itemBinding.carouselImageView.load(imageUrl) {
-                    transformations(RoundedCornersTransformation(8f))
-                }
+        fun bindItem(imageUrl: String) {
+            itemBinding.carouselImageView.load(imageUrl) {
+                transformations(RoundedCornersTransformation(8f))
             }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {
@@ -28,7 +28,7 @@ class CarouselAdapter(
     }
 
     override fun getItemCount(): Int {
-       return  lista.size
+        return  lista.size
     }
 
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {

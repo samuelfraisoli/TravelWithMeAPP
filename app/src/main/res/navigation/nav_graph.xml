@@ -12,7 +12,20 @@
         android:id="@+id/explorarFragment"
         android:name="com.example.travelwithmeapp.fragments.ExplorarFragment"
         android:label="fragment_busqueda"
-        tools:layout="@layout/fragment_buscar" />
+        tools:layout="@layout/fragment_buscar" >
+        <action
+            android:id="@+id/action_explorarFragment_to_buscarHotelesFragment"
+            app:destination="@id/buscarHotelesFragment" />
+        <action
+            android:id="@+id/action_explorarFragment_to_buscarVuelosFragment"
+            app:destination="@id/buscarVuelosFragment" />
+        <action
+            android:id="@+id/action_explorarFragment_to_opinionFragment"
+            app:destination="@id/opinionFragment" />
+        <action
+            android:id="@+id/action_explorarFragment_to_cosasQueHacerFragment"
+            app:destination="@id/cosasQueHacerFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/buscarFragment"
@@ -75,6 +88,11 @@
             android:id="@+id/action_buscarVuelosFragment_to_vueloFragment"
             app:destination="@id/vueloFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/cosasQueHacerFragment"
+        android:name="com.example.travelwithmeapp.fragments.CosasQueHacerFragment"
+        android:label="fragment_cosas_que_hacer"
+        tools:layout="@layout/fragment_cosas_que_hacer" />
 
 
 </navigation>

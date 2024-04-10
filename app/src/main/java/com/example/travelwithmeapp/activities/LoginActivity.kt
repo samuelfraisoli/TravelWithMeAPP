@@ -7,6 +7,7 @@ import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ActivityLoginBinding
+import com.example.travelwithmeapp.fragments.ExplorarFragment
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
 
         comprobarSesion()
 
