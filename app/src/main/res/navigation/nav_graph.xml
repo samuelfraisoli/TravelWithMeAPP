@@ -81,7 +81,11 @@
         android:id="@+id/cuentaFragment"
         android:name="com.example.travelwithmeapp.fragments.CuentaFragment"
         android:label="fragment_busqueda"
-        tools:layout="@layout/fragment_buscar" />
+        tools:layout="@layout/fragment_buscar" >
+        <action
+            android:id="@+id/action_cuentaFragment_to_reservasFragment"
+            app:destination="@id/reservasFragment" />
+    </fragment>
     <fragment
         android:id="@+id/hotelFragment"
         android:name="com.example.travelwithmeapp.fragments.HotelFragment"
@@ -141,7 +145,11 @@
         android:name="com.example.travelwithmeapp.fragments.CosasQueHacerFragment"
         android:label="fragment_cosas_que_hacer"
         tools:layout="@layout/fragment_cosas_que_hacer" />
-
+    <fragment
+        android:id="@+id/reservasFragment"
+        android:name="com.example.travelwithmeapp.fragments.ReservasFragment"
+        android:label="fragment_reservas"
+        tools:layout="@layout/fragment_reservas" />
 
 </navigation>
 
