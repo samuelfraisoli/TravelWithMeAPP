@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.databinding.ViewholderVueloBinding
+import com.example.travelwithmeapp.databinding.ViewholderBuscarvueloBinding
 import com.example.travelwithmeapp.models.Vuelo
 import java.time.LocalTime
 import java.time.ZoneId
@@ -16,9 +16,9 @@ import java.time.format.DateTimeFormatter
 class VuelosAdapter(
     val lista: List<Vuelo>,
     val lambda: (Vuelo) -> Unit)
-    : RecyclerView.Adapter<VuelosAdapter.VueloHolder>() {
+    : RecyclerView.Adapter<VuelosAdapter.BuscarVueloHolder>() {
 
-    inner class VueloHolder(val itemBinding: ViewholderVueloBinding) :
+    inner class BuscarVueloHolder(val itemBinding: ViewholderBuscarvueloBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         @RequiresApi(Build.VERSION_CODES.O)
         fun bindItem(vuelo: Vuelo) {
@@ -75,9 +75,9 @@ class VuelosAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VueloHolder {
-        return VueloHolder(
-            ViewholderVueloBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuscarVueloHolder {
+        return BuscarVueloHolder(
+            ViewholderBuscarvueloBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -86,7 +86,7 @@ class VuelosAdapter(
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    override fun onBindViewHolder(holder: VueloHolder, position: Int) {
+    override fun onBindViewHolder(holder: BuscarVueloHolder, position: Int) {
         val vuelo = lista.get(position)
         holder.bindItem(vuelo)
     }

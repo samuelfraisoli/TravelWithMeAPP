@@ -33,15 +33,19 @@ class ExplorarFragment : Fragment() {
 
         // Pulsacion para el botón explorar hoteles
         binding.botonExplorarHoteles.setOnClickListener {
-            findNavController().navigate(R.id.action_explorarFragment_to_buscarHotelesFragment)
+            val bundle = Bundle()
+            bundle.putInt("eleccion", 2)
+            findNavController().navigate(R.id.action_explorarFragment_to_buscarFragment, bundle)
         }
 
         binding.botonExplorarVuelos.setOnClickListener {
-            findNavController().navigate(R.id.action_explorarFragment_to_buscarVuelosFragment)
+            val bundle = Bundle()
+            bundle.putInt("eleccion", 1)
+            findNavController().navigate(R.id.action_explorarFragment_to_buscarFragment, bundle)
         }
 
         binding.botonForos.setOnClickListener {
-            findNavController().navigate(R.id.action_explorarFragment_to_opinionFragment)
+            findNavController().navigate(R.id.action_explorarFragment_to_resenaFragment)
         }
 
         binding.botonExplorarCosasQueHacer.setOnClickListener {
