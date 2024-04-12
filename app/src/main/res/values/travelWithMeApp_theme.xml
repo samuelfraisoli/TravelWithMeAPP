@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="travelWithMeApp_theme" parent="Theme.AppCompat.Light">
+        <item name="buttonStyle">@style/BotonEstilo1</item>
+        <item name="android:buttonStyle">@style/BotonEstilo2</item>
+    </style>
+
+    <style name="BotonEstilo1" parent="Widget.AppCompat.Button">
+        <!-- Definición del estilo del primer tipo de botón -->
+    </style>
+
+    <style name="BotonEstilo2" parent="Widget.AppCompat.Button">
+        <!-- Definición del estilo del segundo tipo de botón -->
+    </style>
+</resources>
