@@ -52,7 +52,7 @@
                 android:src="@drawable/imagen1_explorar_fragment"
                 app:layout_constraintBottom_toTopOf="@+id/guideline12"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline11"
                 app:layout_constraintVertical_bias="0.0" />
@@ -145,7 +145,6 @@
                 android:layout_height="55dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-
                 android:layout_marginBottom="24dp"
                 android:drawableLeft="@drawable/cama_icon"
                 android:gravity="center|left"
