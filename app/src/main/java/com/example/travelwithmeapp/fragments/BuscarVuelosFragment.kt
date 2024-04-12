@@ -1,15 +1,10 @@
 package com.example.travelwithmeapp.fragments
 
-import android.app.DatePickerDialog
-import android.icu.text.SimpleDateFormat
-import android.icu.util.Calendar
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,14 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.adapters.VuelosAdapter
 import com.example.travelwithmeapp.databinding.FragmentBuscarVuelosBinding
-import com.example.travelwithmeapp.models.Aeropuerto
-import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.Vuelo
 import com.example.travelwithmeapp.utils.MockData
 import com.example.travelwithmeapp.utils.Utilities
 import java.util.Date
-import java.util.Locale
-import kotlin.time.Duration
 
 
 class BuscarVuelosFragment : Fragment() {

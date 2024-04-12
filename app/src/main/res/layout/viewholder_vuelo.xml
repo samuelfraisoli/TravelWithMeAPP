@@ -4,111 +4,106 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-
     >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="10dp"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-        <ImageView
-            android:id="@+id/imagen"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/location_icon" />
-
         <TextView
-            android:id="@+id/hora"
+            android:id="@+id/duracion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:text="10 h 20 m"
+            app:layout_constraintStart_toStartOf="@+id/id_vuelo"
+            app:layout_constraintTop_toBottomOf="@+id/id_vuelo" />
 
-            android:layout_marginStart="20dp"
-            android:text="12:00 - 18:00"
+        <TextView
+            android:id="@+id/id_vuelo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Vuelo CA965"
+            app:layout_constraintStart_toStartOf="@+id/aerolinea"
+            app:layout_constraintTop_toBottomOf="@+id/aerolinea" />
+
+        <TextView
+            android:id="@+id/aerolinea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Ryanair"
+            app:layout_constraintStart_toEndOf="@+id/icono_aerolinea"
+            app:layout_constraintTop_toTopOf="@+id/icono_aerolinea" />
+
+        <TextView
+            android:id="@+id/terminal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Terminal 4"
+            app:layout_constraintStart_toStartOf="@+id/aeropuerto"
+            app:layout_constraintTop_toBottomOf="@+id/aeropuerto" />
+
+        <TextView
+            android:id="@+id/letras_vuelo"
+            android:layout_width="53dp"
+            android:layout_height="51dp"
+            android:gravity="center"
+            android:rotation="270"
+            android:text="MAD"
+            android:textAlignment="center"
             android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imagen"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/precio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="100€"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.988"
-            app:layout_constraintStart_toEndOf="@+id/hora"
-            app:layout_constraintTop_toBottomOf="@+id/ciudadYAerolinea"
-            app:layout_constraintVertical_bias="1.0" />
-
-        <TextView
-            android:id="@+id/ciudadYAerolinea"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-
-            android:text="MDR-NY, Vueling airlines"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/hora"
-            app:layout_constraintTop_toBottomOf="@+id/hora"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <TextView
-            android:id="@+id/escala"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Escala"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.988"
-            app:layout_constraintStart_toEndOf="@+id/hora"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tiempoVuelo"
+            android:id="@+id/aeropuerto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="2h 20m"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.988"
-            app:layout_constraintStart_toEndOf="@+id/hora"
-            app:layout_constraintTop_toBottomOf="@+id/escala" />
+            android:layout_marginTop="10dp"
+            android:text="Madrid Adolfo Suárez"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/fecha_salida"
+            app:layout_constraintTop_toBottomOf="@+id/fecha_salida" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/hora_salida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="12:00"
+            app:layout_constraintBottom_toBottomOf="@+id/fecha_salida"
+            app:layout_constraintStart_toEndOf="@+id/fecha_salida"
+            app:layout_constraintTop_toTopOf="@+id/fecha_salida" />
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/fecha_salida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="18 mayo"
+            app:layout_constraintStart_toEndOf="@+id/letras_vuelo"
+            app:layout_constraintTop_toTopOf="@+id/letras_vuelo" />
 
-    />
+        <ImageView
+            android:id="@+id/icono_aerolinea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@+id/terminal"
+            app:layout_constraintTop_toBottomOf="@+id/terminal"
+            app:srcCompat="@drawable/plane2_icon" />
 
+        <View
+            android:id="@+id/divider"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintBottom_toBottomOf="@+id/duracion"
+            app:layout_constraintEnd_toEndOf="@+id/letras_vuelo"
+            app:layout_constraintStart_toStartOf="@+id/letras_vuelo"
+            app:layout_constraintTop_toBottomOf="@+id/letras_vuelo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

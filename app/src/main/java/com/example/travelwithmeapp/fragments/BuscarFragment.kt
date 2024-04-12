@@ -43,58 +43,81 @@ class BuscarFragment : Fragment() {
         cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 0)
         utilities.crearToolbar(binding.toolbar, "Buscar", binding.toolbarTitle, activity as AppCompatActivity)
 
+        recogerIntentExplorar()
+
         binding.toggleButton.addOnButtonCheckedListener { toggleButtonGroup, checkedId, isChecked ->
             if(isChecked) {
                 when(checkedId) {
-                    binding.buttonVuelos.id -> {
-                        cambiarFondo("vuelos")
-                        busquedaFlag = 1
-                        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 1)
-                        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 0)
-
-                    }
-                    binding.buttonHoteles.id -> {
-                        cambiarFondo("hoteles")
-                        busquedaFlag = 2
-                        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 1)
-                        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 0)
-                    }
+                    binding.buttonVuelos.id -> { mostrarPantallaVuelos() }
+                    binding.buttonHoteles.id -> { mostrarPantallaHoteles() }
                 }
             }
         }
         binding.fechaVuelo.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                utilities.lanzarDatePickerDialog(view, requireContext())
-            }
+            if (hasFocus) { utilities.lanzarDatePickerDialog(view, requireContext()) }
         }
         binding.fechaEntradaHotel.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                utilities.lanzarDatePickerDialog(view, requireContext())
-            }
+            if (hasFocus) { utilities.lanzarDatePickerDialog(view, requireContext()) }
         }
         binding.fechaSalidaHotel.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                utilities.lanzarDatePickerDialog(view, requireContext())
-            }
+            if (hasFocus) { utilities.lanzarDatePickerDialog(view, requireContext()) }
         }
         binding.buttonComenzar.setOnClickListener() {
             when(busquedaFlag) {
-                1 -> {
-                    val bundle = Bundle()
-                    bundle.putString("origen_vuelo", binding.origenVuelo.text.toString())
-                    bundle.putString("destino_vuelo", binding.destinoVuelo.text.toString())
-                    bundle.putString("fecha_vuelo", binding.fechaVuelo.text.toString())
-                    findNavController()?.navigate(R.id.action_buscarFragment_to_buscarVuelosFragment, bundle)
-                }
-                2 -> {
-                    val bundle = Bundle()
-                    bundle.putString("destino_hotel", binding.destinoHotel.text.toString())
-                    bundle.putString("fecha_entrada_hotel", binding.fechaEntradaHotel.text.toString())
-                    bundle.putString("fecha_salida_hotel", binding.fechaSalidaHotel.text.toString())
-                    findNavController()?.navigate(R.id.action_buscarFragment_to_buscarHotelesFragment, bundle)
-                }
+                1 -> { if(verificarDatosVuelos()) { intentABuscarVuelos() } }
+                2 -> {  if(verificarDatosHoteles()) { intentABuscarHoteles() } }
             }
         }
+    }
+
+    fun mostrarPantallaVuelos() {
+        cambiarFondo("vuelos")
+        busquedaFlag = 1
+        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 1)
+        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 0)
+    }
+
+    fun mostrarPantallaHoteles() {
+        cambiarFondo("hoteles")
+        busquedaFlag = 2
+        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 1)
+        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 0)
+    }
+
+    fun verificarDatosHoteles() : Boolean {
+        if(
+            binding.destinoHotel.text.isNotEmpty() &&
+            binding.fechaEntradaHotel.text.isNotEmpty() &&
+            binding.fechaSalidaHotel.text.isNotEmpty()
+        )
+        { return true }
+        else {return false}
+    }
+
+    fun verificarDatosVuelos() : Boolean {
+        if(
+            binding.origenVuelo.text.isNotEmpty() &&
+            binding.destinoVuelo.text.isNotEmpty() &&
+            binding.fechaVuelo.text.isNotEmpty()
+            )
+        {return true}
+        else {return false}
+    }
+
+    fun intentABuscarHoteles() {
+        val bundle = Bundle()
+        bundle.putString("destino_hotel", binding.destinoHotel.text.toString())
+        bundle.putString("fecha_entrada_hotel", binding.fechaEntradaHotel.text.toString())
+        bundle.putString("fecha_salida_hotel", binding.fechaSalidaHotel.text.toString())
+        findNavController()?.navigate(R.id.action_buscarFragment_to_buscarHotelesFragment, bundle)
+    }
+
+    fun intentABuscarVuelos() {
+        val bundle = Bundle()
+        bundle.putString("origen_vuelo", binding.origenVuelo.text.toString())
+        bundle.putString("destino_vuelo", binding.destinoVuelo.text.toString())
+        bundle.putString("fecha_vuelo", binding.fechaVuelo.text.toString())
+        findNavController()?.navigate(R.id.action_buscarFragment_to_buscarVuelosFragment, bundle)
     }
 
     fun cambiarVisibilidadChildrenViewGroup(viewGroup: ViewGroup, funcionalidad: Int) {
@@ -137,6 +160,16 @@ class BuscarFragment : Fragment() {
             backgroundActual = imagen
         }
 
+    }
+
+    fun recogerIntentExplorar() {
+        val bundle = arguments
+        val eleccion = bundle?.getInt("eleccion") ?: 0
+
+        when(eleccion) {
+            1 -> mostrarPantallaVuelos()
+            2 -> mostrarPantallaHoteles()
+        }
     }
 }
 
