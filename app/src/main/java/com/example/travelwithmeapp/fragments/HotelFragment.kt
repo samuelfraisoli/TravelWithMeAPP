@@ -1,24 +1,33 @@
 package com.example.travelwithmeapp.fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.adapters.CarouselAdapter
 import com.example.travelwithmeapp.databinding.FragmentHotelBinding
 import com.example.travelwithmeapp.databinding.FragmentResenaBinding
+import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.Utilities
 import com.google.android.material.carousel.CarouselSnapHelper
 
 
 class HotelFragment : Fragment() {
     private lateinit var binding: FragmentHotelBinding
-    private lateinit var carouselRecyclerView: RecyclerView
-    private lateinit var listaImagenes: ArrayList<String>
+    private var listaImagenes: ArrayList<String> = ArrayList()
     private lateinit var utilities: Utilities
+
+    private lateinit var hotel: Hotel
+    private var fecha_entrada_hotel: String = ""
+    private var fecha_salida_hotel: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,35 +35,66 @@ class HotelFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHotelBinding.inflate(inflater, container, false)
-
-        inicializar()
-
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        inicializar()
+    }
+
     private fun inicializar() {
+        recogerIntent()
         utilities = Utilities()
-        utilities.crearToolbar(binding.toolbar, "nombre Hotel", binding.toolbarTitle, activity as AppCompatActivity)
-        carouselRecyclerView = binding.carouselRecyclerView
-        listaImagenes = ArrayList()
-        inicializarListaImagenes()
+        utilities.crearToolbar(binding.toolbar, "${hotel.name}", binding.toolbarTitle, activity as AppCompatActivity)
+
         inicializarCarouselRecyclerView()
+        cargarElementosHotel()
 
+        binding.buttonSitioWeb.setOnClickListener() {
+            intentASitioWeb(hotel.details.web)
+        }
 
+        binding.buttonEscribirReseA.setOnClickListener() {
+            intentAReseñas(hotel)
+        }
+
+    }
+
+    private fun recogerIntent() {
+        val bundle = arguments
+        if (bundle != null) {
+            hotel = bundle.getSerializable("hotel") as Hotel
+            fecha_entrada_hotel = bundle.getString("fecha_entrada_hotel") ?: ""
+            fecha_salida_hotel = bundle.getString("fecha_salida_hotel") ?: ""
+            Log.v("bundle", "$hotel, $fecha_entrada_hotel, $fecha_entrada_hotel")
+        }
     }
 
     private fun inicializarCarouselRecyclerView() {
-        CarouselSnapHelper().attachToRecyclerView(carouselRecyclerView)
-        carouselRecyclerView.adapter = CarouselAdapter(listaImagenes)
+        CarouselSnapHelper().attachToRecyclerView(binding.carouselRecyclerView)
+        binding.carouselRecyclerView.adapter = CarouselAdapter(listaImagenes)
     }
 
-    private fun inicializarListaImagenes() {
-        listaImagenes.add("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/99/89/9c/exterior-hotel-riu-plaza.jpg?w=700&h=-1&s=1")
-        listaImagenes.add("https://www.riu.com/blog/wp-content/uploads/2022/01/riu-plaza-espana-madrid.jpg")
-        listaImagenes.add("https://www.muchoturismo.com/img/hotel-riu-plaza-espana-madrid-habitacion-deluxe-kind.jpg")
-        listaImagenes.add("https://cf.bstatic.com/xdata/images/hotel/max1024x768/217552037.jpg?k=396e6abf6fc4d566a0fcad9bdeec17fcd61c17f021514f9b66b0d93672bf9424&o=&hp=1")
-        listaImagenes.add("https://www.bestmadridhotels.com/data/Pictures/OriginalPhoto/12844/1284405/1284405139/madrid-hotel-riu-plaza-espana-picture-6.JPEG")
+    private fun cargarElementosHotel() {
+        listaImagenes.addAll(hotel.photos)
+        binding.textviewFecha.text = "${getString(R.string.Del)} ${fecha_entrada_hotel} ${getString(R.string.al)} ${fecha_salida_hotel}"
+        binding.textviewDescripcionTexto.text = hotel.details.description
+    }
+
+    private fun intentASitioWeb(url: String) {
+        // Crea un Intent implícito con la acción ACTION_VIEW y la URL del sitio web
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
 
 
     }
+
+    private fun intentAReseñas(hotel: Hotel) {
+        //todo completar
+    }
+
+
+
+
 }

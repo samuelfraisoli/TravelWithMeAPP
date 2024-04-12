@@ -11,6 +11,8 @@
     <string name="cuenta">cuenta</string>
     <string name="vuelos">vuelos</string>
     <string name="hoteles">hoteles</string>
+    <string name="Del">Del</string>
+    <string name="al">al</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

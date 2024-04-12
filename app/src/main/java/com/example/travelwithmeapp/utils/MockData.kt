@@ -128,7 +128,8 @@ class MockData {
                 city = "Ciudad Principal",
                 country = "País Principal"
             ),
-            photos = arrayListOf("photo1.jpg", "photo2.jpg"),
+            photos = hotelPhotos.shuffled() as ArrayList<String>,
+            details = hotelDetails,
             reviews = arrayListOf("Excelente servicio", "Vistas impresionantes")
         )
         listaHoteles.add(hotel1)
@@ -143,6 +144,7 @@ class MockData {
                 country = "País Secundario"
             ),
             photos = hotelPhotos.shuffled() as ArrayList<String>,
+            details = hotelDetails,
             reviews = arrayListOf("Muy relajante", "Personal amable")
         )
         listaHoteles.add(hotel2)
@@ -156,7 +158,8 @@ class MockData {
                 city = "Ciudad de Montaña",
                 country = "País de Montaña"
             ),
-            photos = arrayListOf("photo5.jpg", "photo6.jpg"),
+            photos = hotelPhotos.shuffled() as ArrayList<String>,
+            details = hotelDetails,
             reviews = arrayListOf("Vistas espectaculares", "Comida deliciosa")
         )
         listaHoteles.add(hotel3)
@@ -170,7 +173,8 @@ class MockData {
                 city = "Ciudad Costera",
                 country = "País Costero"
             ),
-            photos = arrayListOf("photo7.jpg", "photo8.jpg"),
+            photos = hotelPhotos.shuffled() as ArrayList<String>,
+            details = hotelDetails,
             reviews = arrayListOf("Ubicación perfecta", "Playa hermosa")
         )
         listaHoteles.add(hotel4)
@@ -184,7 +188,8 @@ class MockData {
                 city = "Ciudad Elegante",
                 country = "País Elegante"
             ),
-            photos = arrayListOf("photo9.jpg", "photo10.jpg"),
+            photos = hotelPhotos.shuffled() as ArrayList<String>,
+            details = hotelDetails,
             reviews = arrayListOf("Estilo impresionante", "Habitaciones cómodas")
         )
         listaHoteles.add(hotel5)
@@ -198,7 +203,8 @@ class MockData {
                 city = "Ciudad de Aventura",
                 country = "País de Aventura"
             ),
-            photos = arrayListOf("photo11.jpg", "photo12.jpg"),
+            photos = hotelPhotos.shuffled() as ArrayList<String>,
+            details = hotelDetails,
             reviews = arrayListOf("Actividades emocionantes", "Personal atento")
         )
         listaHoteles.add(hotel6)
