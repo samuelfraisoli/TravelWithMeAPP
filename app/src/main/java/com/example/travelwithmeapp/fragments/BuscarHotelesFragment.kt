@@ -56,7 +56,7 @@ class BuscarHotelesFragment : Fragment() {
 
 
     fun inicializar() {
-        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "hoteles", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
+        utilities.crearToolbar(binding.toolbar, "hoteles", binding.toolbarTitle, activity as AppCompatActivity)
         recogerIntent()
         configurarRecycler()
         buscarHoteles()
