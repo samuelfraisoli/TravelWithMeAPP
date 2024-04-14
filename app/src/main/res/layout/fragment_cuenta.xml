@@ -49,7 +49,7 @@
         android:drawableTint="@color/white"
         android:drawablePadding="14dp"
         android:focusable="true"
-        android:gravity="center||left"
+        android:gravity="center|left"
         android:onClick="onPerfilClicked"
         android:text="Perfil"
         android:textColor="#FBF9F9"
