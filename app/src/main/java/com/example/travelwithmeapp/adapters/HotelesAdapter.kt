@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
-import com.example.travelwithmeapp.databinding.ViewholderHotelBinding
+import com.example.travelwithmeapp.databinding.ViewholderBuscarhotelBinding
 import com.example.travelwithmeapp.models.Hotel
 
 
@@ -14,7 +14,7 @@ class HotelesAdapter(
     val lambda: (Hotel) -> Unit)
     : RecyclerView.Adapter<HotelesAdapter.HotelHolder>() {
 
-    inner class HotelHolder(val itemBinding: ViewholderHotelBinding) :
+    inner class HotelHolder(val itemBinding: ViewholderBuscarhotelBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bindItem(hotel: Hotel) {
             itemBinding.textviewNombre.text = hotel.name
@@ -36,7 +36,7 @@ class HotelesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelHolder {
         return HotelHolder(
-            ViewholderHotelBinding.inflate(
+            ViewholderBuscarhotelBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

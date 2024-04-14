@@ -2,6 +2,7 @@ package com.example.travelwithmeapp.utils
 
 import com.example.travelwithmeapp.models.Address
 import com.example.travelwithmeapp.models.Aeropuerto
+import com.example.travelwithmeapp.models.Escala
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.HotelDetails
 import com.example.travelwithmeapp.models.Vuelo
@@ -25,7 +26,7 @@ class MockData {
                 Date(),
                 Date(),
                 Duration.parse("PT1H30M"),
-                arrayListOf("Escala 1", "Escala 2"),
+                arrayListOf(Escala()),
                 150.0
             )
         )
@@ -39,7 +40,7 @@ class MockData {
                 Date(),
                 Date(),
                 Duration.parse("PT5H30M"),
-                arrayListOf("Escala"),
+                arrayListOf(Escala()),
                 200.0
             )
         )
