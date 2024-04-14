@@ -63,13 +63,15 @@
         android:backgroundTint="@android:color/transparent"
         android:drawableLeft="@drawable/account_icon"
         android:hint="Introduce tu correo"
+        android:drawablePadding="5dp"
+        android:drawableTint="@color/white"
         android:textColorHint="@color/white"
         android:paddingLeft="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardview_icono"
-        app:layout_constraintVertical_bias="0.124" />
+        app:layout_constraintVertical_bias="0.124"/>
 
     <EditText
         android:id="@+id/edittext_password"
@@ -80,6 +82,8 @@
         android:textColorHint="@color/white"
         android:drawableLeft="@drawable/pass_icon"
         android:hint="Introduce tu contraseña"
+        android:drawablePadding="5dp"
+        android:drawableTint="@color/white"
         android:inputType="textPassword"
         android:paddingLeft="5dp"
         app:layout_constraintEnd_toEndOf="@+id/edittext_correo"
