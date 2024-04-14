@@ -41,7 +41,7 @@ class BuscarFragment : Fragment() {
         utilities = Utilities()
         cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 0)
         cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 0)
-        utilities.crearToolbar(binding.toolbar, "Buscar", binding.toolbarTitle, activity as AppCompatActivity)
+        utilities.crearToolbarMenuPrincipal(binding.toolbar.toolbarLayout, "Buscar", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
         recogerIntentExplorar()
 

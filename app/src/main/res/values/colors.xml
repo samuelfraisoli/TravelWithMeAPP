@@ -2,4 +2,12 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="red_app">#DB7F8C</color>
+    <color name="gray_app">#99B7D4</color>
+    <color name="gray_6_apple">#E5E5EA</color>
+    <color name="quaternary_system_fill_apple">#F4F4F5</color>
+    <color name="cyan_app">#32ADE6</color>
+    <color name="pink_apple">#FF2D55</color>
+    <color name="elemento_no_seleccionado">#FFA3A3A3</color>
+
 </resources>
