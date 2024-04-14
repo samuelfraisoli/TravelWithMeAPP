@@ -45,8 +45,6 @@ class BuscarFragment : Fragment() {
 
         recogerIntentExplorar()
 
-        recogerIntentExplorar()
-
         binding.toggleButton.addOnButtonCheckedListener { toggleButtonGroup, checkedId, isChecked ->
             if(isChecked) {
                 when(checkedId) {

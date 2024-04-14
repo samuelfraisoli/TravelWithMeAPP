@@ -46,7 +46,7 @@ class HotelFragment : Fragment() {
     private fun inicializar() {
         recogerIntent()
         utilities = Utilities()
-        utilities.crearToolbar(binding.toolbar, "${hotel.name}", binding.toolbarTitle, activity as AppCompatActivity)
+        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "${hotel.name}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
         inicializarCarouselRecyclerView()
         cargarElementosHotel()
