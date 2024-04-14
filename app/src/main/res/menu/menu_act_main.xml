@@ -23,7 +23,7 @@
     </item>
 
     <item
-        android:id="@+id/opinionFragment"
+        android:id="@+id/resenaFragment"
         android:icon="@drawable/write_icon"
         android:title="@string/resena"
         app:showAsAction="always">

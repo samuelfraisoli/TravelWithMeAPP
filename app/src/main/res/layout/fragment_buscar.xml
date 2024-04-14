@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.BuscarFragment"
     android:id="@+id/constraintLayout"
-    >
+    android:theme="@style/EditTextApp">
 
     <ImageView
         android:id="@+id/backgroundVuelos"
@@ -49,10 +49,10 @@
 
         <EditText
             android:id="@+id/destino_hotel"
-            android:layout_width="140dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="destino"
+            android:layout_marginTop="60dp"
+            android:hint="Destino"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,22 +61,22 @@
 
         <EditText
             android:id="@+id/fecha_entrada_hotel"
-            android:layout_width="140dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:editable="false"
-            android:hint="fecha entrada"
+            android:hint="Fecha entrada"
             app:layout_constraintEnd_toEndOf="@+id/destino_hotel"
             app:layout_constraintStart_toStartOf="@+id/destino_hotel"
             app:layout_constraintTop_toBottomOf="@+id/destino_hotel"></EditText>
 
         <EditText
             android:id="@+id/fecha_salida_hotel"
-            android:layout_width="140dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:editable="false"
-            android:hint="fecha salida"
+            android:hint="Fecha salida"
             app:layout_constraintEnd_toEndOf="@+id/fecha_entrada_hotel"
             app:layout_constraintStart_toStartOf="@+id/fecha_entrada_hotel"
             app:layout_constraintTop_toBottomOf="@+id/fecha_entrada_hotel">
@@ -104,10 +104,10 @@
 
         <EditText
             android:id="@+id/origen_vuelo"
-            android:layout_width="140dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:hint="origen"
+            android:layout_marginTop="60dp"
+            android:hint="Origen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -116,21 +116,21 @@
 
         <EditText
             android:id="@+id/destino_vuelo"
-            android:layout_width="140dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:hint="destino"
+            android:hint="Destino"
             app:layout_constraintEnd_toEndOf="@+id/origen_vuelo"
             app:layout_constraintStart_toStartOf="@+id/origen_vuelo"
             app:layout_constraintTop_toBottomOf="@+id/origen_vuelo"></EditText>
 
         <EditText
             android:id="@+id/fecha_vuelo"
-            android:layout_width="140dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:editable="false"
-            android:hint="fecha"
+            android:hint="Fecha"
             app:layout_constraintEnd_toEndOf="@+id/destino_vuelo"
             app:layout_constraintStart_toStartOf="@+id/destino_vuelo"
             app:layout_constraintTop_toBottomOf="@+id/destino_vuelo"></EditText>
@@ -142,13 +142,16 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:elevation="8dp"
+
         android:background="@drawable/constraint_layout_bordes_redondeados"
         android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.158">
+        app:layout_constraintVertical_bias="0.158"
+        >
 
         <com.google.android.material.button.MaterialButtonToggleGroup
             android:id="@+id/toggleButton"
@@ -158,21 +161,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:singleSelection="true">
+            app:singleSelection="true"
+            android:backgroundTint="@color/red_app"
+            app:strokeColor="#33FFFFFF"
+            >
 
             <Button
                 android:id="@+id/buttonVuelos"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vuelos" />
+                android:text="Vuelos"
+                android:backgroundTint="@color/materialbuttontogglegroup_color"
+                app:strokeColor="@color/materialbuttontogglegroup_border_color"
+                />
 
             <Button
                 android:id="@+id/buttonHoteles"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Hoteles" />
+                android:text="Hoteles"
+                android:backgroundTint="@color/materialbuttontogglegroup_color"
+                app:strokeColor="@color/materialbuttontogglegroup_border_color"/>
 
 
         </com.google.android.material.button.MaterialButtonToggleGroup>
@@ -183,6 +194,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="comenzar"
+            android:backgroundTint="@color/pink_apple"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -193,27 +205,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.appcompat.widget.Toolbar
+    <include
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        layout="@layout/layout_toolbar_menu_principal">
 
-        <TextView
-            android:id="@+id/toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=""
-            android:textSize="20dp" />
 
-    </androidx.appcompat.widget.Toolbar>
+    </include>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"

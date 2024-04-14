@@ -44,7 +44,7 @@ class BuscarVuelosFragment : Fragment() {
     fun inicializar() {
         listaVuelos = mockdata.listaPruebaVuelos()
         configurarRecycler()
-        utilities.crearToolbar(binding.toolbar, "vuelos", binding.toolbarTitle, activity as AppCompatActivity)
+        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "vuelos", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
     }
 
     fun configurarRecycler() {

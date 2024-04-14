@@ -1,7 +1,9 @@
 package com.example.travelwithmeapp.utils
 
 import android.app.DatePickerDialog
+import android.app.PendingIntent.getActivity
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
@@ -13,6 +15,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.travelwithmeapp.R
 import com.google.android.material.snackbar.Snackbar
@@ -38,7 +42,7 @@ class Utilities {
         var dia = calendar.get(Calendar.DAY_OF_MONTH)
 
         var datePickerDialog = DatePickerDialog(
-            context,
+            context, R.style.ThemeOverlay_App_Dialog,
             DatePickerDialog.OnDateSetListener { _, anoSeleccionado, mesSeleccionado, diaSeleccionado ->
                 fechaSeleccionada = Calendar.getInstance()
                 fechaSeleccionada.set(anoSeleccionado, mesSeleccionado, diaSeleccionado)
@@ -63,11 +67,25 @@ class Utilities {
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
-    fun crearToolbar(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
+    fun crearToolbarFragmSecundario(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val actionBar = (activity).supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
+        var drawable = ResourcesCompat.getDrawable(activity.resources, R.drawable.back_icon, null)
+        drawable = DrawableCompat.wrap(drawable!!);
+        DrawableCompat.setTint(drawable, activity.resources.getColor(R.color.cyan_app));
         actionBar?.setHomeAsUpIndicator(R.drawable.back_icon)
+
+        actionBar?.setDisplayShowTitleEnabled(false)
+        textView.text = titulo
+        toolbar.setNavigationOnClickListener {
+            activity.onBackPressed()
+        }
+    }
+
+    fun crearToolbarMenuPrincipal(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        val actionBar = (activity).supportActionBar
         actionBar?.setDisplayShowTitleEnabled(false)
         textView.text = titulo
         toolbar.setNavigationOnClickListener {
