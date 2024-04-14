@@ -2,7 +2,7 @@ package com.example.travelwithmeapp.utils
 
 import com.example.travelwithmeapp.models.Address
 import com.example.travelwithmeapp.models.Aeropuerto
-import com.example.travelwithmeapp.models.Escala
+import com.example.travelwithmeapp.models.TrayectoVuelo
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.HotelDetails
 import com.example.travelwithmeapp.models.Vuelo
@@ -17,6 +17,44 @@ class MockData {
         val aeropuerto2 = Aeropuerto("2", "Aeropuerto 2", "Ciudad 2", "C2", "País 2")
 
 
+        val trayectoVuelo1 = TrayectoVuelo(
+            id = "E1",
+            origen = Aeropuerto("A002", "Java Airport", "Javatown", "JT", "Java", "Terminal B"),
+            destino = Aeropuerto(
+                "A003",
+                "Python International",
+                "Pythontown",
+                "PT",
+                "Python",
+                "Terminal C"
+            ),
+            fechaSalida = Date(),
+            fechaLlegada = Date(Date().time + 1800000), // Añadiendo 30 minutos en milisegundos
+            duracion = Duration.parse("PT1H30M"),
+            aerolinea = "JetBrains Airways",
+            escala = true,
+            tiempoEscala = Duration.parse("PT1H30M")
+        )
+
+        val trayectoVuelo2 = TrayectoVuelo(
+            id = "E2",
+            origen = Aeropuerto(
+                "A003",
+                "Python International",
+                "Pythontown",
+                "PT",
+                "Python",
+                "Terminal C"
+            ),
+            destino = Aeropuerto("A004", "C++ Airport", "C++ville", "CP", "C++", "Terminal D"),
+            fechaSalida = Date(Date().time + 3600000), // Añadiendo 1 hora en milisegundos
+            fechaLlegada = Date(Date().time + 5400000), // Añadiendo 1.5 horas en milisegundos
+            duracion = Duration.parse("PT1H30M"),
+            aerolinea = "PyFlight"
+        )
+
+
+
         listaVuelos.add(
             Vuelo(
                 "1",
@@ -26,7 +64,7 @@ class MockData {
                 Date(),
                 Date(),
                 Duration.parse("PT1H30M"),
-                arrayListOf(Escala()),
+                arrayListOf(trayectoVuelo1, trayectoVuelo2),
                 150.0
             )
         )
@@ -40,7 +78,7 @@ class MockData {
                 Date(),
                 Date(),
                 Duration.parse("PT5H30M"),
-                arrayListOf(Escala()),
+                arrayListOf(trayectoVuelo1, trayectoVuelo2),
                 200.0
             )
         )
@@ -54,7 +92,7 @@ class MockData {
                 Date(),
                 Date(),
                 Duration.parse("PT2H20M"),
-                arrayListOf(),
+                arrayListOf(trayectoVuelo1, trayectoVuelo2),
                 180.0
             )
         )
@@ -68,7 +106,7 @@ class MockData {
                 Date(),
                 Date(),
                 Duration.parse("PT2H20M"),
-                arrayListOf(),
+                arrayListOf(trayectoVuelo1, trayectoVuelo2),
                 180.0
             )
         )
@@ -82,7 +120,7 @@ class MockData {
                 Date(),
                 Date(),
                 Duration.parse("PT2H20M"),
-                arrayListOf(),
+                arrayListOf(trayectoVuelo1, trayectoVuelo2),
                 180.0
             )
         )
@@ -90,7 +128,7 @@ class MockData {
         return listaVuelos
     }
 
-    fun listaPruebaHoteles() : ArrayList<Hotel> {
+    fun listaPruebaHoteles(): ArrayList<Hotel> {
         var listaHoteles = ArrayList<Hotel>()
         val hotelDetails = HotelDetails(
             description = "El Hotel Serenidad es un refugio de lujo ubicado en un entorno idílico, rodeado de exuberante vegetación tropical y vistas panorámicas al mar. Con una arquitectura contemporánea y elegante, ofrece una experiencia de alojamiento incomparable para viajeros exigentes. Sus amplias y lujosas habitaciones están diseñadas para el máximo confort, con comodidades modernas y detalles cuidadosamente seleccionados. Los huéspedes pueden disfrutar de una variedad de opciones gastronómicas que van desde platos locales hasta cocina internacional en sus exclusivos restaurantes. Además, el hotel cuenta con instalaciones de primer nivel, que incluyen una piscina infinita, un spa de clase mundial y servicios personalizados para satisfacer todas las necesidades de sus distinguidos visitantes. En el Hotel Serenidad, cada momento se convierte en una experiencia inolvidable de relajación y lujo.",

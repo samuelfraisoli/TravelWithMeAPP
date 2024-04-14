@@ -49,7 +49,7 @@ class BuscarVuelosFragment : Fragment() {
 
     fun configurarRecycler() {
         adaptadorRecycler = VuelosAdapter(listaVuelos) {
-            vuelo -> cambiarFragment(vuelo)
+            vuelo -> intentAVueloFrag(vuelo)
         }
         recyclerView = binding.recyclerBusquedaFrag
         recyclerView.adapter = adaptadorRecycler
@@ -60,10 +60,10 @@ class BuscarVuelosFragment : Fragment() {
         //todo rellenar
     }
 
-    fun cambiarFragment(vuelo: Vuelo) {
+    fun intentAVueloFrag(vuelo: Vuelo) {
         val bundle = Bundle()
         bundle.putSerializable("vuelo", vuelo)
-        findNavController()?.navigate(R.id.action_buscarVuelosFragment_to_vueloFragment)
+        findNavController()?.navigate(R.id.action_buscarVuelosFragment_to_vueloFragment, bundle)
     }
 
 

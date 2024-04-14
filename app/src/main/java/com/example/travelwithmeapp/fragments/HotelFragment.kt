@@ -18,6 +18,7 @@ import com.example.travelwithmeapp.databinding.FragmentResenaBinding
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.Utilities
 import com.google.android.material.carousel.CarouselSnapHelper
+import java.util.Date
 
 
 class HotelFragment : Fragment() {
@@ -26,8 +27,8 @@ class HotelFragment : Fragment() {
     private lateinit var utilities: Utilities
 
     private lateinit var hotel: Hotel
-    private var fecha_entrada_hotel: String = ""
-    private var fecha_salida_hotel: String = ""
+    private lateinit var fecha_entrada_hotel: Date
+    private lateinit var fecha_salida_hotel: Date
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,8 +45,8 @@ class HotelFragment : Fragment() {
     }
 
     private fun inicializar() {
-        recogerIntent()
         utilities = Utilities()
+        recogerIntent()
         utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "${hotel.name}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
         inicializarCarouselRecyclerView()
@@ -65,9 +66,10 @@ class HotelFragment : Fragment() {
         val bundle = arguments
         if (bundle != null) {
             hotel = bundle.getSerializable("hotel") as Hotel
-            fecha_entrada_hotel = bundle.getString("fecha_entrada_hotel") ?: ""
-            fecha_salida_hotel = bundle.getString("fecha_salida_hotel") ?: ""
-            Log.v("bundle", "$hotel, $fecha_entrada_hotel, $fecha_entrada_hotel")
+            var fecha_entrada_string = bundle.getString("fecha_entrada_hotel")!!
+            fecha_entrada_hotel = utilities.parseStringADateDDMMYYYYconBarras(fecha_entrada_string)
+            var fecha_salida_string = bundle.getString("fecha_salida_hotel")!!
+            fecha_salida_hotel = utilities.parseStringADateDDMMYYYYconBarras(fecha_salida_string)
         }
     }
 
@@ -78,7 +80,7 @@ class HotelFragment : Fragment() {
 
     private fun cargarElementosHotel() {
         listaImagenes.addAll(hotel.photos)
-        binding.textviewFecha.text = "${getString(R.string.Del)} ${fecha_entrada_hotel} ${getString(R.string.al)} ${fecha_salida_hotel}"
+        binding.textviewFecha.text = "${getString(R.string.Del)} ${utilities.formatoDateDDMM(fecha_entrada_hotel)} ${getString(R.string.al)} ${utilities.formatoDateDDMM(fecha_salida_hotel)}"
         binding.textviewDescripcionTexto.text = hotel.details.description
     }
 

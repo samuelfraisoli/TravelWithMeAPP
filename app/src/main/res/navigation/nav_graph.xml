@@ -41,28 +41,22 @@
             app:destination="@id/buscarHotelesFragment" />
         <argument
             android:name="destino_hotel"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="fecha_entrada_hotel"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="fecha_salida_hotel"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="origen_vuelo"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="destino_vuelo"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="fecha_vuelo"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
 
     </fragment>
 
@@ -89,9 +83,8 @@
         android:label="fragment_hotel"
         tools:layout="@layout/fragment_hotel">
         <argument
-            android:name="destino_hotel"
-            app:argType="string"
-            app:nullable="true" />
+            android:name="hotel"
+            app:argType="com.example.travelwithmeapp.models.Hotel" />
         <argument
             android:name="fecha_entrada_hotel"
             app:argType="string"
@@ -108,13 +101,8 @@
         android:label="fragment_vuelo"
         tools:layout="@layout/fragment_vuelo">
         <argument
-            android:name="origen_vuelo"
-            app:argType="string"
-            app:nullable="true" />
-        <argument
-            android:name="destino_vuelo"
-            app:argType="string"
-            app:nullable="true" />
+            android:name="vuelo"
+            app:argType="com.example.travelwithmeapp.models.Vuelo" />
         <argument
             android:name="fecha_vuelo"
             app:argType="string"
@@ -131,16 +119,16 @@
             app:destination="@id/hotelFragment" />
         <argument
             android:name="destino_hotel"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="fecha_entrada_hotel"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="fecha_salida_hotel"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
+        <argument
+            android:name="hotel"
+            app:argType="com.example.travelwithmeapp.models.Hotel" />
     </fragment>
 
     <fragment
@@ -153,16 +141,16 @@
             app:destination="@id/vueloFragment" />
         <argument
             android:name="origen_vuelo"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="destino_vuelo"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
         <argument
             android:name="fecha_vuelo"
-            app:argType="string"
-            app:nullable="true" />
+            app:argType="string" />
+        <argument
+            android:name="vuelo"
+            app:argType="com.example.travelwithmeapp.models.Vuelo" />
     </fragment>
     <fragment
         android:id="@+id/cosasQueHacerFragment"

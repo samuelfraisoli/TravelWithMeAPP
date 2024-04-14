@@ -24,9 +24,9 @@ class VuelosAdapter(
         fun bindItem(vuelo: Vuelo) {
             //doy formato a las escalas
             var escalasText = ""
-            if(vuelo.escalas.size == 0) { escalasText = "Sin escalas" }
-            else if(vuelo.escalas.size == 1) { escalasText = "1 escala" }
-            else { escalasText = "${vuelo.escalas.size} escalas" }
+            if(vuelo.trayectos.size == 1 && vuelo.trayectos.size == 0) { escalasText = "Sin escalas" }
+            else if(vuelo.trayectos.size == 2) { escalasText = "1 escala" }
+            else { escalasText = "${vuelo.trayectos.size + 1} escalas" }
             itemBinding.escala.text = escalasText
 
 

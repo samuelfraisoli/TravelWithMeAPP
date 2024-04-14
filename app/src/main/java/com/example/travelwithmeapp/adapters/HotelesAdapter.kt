@@ -22,7 +22,7 @@ class HotelesAdapter(
 
 
             itemBinding.imagen.load(hotel?.photos?.get(0)) {
-                transformations(RoundedCornersTransformation(8f))
+                transformations(RoundedCornersTransformation(20f))
             }
 
             itemBinding.root.setOnClickListener {
