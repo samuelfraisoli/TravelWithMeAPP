@@ -4,19 +4,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.databinding.ViewholderEscalaBinding
+import com.example.travelwithmeapp.databinding.ViewholderTrayectoBinding
 import com.example.travelwithmeapp.models.TrayectoVuelo
 import com.example.travelwithmeapp.utils.Utilities
 
 
-class EscalasAdapter(
+class TrayectosAdapter(
     val lista: List<TrayectoVuelo>
     )
-    : RecyclerView.Adapter<EscalasAdapter.EscalaHolder>() {
+    : RecyclerView.Adapter<TrayectosAdapter.TrayectoHolder>() {
 
 
 
-    inner class EscalaHolder(val itemBinding: ViewholderEscalaBinding) :
+    inner class TrayectoHolder(val itemBinding: ViewholderTrayectoBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
         var utilities = Utilities()
@@ -51,9 +51,9 @@ class EscalasAdapter(
             }
         }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EscalaHolder {
-        return EscalaHolder(
-            ViewholderEscalaBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrayectoHolder {
+        return TrayectoHolder(
+            ViewholderTrayectoBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -65,7 +65,7 @@ class EscalasAdapter(
         return lista.size
     }
 
-    override fun onBindViewHolder(holder: EscalaHolder, position: Int) {
+    override fun onBindViewHolder(holder: TrayectoHolder, position: Int) {
             val escala = lista.get(position)
             holder.bindItem(escala)
         }

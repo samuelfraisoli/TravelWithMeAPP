@@ -9,10 +9,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.travelwithmeapp.adapters.EscalasAdapter
-import com.example.travelwithmeapp.adapters.HotelesAdapter
+import com.example.travelwithmeapp.adapters.TrayectosAdapter
 import com.example.travelwithmeapp.databinding.FragmentVueloBinding
-import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.Vuelo
 import com.example.travelwithmeapp.utils.Utilities
 
@@ -22,7 +20,7 @@ class VueloFragment : Fragment() {
     private lateinit var vuelo: Vuelo
     private var fecha_vuelo: String = ""
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adaptadorRecycler: EscalasAdapter
+    private lateinit var adaptadorRecycler: TrayectosAdapter
     private lateinit var utilities: Utilities
 
     override fun onCreateView(
@@ -73,7 +71,7 @@ class VueloFragment : Fragment() {
 
     fun configurarRecycler() {
         recyclerView = binding.recyclerEscalas
-        adaptadorRecycler = EscalasAdapter(vuelo.trayectos)
+        adaptadorRecycler = TrayectosAdapter(vuelo.trayectos)
         recyclerView.adapter = adaptadorRecycler
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
