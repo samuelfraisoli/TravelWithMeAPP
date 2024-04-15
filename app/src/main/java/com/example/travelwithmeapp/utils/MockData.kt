@@ -13,8 +13,8 @@ class MockData {
     fun listaPruebaVuelos(): ArrayList<Vuelo> {
         var listaVuelos = ArrayList<Vuelo>()
         // Crear algunos objetos Aeropuerto para usar en los vuelos
-        val aeropuerto1 = Aeropuerto("1", "Aeropuerto 1", "Ciudad 1", "C1", "País 1")
-        val aeropuerto2 = Aeropuerto("2", "Aeropuerto 2", "Ciudad 2", "C2", "País 2")
+        val aeropuerto1 = Aeropuerto("1", "Aeropuerto 1", "Ciudad 1", "MAD", "País 1", "C1")
+        val aeropuerto2 = Aeropuerto("2", "Aeropuerto 2", "Ciudad 2", "PEK", "País 2", "T5")
 
 
         val trayectoVuelo1 = TrayectoVuelo(
@@ -58,6 +58,7 @@ class MockData {
         listaVuelos.add(
             Vuelo(
                 "1",
+                "C2123",
                 "Aerolínea 1",
                 aeropuerto1,
                 aeropuerto2,
@@ -72,6 +73,7 @@ class MockData {
         listaVuelos.add(
             Vuelo(
                 "2",
+                "D2123",
                 "Aerolínea 2",
                 aeropuerto2,
                 aeropuerto1,
@@ -86,6 +88,7 @@ class MockData {
         listaVuelos.add(
             Vuelo(
                 "3",
+                "C3123",
                 "Aerolínea 3",
                 aeropuerto1,
                 aeropuerto2,
@@ -100,6 +103,7 @@ class MockData {
         listaVuelos.add(
             Vuelo(
                 "4",
+                "C3133",
                 "Aerolínea 3",
                 aeropuerto1,
                 aeropuerto2,
@@ -114,6 +118,7 @@ class MockData {
         listaVuelos.add(
             Vuelo(
                 "5",
+                "W3123",
                 "Aerolínea 3",
                 aeropuerto1,
                 aeropuerto2,

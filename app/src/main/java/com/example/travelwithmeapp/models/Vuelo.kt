@@ -6,6 +6,7 @@ import kotlin.time.Duration
 
 data class Vuelo(
     var id: String = "",
+    var id_vuelo: String = "",
     var aerolinea: String = "",
     var origen: Aeropuerto = Aeropuerto(),
     var destino: Aeropuerto = Aeropuerto(),

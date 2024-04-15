@@ -5,6 +5,7 @@ import kotlin.time.Duration
 
 data class TrayectoVuelo(
     var id: String = "",
+    var id_trayecto: String = "",
     var origen: Aeropuerto = Aeropuerto(),
     var destino: Aeropuerto = Aeropuerto(),
     var fechaSalida: Date = Date(),

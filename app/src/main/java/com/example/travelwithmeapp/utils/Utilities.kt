@@ -5,10 +5,12 @@ import android.content.Context
 
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
+import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
@@ -106,11 +108,12 @@ class Utilities {
         return fechaFormateada
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun formatoDateHHMM(fecha:Date) : String {
         val fechaLocalTime = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalTime()
         val formatoHora = DateTimeFormatter.ofPattern("HH:mm")
-        fechaLocalTime.format(formatoHora)
-        return fechaLocalTime.toString()
+        val fechaFormateada = fechaLocalTime.format(formatoHora)
+        return fechaFormateada
     }
 
     fun formatoDurationHHhMMm(duracion: Duration) : String {

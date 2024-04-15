@@ -16,5 +16,9 @@
     <color name="yellow_apple">#FFCC00</color>
     <color name="pink_apple">#FF2D55</color>
     <color name="elemento_no_seleccionado">#FFA3A3A3</color>
+    <color name="orange_apple">#FF9500</color>
+    <color name="red_apple">#FF3B30</color>
+    <color name="indigo_apple">#5856D6</color>
+
 
 </resources>
