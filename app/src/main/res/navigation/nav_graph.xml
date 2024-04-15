@@ -82,7 +82,11 @@
         android:id="@+id/cuentaFragment"
         android:name="com.example.travelwithmeapp.fragments.CuentaFragment"
         android:label="fragment_busqueda"
-        tools:layout="@layout/fragment_buscar" />
+        tools:layout="@layout/fragment_buscar" >
+        <action
+            android:id="@+id/action_cuentaFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
+    </fragment>
     <fragment
         android:id="@+id/hotelFragment"
         android:name="com.example.travelwithmeapp.fragments.HotelFragment"
@@ -169,6 +173,15 @@
         android:name="com.example.travelwithmeapp.fragments.CosasQueHacerFragment"
         android:label="fragment_cosas_que_hacer"
         tools:layout="@layout/fragment_cosas_que_hacer" >
+    </fragment>
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.example.travelwithmeapp.fragments.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" >
+        <action
+            android:id="@+id/action_perfilFragment_to_cuentaFragment"
+            app:destination="@id/cuentaFragment" />
     </fragment>
 
 

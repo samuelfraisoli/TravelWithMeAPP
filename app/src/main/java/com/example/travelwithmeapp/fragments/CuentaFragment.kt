@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.travelwithmeapp.activities.LoginActivity
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentCuentaBinding
@@ -28,6 +29,13 @@ class CuentaFragment : Fragment() {
         inicializar()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.textPerfil.setOnClickListener{
+            findNavController().navigate(R.id.action_cuentaFragment_to_perfilFragment)
+        }
     }
 
     fun inicializar() {
