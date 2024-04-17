@@ -71,7 +71,7 @@ class Utilities {
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
-    fun crearToolbarFragmSecundario(toolbar: LayoutToolbarFragmentSecundarioBinding, titulo: String, textView: TextView, activity: FragmentActivity) {
+    fun crearToolbarFragmSecundario(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val actionBar = (activity).supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
