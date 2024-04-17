@@ -12,6 +12,6 @@ data class Vuelo(
     var fechaSalida: Date = Date(),
     var fechaLlegada: Date = Date(),
     var duracion: Duration = Duration.ZERO,
-    var escalas: ArrayList<Escala> = ArrayList(),
+    var trayectos: ArrayList<TrayectoVuelo> = ArrayList(),
     var precio: Double = 0.0
 ) : Serializable

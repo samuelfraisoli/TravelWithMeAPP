@@ -7,5 +7,6 @@ data class Aeropuerto (
     var nombre: String = "",
     var ciudad: String = "",
     var ciudadAbrev: String = "",
-    var pais: String = ""
+    var pais: String = "",
+    var terminal: String = ""
 ) : Serializable

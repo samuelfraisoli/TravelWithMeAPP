@@ -13,5 +13,5 @@ data class TrayectoVuelo(
     var duracion: Duration = Duration.ZERO,
     var aerolinea: String = "",
     var escala: Boolean = false,
-    var tiempoEscala: Duration = Duration.ZERO
+    var tiempoEscala: Duration = Duration.ZERO,
 )
