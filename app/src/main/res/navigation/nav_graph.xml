@@ -29,6 +29,13 @@
     </fragment>
 
     <fragment
+        android:id="@+id/cosasQueHacerFragment"
+        android:name="com.example.travelwithmeapp.fragments.CosasQueHacerFragment"
+        android:label="fragment_cosas_que_hacer"
+        tools:layout="@layout/fragment_cosas_que_hacer" >
+    </fragment>
+
+    <fragment
         android:id="@+id/buscarFragment"
         android:name="com.example.travelwithmeapp.fragments.BuscarFragment"
         android:label="fragment_busqueda"
@@ -78,15 +85,7 @@
         android:label="fragment_busqueda"
         tools:layout="@layout/fragment_buscar" />
 
-    <fragment
-        android:id="@+id/cuentaFragment"
-        android:name="com.example.travelwithmeapp.fragments.CuentaFragment"
-        android:label="fragment_busqueda"
-        tools:layout="@layout/fragment_buscar" >
-        <action
-            android:id="@+id/action_cuentaFragment_to_perfilFragment"
-            app:destination="@id/perfilFragment" />
-    </fragment>
+
     <fragment
         android:id="@+id/hotelFragment"
         android:name="com.example.travelwithmeapp.fragments.HotelFragment"
@@ -168,12 +167,17 @@
             app:argType="string"
             app:nullable="true" />
     </fragment>
+
     <fragment
-        android:id="@+id/cosasQueHacerFragment"
-        android:name="com.example.travelwithmeapp.fragments.CosasQueHacerFragment"
-        android:label="fragment_cosas_que_hacer"
-        tools:layout="@layout/fragment_cosas_que_hacer" >
+        android:id="@+id/cuentaFragment"
+        android:name="com.example.travelwithmeapp.fragments.CuentaFragment"
+        android:label="fragment_busqueda"
+        tools:layout="@layout/fragment_buscar" >
+        <action
+            android:id="@+id/action_cuentaFragment_to_perfilFragment"
+            app:destination="@id/perfilFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/perfilFragment"
         android:name="com.example.travelwithmeapp.fragments.PerfilFragment"
