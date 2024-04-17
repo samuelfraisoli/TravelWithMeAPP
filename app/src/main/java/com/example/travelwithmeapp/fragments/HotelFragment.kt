@@ -9,12 +9,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.adapters.CarouselAdapter
 import com.example.travelwithmeapp.databinding.FragmentHotelBinding
-import com.example.travelwithmeapp.databinding.FragmentResenaBinding
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.Utilities
 import com.google.android.material.carousel.CarouselSnapHelper

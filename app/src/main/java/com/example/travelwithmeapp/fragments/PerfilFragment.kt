@@ -1,15 +1,11 @@
 package com.example.travelwithmeapp.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
-import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.activities.LoginActivity
 import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.databinding.FragmentPerfilBinding
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager

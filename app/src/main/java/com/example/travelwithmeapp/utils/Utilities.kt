@@ -18,6 +18,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.travelwithmeapp.R
+import com.example.travelwithmeapp.databinding.LayoutToolbarFragmentSecundarioBinding
 import com.google.android.material.snackbar.Snackbar
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -70,7 +71,7 @@ class Utilities {
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
-    fun crearToolbarFragmSecundario(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
+    fun crearToolbarFragmSecundario(toolbar: LayoutToolbarFragmentSecundarioBinding, titulo: String, textView: TextView, activity: FragmentActivity) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val actionBar = (activity).supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)

@@ -41,9 +41,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="10h 50m"
-                app:layout_constraintBottom_toBottomOf="@+id/fecha_salida"
-                app:layout_constraintStart_toEndOf="@+id/fecha_salida"
-                app:layout_constraintTop_toTopOf="@+id/fecha_salida" />
+                app:layout_constraintBottom_toBottomOf="@+id/escalas"
+                app:layout_constraintStart_toEndOf="@+id/escalas"
+                app:layout_constraintTop_toTopOf="@+id/escalas" />
 
             <TextView
                 android:id="@+id/tipo_vuelo"
@@ -66,7 +66,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/fecha_salida"
+                android:id="@+id/escalas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -75,12 +75,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/titulo_vuelo" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/trayectos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fecha_salida" />
+                app:layout_constraintTop_toBottomOf="@+id/escalas" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

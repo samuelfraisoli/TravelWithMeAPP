@@ -42,7 +42,7 @@ class VueloFragment : Fragment() {
         recogerIntent()
         configurarRecycler()
         utilities = Utilities()
-        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "Tu vuelo a ${vuelo.destino.ciudad}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
+        utilities.crearToolbarFragmSecundario(binding.toolbar, "Tu vuelo a ${vuelo.destino.ciudad}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
         binding.duracion.text = utilities.formatoDurationHHhMMm(vuelo.duracion)
         binding.escalas.text = numeroEscalas(vuelo)
         binding.tipoVuelo.text = vuelo.tipo
@@ -70,7 +70,7 @@ class VueloFragment : Fragment() {
     }
 
     fun configurarRecycler() {
-        recyclerView = binding.recyclerEscalas
+        recyclerView = binding.trayectos
         adaptadorRecycler = TrayectosAdapter(vuelo.trayectos)
         recyclerView.adapter = adaptadorRecycler
         recyclerView.layoutManager =

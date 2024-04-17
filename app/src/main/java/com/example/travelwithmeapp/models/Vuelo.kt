@@ -6,6 +6,7 @@ import kotlin.time.Duration
 
 data class Vuelo(
     var id: String = "",
+    var id_vuelo: String = "",
     var aerolinea: String = "",
     var origen: Aeropuerto = Aeropuerto(),
     var destino: Aeropuerto = Aeropuerto(),
@@ -13,5 +14,6 @@ data class Vuelo(
     var fechaLlegada: Date = Date(),
     var duracion: Duration = Duration.ZERO,
     var trayectos: ArrayList<TrayectoVuelo> = ArrayList(),
-    var precio: Double = 0.0
+    var precio: Double = 0.0,
+    var tipo: String = ""
 ) : Serializable
