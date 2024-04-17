@@ -4,10 +4,21 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red_app">#DB7F8C</color>
     <color name="gray_app">#99B7D4</color>
-    <color name="gray_6_apple">#E5E5EA</color>
+    <color name="gray_1_apple">#8E8E93</color>
+    <color name="gray_2_apple">#AEAEB2</color>
+    <color name="gray_3_apple">#C7C7CC</color>
+    <color name="gray_4_apple">#D1D1D6</color>
+    <color name="gray_5_apple">#E5E5EA</color>
+    <color name="gray_6_apple">#F2F2F7</color>
     <color name="quaternary_system_fill_apple">#F4F4F5</color>
     <color name="cyan_app">#32ADE6</color>
+    <color name="blue_apple">#007AFF</color>
+    <color name="yellow_apple">#FFCC00</color>
     <color name="pink_apple">#FF2D55</color>
     <color name="elemento_no_seleccionado">#FFA3A3A3</color>
+    <color name="orange_apple">#FF9500</color>
+    <color name="red_apple">#FF3B30</color>
+    <color name="indigo_apple">#5856D6</color>
+
 
 </resources>
