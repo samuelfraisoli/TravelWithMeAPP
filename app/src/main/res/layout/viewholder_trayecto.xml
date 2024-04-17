@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/blue_apple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/letras_trayecto_origen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </View>
+
+
+
+
+        <TextView
+            android:id="@+id/letras_trayecto_origen"
+            android:layout_width="53dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:rotation="270"
+            android:text="MAD"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fecha_salida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="18 mayo"
+            app:layout_constraintStart_toEndOf="@+id/letras_trayecto_origen"
+            app:layout_constraintTop_toTopOf="@+id/letras_trayecto_origen" />
+
+        <TextView
+            android:id="@+id/hora_salida"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="12:00"
+            app:layout_constraintBottom_toBottomOf="@+id/fecha_salida"
+            app:layout_constraintStart_toEndOf="@+id/fecha_salida"
+            app:layout_constraintTop_toTopOf="@+id/fecha_salida" />
+
+        <TextView
+            android:id="@+id/aeropuerto_origen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Madrid Adolfo Suárez"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/fecha_salida"
+            app:layout_constraintTop_toBottomOf="@+id/fecha_salida" />
+
+        <TextView
+            android:id="@+id/duracion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="10 h 20 m"
+            app:layout_constraintStart_toStartOf="@+id/id_vuelo"
+            app:layout_constraintTop_toBottomOf="@+id/id_vuelo" />
+
+        <TextView
+            android:id="@+id/id_vuelo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Vuelo CA965"
+            app:layout_constraintStart_toStartOf="@+id/aerolinea"
+            app:layout_constraintTop_toBottomOf="@+id/aerolinea" />
+
+        <TextView
+            android:id="@+id/aerolinea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Ryanair"
+            app:layout_constraintStart_toEndOf="@+id/icono_aerolinea"
+            app:layout_constraintTop_toTopOf="@+id/icono_aerolinea" />
+
+        <TextView
+            android:id="@+id/terminal_origen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Terminal 4"
+            app:layout_constraintStart_toStartOf="@+id/aeropuerto_origen"
+            app:layout_constraintTop_toBottomOf="@+id/aeropuerto_origen" />
+
+        <ImageView
+            android:id="@+id/icono_aerolinea"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="@+id/terminal_origen"
+            app:layout_constraintTop_toBottomOf="@+id/terminal_origen"
+            tools:src="@drawable/plane2_icon" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="3dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/letras_trayecto_destino"
+            app:layout_constraintEnd_toEndOf="@+id/letras_trayecto_origen"
+            app:layout_constraintStart_toStartOf="@+id/letras_trayecto_origen"
+            app:layout_constraintTop_toBottomOf="@+id/letras_trayecto_origen" />
+
+        <TextView
+            android:id="@+id/letras_trayecto_destino"
+            android:layout_width="53dp"
+            android:layout_height="51dp"
+            android:gravity="center"
+            android:rotation="270"
+            android:textColor="@color/white"
+            android:text="PEK"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:textStyle="bold|italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/fecha_llegada" />
+
+        <TextView
+            android:id="@+id/fecha_llegada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="25dp"
+            android:text="20 mayo"
+            app:layout_constraintStart_toEndOf="@+id/letras_trayecto_destino"
+            app:layout_constraintTop_toBottomOf="@+id/duracion" />
+
+        <TextView
+            android:id="@+id/hora_llegada"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="20:30"
+            app:layout_constraintBottom_toBottomOf="@+id/fecha_llegada"
+            app:layout_constraintStart_toEndOf="@+id/fecha_llegada"
+            app:layout_constraintTop_toTopOf="@+id/fecha_llegada" />
+
+        <TextView
+            android:id="@+id/aeropuerto_destino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Aeropuerto de Pekin"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/fecha_llegada"
+            app:layout_constraintTop_toBottomOf="@+id/fecha_llegada" />
+
+        <TextView
+            android:id="@+id/terminal_destino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Terminal 4"
+            app:layout_constraintStart_toStartOf="@+id/aeropuerto_destino"
+            app:layout_constraintTop_toBottomOf="@+id/aeropuerto_destino" />
+
+        <TextView
+            android:id="@+id/tiempo_escala"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/aeropuerto_destino"
+            app:layout_constraintTop_toBottomOf="@+id/terminal_destino" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

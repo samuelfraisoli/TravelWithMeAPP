@@ -1,18 +1,17 @@
 package com.example.travelwithmeapp.utils
 
 import android.app.DatePickerDialog
-import android.app.PendingIntent.getActivity
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Color
+
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
-import android.util.TypedValue
+import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
@@ -20,7 +19,11 @@ import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.travelwithmeapp.R
 import com.google.android.material.snackbar.Snackbar
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Date
 import java.util.Locale
+import kotlin.time.Duration
 
 class Utilities {
 
@@ -98,4 +101,35 @@ class Utilities {
         val snackbar = Snackbar.make(view, "Mensaje corto", Snackbar.LENGTH_SHORT)
         snackbar.show()
     }
-}
+
+
+    fun formatoDateDDMM(fecha: Date) : String {
+        val formato = SimpleDateFormat("dd-MM")
+        val fechaFormateada = formato.format(fecha)
+        return fechaFormateada
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun formatoDateHHMM(fecha:Date) : String {
+        val fechaLocalTime = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalTime()
+        val formatoHora = DateTimeFormatter.ofPattern("HH:mm")
+        val fechaFormateada = fechaLocalTime.format(formatoHora)
+        return fechaFormateada
+    }
+
+    fun formatoDurationHHhMMm(duracion: Duration) : String {
+        var stringHora = ""
+        duracion.toComponents { h, m, s, ns ->
+            var horas = h.toInt()
+            var minutos = m
+            stringHora = "${horas}h ${minutos}m"
+        }
+        return  stringHora
+    }
+
+    fun parseStringADateDDMMYYYYconBarras(string: String) : Date {
+        val format = SimpleDateFormat("dd/MM/yyyy")
+        val date = format.parse(string)
+        return date
+    }
+ }
