@@ -32,7 +32,7 @@
 
         app:itemIconSize="25dp"
         app:itemIconTint="@color/bottom_nav_color"
-        app:itemRippleColor="#CDA3A9"
+        app:itemRippleColor="#D6B9BD"
         app:itemTextAppearanceActive="@color/red_app"
 
         app:itemTextColor="@color/bottom_nav_color"
@@ -45,7 +45,6 @@
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintVertical_weight="1"
-
         app:menu="@menu/menu_act_main"
 
         />

@@ -9,65 +9,60 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:background="@drawable/fondo3_login_desenfocado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_menu_principal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Información personal"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline17"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <TextView
         android:id="@+id/apellidosText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="15dp"
         android:text="Apellidos"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/nombre"
         app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
     <TextView
         android:id="@+id/correoText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="15dp"
         android:text="Correo"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/apellido"
         app:layout_constraintTop_toBottomOf="@+id/apellido" />
 
     <TextView
         android:id="@+id/fechaText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="15dp"
         android:text="Fecha nacimiento"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/correo"
         app:layout_constraintTop_toBottomOf="@+id/correo" />
 
     <TextView
         android:id="@+id/nombreText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="10dp"
         android:text="Nombre"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline17" />
@@ -78,53 +73,39 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="nombre"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/nombreText"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/nombreText"
         app:layout_constraintTop_toBottomOf="@+id/nombreText" />
 
     <TextView
         android:id="@+id/apellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="10dp"
         android:text="apellido"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/apellidosText"
         app:layout_constraintTop_toBottomOf="@+id/apellidosText" />
 
     <TextView
         android:id="@+id/correo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="10dp"
         android:text="correo"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/correoText"
         app:layout_constraintTop_toBottomOf="@+id/correoText" />
 
     <TextView
         android:id="@+id/fecha_nacimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="10dp"
         android:text="fecha_nacimiento"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/fechaText"
         app:layout_constraintTop_toBottomOf="@+id/fechaText" />
-
-    <Button
-        android:id="@+id/btnVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Volver"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline18" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline17"

@@ -18,7 +18,6 @@ class ResenaFragment : Fragment() {
     private lateinit var binding: FragmentResenaBinding
     private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
     private lateinit var utilities: Utilities
-
     private lateinit var uid: String
 
     override fun onCreateView(
@@ -28,21 +27,31 @@ class ResenaFragment : Fragment() {
     ): View? {
         binding = FragmentResenaBinding.inflate(inflater, container, false)
 
-        inicializar()
-
         return binding.root
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        inicializar()
+    }
+
     fun inicializar() {
+        utilities = Utilities()
+        utilities.crearToolbarMenuPrincipal(
+            binding.toolbar.toolbarLayout,
+            "Reseñas",
+            binding.toolbar.toolbarLayoutTitle,
+            activity as AppCompatActivity
+        )
+
         firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
         utilities = Utilities()
-        utilities.crearToolbarMenuPrincipal(binding.toolbar, "Reseñas", binding.toolbarTitle, activity as AppCompatActivity)
 
         recogerUidActMain()
         recogerDatosUsuario()
-
     }
+
 
 
     /**

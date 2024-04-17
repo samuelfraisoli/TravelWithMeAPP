@@ -4,14 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-
-    >
+    android:orientation="horizontal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="12dp"
+        android:padding="15dp"
+        android:background="@drawable/constraint_layout_bordes_redondeados"
+        android:elevation="5dp"
+
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,30 +55,49 @@
             android:id="@+id/precio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:text="100€"
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.988"
-            app:layout_constraintStart_toEndOf="@+id/hora"
-            app:layout_constraintTop_toBottomOf="@+id/ciudadYAerolinea"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintStart_toEndOf="@+id/hora" />
 
         <TextView
-            android:id="@+id/ciudadYAerolinea"
+            android:id="@+id/letras_ciudad_origen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/blue_apple"
 
-            android:text="MDR-NY, Vueling airlines"
+            android:text="MDR"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/hora"
             app:layout_constraintTop_toBottomOf="@+id/hora"
             app:layout_constraintVertical_bias="0.0" />
+
+
+        <TextView
+            android:id="@+id/letras_ciudad_destino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NY"
+            android:textColor="@color/blue_apple"
+
+
+            app:layout_constraintBottom_toBottomOf="@+id/letras_ciudad_origen"
+            app:layout_constraintEnd_toEndOf="@+id/hora"
+            app:layout_constraintTop_toTopOf="@+id/letras_ciudad_origen"></TextView>
+
+        <TextView
+            android:id="@+id/aerolinea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="8dp"
+            android:text="Vueling airlines"
+            app:layout_constraintStart_toStartOf="@+id/letras_ciudad_origen"
+            app:layout_constraintTop_toBottomOf="@+id/letras_ciudad_origen" />
 
         <TextView
             android:id="@+id/escala"
@@ -92,23 +115,28 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="2h 20m"
+            android:textColor="@color/elemento_no_seleccionado"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.988"
             app:layout_constraintStart_toEndOf="@+id/hora"
             app:layout_constraintTop_toBottomOf="@+id/escala" />
 
+        <View
+            android:id="@+id/divider8"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:background="@color/blue_apple"
+            app:layout_constraintBottom_toBottomOf="@+id/letras_ciudad_origen"
+            app:layout_constraintStart_toEndOf="@+id/letras_ciudad_origen"
+            app:layout_constraintTop_toTopOf="@+id/letras_ciudad_origen"
+            app:layout_constraintEnd_toStartOf="@id/letras_ciudad_destino"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

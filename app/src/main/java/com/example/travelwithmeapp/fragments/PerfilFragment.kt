@@ -38,9 +38,7 @@ class PerfilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnVolver.setOnClickListener{
-            findNavController().navigate(R.id.action_perfilFragment_to_cuentaFragment)
-        }
+
     }
 
 
@@ -50,6 +48,8 @@ class PerfilFragment : Fragment() {
 
         recogerUidActMain()
         recogerDatosUsuario()
+        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "Información personal", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
+
 
     }
 
