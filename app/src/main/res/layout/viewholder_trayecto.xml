@@ -6,6 +6,20 @@
     android:layout_height="wrap_content"
     >
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/blue_apple"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/letras_trayecto_origen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </View>
+
+
+
+
         <TextView
             android:id="@+id/letras_trayecto_origen"
             android:layout_width="53dp"
@@ -14,6 +28,7 @@
             android:gravity="center"
             android:rotation="270"
             android:text="MAD"
+            android:textColor="@color/white"
             android:textAlignment="center"
             android:textSize="20dp"
             android:textStyle="bold|italic"
@@ -101,7 +116,7 @@
             android:layout_height="0dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:background="?android:attr/listDivider"
+            android:background="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/letras_trayecto_destino"
             app:layout_constraintEnd_toEndOf="@+id/letras_trayecto_origen"
             app:layout_constraintStart_toStartOf="@+id/letras_trayecto_origen"
@@ -113,6 +128,7 @@
             android:layout_height="51dp"
             android:gravity="center"
             android:rotation="270"
+            android:textColor="@color/white"
             android:text="PEK"
             android:textAlignment="center"
             android:textSize="20dp"

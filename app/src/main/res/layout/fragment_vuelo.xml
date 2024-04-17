@@ -66,16 +66,22 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:id="@+id/imageButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/fui_transparent"
+                android:drawableEnd="@drawable/cama_icon"
                 android:layout_marginStart="125dp"
                 android:layout_marginEnd="20dp"
-
                 app:layout_constraintBottom_toBottomOf="@+id/titulo_vuelo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/titulo_vuelo"
                 app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"
                 tools:src="@drawable/favorite_icon"></ImageButton>
+
+           
+
+
 
             <TextView
                 android:id="@+id/escalas"
@@ -87,6 +93,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/titulo_vuelo" />
 
             <androidx.recyclerview.widget.RecyclerView
+                android:clipToPadding="true"
+                android:clipChildren="true"
                 android:id="@+id/recycler_escalas"
                 android:layout_width="0dp"
                 android:background="@drawable/constraint_layout_bordes_redondeados"
