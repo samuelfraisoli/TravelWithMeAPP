@@ -1,6 +1,5 @@
 package com.example.travelwithmeapp.adapters
 
-import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
@@ -15,13 +14,12 @@ import com.example.travelwithmeapp.models.Vuelo
 import com.example.travelwithmeapp.utils.Utilities
 import java.time.LocalTime
 import java.time.ZoneId
-import java.time.format.DateTimeFormatter
 
 
-class VuelosAdapter(
+class BuscarVuelosAdapter(
     val lista: List<Vuelo>,
     val lambda: (Vuelo) -> Unit)
-    : RecyclerView.Adapter<VuelosAdapter.BuscarVueloHolder>() {
+    : RecyclerView.Adapter<BuscarVuelosAdapter.BuscarVueloHolder>() {
 
     inner class BuscarVueloHolder(val itemBinding: ViewholderBuscarvueloBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -61,9 +59,6 @@ class VuelosAdapter(
                 itemBinding.imagen.setImageResource(R.drawable.sun_moon_icon)
                 ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#FF3B30")));
             }
-
-
-
 
             //añado un onclicklistener a cada viewgholder
             itemBinding.root.setOnClickListener {

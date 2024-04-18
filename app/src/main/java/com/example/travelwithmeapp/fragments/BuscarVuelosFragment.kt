@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.adapters.VuelosAdapter
+import com.example.travelwithmeapp.adapters.BuscarVuelosAdapter
 import com.example.travelwithmeapp.databinding.FragmentBuscarVuelosBinding
 import com.example.travelwithmeapp.models.Vuelo
 import com.example.travelwithmeapp.utils.MockData
@@ -26,7 +26,7 @@ class BuscarVuelosFragment : Fragment() {
     private var utilities = Utilities()
     private var mockdata = MockData()
 
-    private lateinit var adaptadorRecycler: VuelosAdapter
+    private lateinit var adaptadorRecycler: BuscarVuelosAdapter
     private var listaVuelos = ArrayList<Vuelo>()
 
     override fun onCreateView(
@@ -48,7 +48,7 @@ class BuscarVuelosFragment : Fragment() {
     }
 
     fun configurarRecycler() {
-        adaptadorRecycler = VuelosAdapter(listaVuelos) {
+        adaptadorRecycler = BuscarVuelosAdapter(listaVuelos) {
             vuelo -> intentAVueloFrag(vuelo)
         }
         recyclerView = binding.recyclerBusquedaFrag

@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.adapters.HotelesAdapter
+import com.example.travelwithmeapp.adapters.BuscarHotelesAdapter
 import com.example.travelwithmeapp.databinding.FragmentBuscarHotelesBinding
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.MockData
@@ -21,7 +21,7 @@ import com.example.travelwithmeapp.utils.Utilities
 class BuscarHotelesFragment : Fragment() {
     private lateinit var binding: FragmentBuscarHotelesBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adaptadorRecycler: HotelesAdapter
+    private lateinit var adaptadorRecycler: BuscarHotelesAdapter
 
     private var destino_hotel : String = ""
     private var fecha_entrada_hotel : String = ""
@@ -82,7 +82,7 @@ class BuscarHotelesFragment : Fragment() {
      * - Una vez que se ejecute la lambda, pasará ese objeto Hotel, y se ejecutará la función cambiarFragment*/
     fun configurarRecycler() {
         recyclerView = binding.recyclerBusquedaFrag
-        adaptadorRecycler = HotelesAdapter(hoteles) { hotel ->
+        adaptadorRecycler = BuscarHotelesAdapter(hoteles) { hotel ->
             intentAHotelFrag(hotel)
         }
         recyclerView.adapter = adaptadorRecycler

@@ -1,12 +1,15 @@
 package com.example.travelwithmeapp.adapters
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ViewholderTrayectoBinding
 import com.example.travelwithmeapp.models.TrayectoVuelo
 import com.example.travelwithmeapp.utils.Utilities
+import java.util.Locale
 
 
 class TrayectosAdapter(
@@ -20,10 +23,11 @@ class TrayectosAdapter(
         RecyclerView.ViewHolder(itemBinding.root) {
 
         var utilities = Utilities()
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bindItem(trayectoVuelo: TrayectoVuelo) {
             itemBinding.letrasTrayectoOrigen.text = trayectoVuelo.origen.ciudadAbrev
-            itemBinding.fechaSalida.text = utilities.formatoDateDDMM(trayectoVuelo.fechaSalida)
-            itemBinding.horaSalida.text = utilities.formatoDateDDMM(trayectoVuelo.fechaSalida)
+            itemBinding.fechaSalida.text = utilities.formatoDateDDMMMM(trayectoVuelo.fechaSalida, Locale.getDefault())
+            itemBinding.horaSalida.text = utilities.formatoDateHHMM(trayectoVuelo.fechaSalida)
             itemBinding.aeropuertoOrigen.text = trayectoVuelo.origen.nombre
             itemBinding.terminalOrigen.text = trayectoVuelo.origen.terminal
             itemBinding.duracion.text = utilities.formatoDurationHHhMMm(trayectoVuelo.duracion)
@@ -38,9 +42,8 @@ class TrayectosAdapter(
 
 
                 itemBinding.letrasTrayectoDestino.text = trayectoVuelo.destino.ciudadAbrev
-                itemBinding.fechaLlegada.text =
-                    utilities.formatoDateDDMM(trayectoVuelo.fechaLlegada)
-                itemBinding.horaLlegada.text = utilities.formatoDateDDMM(trayectoVuelo.fechaLlegada)
+                itemBinding.fechaLlegada.text = utilities.formatoDateDDMMMM(trayectoVuelo.fechaLlegada, Locale.getDefault())
+                itemBinding.horaLlegada.text = utilities.formatoDateHHMM(trayectoVuelo.fechaLlegada)
                 itemBinding.aeropuertoDestino.text = trayectoVuelo.destino.nombre
                 itemBinding.terminalDestino.text = trayectoVuelo.destino.terminal
 

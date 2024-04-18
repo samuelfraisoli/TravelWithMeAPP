@@ -27,7 +27,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
 
@@ -48,109 +47,185 @@
 
         <TextView
             android:id="@+id/textviewFecha"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="desde el 20 de marzo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.023"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/carouselRecyclerView" />
+            android:layout_marginTop="48dp"
+            android:text="Del 01/04/2024"
+            app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
+            app:layout_constraintStart_toStartOf="@+id/buttonReservar"
+            app:layout_constraintTop_toTopOf="@+id/buttonReservar" />
 
         <Button
             android:id="@+id/buttonSitioWeb"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
             android:text="Sitio web"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewFecha" />
+            android:backgroundTint="@color/gray_2_apple"
+            app:layout_constraintEnd_toStartOf="@+id/guideline17"
+            app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/carouselRecyclerView" />
 
         <Button
             android:id="@+id/buttonEscribirReseña"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginEnd="10dp"
+            android:backgroundTint="@color/gray_2_apple"
             android:text="Escribir Reseña"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewFecha" />
+            app:layout_constraintStart_toEndOf="@+id/guideline17"
+            app:layout_constraintTop_toBottomOf="@+id/carouselRecyclerView" />
 
-        <Button
-            android:id="@+id/buttonReservar"
+        <View
+            android:id="@+id/divider4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1dp"
             android:layout_marginTop="20dp"
-            android:text="Reservar"
+            android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonSitioWeb" />
 
         <TextView
-            android:id="@+id/textviewDescripcionTitulo"
-            android:layout_width="match_parent"
+            android:id="@+id/precio"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+
+            android:layout_marginTop="20dp"
+            android:text="100€"
+            android:textStyle="bold"
+
+            android:textSize="30dp"
+            app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
+            app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+
+        <TextView
+            android:id="@+id/nPersonas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 persona"
+            app:layout_constraintBottom_toBottomOf="@+id/textviewFecha"
+            app:layout_constraintStart_toStartOf="@+id/precio"
+            app:layout_constraintTop_toBottomOf="@+id/precio" />
+
+        <Button
+            android:id="@+id/buttonReservar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/pink_apple"
+            android:text="Reservar"
+            app:layout_constraintEnd_toEndOf="@+id/buttonEscribirReseña"
+            app:layout_constraintStart_toStartOf="@+id/buttonEscribirReseña"
+            app:layout_constraintTop_toTopOf="@+id/precio" />
+
+        <View
+            android:id="@+id/divider5"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textviewFecha" />
+
+        <TextView
+            android:id="@+id/textviewDescripcionTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="Descripción"
 
             android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonReservar" />
+            app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
+            app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
+            app:layout_constraintTop_toBottomOf="@+id/divider5" />
 
         <TextView
             android:id="@+id/textviewDescripcionTexto"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Situado en una pintoresca ubicación entre exuberantes montañas y relucientes aguas cristalinas, nuestro hotel es un refugio de lujo y comodidad. Con una arquitectura elegante y moderna, ofrece una experiencia única que combina el encanto tradicional con las comodidades contemporáneas. Nuestras amplias habitaciones están diseñadas para brindar el máximo confort, con vistas impresionantes que cautivan los sentidos. Los huéspedes pueden disfrutar de una variedad de opciones gastronómicas en nuestros restaurantes de clase mundial, que ofrecen desde platos locales hasta cocina internacional de primera categoría"
+            app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTitulo"
+            app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTitulo"
+            app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTitulo" />
+
+        <View
+            android:id="@+id/divider6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTitulo" />
+            app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTexto" />
 
         <TextView
             android:id="@+id/textviewMapaTitulo"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:text="Mapa"
             android:textSize="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTexto"
-            tools:layout_editor_absoluteX="16dp" />
+            app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTexto"
+            app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTexto"
+            app:layout_constraintTop_toBottomOf="@+id/divider6" />
 
         <androidx.constraintlayout.utils.widget.MockView
             android:id="@+id/mapViewHotel"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="200dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textviewMapaTitulo"
+            app:layout_constraintStart_toStartOf="@+id/textviewMapaTitulo"
             app:layout_constraintTop_toBottomOf="@+id/textviewMapaTitulo" />
 
-        <TextView
-            android:id="@+id/textviewReseñaTitulo"
+        <View
+            android:id="@+id/divider7"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
-            android:text="Reseñas"
-            android:textSize="20dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mapViewHotel" />
 
+        <TextView
+            android:id="@+id/textviewReseñaTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Reseñas"
+            android:textSize="20dp"
+            app:layout_constraintEnd_toEndOf="@+id/mapViewHotel"
+            app:layout_constraintStart_toStartOf="@+id/mapViewHotel"
+            app:layout_constraintTop_toBottomOf="@+id/divider7" />
+
 
         <androidx.constraintlayout.utils.widget.MockView
             android:id="@+id/recyclerviewReseñas"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="200dp"
 
             android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textviewReseñaTitulo"
+            app:layout_constraintStart_toStartOf="@+id/textviewReseñaTitulo"
             app:layout_constraintTop_toBottomOf="@+id/textviewReseñaTitulo"
             app:layout_constraintVertical_bias="0.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.50" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

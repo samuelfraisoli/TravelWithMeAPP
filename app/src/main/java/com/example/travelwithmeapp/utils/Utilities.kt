@@ -71,7 +71,12 @@ class Utilities {
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
-    fun crearToolbarFragmSecundario(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
+    fun crearToolbarFragmSecundario(
+        toolbar: Toolbar,
+        titulo: String,
+        textView: TextView,
+        activity: FragmentActivity
+    ) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val actionBar = (activity).supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -87,7 +92,12 @@ class Utilities {
         }
     }
 
-    fun crearToolbarMenuPrincipal(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
+    fun crearToolbarMenuPrincipal(
+        toolbar: Toolbar,
+        titulo: String,
+        textView: TextView,
+        activity: FragmentActivity
+    ) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val actionBar = (activity).supportActionBar
         actionBar?.setDisplayShowTitleEnabled(false)
@@ -104,33 +114,47 @@ class Utilities {
     }
 
 
-    fun formatoDateDDMM(fecha: Date) : String {
+    fun formatoDateDDMM(fecha: Date): String {
         val formato = SimpleDateFormat("dd-MM")
         val fechaFormateada = formato.format(fecha)
         return fechaFormateada
     }
 
+
+    fun formatoDateDDMMMM(fecha: Date, locale: Locale): String {
+        val dayFormat = SimpleDateFormat("d", locale)
+        val monthFormat = SimpleDateFormat("MMMM", locale)
+
+        val day = dayFormat.format(fecha)
+        val month = monthFormat.format(fecha)
+
+        return "$day $month"
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.O)
-    fun formatoDateHHMM(fecha:Date) : String {
+    fun formatoDateHHMM(fecha: Date): String {
         val fechaLocalTime = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalTime()
         val formatoHora = DateTimeFormatter.ofPattern("HH:mm")
         val fechaFormateada = fechaLocalTime.format(formatoHora)
         return fechaFormateada
     }
 
-    fun formatoDurationHHhMMm(duracion: Duration) : String {
+    fun formatoDurationHHhMMm(duracion: Duration): String {
         var stringHora = ""
         duracion.toComponents { h, m, s, ns ->
             var horas = h.toInt()
             var minutos = m
             stringHora = "${horas}h ${minutos}m"
         }
-        return  stringHora
+        return stringHora
     }
 
-    fun parseStringADateDDMMYYYYconBarras(string: String) : Date {
+    fun parseStringADateDDMMYYYYconBarras(string: String): Date {
         val format = SimpleDateFormat("dd/MM/yyyy")
         val date = format.parse(string)
         return date
     }
- }
+
+
+}
