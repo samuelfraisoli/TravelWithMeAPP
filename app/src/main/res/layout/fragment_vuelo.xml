@@ -66,17 +66,29 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
+                android:id="@+id/favorito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="125dp"
                 android:layout_marginEnd="20dp"
-                android:backgroundTint="@color/fui_transparent"
+
 
                 app:layout_constraintBottom_toBottomOf="@+id/titulo_vuelo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/titulo_vuelo"
                 app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"
-                tools:drawableLeft="@drawable/favorite_icon"></Button>
+                android:src="@drawable/favorite_icon"></Button>
+
+            <ImageView
+                android:id="@+id/resena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+
+                app:layout_constraintBottom_toBottomOf="@+id/titulo_vuelo"
+                app:layout_constraintEnd_toStartOf="@+id/favorito"
+                app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"
+                android:src="@drawable/resena_icon"></ImageView>
 
             <TextView
                 android:id="@+id/escalas"

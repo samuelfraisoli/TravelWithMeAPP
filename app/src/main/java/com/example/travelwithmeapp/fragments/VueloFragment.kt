@@ -46,6 +46,9 @@ class VueloFragment : Fragment() {
         binding.duracion.text = utilities.formatoDurationHHhMMm(vuelo.duracion)
         binding.escalas.text = numeroEscalas(vuelo)
         binding.tipoVuelo.text = vuelo.tipo
+        binding.favorito.setOnClickListener() {
+            utilities.lanzarDatePickerDialog(binding.duracion, requireContext())
+        }
     }
 
     fun recogerIntent() {
@@ -76,5 +79,7 @@ class VueloFragment : Fragment() {
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
+
+
 
 }
