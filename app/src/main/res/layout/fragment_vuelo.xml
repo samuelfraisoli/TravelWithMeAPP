@@ -65,17 +65,18 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageButton
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="125dp"
                 android:layout_marginEnd="20dp"
+                android:backgroundTint="@color/fui_transparent"
 
                 app:layout_constraintBottom_toBottomOf="@+id/titulo_vuelo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/titulo_vuelo"
                 app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"
-                tools:src="@drawable/favorite_icon"></ImageButton>
+                tools:drawableLeft="@drawable/favorite_icon"></Button>
 
             <TextView
                 android:id="@+id/escalas"
