@@ -79,8 +79,8 @@
         android:label="fragment_busqueda"
         tools:layout="@layout/fragment_planificar" >
         <action
-            android:id="@+id/action_planificarFragment_to_planearFavoritosFragment"
-            app:destination="@id/planearFavoritosFragment" />
+            android:id="@+id/action_planificarFragment_to_planificarFavoritosFragment"
+            app:destination="@id/planificarFavoritosFragment" />
     </fragment>
 
     <fragment
@@ -186,11 +186,12 @@
             app:destination="@id/cuentaFragment" />
     </fragment>
     <fragment
-        android:id="@+id/planearFavoritosFragment"
+        android:id="@+id/planificarFavoritosFragment"
         android:name="com.example.travelwithmeapp.fragments.PlanificarFavoritosFragment"
-        android:label="PlanearFavoritosFragment" >
+        android:label="fragment_planificar_favoritos"
+        tools:layout="@layout/fragment_planificar_favoritos" >
         <action
-            android:id="@+id/action_planearFavoritosFragment_to_planificarFragment"
+            android:id="@+id/action_planificarFavoritosFragment_to_planificarFragment"
             app:destination="@id/planificarFragment" />
     </fragment>
 
