@@ -2,14 +2,13 @@ package com.example.travelwithmeapp.utils
 
 import android.util.Log
 import com.example.travelwithmeapp.models.Hotel
-import com.example.travelwithmeapp.models.HotelPhotos
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import java.net.URLEncoder
 
 class TripadvisorAPIManager {
-
+    /*
     /**
      * Recibe una query en texto normal ej ("hoteles en Madrid"), manda una petición a la API y devuelve 10 localizaciones
      * El idioma acepta un String: "es" si es español, "en" si es en inglés
@@ -45,25 +44,21 @@ class TripadvisorAPIManager {
                 hotel.id = item.getString("location_id")
                 hotel.name = item.getString("name")
                 val addressObj = item.getJSONObject("address_obj")
-                hotel.address.street1 = addressObj.getString("street1")
-                hotel.address.street2 = addressObj.getString("street2")
-                hotel.address.city = addressObj.getString("city")
+                hotel.direccion.direccion1 = addressObj.getString("street1")
+                hotel.direccion.direccion2 = addressObj.getString("street2")
+                hotel.direccion.ciudad = addressObj.getString("city")
                 hotel.address.country = addressObj.getString("country")
                 hotel.address.postalCorde = addressObj.getString("postalcode")
                 hotel.address.addressString = addressObj.getString("address_string")
 
                 hoteles.add(hotel)
             }
-
             return hoteles
-
         }
         Log.v("locationSearch", "error conexion ${response}")
 
         return null
     }
-
-
 
     /**
      * Devuelve la URL de 5 fotos de una localización
@@ -146,5 +141,5 @@ class TripadvisorAPIManager {
 
     //todo falta funcion para coger las reviews
 
-
+*/
 }

@@ -1,11 +1,9 @@
 package com.example.travelwithmeapp.activities
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
-import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ActivityLoginBinding
 import com.example.travelwithmeapp.models.User
 import com.example.travelwithmeapp.utils.FirebaseAuthManager

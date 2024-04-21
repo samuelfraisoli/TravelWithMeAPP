@@ -9,22 +9,19 @@ import com.example.travelwithmeapp.databinding.ViewholderBuscarhotelBinding
 import com.example.travelwithmeapp.models.Hotel
 
 
-class BuscarHotelesAdapter(
+class HotelesAdapter(
     val lista: List<Hotel>,
     val lambda: (Hotel) -> Unit)
-    : RecyclerView.Adapter<BuscarHotelesAdapter.HotelHolder>() {
+    : RecyclerView.Adapter<HotelesAdapter.HotelHolder>() {
 
     inner class HotelHolder(val itemBinding: ViewholderBuscarhotelBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bindItem(hotel: Hotel) {
-            itemBinding.textviewNombre.text = hotel.name
-            itemBinding.textViewProvinciaPais.text = "${hotel.address.city}, ${hotel.address.country}"
-
-
-            itemBinding.imagen.load(hotel?.photos?.get(0)) {
-                transformations(RoundedCornersTransformation(8f))
+            itemBinding.textviewNombre.text = hotel.nombre
+            itemBinding.textViewProvinciaPais.text = "${hotel.direccion.ciudad}, ${hotel.direccion.pais}"
+            itemBinding.imagen.load(hotel?.fotos?.get(0)) {
+                transformations(RoundedCornersTransformation(20f))
             }
-
             itemBinding.root.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {

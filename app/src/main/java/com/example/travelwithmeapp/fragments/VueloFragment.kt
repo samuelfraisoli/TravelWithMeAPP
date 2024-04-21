@@ -1,11 +1,13 @@
 package com.example.travelwithmeapp.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,17 +35,19 @@ class VueloFragment : Fragment() {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         inicializar()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun inicializar() {
         recogerIntent()
         configurarRecycler()
         utilities = Utilities()
-        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "Tu vuelo a ${vuelo.destino.ciudad}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
-        binding.duracion.text = utilities.formatoDurationHHhMMm(vuelo.duracion)
+        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "Tu vuelo a ${vuelo.getAeropuertoDestino().ciudad}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
+        binding.duracion.text = vuelo.getDuracionTotalFormatoHHhMMm()
         binding.escalas.text = numeroEscalas(vuelo)
         binding.tipoVuelo.text = vuelo.tipo
         binding.favorito.setOnClickListener() {
