@@ -15,10 +15,10 @@ import java.time.LocalTime
 
 
 
-class VuelosAdapter(
+class BuscarVuelosAdapter(
     val lista: List<Vuelo>,
     val lambda: (Vuelo) -> Unit)
-    : RecyclerView.Adapter<VuelosAdapter.BuscarVueloHolder>() {
+    : RecyclerView.Adapter<BuscarVuelosAdapter.BuscarVueloHolder>() {
 
     inner class BuscarVueloHolder(val itemBinding: ViewholderBuscarvueloBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {

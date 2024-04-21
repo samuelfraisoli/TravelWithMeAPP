@@ -9,10 +9,10 @@ import com.example.travelwithmeapp.databinding.ViewholderBuscarhotelBinding
 import com.example.travelwithmeapp.models.Hotel
 
 
-class HotelesAdapter(
+class BuscarHotelesAdapter(
     val lista: List<Hotel>,
     val lambda: (Hotel) -> Unit)
-    : RecyclerView.Adapter<HotelesAdapter.HotelHolder>() {
+    : RecyclerView.Adapter<BuscarHotelesAdapter.HotelHolder>() {
 
     inner class HotelHolder(val itemBinding: ViewholderBuscarhotelBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
