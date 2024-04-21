@@ -10,21 +10,22 @@
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:background="@drawable/fondo3_login_desenfocado"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_fragment_secundario"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:text="Preferencias"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        >
+
+    </include>
 
     <EditText
         android:id="@+id/contraseña"
@@ -34,6 +35,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:hint="Contraseña actual"
+        style="@style/EditTextApp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view" />
@@ -46,6 +48,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:hint="Introduzca de nuevo su contraseña actual"
+        style="@style/EditTextApp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contraseña" />
@@ -58,6 +61,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:hint="Introduzca su nueva contraseña"
+        style="@style/EditTextApp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contraseña2" />
@@ -70,6 +74,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:hint="Introduzca de nuevo su nueva contraseña"
+        style="@style/EditTextApp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/restContraseña" />
@@ -82,6 +87,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:text="Limpiar"
+        style="@style/BotonRed"
         app:layout_constraintBottom_toTopOf="@+id/guideline21"
         app:layout_constraintEnd_toStartOf="@+id/guideline20"
         app:layout_constraintStart_toStartOf="parent"/>
@@ -94,24 +100,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
         android:text="Guardar"
+        style="@style/BotonRed"
         app:layout_constraintBottom_toTopOf="@+id/guideline21"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/guideline20" />
-
-    <Button
-        android:id="@+id/boton_volver"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Volver"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline21"
-        app:layout_constraintWidth_percent="0.5" />
-
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline19"
