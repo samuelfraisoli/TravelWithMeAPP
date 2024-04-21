@@ -197,6 +197,15 @@
         <action android:id="@+id/action_planificarFavoritosFragment_to_planificarFragment"
             app:destination="@id/planificarFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/preferenciasFragment"
+        android:name="com.example.travelwithmeapp.fragments.PreferenciasFragment"
+        android:label="fragment_preferencias"
+        tools:layout="@layout/fragment_preferencias" >
+        <action
+            android:id="@+id/action_preferenciasFragment_to_cuentaFragment"
+            app:destination="@id/cuentaFragment" />
+    </fragment>
 
 
 </navigation>
