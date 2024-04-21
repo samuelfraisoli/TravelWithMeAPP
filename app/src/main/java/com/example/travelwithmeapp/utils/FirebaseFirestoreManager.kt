@@ -30,8 +30,10 @@ class FirebaseFirestoreManager(var context: Context, var view: View) {
                 callback(true)
             }
             .addOnFailureListener { e ->
-                utilities.lanzarSnackBarCorto("Error al guardar los datos", view)
-                callback(false)
+                if (e.message != null) {
+                    utilities.lanzarSnackBarCorto(e.message!!, view)
+                    callback(false)
+                }
             }
     }
 

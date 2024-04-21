@@ -174,6 +174,9 @@
         <action
             android:id="@+id/action_cuentaFragment_to_perfilFragment"
             app:destination="@id/perfilFragment" />
+        <action
+            android:id="@+id/action_cuentaFragment_to_preferenciasFragment"
+            app:destination="@id/preferenciasFragment" />
     </fragment>
 
     <fragment
@@ -183,6 +186,15 @@
         tools:layout="@layout/fragment_perfil" >
         <action
             android:id="@+id/action_perfilFragment_to_cuentaFragment"
+            app:destination="@id/cuentaFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/preferenciasFragment"
+        android:name="com.example.travelwithmeapp.fragments.PreferenciasFragment"
+        android:label="fragment_preferencias"
+        tools:layout="@layout/fragment_preferencias" >
+        <action
+            android:id="@+id/action_preferenciasFragment_to_cuentaFragment"
             app:destination="@id/cuentaFragment" />
     </fragment>
     <fragment

@@ -36,6 +36,9 @@ class CuentaFragment : Fragment() {
         binding.textPerfil.setOnClickListener{
             findNavController().navigate(R.id.action_cuentaFragment_to_perfilFragment)
         }
+        binding.textPreferencias.setOnClickListener{
+            findNavController().navigate(R.id.action_cuentaFragment_to_preferenciasFragment)
+        }
     }
 
     fun inicializar() {

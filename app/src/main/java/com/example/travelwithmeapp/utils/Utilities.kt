@@ -109,7 +109,7 @@ class Utilities {
 
 
     fun lanzarSnackBarCorto(mensaje: String, view: View) {
-        val snackbar = Snackbar.make(view, "Mensaje corto", Snackbar.LENGTH_SHORT)
+        val snackbar = Snackbar.make(view, mensaje, Snackbar.LENGTH_SHORT)
         snackbar.show()
     }
 
