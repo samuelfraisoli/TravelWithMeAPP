@@ -136,24 +136,25 @@ class MockData {
 
     fun listaPruebaHoteles(): ArrayList<Hotel> {
 
-        val hotelPhotos = ArrayList<String>()
-        hotelPhotos.add("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/37/69/93/four-seasons-hotel-madrid.jpg?w=700&h=-1&s=1")
-        hotelPhotos.add("https://www.momondo.es/himg/65/a8/5b/expediav2-4288651-6d557b-453569.jpg")
-        hotelPhotos.add("https://upload.wikimedia.org/wikipedia/commons/7/7d/The_Westin_Palace_Madrid.jpg")
-        hotelPhotos.add("https://www.hotelmadridpraga.com/wp-content/uploads/sites/2490/nggallery/content-img//Praga_39-1.jpg")
-        hotelPhotos.add("https://www.ahstatic.com/photos/7438_ho_00_p_1024x768.jpg")
-        hotelPhotos.add("https://media.timeout.com/images/105965911/750/562/image.jpg")
-        hotelPhotos.add("https://cf.bstatic.com/xdata/images/hotel/max1024x768/470960002.jpg?k=a70e747872b27bbb5093759421705a033ff9522988c9d5668d4543aee721b45d&o=&hp=1")
-        hotelPhotos.add("https://www.ahstatic.com/photos/9298_ho_00_p_1024x768.jpg")
-        hotelPhotos.add("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/43/22/1e/only-you-boutique-hotel.jpg?w=1200&h=-1&s=1")
-        hotelPhotos.add("https://www.indigomadrid.com/wp-content/uploads/pool.jpg")
+        val hotelPhotos: ArrayList<String> = arrayListOf(
+            "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/37/69/93/four-seasons-hotel-madrid.jpg?w=700&h=-1&s=1",
+            "https://www.momondo.es/himg/65/a8/5b/expediav2-4288651-6d557b-453569.jpg",
+            "https://upload.wikimedia.org/wikipedia/commons/7/7d/The_Westin_Palace_Madrid.jpg",
+            "https://www.hotelmadridpraga.com/wp-content/uploads/sites/2490/nggallery/content-img//Praga_39-1.jpg",
+            "https://www.ahstatic.com/photos/7438_ho_00_p_1024x768.jpg",
+            "https://media.timeout.com/images/105965911/750/562/image.jpg",
+            "https://cf.bstatic.com/xdata/images/hotel/max1024x768/470960002.jpg?k=a70e747872b27bbb5093759421705a033ff9522988c9d5668d4543aee721b45d&o=&hp=1",
+            "https://www.ahstatic.com/photos/9298_ho_00_p_1024x768.jpg",
+            "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/43/22/1e/only-you-boutique-hotel.jpg?w=1200&h=-1&s=1",
+            "https://www.indigomadrid.com/wp-content/uploads/pool.jpg",
+        )
 
 
         val hoteles = arrayListOf(
             Hotel(
                 id = 1,
                 nombre = "Hotel Sol",
-                fotos = arrayListOf("foto1.jpg", "foto2.jpg"),
+                fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
                     OffsetDateTime.of(2024, 5, 1, 0, 0, 0, 0, ZoneOffset.ofHours(2)),
                     OffsetDateTime.of(2024, 5, 10, 0, 0, 0, 0, ZoneOffset.ofHours(2))
@@ -183,7 +184,7 @@ class MockData {
             Hotel(
                 id = 2,
                 nombre = "Hotel Luna",
-                fotos = arrayListOf("luna1.jpg", "luna2.jpg"),
+                fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
                     OffsetDateTime.of(2024, 6, 5, 0, 0, 0, 0, ZoneOffset.ofHours(1)),
                     OffsetDateTime.of(2024, 6, 20, 0, 0, 0, 0, ZoneOffset.ofHours(1))
@@ -214,7 +215,7 @@ class MockData {
             Hotel(
                 id = 3,
                 nombre = "Hotel Estrella",
-                fotos = arrayListOf("estrella1.jpg", "estrella2.jpg"),
+                fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
                     OffsetDateTime.of(2024, 7, 10, 0, 0, 0, 0, ZoneOffset.ofHours(1)),
                     OffsetDateTime.of(2024, 7, 25, 0, 0, 0, 0, ZoneOffset.ofHours(1))
@@ -244,7 +245,7 @@ class MockData {
             Hotel(
                 id = 4,
                 nombre = "Hotel Mar",
-                fotos = arrayListOf("mar1.jpg", "mar2.jpg"),
+                fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
                     OffsetDateTime.of(2024, 8, 15, 0, 0, 0, 0, ZoneOffset.ofHours(1)),
                     OffsetDateTime.of(2024, 8, 30, 0, 0, 0, 0, ZoneOffset.ofHours(1))
@@ -274,7 +275,7 @@ class MockData {
             Hotel(
                 id = 5,
                 nombre = "Hotel Montaña",
-                fotos = arrayListOf("montana1.jpg", "montana2.jpg"),
+                fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
                     OffsetDateTime.of(2024, 9, 10, 0, 0, 0, 0, ZoneOffset.ofHours(1)),
                     OffsetDateTime.of(2024, 9, 25, 0, 0, 0, 0, ZoneOffset.ofHours(1))

@@ -48,15 +48,13 @@
             android:id="@+id/textviewFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
             android:text="Del 01/04/2024"
-            app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
-            app:layout_constraintStart_toStartOf="@+id/buttonReservar"
-            app:layout_constraintTop_toTopOf="@+id/buttonReservar" />
+            app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
+            app:layout_constraintTop_toTopOf="@+id/favorito" />
 
         <Button
             android:id="@+id/buttonSitioWeb"
-            android:layout_width="180dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="20dp"
@@ -77,7 +75,7 @@
             style="?attr/materialButtonOutlinedStyle"
             app:strokeColor="@color/elemento_no_seleccionado"
             android:textColor="@color/black"
-            android:layout_width="180dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="20dp"
@@ -98,39 +96,60 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonSitioWeb" />
 
+
         <TextView
             android:id="@+id/precio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-
-            android:layout_marginTop="20dp"
             android:text="100€"
-            android:textStyle="bold"
 
+            android:textColor="@color/black"
             android:textSize="30dp"
-            app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
-            app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonReservar"
+            app:layout_constraintStart_toStartOf="@+id/nPersonas"
+            app:layout_constraintTop_toTopOf="@+id/buttonReservar" />
 
         <TextView
             android:id="@+id/nPersonas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1 persona"
-            app:layout_constraintBottom_toBottomOf="@+id/textviewFecha"
-            app:layout_constraintStart_toStartOf="@+id/precio"
-            app:layout_constraintTop_toBottomOf="@+id/precio" />
+            app:layout_constraintStart_toStartOf="@+id/textviewFecha"
+            app:layout_constraintTop_toBottomOf="@+id/textviewFecha" />
+
+        <ImageView
+            android:id="@+id/favorito"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+
+            android:padding="5dp"
+            android:src="@drawable/favorite_icon"
+            app:layout_constraintEnd_toStartOf="@+id/resena"
+            app:layout_constraintTop_toBottomOf="@+id/divider4"></ImageView>
+
+        <ImageView
+            android:id="@+id/resena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/resena_icon"
+            app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
+            app:layout_constraintTop_toTopOf="@+id/favorito"></ImageView>
 
         <Button
             android:id="@+id/buttonReservar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
             android:backgroundTint="@color/pink_apple"
             android:text="Reservar"
             app:layout_constraintEnd_toEndOf="@+id/buttonEscribirReseña"
+            app:layout_constraintHorizontal_bias="0.52"
             app:layout_constraintStart_toStartOf="@+id/buttonEscribirReseña"
-            app:layout_constraintTop_toTopOf="@+id/precio" />
+            app:layout_constraintTop_toBottomOf="@+id/favorito" />
 
         <View
             android:id="@+id/divider5"
@@ -140,7 +159,7 @@
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewFecha" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonReservar" />
 
         <TextView
             android:id="@+id/textviewDescripcionTitulo"

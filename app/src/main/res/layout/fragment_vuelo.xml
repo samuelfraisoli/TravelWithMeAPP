@@ -65,30 +65,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+            <ImageView
                 android:id="@+id/favorito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="125dp"
-                android:layout_marginEnd="20dp"
+                android:padding="5dp"
 
-
+                android:src="@drawable/favorite_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/titulo_vuelo"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/trayectos"
                 app:layout_constraintStart_toEndOf="@+id/titulo_vuelo"
-                app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"
-                android:src="@drawable/favorite_icon"></Button>
+                app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"></ImageView>
 
             <ImageView
                 android:id="@+id/resena"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="20dp"
-
+                android:padding="5dp"
+                android:src="@drawable/resena_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/titulo_vuelo"
                 app:layout_constraintEnd_toStartOf="@+id/favorito"
-                app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"
-                android:src="@drawable/resena_icon"></ImageView>
+                app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"></ImageView>
 
             <TextView
                 android:id="@+id/escalas"
