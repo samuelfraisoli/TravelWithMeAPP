@@ -1,6 +1,4 @@
 package com.example.travelwithmeapp.adapters
-
-import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
@@ -14,8 +12,7 @@ import com.example.travelwithmeapp.databinding.ViewholderBuscarvueloBinding
 import com.example.travelwithmeapp.models.Vuelo
 import com.example.travelwithmeapp.utils.Utilities
 import java.time.LocalTime
-import java.time.ZoneId
-import java.time.format.DateTimeFormatter
+
 
 
 class VuelosAdapter(
