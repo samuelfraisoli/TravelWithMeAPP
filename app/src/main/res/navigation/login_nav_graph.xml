@@ -2,12 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/login_nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/loginFragment"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.travelwithmeapp.fragments.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registroFragment"
             app:destination="@id/registroFragment" />
@@ -15,5 +17,7 @@
     <fragment
         android:id="@+id/registroFragment"
         android:name="com.example.travelwithmeapp.fragments.RegistroFragment"
-        android:label="RegistroFragment" />
+        android:label="RegistroFragment"
+        tools:layout="@layout/fragment_registro"
+        />
 </navigation>
