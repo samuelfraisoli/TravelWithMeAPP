@@ -79,6 +79,8 @@ class PerfilFragment : Fragment(), View.OnClickListener {
                 binding.apellido.setText(userRecogido.surname)
                 binding.correo.setText(userRecogido.email)
                 binding.fechaNacimiento.setText(userRecogido.birthdate)
+
+
             }
         }
     }
@@ -87,7 +89,13 @@ class PerfilFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v?.id) {
             binding.btnGuardarDatos.id -> {
-                    firebaseFirestoreManager.guardarDatosUsuario(userRecogido){
+                userRecogido = User(uid)
+                userRecogido.name = binding.nombre.text.toString()
+                userRecogido.surname = binding.apellido.text.toString()
+                userRecogido.email = binding.correo.text.toString()
+                userRecogido.birthdate = binding.fechaNacimiento.text.toString()
+
+                firebaseFirestoreManager.guardarDatosUsuario(userRecogido){
                 }
             }
         }
