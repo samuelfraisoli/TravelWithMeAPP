@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+        <item
+            android:bottom="6dp"
+            android:drawable="@drawable/fondo_transparente_borde"
+            android:top="6dp">
+            <stroke android:width="2dp" android:color="@color/blue_apple" />
+        </item>
+
+            />
+    </layer-list>

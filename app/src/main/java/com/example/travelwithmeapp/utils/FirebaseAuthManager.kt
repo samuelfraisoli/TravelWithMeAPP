@@ -144,7 +144,8 @@ class FirebaseAuthManager(val context: Context) {
                     }
 
             }
-        } catch (e: ApiException) {
+        }
+        catch (e: ApiException) {
 
         }
     }

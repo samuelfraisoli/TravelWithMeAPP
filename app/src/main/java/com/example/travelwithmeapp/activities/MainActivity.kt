@@ -1,7 +1,5 @@
 package com.example.travelwithmeapp.activities
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,7 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ActivityMainBinding
-import com.example.travelwithmeapp.models.ProviderType
+
 import com.example.travelwithmeapp.models.User
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.example.travelwithmeapp.utils.FirebaseAuthManager

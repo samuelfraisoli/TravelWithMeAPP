@@ -8,7 +8,6 @@ import android.icu.util.Calendar
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -18,8 +17,11 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentActivity
 import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.databinding.LayoutToolbarFragmentSecundarioBinding
+import com.example.travelwithmeapp.models.Vuelo
 import com.google.android.material.snackbar.Snackbar
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.OffsetDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Date
@@ -71,12 +73,7 @@ class Utilities {
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
-    fun crearToolbarFragmSecundario(
-        toolbar: Toolbar,
-        titulo: String,
-        textView: TextView,
-        activity: FragmentActivity
-    ) {
+    fun crearToolbarFragmSecundario(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val actionBar = (activity).supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
@@ -92,12 +89,7 @@ class Utilities {
         }
     }
 
-    fun crearToolbarMenuPrincipal(
-        toolbar: Toolbar,
-        titulo: String,
-        textView: TextView,
-        activity: FragmentActivity
-    ) {
+    fun crearToolbarMenuPrincipal(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val actionBar = (activity).supportActionBar
         actionBar?.setDisplayShowTitleEnabled(false)
@@ -113,48 +105,41 @@ class Utilities {
         snackbar.show()
     }
 
-
-    fun formatoDateDDMM(fecha: Date): String {
-        val formato = SimpleDateFormat("dd-MM")
-        val fechaFormateada = formato.format(fecha)
-        return fechaFormateada
-    }
-
-
-    fun formatoDateDDMMMM(fecha: Date, locale: Locale): String {
-        val dayFormat = SimpleDateFormat("d", locale)
-        val monthFormat = SimpleDateFormat("MMMM", locale)
-
-        val day = dayFormat.format(fecha)
-        val month = monthFormat.format(fecha)
-
-        return "$day $month"
+    //FECHAS
+    fun formatearOffsetDateTimeDDMMMM(offsetDateTime: OffsetDateTime): String {
+        // Crear un DateTimeFormatter con el patrón "dd MMMM" y el Locale español
+        val formatter = DateTimeFormatter.ofPattern("dd MMMM").withLocale(Locale.getDefault())
+        return offsetDateTime.format(formatter)
     }
 
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun formatoDateHHMM(fecha: Date): String {
-        val fechaLocalTime = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalTime()
+    fun formatoOffsetDateTimeHHMM(offsetDateTime: OffsetDateTime): String {
         val formatoHora = DateTimeFormatter.ofPattern("HH:mm")
-        val fechaFormateada = fechaLocalTime.format(formatoHora)
-        return fechaFormateada
-    }
-
-    fun formatoDurationHHhMMm(duracion: Duration): String {
-        var stringHora = ""
-        duracion.toComponents { h, m, s, ns ->
-            var horas = h.toInt()
-            var minutos = m
-            stringHora = "${horas}h ${minutos}m"
-        }
-        return stringHora
-    }
-
-    fun parseStringADateDDMMYYYYconBarras(string: String): Date {
-        val format = SimpleDateFormat("dd/MM/yyyy")
-        val date = format.parse(string)
-        return date
+        return offsetDateTime.format(formatoHora)
     }
 
 
-}
+
+
+    fun parseStringAOffsetDateDDMMYYYY(string: String) : OffsetDateTime {
+        // Obtener la zona horaria predeterminada del sistema
+        val zoneId = ZoneId.systemDefault()
+        // Obtener el OffsetDateTime actual con la zona horaria predeterminada del sistema
+        val offsetDateTime = OffsetDateTime.now(zoneId)
+        // Obtener el offset (desplazamiento) del OffsetDateTime
+        val offset = offsetDateTime.offset
+
+        // Crear un DateTimeFormatter con el formato "dd/MM/yyyy"
+        val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+
+        // Parsear la cadena a LocalDate usando el formatter
+        val localDate = LocalDate.parse(string, formatter)
+
+        // Combinar el el localdate(tiene dias, meses, años), localtime (tiene hora y minutos), y offset (el UTC)
+        return OffsetDateTime.of(localDate, LocalTime.of(7, 0), offset)
+    }
+
+
+
+ }

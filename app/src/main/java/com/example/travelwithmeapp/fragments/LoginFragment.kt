@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.R
@@ -18,9 +17,7 @@ import com.example.travelwithmeapp.utils.FirebaseAuthManager
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
+
 
 
 class LoginFragment : Fragment(), View.OnClickListener {
@@ -83,7 +80,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
      */
     fun logearConCorreo() {
         if (email.isNotEmpty() && password.isNotEmpty()) {
-            val user =
+            val user = User()
                 firebaseAuthManager.logearConCorreo(email.toString(), password.toString()) { user ->
                     if (user != null) {
                         intentAMainAct(user)

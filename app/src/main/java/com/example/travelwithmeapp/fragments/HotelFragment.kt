@@ -9,12 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.adapters.CarouselAdapter
 import com.example.travelwithmeapp.databinding.FragmentHotelBinding
+import com.example.travelwithmeapp.databinding.FragmentResenaBinding
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.Utilities
 import com.google.android.material.carousel.CarouselSnapHelper
+import java.time.OffsetDateTime
+import java.util.Date
+import java.util.Locale
 
 
 class HotelFragment : Fragment() {
@@ -23,8 +29,8 @@ class HotelFragment : Fragment() {
     private lateinit var utilities: Utilities
 
     private lateinit var hotel: Hotel
-    private var fecha_entrada_hotel: String = ""
-    private var fecha_salida_hotel: String = ""
+    private lateinit var fecha_entrada_hotel: OffsetDateTime
+    private lateinit var fecha_salida_hotel: OffsetDateTime
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,15 +47,15 @@ class HotelFragment : Fragment() {
     }
 
     private fun inicializar() {
-        recogerIntent()
         utilities = Utilities()
-        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "${hotel.name}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
+        recogerIntent()
+        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "${hotel.nombre}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
         inicializarCarouselRecyclerView()
         cargarElementosHotel()
 
         binding.buttonSitioWeb.setOnClickListener() {
-            intentASitioWeb(hotel.details.web)
+            intentASitioWeb(hotel.detalles.web)
         }
 
         binding.buttonEscribirReseA.setOnClickListener() {
@@ -62,9 +68,10 @@ class HotelFragment : Fragment() {
         val bundle = arguments
         if (bundle != null) {
             hotel = bundle.getSerializable("hotel") as Hotel
-            fecha_entrada_hotel = bundle.getString("fecha_entrada_hotel") ?: ""
-            fecha_salida_hotel = bundle.getString("fecha_salida_hotel") ?: ""
-            Log.v("bundle", "$hotel, $fecha_entrada_hotel, $fecha_entrada_hotel")
+            var fecha_entrada_string = bundle.getString("fecha_entrada_hotel")!!
+            fecha_entrada_hotel = utilities.parseStringAOffsetDateDDMMYYYY(fecha_entrada_string)
+            var fecha_salida_string = bundle.getString("fecha_salida_hotel")!!
+            fecha_salida_hotel = utilities.parseStringAOffsetDateDDMMYYYY(fecha_salida_string)
         }
     }
 
@@ -74,9 +81,9 @@ class HotelFragment : Fragment() {
     }
 
     private fun cargarElementosHotel() {
-        listaImagenes.addAll(hotel.photos)
-        binding.textviewFecha.text = "${getString(R.string.Del)} ${fecha_entrada_hotel} ${getString(R.string.al)} ${fecha_salida_hotel}"
-        binding.textviewDescripcionTexto.text = hotel.details.description
+        listaImagenes.addAll(hotel.fotos)
+        binding.textviewFecha.text = "${getString(R.string.Del)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_entrada_hotel)} ${getString(R.string.al)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_salida_hotel)}"
+        binding.textviewDescripcionTexto.text = hotel.detalles.descripcion
     }
 
     private fun intentASitioWeb(url: String) {

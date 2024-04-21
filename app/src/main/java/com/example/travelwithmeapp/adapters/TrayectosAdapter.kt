@@ -26,11 +26,11 @@ class TrayectosAdapter(
         @RequiresApi(Build.VERSION_CODES.O)
         fun bindItem(trayectoVuelo: TrayectoVuelo) {
             itemBinding.letrasTrayectoOrigen.text = trayectoVuelo.origen.ciudadAbrev
-            itemBinding.fechaSalida.text = utilities.formatoDateDDMMMM(trayectoVuelo.fechaSalida, Locale.getDefault())
-            itemBinding.horaSalida.text = utilities.formatoDateHHMM(trayectoVuelo.fechaSalida)
+            itemBinding.fechaSalida.text = utilities.formatearOffsetDateTimeDDMMMM(trayectoVuelo.fechaSalida)
+            itemBinding.horaSalida.text = utilities.formatoOffsetDateTimeHHMM(trayectoVuelo.fechaSalida)
             itemBinding.aeropuertoOrigen.text = trayectoVuelo.origen.nombre
-            itemBinding.terminalOrigen.text = trayectoVuelo.origen.terminal
-            itemBinding.duracion.text = utilities.formatoDurationHHhMMm(trayectoVuelo.duracion)
+            itemBinding.terminalOrigen.text = trayectoVuelo.terminalSalida
+            itemBinding.duracion.text = trayectoVuelo.getDuracionFormatoHHhMMm()
 
             itemBinding.iconoAerolinea.setImageResource(R.drawable.plane2_icon)
             if (trayectoVuelo.aerolinea.isNotEmpty()) {
@@ -42,14 +42,15 @@ class TrayectosAdapter(
 
 
                 itemBinding.letrasTrayectoDestino.text = trayectoVuelo.destino.ciudadAbrev
-                itemBinding.fechaLlegada.text = utilities.formatoDateDDMMMM(trayectoVuelo.fechaLlegada, Locale.getDefault())
-                itemBinding.horaLlegada.text = utilities.formatoDateHHMM(trayectoVuelo.fechaLlegada)
+                itemBinding.fechaLlegada.text =
+                    utilities.formatearOffsetDateTimeDDMMMM(trayectoVuelo.fechaLlegada)
+                itemBinding.horaLlegada.text = utilities.formatoOffsetDateTimeHHMM(trayectoVuelo.fechaLlegada)
                 itemBinding.aeropuertoDestino.text = trayectoVuelo.destino.nombre
-                itemBinding.terminalDestino.text = trayectoVuelo.destino.terminal
+                itemBinding.terminalDestino.text = trayectoVuelo.terminalLlegada
 
                 if (trayectoVuelo.escala) {
                     itemBinding.tiempoEscala.text =
-                        "ESCALA: ${utilities.formatoDurationHHhMMm(trayectoVuelo.tiempoEscala)}"
+                        "ESCALA: ${trayectoVuelo.getDuracionEscalaHHhMMm()}"
                 }
             }
         }
@@ -68,6 +69,7 @@ class TrayectosAdapter(
         return lista.size
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: TrayectoHolder, position: Int) {
             val escala = lista.get(position)
             holder.bindItem(escala)
