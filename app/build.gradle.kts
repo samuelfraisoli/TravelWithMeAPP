@@ -76,6 +76,10 @@ dependencies {
     //carousel material design3
     implementation("io.coil-kt:coil:2.5.0")
 
+    //volley
+    implementation ("com.android.volley:volley:1.2.1")
+
+
 
 
 

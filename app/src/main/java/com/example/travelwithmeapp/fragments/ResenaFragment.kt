@@ -2,6 +2,7 @@ package com.example.travelwithmeapp.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +12,17 @@ import com.example.travelwithmeapp.activities.LoginActivity
 import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.databinding.FragmentResenaBinding
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
+import com.example.travelwithmeapp.utils.TravelWithMeApiManager
 import com.example.travelwithmeapp.utils.Utilities
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class ResenaFragment : Fragment() {
     private lateinit var binding: FragmentResenaBinding
     private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
     private lateinit var utilities: Utilities
+    private lateinit var travelWithMeApiManager: TravelWithMeApiManager
     private lateinit var uid: String
 
     override fun onCreateView(
@@ -37,19 +42,21 @@ class ResenaFragment : Fragment() {
     }
 
     fun inicializar() {
+        travelWithMeApiManager = TravelWithMeApiManager()
         utilities = Utilities()
-        utilities.crearToolbarMenuPrincipal(
-            binding.toolbar.toolbarLayout,
-            "Reseñas",
-            binding.toolbar.toolbarLayoutTitle,
-            activity as AppCompatActivity
-        )
+        utilities.crearToolbarMenuPrincipal(binding.toolbar.toolbarLayout,"Reseñas", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
         firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
         utilities = Utilities()
 
         recogerUidActMain()
         recogerDatosUsuario()
+
+        binding.buttonAPI.setOnClickListener() {
+            travelWithMeApiManager.crearYLanzarRequest("http://localhost:8080/api/vuelos", "1", requireContext()) {string
+                -> Log.v("", "${string}")
+        }
+    }
     }
 
 

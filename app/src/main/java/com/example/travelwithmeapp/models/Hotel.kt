@@ -5,7 +5,7 @@ import java.util.Date
 
 
 data class Hotel (
-    var id: Long,
+    var id: Long = -1,
     var nombre: String = "",
     var fotos: ArrayList<String> = ArrayList(),
     var fechasLibres: ArrayList<OffsetDateTime> = ArrayList(),

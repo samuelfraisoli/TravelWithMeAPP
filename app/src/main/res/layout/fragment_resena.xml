@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ResenaFragment">
 
+    <TextView
+        android:id="@+id/vuelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:text="vuelo"
+        app:layout_constraintEnd_toEndOf="@+id/correo"
+        app:layout_constraintHorizontal_bias="0.457"
+        app:layout_constraintStart_toStartOf="@+id/correo"
+        app:layout_constraintTop_toBottomOf="@+id/fecha_nacimiento" />
+
     <include
         android:id="@+id/toolbar"
         layout="@layout/layout_toolbar_menu_principal"
@@ -67,5 +78,14 @@
         app:layout_constraintEnd_toEndOf="@+id/nombre"
         app:layout_constraintStart_toStartOf="@+id/nombre"
         app:layout_constraintTop_toBottomOf="@+id/nombre" />
+
+    <Button
+        android:id="@+id/buttonAPI"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="peticion API"
+        app:layout_constraintEnd_toEndOf="@+id/vuelo"
+        app:layout_constraintStart_toStartOf="@+id/vuelo"
+        app:layout_constraintTop_toBottomOf="@+id/vuelo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

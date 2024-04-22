@@ -8,7 +8,7 @@ import org.json.JSONObject
 import java.net.URLEncoder
 
 class TripadvisorAPIManager {
-    /*
+
     /**
      * Recibe una query en texto normal ej ("hoteles en Madrid"), manda una petición a la API y devuelve 10 localizaciones
      * El idioma acepta un String: "es" si es español, "en" si es en inglés
@@ -41,15 +41,15 @@ class TripadvisorAPIManager {
                 val hotel = Hotel()
 
                 val item = dataArray.getJSONObject(i)
-                hotel.id = item.getString("location_id")
-                hotel.name = item.getString("name")
+                hotel.id = item.getLong("location_id")
+                hotel.nombre = item.getString("name")
                 val addressObj = item.getJSONObject("address_obj")
                 hotel.direccion.direccion1 = addressObj.getString("street1")
                 hotel.direccion.direccion2 = addressObj.getString("street2")
                 hotel.direccion.ciudad = addressObj.getString("city")
-                hotel.address.country = addressObj.getString("country")
-                hotel.address.postalCorde = addressObj.getString("postalcode")
-                hotel.address.addressString = addressObj.getString("address_string")
+                hotel.direccion.pais = addressObj.getString("country")
+                hotel.direccion.codPostal = addressObj.getString("postalcode")
+                hotel.direccion.direccionString = addressObj.getString("address_string")
 
                 hoteles.add(hotel)
             }
@@ -66,7 +66,7 @@ class TripadvisorAPIManager {
      * La llamada devuelve las fotos en 3 tamaños: pequeño, mediano y grande
      * arsea el json y devuelve un objeto HotelPhotos que contiene 3 arraylist, cada uno con las fotos de cada tamaño
      */
-    fun locationPhotos(id: String): HotelPhotos? {
+    fun locationPhotos(id: String) {
         val client = OkHttpClient()
         val request = Request.Builder()
             .url("https://api.content.tripadvisor.com/api/v1/location/${id}/photos?language=en&offset=0&source=Management&key=9C7A00524C324586B88C35003A944546")
@@ -78,7 +78,7 @@ class TripadvisorAPIManager {
         if(response.isSuccessful) {
             val responseBodyString: String? = response.body?.string()
 
-            val hotelphotos = HotelPhotos()
+            val hotelphotos = ArrayList<String>()
             val jsonObject = JSONObject(responseBodyString)
             val dataArray = jsonObject.getJSONArray("data")
             for (i in 0 until dataArray.length()) {
@@ -89,15 +89,9 @@ class TripadvisorAPIManager {
                 val mediumImage = images.getJSONObject("medium").getString("url")
                 val largeImage = images.getJSONObject("large").getString("url")
 
-                hotelphotos.smallPhotos.add(smallImage)
-                hotelphotos.mediumPhotos.add(mediumImage)
-                hotelphotos.bigPhotos.add(largeImage)
+
             }
-
-            return hotelphotos
         }
-
-        return null
     }
 
     /**
@@ -122,14 +116,14 @@ class TripadvisorAPIManager {
 
             val jsonObject = JSONObject(responseBodyString)
 
-            hotel.details.description = jsonObject.getString("description")
-            hotel.details.web = jsonObject.getString("web_url")
-            hotel.details.telephone = jsonObject.getString("phone")
+            hotel.detalles.descripcion = jsonObject.getString("description")
+            hotel.detalles.web = jsonObject.getString("web_url")
+            hotel.detalles.telefono = jsonObject.getString("phone")
             val amenitiesArray = jsonObject.getJSONArray("amenities")
 
             for (i in 0 until amenitiesArray.length()) {
                 val amenity = amenitiesArray.getString(i)
-                hotel.details.amenities.add(amenity)
+                hotel.detalles.comodidades.add(amenity)
             }
 
             return true
@@ -141,5 +135,5 @@ class TripadvisorAPIManager {
 
     //todo falta funcion para coger las reviews
 
-*/
+
 }
