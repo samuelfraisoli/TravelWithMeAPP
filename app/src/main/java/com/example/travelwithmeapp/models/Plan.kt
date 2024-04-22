@@ -4,5 +4,7 @@ class Plan (
     var horaPlan: String,
     var nombrePlan: String,
     var descripcionPlan: String,
-    var precioPlan: Int
+    var precioPlan: String,
+    var esFavorito: Boolean
+
 )
