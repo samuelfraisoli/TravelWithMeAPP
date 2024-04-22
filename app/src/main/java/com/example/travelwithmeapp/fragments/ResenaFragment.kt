@@ -42,7 +42,7 @@ class ResenaFragment : Fragment() {
     }
 
     fun inicializar() {
-        travelWithMeApiManager = TravelWithMeApiManager()
+        travelWithMeApiManager = TravelWithMeApiManager(requireContext())
         utilities = Utilities()
         utilities.crearToolbarMenuPrincipal(binding.toolbar.toolbarLayout,"Reseñas", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
@@ -53,7 +53,7 @@ class ResenaFragment : Fragment() {
         recogerDatosUsuario()
 
         binding.buttonAPI.setOnClickListener() {
-            travelWithMeApiManager.crearYLanzarRequest("http://localhost:8080/api/vuelos", "1", requireContext()) {string
+            travelWithMeApiManager.getVuelosConParametros("Madrid", "barcelona", "22/04/2024") { string
                 -> Log.v("", "${string}")
         }
     }
