@@ -47,7 +47,7 @@ class ResenaFragment : Fragment() {
         utilities.crearToolbarMenuPrincipal(binding.toolbar.toolbarLayout,"Reseñas", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
         firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
-        utilities = Utilities()
+
 
         recogerUidActMain()
         recogerDatosUsuario()
