@@ -31,8 +31,9 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintTop_toBottomOf="@id/toolbar">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintVertical_bias="0.0">
 
             <TextView
                 android:id="@+id/duracion"
@@ -100,11 +101,11 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/trayectos"
                 android:layout_width="0dp"
-                android:background="@drawable/constraint_layout_bordes_redondeados"
-                android:elevation="5dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="10dp"
+                android:background="@drawable/constraint_layout_bordes_redondeados"
+                android:elevation="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/escalas"
                 app:layout_constraintTop_toBottomOf="@+id/escalas" />
@@ -186,7 +187,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi
 import java.util.Date
 import java.io.Serializable
 import java.time.Duration
+import java.time.OffsetDateTime
 
 /**
  * id -> la id con la que lo guardamos en la BD
@@ -18,7 +19,11 @@ data class Vuelo(
     var aerolinea: String = "",
     var precio: Double = 0.0,
     var trayectos: ArrayList<TrayectoVuelo> = ArrayList(),
-    var tipo: String = "turista"
+    var tipo: String = "turista",
+    var origen: String = "",
+    var destino: String = "",
+    var fecha: OffsetDateTime = OffsetDateTime.now(),
+    var equipaje: Equipaje = Equipaje()
 ) : Serializable {
 
     @RequiresApi(Build.VERSION_CODES.O)

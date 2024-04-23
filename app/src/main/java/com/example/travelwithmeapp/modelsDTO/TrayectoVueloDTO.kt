@@ -1,4 +1,4 @@
-package com.example.travelwithmeapp.models
+package com.example.travelwithmeapp.modelsDTO
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -9,7 +9,7 @@ import kotlin.time.Duration
  * id -> la id con la que lo guardamos en la BD
  * id_trayecto -> la id que le da la aerolínea (ej. C3451)
  */
-data class TrayectoVuelo @RequiresApi(Build.VERSION_CODES.O) constructor(
+data class TrayectoVueloDTO @RequiresApi(Build.VERSION_CODES.O) constructor(
     var id: Long = -1,
     var id_trayecto: String = "",
     var aerolinea: String = "",
@@ -21,8 +21,9 @@ data class TrayectoVuelo @RequiresApi(Build.VERSION_CODES.O) constructor(
     var fechaFinEscala: OffsetDateTime = OffsetDateTime.now(),
     var terminalSalida: String = "",
     var terminalLlegada: String = "",
-    var origen: Aeropuerto = Aeropuerto(),
-    var destino: Aeropuerto = Aeropuerto(),
+    var vuelo_id: Long = -1,
+    var origen_aeropuerto_id: Long = -1,
+    var destino_aeropuerto_id: Long = -1,
 ) {
 
     @RequiresApi(Build.VERSION_CODES.O)

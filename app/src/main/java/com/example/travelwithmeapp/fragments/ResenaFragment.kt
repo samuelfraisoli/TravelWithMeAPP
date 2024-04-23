@@ -1,6 +1,5 @@
 package com.example.travelwithmeapp.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import com.example.travelwithmeapp.activities.LoginActivity
 import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.databinding.FragmentResenaBinding
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.example.travelwithmeapp.utils.TravelWithMeApiManager
 import com.example.travelwithmeapp.utils.Utilities
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
@@ -33,7 +32,6 @@ class ResenaFragment : Fragment() {
         binding = FragmentResenaBinding.inflate(inflater, container, false)
 
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +40,7 @@ class ResenaFragment : Fragment() {
     }
 
     fun inicializar() {
-        travelWithMeApiManager = TravelWithMeApiManager()
+        travelWithMeApiManager = TravelWithMeApiManager(requireContext())
         utilities = Utilities()
         utilities.crearToolbarMenuPrincipal(binding.toolbar.toolbarLayout,"Reseñas", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
@@ -53,10 +51,15 @@ class ResenaFragment : Fragment() {
         recogerDatosUsuario()
 
         binding.buttonAPI.setOnClickListener() {
-            travelWithMeApiManager.crearYLanzarRequest("http://localhost:8080/api/vuelos", "1", requireContext()) {string
-                -> Log.v("", "${string}")
+            CoroutineScope(Dispatchers.IO).launch {
+                //try {
+                val vuelos = travelWithMeApiManager.buscarVuelosConParametrosCorrutina("Madrid", "Barcelona", "01/02/2024")
+                //}
+                //catch(e: Exception) {
+                //    Log.v("reseña, buscarvuelos", "${e.message}")
+                //}
+            }
         }
-    }
     }
 
 

@@ -79,6 +79,11 @@ dependencies {
     //volley
     implementation ("com.android.volley:volley:1.2.1")
 
+    //gson
+    implementation ("com.google.code.gson:gson:2.8.8")
+
+
+
 
 
 

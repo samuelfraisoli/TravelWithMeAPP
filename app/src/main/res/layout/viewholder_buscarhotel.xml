@@ -39,8 +39,6 @@
                 android:id="@+id/imagen"
                 android:layout_width="130dp"
                 android:layout_height="match_parent"
-
-
                 tools:srcCompat="@drawable/location_icon" />
 
         </androidx.cardview.widget.CardView>

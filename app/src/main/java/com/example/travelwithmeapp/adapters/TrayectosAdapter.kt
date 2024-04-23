@@ -1,8 +1,11 @@
 package com.example.travelwithmeapp.adapters
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.travelwithmeapp.R
@@ -37,6 +40,8 @@ class TrayectosAdapter(
                 itemBinding.iconoAerolinea.load(trayectoVuelo.aerolinea) {
                     placeholder(R.drawable.plane2_icon)
                     error(R.drawable.plane2_icon)
+                    ImageViewCompat.setImageTintList(itemBinding.iconoAerolinea, ColorStateList.valueOf(
+                        Color.parseColor("#FFA3A3A3")));
                 }
 
 

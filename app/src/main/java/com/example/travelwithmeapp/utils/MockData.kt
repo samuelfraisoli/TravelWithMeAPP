@@ -31,6 +31,8 @@ class MockData {
                 origen = aeropuertos[0], // Madrid
                 destino = aeropuertos[1], // Barcelona
                 aerolinea = "Ryanair",
+                terminalSalida = "C1",
+                terminalLlegada = "B2",
                 fechaSalida = OffsetDateTime.of(2024, 4, 21, 14, 30, 0, 0, ZoneOffset.ofHours(2)),
                 fechaLlegada = OffsetDateTime.of(2024, 4, 21, 20, 30, 0, 0, ZoneOffset.ofHours(2)),
                 escala = true,
@@ -44,6 +46,8 @@ class MockData {
                 origen = aeropuertos[1], //Barcelona
                 destino = aeropuertos[2], //Paris
                 aerolinea = "Air France",
+                terminalSalida = "C1",
+                terminalLlegada = "B2",
                 fechaSalida = OffsetDateTime.of(2024, 4, 22, 10, 0, 0, 0, ZoneOffset.ofHours(1)),
                 fechaLlegada = OffsetDateTime.of(2024, 4, 22, 13, 0, 0, 0, ZoneOffset.ofHours(2)),
                 escala = true,
@@ -57,6 +61,8 @@ class MockData {
                 origen = aeropuertos[2], // París
                 destino = aeropuertos[3], // Londres
                 aerolinea = "British Airways",
+                terminalSalida = "C1",
+                terminalLlegada = "B2",
                 fechaSalida = OffsetDateTime.of(2024, 4, 23, 9, 0, 0, 0, ZoneOffset.ofHours(1)),
                 fechaLlegada = OffsetDateTime.of(2024, 4, 23, 10, 0, 0, 0, ZoneOffset.ofHours(1)),
                 escala = false,
@@ -70,6 +76,8 @@ class MockData {
                 origen = aeropuertos[3], // Londres
                 destino = aeropuertos[4], // Nueva York
                 aerolinea = "British Airways",
+                terminalSalida = "C1",
+                terminalLlegada = "B2",
                 fechaSalida = OffsetDateTime.of(2024, 4, 24, 11, 0, 0, 0, ZoneOffset.ofHours(1)),
                 fechaLlegada = OffsetDateTime.of(2024, 4, 24, 15, 0, 0, 0, ZoneOffset.ofHours(-5)),
                 escala = false
@@ -81,6 +89,8 @@ class MockData {
                 origen = aeropuertos[4], // Nueva York
                 destino = aeropuertos[0], // Madrid
                 aerolinea = "Iberia",
+                terminalSalida = "C1",
+                terminalLlegada = "B2",
                 fechaSalida = OffsetDateTime.of(2024, 4, 25, 20, 0, 0, 0, ZoneOffset.ofHours(-5)),
                 fechaLlegada = OffsetDateTime.of(2024, 4, 26, 8, 0, 0, 0, ZoneOffset.ofHours(2)),
                 escala = false
