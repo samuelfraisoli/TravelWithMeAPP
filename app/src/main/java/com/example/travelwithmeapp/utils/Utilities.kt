@@ -120,8 +120,9 @@ class Utilities {
     }
 
 
-
-
+    /**
+     * Solo sirve para formatos de fecha DD/MM/YYYY !!!
+     */
     fun parseStringAOffsetDateDDMMYYYY(string: String) : OffsetDateTime {
         // Obtener la zona horaria predeterminada del sistema
         val zoneId = ZoneId.systemDefault()
@@ -139,6 +140,23 @@ class Utilities {
         // Combinar el el localdate(tiene dias, meses, años), localtime (tiene hora y minutos), y offset (el UTC)
         return OffsetDateTime.of(localDate, LocalTime.of(7, 0), offset)
     }
+
+    /**
+     * Solo parsea formatos ISO (ej. "2024-02-01T00:00:00Z"). Son los que vienen de la bd
+     */
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun parseStringISOAOffsetDateTime(string: String) : OffsetDateTime {
+        // Crear un formateador de fecha y hora con el patrón adecuado
+        val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+
+        // Parsear la cadena a OffsetDateTime utilizando el formateador
+        val offsetDateTime = OffsetDateTime.parse(string, formatter)
+
+        return offsetDateTime
+    }
+
+
+
 
 
 

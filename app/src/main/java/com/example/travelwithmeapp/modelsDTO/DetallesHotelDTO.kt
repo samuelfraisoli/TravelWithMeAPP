@@ -1,6 +1,6 @@
-package com.example.travelwithmeapp.models
+package com.example.travelwithmeapp.modelsDTO
 
-data class DetallesHotel(
+data class DetallesHotelDTO(
     var id: Long = -1,
     var descripcion: String = "",
     var web: String = "",
