@@ -16,7 +16,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             tools:context=".fragments.ExplorarFragment">
 
             <View
@@ -27,7 +26,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <TextView
                 android:id="@+id/textview_explorar"
@@ -45,6 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.606" />
 
+            <!--
             <ImageView
                 android:id="@+id/imagen1_Explorar"
                 android:layout_width="0dp"
@@ -56,88 +55,92 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline11"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.0" />-->
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="30dp"
+                app:cardElevation="10dp"
                 android:padding="20dp"
-                app:cardBackgroundColor="#BFCFDC"
                 app:cardCornerRadius="12dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagen1_Explorar">
+                app:layout_constraintTop_toBottomOf="@+id/color_superior_explorar">
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fondo_maleta_azul">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="16dp"
-                        android:layout_marginBottom="20sp"
-                        android:text="Descubre puntos de interés en tu zona"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        android:textSize="25sp" />
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginBottom="20sp"
-                        android:backgroundTint="@color/white"
-                        android:drawableTint="@color/red_app"
-                        android:textColor="@color/red_apple"
-                        android:text="Ver en mapa" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="20sp"
+                            android:text="Descubre puntos de interés en tu zona"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="25sp" />
 
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginBottom="20sp"
+                            android:backgroundTint="@color/white"
+                            android:drawableTint="@color/red_app"
+                            android:text="Ver en mapa"
+                            android:textColor="@color/red_apple" />
 
-                </LinearLayout>
+                    </LinearLayout>
+                </FrameLayout>
             </androidx.cardview.widget.CardView>
+
 
             <ImageView
                 android:id="@+id/imagen_vertical"
                 android:layout_width="0dp"
                 android:layout_height="700dp"
                 android:src="@drawable/imagen4_explorar_fragment"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline5"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
             <TextView
                 android:layout_width="170dp"
                 android:layout_height="80dp"
-                android:layout_marginTop="180dp"
+                android:layout_marginTop="92dp"
                 android:gravity="center"
                 android:text="LOS LOS MEJORES DESTINOS A TU ALCANCE"
                 android:textColor="@color/blue_apple"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline10"
-                app:layout_constraintHorizontal_bias="0.444"
+                app:layout_constraintHorizontal_bias="0.111"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline5" />
+                app:layout_constraintTop_toTopOf="@+id/guideline12" />
 
             <TextView
                 android:layout_width="170dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="280dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="¡VIAJA Y VIVE EXPERIENCIAS INOLVIDABLES CON NOSOTROS!"
                 android:textColor="@color/blue_apple"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.542"
+                app:layout_constraintHorizontal_bias="0.457"
                 app:layout_constraintStart_toStartOf="@+id/guideline10"
                 app:layout_constraintTop_toTopOf="@+id/guideline5" />
 
@@ -244,7 +247,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="745dp" />
+                app:layout_constraintGuide_begin="741dp" />
 
             <androidx.constraintlayout.widget.Guideline
 
