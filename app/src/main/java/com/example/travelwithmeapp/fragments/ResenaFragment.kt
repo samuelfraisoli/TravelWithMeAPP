@@ -1,7 +1,6 @@
 package com.example.travelwithmeapp.fragments
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -53,7 +52,7 @@ class ResenaFragment : Fragment() {
         binding.buttonAPI.setOnClickListener() {
             CoroutineScope(Dispatchers.IO).launch {
                 //try {
-                val vuelos = travelWithMeApiManager.buscarVuelosConParametrosCorrutina("Madrid", "Barcelona", "01/02/2024")
+                val vuelos = travelWithMeApiManager.buscarVuelosConParametrosParent("Madrid", "Barcelona", "01/02/2024")
                 //}
                 //catch(e: Exception) {
                 //    Log.v("reseña, buscarvuelos", "${e.message}")

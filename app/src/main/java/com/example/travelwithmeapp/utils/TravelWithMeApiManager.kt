@@ -10,7 +10,6 @@ import com.android.volley.toolbox.Volley
 import com.example.travelwithmeapp.models.Aeropuerto
 import com.example.travelwithmeapp.models.TrayectoVuelo
 import com.example.travelwithmeapp.models.Vuelo
-import com.example.travelwithmeapp.modelsDTO.TrayectoVueloDTO
 import com.google.gson.Gson
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.json.JSONArray
@@ -32,7 +31,7 @@ class TravelWithMeApiManager(var context: Context) {
 
     //todo falta añadir el equipaje
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun buscarVuelosConParametrosCorrutina(origen: String, destino: String, fecha: String) : ArrayList<Vuelo> {
+    suspend fun buscarVuelosConParametrosParent(origen: String, destino: String, fecha: String) : ArrayList<Vuelo> {
         val vuelos: ArrayList<Vuelo>
         val jsonVuelos = getVuelosConParametrosCorrutina(origen, destino, fecha)
         vuelos = parsearJsonVuelos(jsonVuelos)
@@ -60,6 +59,8 @@ class TravelWithMeApiManager(var context: Context) {
 
     suspend fun getVuelosConParametrosCorrutina(origen: String, destino: String, fecha: String): String {
         return suspendCancellableCoroutine { continuation ->
+            Log.v("getVuelosConParametros","${origen}, ${destino}, ${fecha}")
+            Log.v("getVuelosConParametros", "${url}/vuelos/filtrados?origen=${origen}&destino=${destino}&fecha=${fecha}")
             val url = "${url}/vuelos/filtrados?origen=${origen}&destino=${destino}&fecha=${fecha}"
             val stringRequest = StringRequest(
                 Request.Method.GET, url,

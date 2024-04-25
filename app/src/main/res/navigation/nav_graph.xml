@@ -47,10 +47,12 @@
         tools:layout="@layout/fragment_buscar">
         <action
             android:id="@+id/action_buscarFragment_to_buscarVuelosFragment"
-            app:destination="@id/buscarVuelosFragment" />
+            app:destination="@id/buscarVuelosFragment"
+            app:enterAnim="@anim/fui_slide_out_left" />
         <action
             android:id="@+id/action_buscarFragment_to_buscarHotelesFragment"
-            app:destination="@id/buscarHotelesFragment" />
+            app:destination="@id/buscarHotelesFragment"
+            app:enterAnim="@anim/fui_slide_out_left" />
         <argument
             android:name="destino_hotel"
             app:argType="string" />

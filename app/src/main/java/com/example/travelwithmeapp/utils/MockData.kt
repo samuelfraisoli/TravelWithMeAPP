@@ -9,8 +9,6 @@ import com.example.travelwithmeapp.models.Resena
 import com.example.travelwithmeapp.models.Vuelo
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
-import java.util.Date
-import kotlin.time.Duration
 
 class MockData {
     fun listaPruebaVuelos(): ArrayList<Vuelo> {
@@ -144,8 +142,7 @@ class MockData {
         return vuelos
     }
 
-    fun listaPruebaHoteles(): ArrayList<Hotel> {
-
+    fun listaFotosHoteles(): ArrayList<String> {
         val hotelPhotos: ArrayList<String> = arrayListOf(
             "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/37/69/93/four-seasons-hotel-madrid.jpg?w=700&h=-1&s=1",
             "https://www.momondo.es/himg/65/a8/5b/expediav2-4288651-6d557b-453569.jpg",
@@ -158,6 +155,12 @@ class MockData {
             "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/43/22/1e/only-you-boutique-hotel.jpg?w=1200&h=-1&s=1",
             "https://www.indigomadrid.com/wp-content/uploads/pool.jpg",
         )
+        return hotelPhotos
+    }
+
+    fun listaPruebaHoteles(): ArrayList<Hotel> {
+
+        val hotelPhotos = listaFotosHoteles()
 
 
         val hoteles = arrayListOf(

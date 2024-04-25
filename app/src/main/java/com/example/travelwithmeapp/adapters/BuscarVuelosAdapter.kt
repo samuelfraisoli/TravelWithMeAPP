@@ -9,6 +9,7 @@ import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ViewholderBuscarvueloBinding
+import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.Vuelo
 import com.example.travelwithmeapp.utils.Utilities
 import java.time.LocalTime
@@ -16,7 +17,7 @@ import java.time.LocalTime
 
 
 class BuscarVuelosAdapter(
-    val lista: List<Vuelo>,
+    val lista: ArrayList<Vuelo>,
     val lambda: (Vuelo) -> Unit)
     : RecyclerView.Adapter<BuscarVuelosAdapter.BuscarVueloHolder>() {
 
@@ -64,6 +65,12 @@ class BuscarVuelosAdapter(
             ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#FF3B30")));
         }
 
+    }
+
+    fun setData(nuevaLista: ArrayList<Vuelo>) {
+        lista.clear()
+        lista.addAll(nuevaLista)
+        notifyDataSetChanged() // Notificar al RecyclerView de que los datos han cambiado
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuscarVueloHolder {

@@ -1,5 +1,6 @@
 package com.example.travelwithmeapp.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,12 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentBuscarBinding
 import com.example.travelwithmeapp.utils.Utilities
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class BuscarFragment : Fragment() {
@@ -70,20 +75,7 @@ class BuscarFragment : Fragment() {
         }
     }
 
-    fun mostrarPantallaVuelos() {
-        cambiarFondo("vuelos")
-        busquedaFlag = 1
-        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 1)
-        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 0)
-    }
-
-    fun mostrarPantallaHoteles() {
-        cambiarFondo("hoteles")
-        busquedaFlag = 2
-        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 1)
-        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 0)
-    }
-
+    //VERIFICAR EDITTEXT
     fun verificarDatosHoteles() : Boolean {
         if(
             binding.destinoHotel.text.isNotEmpty() &&
@@ -99,11 +91,21 @@ class BuscarFragment : Fragment() {
             binding.origenVuelo.text.isNotEmpty() &&
             binding.destinoVuelo.text.isNotEmpty() &&
             binding.fechaVuelo.text.isNotEmpty()
-            )
+        )
         {return true}
         else {return false}
     }
 
+    //INTENTS
+    fun recogerIntentExplorar() {
+        val bundle = arguments
+        val eleccion = bundle?.getInt("eleccion") ?: 0
+
+        when(eleccion) {
+            1 -> mostrarPantallaVuelos()
+            2 -> mostrarPantallaHoteles()
+        }
+    }
     fun intentABuscarHoteles() {
         val bundle = Bundle()
         bundle.putString("destino_hotel", binding.destinoHotel.text.toString())
@@ -118,6 +120,22 @@ class BuscarFragment : Fragment() {
         bundle.putString("destino_vuelo", binding.destinoVuelo.text.toString())
         bundle.putString("fecha_vuelo", binding.fechaVuelo.text.toString())
         findNavController()?.navigate(R.id.action_buscarFragment_to_buscarVuelosFragment, bundle)
+    }
+
+
+    //EFECTOS
+    fun mostrarPantallaVuelos() {
+        cambiarFondo("vuelos")
+        busquedaFlag = 1
+        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 1)
+        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 0)
+    }
+
+    fun mostrarPantallaHoteles() {
+        cambiarFondo("hoteles")
+        busquedaFlag = 2
+        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 1)
+        cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 0)
     }
 
     fun cambiarVisibilidadChildrenViewGroup(viewGroup: ViewGroup, funcionalidad: Int) {
@@ -162,15 +180,7 @@ class BuscarFragment : Fragment() {
 
     }
 
-    fun recogerIntentExplorar() {
-        val bundle = arguments
-        val eleccion = bundle?.getInt("eleccion") ?: 0
 
-        when(eleccion) {
-            1 -> mostrarPantallaVuelos()
-            2 -> mostrarPantallaHoteles()
-        }
-    }
 }
 
 
