@@ -88,7 +88,6 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
             android:src="@drawable/fav_icon"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,6 +98,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
             android:src="@drawable/nofav_icon"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
