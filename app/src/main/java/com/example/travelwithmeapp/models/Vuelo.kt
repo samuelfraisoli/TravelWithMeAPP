@@ -2,7 +2,6 @@ package com.example.travelwithmeapp.models
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import java.util.Date
 import java.io.Serializable
 import java.time.Duration
 import java.time.OffsetDateTime

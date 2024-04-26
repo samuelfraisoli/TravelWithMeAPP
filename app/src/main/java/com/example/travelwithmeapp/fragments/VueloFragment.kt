@@ -14,16 +14,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.adapters.TrayectosAdapter
 import com.example.travelwithmeapp.databinding.FragmentVueloBinding
 import com.example.travelwithmeapp.models.Vuelo
+import com.example.travelwithmeapp.utils.TravelWithMeApiManager
 import com.example.travelwithmeapp.utils.Utilities
 
 
 class VueloFragment : Fragment() {
     private lateinit var binding: FragmentVueloBinding
     private lateinit var vuelo: Vuelo
-    private var fecha_vuelo: String = ""
     private lateinit var recyclerView: RecyclerView
     private lateinit var adaptadorRecycler: TrayectosAdapter
     private lateinit var utilities: Utilities
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

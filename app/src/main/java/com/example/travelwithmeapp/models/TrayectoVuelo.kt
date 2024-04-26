@@ -2,8 +2,8 @@ package com.example.travelwithmeapp.models
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import java.io.Serializable
 import java.time.OffsetDateTime
-import kotlin.time.Duration
 
 /**
  * id -> la id con la que lo guardamos en la BD
@@ -23,7 +23,7 @@ data class TrayectoVuelo @RequiresApi(Build.VERSION_CODES.O) constructor(
     var terminalLlegada: String = "",
     var origen: Aeropuerto = Aeropuerto(),
     var destino: Aeropuerto = Aeropuerto(),
-) {
+) : Serializable {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun getDuracion(): java.time.Duration {

@@ -10,7 +10,7 @@ import com.example.travelwithmeapp.models.Hotel
 
 
 class BuscarHotelesAdapter(
-    val lista: List<Hotel>,
+    val lista: ArrayList<Hotel>,
     val lambda: (Hotel) -> Unit)
     : RecyclerView.Adapter<BuscarHotelesAdapter.HotelHolder>() {
 
@@ -29,6 +29,11 @@ class BuscarHotelesAdapter(
                 }
             }
         }
+    }
+    fun setData(nuevaLista: ArrayList<Hotel>) {
+        lista.clear()
+        lista.addAll(nuevaLista)
+        notifyDataSetChanged() // Notificar al RecyclerView de que los datos han cambiado
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelHolder {
