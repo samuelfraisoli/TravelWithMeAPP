@@ -35,7 +35,7 @@
             tools:src="@drawable/planes_icon" />
 
         <TextView
-            android:id="@+id/text_nombre_plan"
+            android:id="@+id/text_nombre_plan_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -48,7 +48,7 @@
 
 
         <TextView
-            android:id="@+id/text_hora_plan"
+            android:id="@+id/text_hora_plan_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -59,17 +59,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_descripcion_plan"
+            android:id="@+id/text_descripcion_plan_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="Tesoro artístico, historia increíble."
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/text_precio_plan"
+            app:layout_constraintStart_toEndOf="@+id/text_precio_plan_fav"
             app:layout_constraintVertical_bias="0.937" />
 
         <TextView
-            android:id="@+id/text_precio_plan"
+            android:id="@+id/text_precio_plan_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
@@ -88,7 +88,6 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
             android:src="@drawable/fav_icon"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -99,6 +98,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
             android:src="@drawable/nofav_icon"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
