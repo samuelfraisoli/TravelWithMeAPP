@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"/>
 
         <include
             android:id="@+id/toolbar"
@@ -19,9 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            >
-
+            app:layout_constraintHorizontal_bias="1.0">
         </include>
 
 
@@ -132,62 +130,16 @@
                 app:layout_constraintStart_toStartOf="@+id/trayectos"
                 app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
-            <TextView
-                android:id="@+id/EquipajeDescripcion"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Situado en una pintoresca ubicación entre exuberantes montañas y relucientes aguas cristalinas, nuestro hotel es un refugio de lujo y comodidad. Con una arquitectura elegante y moderna, ofrece una experiencia única que combina el encanto tradicional con las comodidades contemporáneas. Nuestras amplias habitaciones están diseñadas para brindar el máximo confort, con vistas impresionantes que cautivan los sentidos. Los huéspedes pueden disfrutar de una variedad de opciones gastronómicas en nuestros restaurantes de clase mundial, que ofrecen desde platos locales hasta cocina internacional de primera categoría"
-                app:layout_constraintEnd_toEndOf="@+id/EquipajeTitulo"
-                app:layout_constraintStart_toStartOf="@+id/EquipajeTitulo"
-                app:layout_constraintTop_toBottomOf="@+id/EquipajeTitulo" />
-
-            <View
-                android:id="@+id/divider4"
+            <include
+                android:id="@+id/equipajeDescipcion"
+                layout="@layout/constraint_layout_equipaje"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="?android:attr/listDivider"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/EquipajeDescripcion" />
-
-            <TextView
-                android:id="@+id/precio"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-
-                android:text="Precio"
-                android:textSize="20dp"
-
-                app:layout_constraintBottom_toBottomOf="@+id/comprar"
-                app:layout_constraintStart_toStartOf="@+id/EquipajeDescripcion"
-                app:layout_constraintTop_toTopOf="@+id/comprar"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/nPersonas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1 persona"
-                app:layout_constraintStart_toStartOf="@+id/precio"
-                app:layout_constraintTop_toBottomOf="@+id/precio" />
-
-            <Button
-                android:id="@+id/comprar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="20dp"
-                android:backgroundTint="@color/pink_apple"
-                android:text="Comprar en página web"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintHorizontal_bias="1.0">
+            </include>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

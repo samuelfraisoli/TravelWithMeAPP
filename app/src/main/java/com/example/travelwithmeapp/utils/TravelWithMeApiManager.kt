@@ -8,6 +8,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.travelwithmeapp.models.Aeropuerto
+import com.example.travelwithmeapp.models.Equipaje
+import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.TrayectoVuelo
 import com.example.travelwithmeapp.models.Vuelo
 import com.google.gson.Gson
@@ -25,11 +27,11 @@ class TravelWithMeApiManager(var context: Context) {
     private val url = "http://10.0.2.2:8080/api"
     private var vuelos = ArrayList<Vuelo>()
 
-
     // =======================================================================================================
-    // CORRUTINAS
+    //  VUELOS
+    // =======================================================================================================
 
-    //todo falta añadir el equipaje
+    // CORRUTINAS
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun buscarVuelosConParametrosParent(origen: String, destino: String, fecha: String) : ArrayList<Vuelo> {
         val vuelos: ArrayList<Vuelo>
@@ -39,6 +41,10 @@ class TravelWithMeApiManager(var context: Context) {
         for(vuelo: Vuelo in vuelos) {
             val jsonTrayectosVuelo = getTrayectosVueloPorIdVueloCorrutina(vuelo.id)
             val trayectos = parsearJsonTrayectos(jsonTrayectosVuelo)
+
+            val jsonEquipaje = getEquipajePorIdCorrutina(vuelo.equipaje.id)
+            val equipaje = parsearJsonEquipaje(jsonEquipaje)
+            vuelo.equipaje = equipaje
 
             for(trayecto: TrayectoVuelo in trayectos) {
                 val jsonOrigen = getAeropuertoPorIdCorrutina(trayecto.origen.id)
@@ -56,7 +62,6 @@ class TravelWithMeApiManager(var context: Context) {
         return vuelos
     }
 
-
     suspend fun getVuelosConParametrosCorrutina(origen: String, destino: String, fecha: String): String {
         return suspendCancellableCoroutine { continuation ->
             Log.v("getVuelosConParametros","${origen}, ${destino}, ${fecha}")
@@ -73,6 +78,34 @@ class TravelWithMeApiManager(var context: Context) {
                 { error ->
                     Log.v("getVuelosConParametros", "los datos no se han recibido")
                     Log.v("getVuelosConParametros", "${error}")
+                    // Manejar el error y reanudar la corrutina con una excepción
+                    continuation.resumeWithException(error)
+                }
+            )
+            Volley.newRequestQueue(context).add(stringRequest)
+
+            // Cancelar la solicitud de red si la corrutina es cancelada
+            continuation.invokeOnCancellation {
+                stringRequest.cancel()
+            }
+        }
+    }
+
+    suspend fun getEquipajePorIdCorrutina(id: Long): String {
+        return suspendCancellableCoroutine { continuation ->
+            val url = "${url}/equipajes/${id}"
+            Log.v("getEquipajePorIdCorrutina", url)
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                { response ->
+                    Log.v("getEquipajePorIdCorrutina", "recibido correctamente")
+                    Log.v("getEquipajePorIdCorrutina", "${response.toString()}")
+                    // Parsear el JSON y luego reanudar la corrutina con el resultado
+                    continuation.resume(response.toString())
+                },
+                { error ->
+                    Log.v("getEquipajePorIdCorrutina", "los datos no se han recibido")
+                    Log.v("getEquipajePorIdCorrutina", "${error}")
                     // Manejar el error y reanudar la corrutina con una excepción
                     continuation.resumeWithException(error)
                 }
@@ -137,40 +170,6 @@ class TravelWithMeApiManager(var context: Context) {
     }
 
 
-
-
-
-    // =============================================================================================
-    // PARSEAR JSONS CON GSON
-    /*@RequiresApi(Build.VERSION_CODES.O)
-    fun parsearJsonVuelo(json: String) : ArrayList<VueloDTO> {
-        val vueloType = object : TypeToken<ArrayList<VueloDTO>>() {}.type
-        val vuelos: ArrayList<VueloDTO> = gson.fromJson(json, vueloType)
-        return vuelos
-    }*/
-
-
-
-
-    /*@RequiresApi(Build.VERSION_CODES.O)
-    fun parsearJsonTrayectos(json: String) : ArrayList<TrayectoVueloDTO> {
-        val trayectosVuelo: ArrayList<TrayectoVueloDTO> = ArrayList()
-        val jsonArray = JSONArray(json)
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val trayecto = gson.fromJson(jsonObject.toString(), TrayectoVueloDTO::class.java)
-            trayectosVuelo.add(trayecto)
-        }
-        return trayectosVuelo
-    }*/
-
-    /*@RequiresApi(Build.VERSION_CODES.O)
-    fun parsearJsonAeropuerto(json: String): AeropuertoDTO {
-        val aeropuerto: AeropuertoDTO = gson.fromJson(json, AeropuertoDTO::class.java)
-        return aeropuerto
-    }*/
-
-
     // =============================================================================================
     // PARSEAR JSONS CON JSONOBJECT
     @RequiresApi(Build.VERSION_CODES.O)
@@ -195,6 +194,19 @@ class TravelWithMeApiManager(var context: Context) {
 
         }
         return vuelos
+    }
+
+    fun parsearJsonEquipaje(json: String): Equipaje {
+        var equipaje = Equipaje()
+        val jsonObject = JSONObject(json)
+
+        equipaje.id = jsonObject.getInt("id").toLong()
+        equipaje.peso = jsonObject.getString("peso")
+        equipaje.alto = jsonObject.getString("alto")
+        equipaje.ancho = jsonObject.getString("ancho")
+        equipaje.precio = jsonObject.getString("precio")
+
+        return equipaje
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -240,130 +252,50 @@ class TravelWithMeApiManager(var context: Context) {
         return aeropuerto
     }
 
-    // =============================================================================================
-    // CALLBACKS
 
-    //es una funcion suspendida, porque las lanzamos como corrutinas (las funciones suspendidas pueden pausar su ejecucion hasta que se ejecute la operación, sin pausar el resto de
-    //la aplicación
-    /*fun buscarVuelosConParametros(origen: String, destino: String, fecha: String) {
+    // =======================================================================================================
+    //  VUELOS
+    // =======================================================================================================
 
-        getVuelosConParametros(origen, destino, fecha) { it ->
-            vuelos = parsearJsonVuelo(it)
-            for (vuelo: Vuelo in vuelos) {
-                getTrayectosVueloPorIdVuelo(vuelo.id) { it ->
-                    var trayectos = ArrayList<TrayectoVuelo>()
-                    trayectos = parsearJsonTrayectos(it)
-                    vuelo.trayectos = trayectos
-                    for (trayecto: TrayectoVuelo in trayectos) {
-                        getAeropuertoPorId(trayecto.origen.id) { it ->
-                            val origen = parsearJsonAeropuerto(it)
-                            trayecto.origen = origen
-                        }
-                        getAeropuertoPorId(trayecto.destino.id) { it ->
-                            val destino = parsearJsonAeropuerto(it)
-                            trayecto.destino = destino
-                        }
-                    }
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun buscarHotelesConParametrosParent(nombre: String, fecha_entrada: String, fecha_salida: String) : ArrayList<Hotel> {
+        val hoteles: ArrayList<Hotel>
+        val jsonHoteles = getHotelesConParametrosCorrutina(nombre, fecha_entrada, fecha_salida)
+        Log.v("jsonHoteles", "${jsonHoteles}")
+
+        return ArrayList<Hotel>()
+
+
+    }
+
+    suspend fun getHotelesConParametrosCorrutina(nombre: String, fecha_entrada: String, fecha_salida: String): String {
+        return suspendCancellableCoroutine { continuation ->
+            Log.v("getVuelosConParametros","${nombre}, ${fecha_entrada}, ${fecha_salida}")
+            Log.v("getVuelosConParametros", "${url}/hoteles/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}")
+            val url = "${url}/hoteles/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}"
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                { response ->
+                    Log.v("getHotelesConParametros", "recibido correctamente")
+                    Log.v("getHotelesConParametros", "${response.toString()}")
+                    // Parsear el JSON y luego reanudar la corrutina con el resultado
+                    continuation.resume(response.toString())
+                },
+                { error ->
+                    Log.v("getHotelesConParametros", "los datos no se han recibido")
+                    Log.v("getHotelesConParametros", "${error}")
+                    // Manejar el error y reanudar la corrutina con una excepción
+                    continuation.resumeWithException(error)
                 }
+            )
+            Volley.newRequestQueue(context).add(stringRequest)
+
+            // Cancelar la solicitud de red si la corrutina es cancelada
+            continuation.invokeOnCancellation {
+                stringRequest.cancel()
             }
         }
     }
-
-    fun getVuelosConParametros(origen: String, destino: String, fecha: String, callback: (String) -> Unit) {
-        val url = "${url}/vuelos/filtrados?origen=${origen}&destino=${destino}&fecha=${fecha}"
-
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener { response ->
-                Log.v("getVuelosConParametros", "recibido correctamente")
-                Log.v("getVuelosConParametros", "${response.toString()}")
-                // ejecuta la función callback, que pide un String y devuelve un unit
-                //se usa para procesar el resultado de la solicitud
-                //todo parsear json
-                callback(response.toString())
-            },
-
-            Response.ErrorListener { error ->
-                Log.v("getVuelosConParametros", "los datos no se han recibido")
-                Log.v("getVuelosConParametros", "${error}")
-                //todo mostrar snackbar con error
-            })
-        Volley.newRequestQueue(context).add(stringRequest)
-    }
-
-
-    fun getTrayectosVueloPorIdVuelo(idVuelo : Long, callback: (String) -> Unit) {
-        val url = "${url}/trayectoVuelos/filtradosIdVuelo?idVuelo=${idVuelo}"
-
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener { response ->
-                Log.v("getTrayectosVueloPorIdVuelo", "recibido correctamente")
-                Log.v("getTrayectosVueloPorIdVuelo", "${response.toString()}")
-                // ejecuta la función callback, que pide un String y devuelve un unit
-                //se usa para procesar el resultado de la solicitud
-                //todo parsear json
-                callback(response.toString())
-            },
-
-            Response.ErrorListener { error ->
-                Log.v("getTrayectosVueloPorIdVuelo", "los datos no se han recibido")
-                Log.v("getTrayectosVueloPorIdVuelo", "${error}")
-                //todo mostrar snackbar con error
-            })
-        Volley.newRequestQueue(context).add(stringRequest)
-    }
-
-
-    fun getAeropuertoPorId(id : Long, callback: (String) -> Unit) {
-        val url = "${url}/api/aeropuertos/${id}"
-
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener { response ->
-                Log.v("getAeropuertoPorId", "recibido correctamente")
-                Log.v("getAeropuertoPorId", "${response.toString()}")
-                // ejecuta la función callback, que pide un String y devuelve un unit
-                //se usa para procesar el resultado de la solicitud
-                //todo parsear json
-                callback(response.toString())
-            },
-
-            Response.ErrorListener { error ->
-                Log.v("getAeropuertoPorId", "los datos no se han recibido")
-                Log.v("getAeropuertoPorId", "${error}")
-                //todo mostrar snackbar con error
-            })
-        Volley.newRequestQueue(context).add(stringRequest)
-    }
-
-
-    // =============================================================================================
-    // REQUEST PRUEBA
-
-    fun crearYLanzarRequest(url: String, nombre: String, context: Context, callback: (String) -> Unit) {
-        volleyQueue = Volley.newRequestQueue(context)
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener { response ->
-                Log.v("", "recibido correctamente")
-                Log.v("", "${response.toString()}")
-                // ejecuta la función callback, que pide un String y devuelve un unit
-                callback(response.toString())
-
-
-            },
-            Response.ErrorListener { error ->
-                Log.v("", "los datos no se han recibido")
-                Log.v("", "${error}")
-                // Aquí puedes agregar alguna lógica adicional para manejar errores, si es necesario
-            })
-
-        // le da el nombre personalizado a la request (en Volley si metes dos request con el mismo nombre, se sobreescriben)
-        stringRequest.tag = nombre
-        // añade la request a la requestqueue
-        volleyQueue.add(stringRequest)
-    }*/
 }
 
 
