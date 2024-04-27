@@ -1,5 +1,7 @@
 package com.example.travelwithmeapp.utils
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.example.travelwithmeapp.models.Direccion
 import com.example.travelwithmeapp.models.Aeropuerto
 import com.example.travelwithmeapp.models.TrayectoVuelo
@@ -7,10 +9,12 @@ import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.DetallesHotel
 import com.example.travelwithmeapp.models.Resena
 import com.example.travelwithmeapp.models.Vuelo
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 
 class MockData {
+    @RequiresApi(Build.VERSION_CODES.O)
     fun listaPruebaVuelos(): ArrayList<Vuelo> {
 
         val aeropuertos = arrayOf(
@@ -29,6 +33,7 @@ class MockData {
                 origen = aeropuertos[0], // Madrid
                 destino = aeropuertos[1], // Barcelona
                 aerolinea = "Ryanair",
+                tipo= "turista",
                 terminalSalida = "C1",
                 terminalLlegada = "B2",
                 fechaSalida = OffsetDateTime.of(2024, 4, 21, 14, 30, 0, 0, ZoneOffset.ofHours(2)),
@@ -169,8 +174,8 @@ class MockData {
                 nombre = "Hotel Sol",
                 fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
-                    OffsetDateTime.of(2024, 5, 1, 0, 0, 0, 0, ZoneOffset.ofHours(2)),
-                    OffsetDateTime.of(2024, 5, 10, 0, 0, 0, 0, ZoneOffset.ofHours(2))
+                    LocalDate.of(2024, 5, 1),
+                    LocalDate.of(2024, 5, 10)
                 ),
                 direccion = Direccion(
                     direccionString = "123 Calle Sol, Madrid, España",
@@ -199,8 +204,8 @@ class MockData {
                 nombre = "Hotel Luna",
                 fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
-                    OffsetDateTime.of(2024, 6, 5, 0, 0, 0, 0, ZoneOffset.ofHours(1)),
-                    OffsetDateTime.of(2024, 6, 20, 0, 0, 0, 0, ZoneOffset.ofHours(1))
+                    LocalDate.of(2024, 5, 1),
+                    LocalDate.of(2024, 5, 10)
                 ),
                 direccion = Direccion(
                     direccionString = "456 Avenida Luna, Barcelona, España",
@@ -230,8 +235,8 @@ class MockData {
                 nombre = "Hotel Estrella",
                 fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
-                    OffsetDateTime.of(2024, 7, 10, 0, 0, 0, 0, ZoneOffset.ofHours(1)),
-                    OffsetDateTime.of(2024, 7, 25, 0, 0, 0, 0, ZoneOffset.ofHours(1))
+                    LocalDate.of(2024, 5, 1),
+                    LocalDate.of(2024, 5, 10)
                 ),
                 direccion = Direccion(
                     direccionString = "789 Calle Estrella, Sevilla, España",
@@ -260,8 +265,8 @@ class MockData {
                 nombre = "Hotel Mar",
                 fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
-                    OffsetDateTime.of(2024, 8, 15, 0, 0, 0, 0, ZoneOffset.ofHours(1)),
-                    OffsetDateTime.of(2024, 8, 30, 0, 0, 0, 0, ZoneOffset.ofHours(1))
+                    LocalDate.of(2024, 5, 1),
+                    LocalDate.of(2024, 5, 10)
                 ),
                 direccion = Direccion(
                     direccionString = "321 Paseo Mar, Málaga, España",
@@ -290,8 +295,8 @@ class MockData {
                 nombre = "Hotel Montaña",
                 fotos = hotelPhotos.shuffled() as ArrayList<String>,
                 fechasLibres = arrayListOf(
-                    OffsetDateTime.of(2024, 9, 10, 0, 0, 0, 0, ZoneOffset.ofHours(1)),
-                    OffsetDateTime.of(2024, 9, 25, 0, 0, 0, 0, ZoneOffset.ofHours(1))
+                    LocalDate.of(2024, 5, 1),
+                    LocalDate.of(2024, 5, 10)
                 ),
                 direccion = Direccion(
                     direccionString = "654 Calle Montaña, Granada, España",

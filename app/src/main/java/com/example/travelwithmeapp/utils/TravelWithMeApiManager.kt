@@ -8,6 +8,8 @@ import com.android.volley.RequestQueue
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.travelwithmeapp.models.Aeropuerto
+import com.example.travelwithmeapp.models.DetallesHotel
+import com.example.travelwithmeapp.models.Direccion
 import com.example.travelwithmeapp.models.Equipaje
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.TrayectoVuelo
@@ -168,7 +170,7 @@ class TravelWithMeApiManager(var context: Context) {
 
 
     // =============================================================================================
-    // PARSEAR JSONS CON JSONOBJECT
+    // PARSEAR JSONS
     @RequiresApi(Build.VERSION_CODES.O)
     fun parsearJsonVuelos(json: String) : ArrayList<Vuelo> {
         val vuelos = ArrayList<Vuelo>()
@@ -251,23 +253,34 @@ class TravelWithMeApiManager(var context: Context) {
 
 
     // =======================================================================================================
-    //  VUELOS
+    //  HOTELES
     // =======================================================================================================
 
     @RequiresApi(Build.VERSION_CODES.O)
     suspend fun buscarHotelesConParametrosParent(nombre: String, fecha_entrada: String, fecha_salida: String) : ArrayList<Hotel> {
-        val hoteles: ArrayList<Hotel>
+        var hoteles = ArrayList<Hotel>()
         val jsonHoteles = getHotelesConParametrosCorrutina(nombre, fecha_entrada, fecha_salida)
         Log.v("jsonHoteles", "${jsonHoteles}")
+        hoteles = parsearJsonHoteles(jsonHoteles)
 
-        return ArrayList<Hotel>()
+        for(hotel: Hotel in hoteles) {
+            var jsonDireccion = getDireccionPorIdCorrutina(hotel.direccion.id)
+            val direccion = parsearJsonDireccion(jsonDireccion)
+            hotel.direccion = direccion
+
+            var jsonDetalles = getDetallesHotelPorIDCorrutina(hotel.detalles.id)
+            val detallesHotel = parsearJsonDetalles(jsonDetalles)
+            hotel.detalles = detallesHotel
+        }
+
+        return hoteles
     }
 
     suspend fun getHotelesConParametrosCorrutina(nombre: String, fecha_entrada: String, fecha_salida: String): String {
         return suspendCancellableCoroutine { continuation ->
-            Log.v("getVuelosConParametros","${nombre}, ${fecha_entrada}, ${fecha_salida}")
-            Log.v("getVuelosConParametros", "${url}/hoteles/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}")
-            val url = "${url}/hoteles/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}"
+            Log.v("getHotelesConParametros","${nombre}, ${fecha_entrada}, ${fecha_salida}")
+            Log.v("getHotelesConParametros", "${url}/hotels/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}")
+            val url = "${url}/hotels/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}"
             val stringRequest = StringRequest(
                 Request.Method.GET, url,
                 { response ->
@@ -291,6 +304,142 @@ class TravelWithMeApiManager(var context: Context) {
             }
         }
     }
+
+    suspend fun getDireccionPorIdCorrutina(id: Long): String {
+        return suspendCancellableCoroutine { continuation ->
+            Log.v("getDireccionPorId", "${url}/direccions/$id")
+            val url = "${url}/direccions/$id"
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                { response ->
+                    Log.v("getDireccionPorId", "recibido correctamente")
+                    Log.v("getDireccionPorId", "${response.toString()}")
+                    // Parsear el JSON y luego reanudar la corrutina con el resultado
+                    continuation.resume(response.toString())
+                },
+                { error ->
+                    Log.v("getDireccionPorId", "los datos no se han recibido")
+                    Log.v("getDireccionPorId", "${error}")
+                    // Manejar el error y reanudar la corrutina con una excepción
+                    continuation.resumeWithException(error)
+                }
+            )
+            Volley.newRequestQueue(context).add(stringRequest)
+
+            // Cancelar la solicitud de red si la corrutina es cancelada
+            continuation.invokeOnCancellation {
+                stringRequest.cancel()
+            }
+        }
+    }
+
+    suspend fun getDetallesHotelPorIDCorrutina(id: Long): String {
+        return suspendCancellableCoroutine { continuation ->
+            Log.v("getHotelDetailsPorID",  "${url}/detallesHotels/$id")
+            val url =  "${url}/detallesHotels/$id"
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                { response ->
+                    Log.v("getHotelDetailsPorID", "recibido correctamente")
+                    Log.v("getHotelDetailsPorID", "${response.toString()}")
+                    // Parsear el JSON y luego reanudar la corrutina con el resultado
+                    continuation.resume(response.toString())
+                },
+                { error ->
+                    Log.v("getHotelDetailsPorID", "los datos no se han recibido")
+                    Log.v("getHotelDetailsPorID", "${error}")
+                    // Manejar el error y reanudar la corrutina con una excepción
+                    continuation.resumeWithException(error)
+                }
+            )
+            Volley.newRequestQueue(context).add(stringRequest)
+
+            // Cancelar la solicitud de red si la corrutina es cancelada
+            continuation.invokeOnCancellation {
+                stringRequest.cancel()
+            }
+        }
+    }
+
+
+
+
+
+
+
+    // =============================================================================================
+    // PARSEAR JSONS
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun parsearJsonHoteles(json: String) : ArrayList<Hotel> {
+        var hoteles: ArrayList<Hotel> = ArrayList()
+        val jsonArray = JSONArray(json)
+
+
+        for (i in 0 until jsonArray.length()) {
+            var hotel: Hotel = Hotel()
+            val jsonObject = jsonArray.getJSONObject(i)
+
+            hotel.id = jsonObject.getLong("id")
+            hotel.nombre = jsonObject.getString("nombre")
+            var fotos = jsonObject.getJSONArray("fotos")
+            if(fotos.length() > 0) {
+                for (j in 0 until fotos.length()) {
+                    hotel.fotos.add(fotos.getString(j))
+                }
+            }
+
+            var fechasLibres = jsonObject.getJSONArray("fechasLibres")
+            for (j in 0 until fechasLibres.length()) {
+                val fechaString = fechasLibres.getString(j)
+                val fechaLocalDate = utilities.parseStringISOTaLocalDate(fechaString)
+                hotel.fechasLibres.add(fechaLocalDate)
+            }
+
+            hotel.direccion.id = jsonObject.getLong("direccion")
+            hotel.detalles.id = jsonObject.getLong("detallesHotel")
+
+            hoteles.add(hotel)
+
+        }
+
+        return hoteles
+    }
+
+    fun parsearJsonDireccion(json: String): Direccion {
+        var direccion: Direccion = Direccion()
+
+        val jsonObject = JSONObject(json)
+        direccion.id = jsonObject.getLong("id")
+        direccion.direccionString = jsonObject.getString("direccionString")
+        direccion.direccion1 = jsonObject.getString("direccion1")
+        direccion.direccion2 = jsonObject.getString("direccion2")
+        direccion.ciudad = jsonObject.getString("ciudad")
+        direccion.pais = jsonObject.getString("pais")
+        direccion.codPostal = jsonObject.getString("codPostal")
+
+        return direccion
+    }
+
+    fun parsearJsonDetalles(json: String) : DetallesHotel {
+        var detallesHotel = DetallesHotel()
+        val jsonObject = JSONObject(json)
+
+        detallesHotel.id = jsonObject.getLong("id")
+        detallesHotel.descripcion = jsonObject.getString("descripcion")
+        detallesHotel.web = jsonObject.getString("web")
+        detallesHotel.telefono = jsonObject.getString("telefono")
+        var comodidadesArray = jsonObject.getJSONArray("comodidades")
+
+        if(comodidadesArray.length() > 0) {
+            for (i in 0 until comodidadesArray.length()) {
+                detallesHotel.comodidades.add(comodidadesArray.getString(i))
+            }
+        }
+        return detallesHotel
+    }
+
+
 }
 
 

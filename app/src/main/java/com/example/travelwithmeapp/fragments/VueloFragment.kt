@@ -33,7 +33,6 @@ class VueloFragment : Fragment() {
     ): View? {
         binding = FragmentVueloBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

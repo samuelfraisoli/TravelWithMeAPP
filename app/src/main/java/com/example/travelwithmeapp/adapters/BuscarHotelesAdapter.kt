@@ -1,5 +1,6 @@
 package com.example.travelwithmeapp.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,9 +20,17 @@ class BuscarHotelesAdapter(
         fun bindItem(hotel: Hotel) {
             itemBinding.textviewNombre.text = hotel.nombre
             itemBinding.textViewProvinciaPais.text = "${hotel.direccion.ciudad}, ${hotel.direccion.pais}"
-            itemBinding.imagen.load(hotel?.fotos?.get(0)) {
-                transformations(RoundedCornersTransformation(20f))
+            if(hotel.fotos.size > 0) {
+                try {
+                    itemBinding.imagen.load(hotel?.fotos?.get(0)) {
+                        transformations(RoundedCornersTransformation(20f))
+                    }
+                }
+                catch(e: Exception) {
+                    Log.v("Error al cargar imagen", "${e.message}")
+                }
             }
+
             itemBinding.root.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {

@@ -17,11 +17,12 @@ data class Vuelo(
     var id_vuelo: String = "",
     var aerolinea: String = "",
     var precio: Double = 0.0,
-    var trayectos: ArrayList<TrayectoVuelo> = ArrayList(),
     var tipo: String = "turista",
     var origen: String = "",
     var destino: String = "",
     var fecha: OffsetDateTime = OffsetDateTime.now(),
+
+    var trayectos: ArrayList<TrayectoVuelo> = ArrayList(),
     var equipaje: Equipaje = Equipaje()
 ) : Serializable {
 

@@ -45,6 +45,26 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/direccion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Calle Alcalá, 123, Madrid, España"
+            app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/carouselRecyclerView" />
+
+        <TextView
+            android:id="@+id/telefono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:text="666 666 666"
+            app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/direccion" />
+
+        <TextView
             android:id="@+id/textviewFecha"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,37 +74,36 @@
 
         <Button
             android:id="@+id/buttonSitioWeb"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="5dp"
-            style="?attr/materialButtonOutlinedStyle"
             android:text="Sitio web"
-            app:strokeColor="@color/elemento_no_seleccionado"
             android:textColor="@color/black"
-
-
-
             app:layout_constraintEnd_toStartOf="@+id/guideline17"
+
+
             app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/carouselRecyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/telefono"
+            app:strokeColor="@color/elemento_no_seleccionado" />
 
         <Button
             android:id="@+id/buttonEscribirReseña"
             style="?attr/materialButtonOutlinedStyle"
-            app:strokeColor="@color/elemento_no_seleccionado"
-            android:textColor="@color/black"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
-            android:layout_marginTop="20dp"
             android:layout_marginEnd="10dp"
             android:backgroundTint="@color/white"
             android:text="Escribir Reseña"
+            android:textColor="@color/black"
+            app:layout_constraintBottom_toBottomOf="@+id/buttonSitioWeb"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/guideline17"
-            app:layout_constraintTop_toBottomOf="@+id/carouselRecyclerView" />
+            app:layout_constraintTop_toTopOf="@+id/buttonSitioWeb"
+            app:strokeColor="@color/elemento_no_seleccionado" />
 
         <View
             android:id="@+id/divider4"
@@ -183,6 +202,28 @@
             app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTitulo"
             app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTitulo" />
 
+        <TextView
+            android:id="@+id/textviewComodidadesTitulo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Comodidades"
+
+            android:textSize="17dp"
+            app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTexto"
+            app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTexto"
+            app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTexto" />
+
+        <TextView
+            android:id="@+id/textviewComodidadesTexto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Situado en una pintoresca ubicación entre exuberantes montañas y relucientes aguas cristalinas, nuestro hotel es un refugio de lujo y comodidad. Con una arquitectura elegante y moderna, ofrece una experiencia única que combina el encanto tradicional con las comodidades contemporáneas. Nuestras amplias habitaciones están diseñadas para brindar el máximo confort, con vistas impresionantes que cautivan los sentidos. Los huéspedes pueden disfrutar de una variedad de opciones gastronómicas en nuestros restaurantes de clase mundial, que ofrecen desde platos locales hasta cocina internacional de primera categoría"
+            app:layout_constraintEnd_toEndOf="@+id/textviewComodidadesTitulo"
+            app:layout_constraintStart_toStartOf="@+id/textviewComodidadesTitulo"
+            app:layout_constraintTop_toBottomOf="@+id/textviewComodidadesTitulo"/>
+
         <View
             android:id="@+id/divider6"
             android:layout_width="match_parent"
@@ -191,7 +232,7 @@
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTexto" />
+            app:layout_constraintTop_toBottomOf="@+id/textviewComodidadesTexto" />
 
         <TextView
             android:id="@+id/textviewMapaTitulo"

@@ -1,10 +1,12 @@
 package com.example.travelwithmeapp.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -15,7 +17,12 @@ import com.example.travelwithmeapp.adapters.BuscarHotelesAdapter
 import com.example.travelwithmeapp.databinding.FragmentBuscarHotelesBinding
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.MockData
+import com.example.travelwithmeapp.utils.TravelWithMeApiManager
 import com.example.travelwithmeapp.utils.Utilities
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class BuscarHotelesFragment : Fragment() {
@@ -27,10 +34,12 @@ class BuscarHotelesFragment : Fragment() {
     private var fecha_entrada_hotel : String = ""
     private var fecha_salida_hotel : String = ""
 
-    private var hoteles = ArrayList<Hotel>()
+    private var listaHoteles = ArrayList<Hotel>()
 
     private var mockdata = MockData()
     private var utilities = Utilities()
+    private lateinit var travelWithMeApiManager: TravelWithMeApiManager
+
 
     private lateinit var hotelClicado: Hotel
 
@@ -44,6 +53,7 @@ class BuscarHotelesFragment : Fragment() {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var destino_hotel = arguments?.getString("destino_hotel").toString()
@@ -55,12 +65,40 @@ class BuscarHotelesFragment : Fragment() {
 
 
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun inicializar() {
+        travelWithMeApiManager = TravelWithMeApiManager(requireContext())
         utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "hoteles", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
         recogerIntent()
         configurarRecycler()
-        buscarHoteles()
+        buscarHoteles(destino_hotel, fecha_entrada_hotel, fecha_salida_hotel)
+    }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun buscarHoteles(nombre: String, fechaEntrada: String, fechaSalida: String) {
+        if(nombre.equals("PRUEBA")) {
+            listaHoteles = mockdata.listaPruebaHoteles()
+            adaptadorRecycler.setData(listaHoteles)
+
+        }
+        else {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+
+                    listaHoteles = travelWithMeApiManager.buscarHotelesConParametrosParent(nombre, fechaEntrada, fechaSalida)
+                    Log.v("buscarHotelesConParametrosParent", "${nombre}, ${fechaEntrada}, ${fechaSalida}")
+
+                    // Actualiza el RecyclerView en el hilo principal (no deja hacerlo en una corrutina)
+                    withContext(Dispatchers.Main) {
+                        adaptadorRecycler.setData(listaHoteles)
+                    }
+
+                } catch (e: Exception) {
+                    Log.v("buscarHotelesConParametrosParent", "${e.message}")
+                    view?.let { utilities.lanzarSnackBarCorto("Error cargar los resultados", it) };
+                }
+            }
+        }
     }
 
     fun recogerIntent() {
@@ -82,7 +120,7 @@ class BuscarHotelesFragment : Fragment() {
      * - Una vez que se ejecute la lambda, pasará ese objeto Hotel, y se ejecutará la función cambiarFragment*/
     fun configurarRecycler() {
         recyclerView = binding.recyclerBusquedaFrag
-        adaptadorRecycler = BuscarHotelesAdapter(hoteles) { hotel ->
+        adaptadorRecycler = BuscarHotelesAdapter(listaHoteles) { hotel ->
             intentAHotelFrag(hotel)
         }
         recyclerView.adapter = adaptadorRecycler
@@ -93,8 +131,8 @@ class BuscarHotelesFragment : Fragment() {
     fun buscarHoteles() {
             //todo cambiar para que coja los datos de la api
             //hoteles = lanzarPeticionApi(origen, destino, fecha
-            hoteles.clear()
-            hoteles.addAll(mockdata.listaPruebaHoteles())
+            listaHoteles.clear()
+            listaHoteles.addAll(mockdata.listaPruebaHoteles())
             adaptadorRecycler.notifyDataSetChanged()
         }
 

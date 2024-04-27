@@ -81,7 +81,6 @@ class BuscarVuelosFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     fun inicializar() {
         travelWithMeApiManager = TravelWithMeApiManager(requireContext())
-        //listaVuelos = mockdata.listaPruebaVuelos()     //carga la lista de prueba
         recogerIntent()
         buscarVuelos(origenVuelo, destinoVuelo, fechaVuelo)
         configurarRecycler()
@@ -92,20 +91,30 @@ class BuscarVuelosFragment : Fragment() {
     //PETICIONES
     @RequiresApi(Build.VERSION_CODES.O)
     fun buscarVuelos(origenVuelo: String, destinoVuelo: String, fechaVuelo: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                //listaVuelos = travelWithMeApiManager.buscarVuelosConParametrosParent(fechaVuelo, origenVuelo, destinoVuelo)
-                listaVuelos = travelWithMeApiManager.buscarVuelosConParametrosParent(origenVuelo, destinoVuelo, fechaVuelo)
-                Log.v("buscarvuelos", "${origenVuelo}, ${destinoVuelo}, ${fechaVuelo}")
+        if(origenVuelo.equals("PRUEBA") && destinoVuelo.equals("PRUEBA")) {
+            listaVuelos = mockdata.listaPruebaVuelos()
+            adaptadorRecycler.setData(listaVuelos)
+        }
+        else {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
 
-                // Actualiza el RecyclerView en el hilo principal (no deja hacerlo en una corrutina)
-                withContext(Dispatchers.Main) {
-                    adaptadorRecycler.setData(listaVuelos)
+                    listaVuelos = travelWithMeApiManager.buscarVuelosConParametrosParent(
+                        origenVuelo,
+                        destinoVuelo,
+                        fechaVuelo
+                    )
+                    Log.v("buscarvuelos", "${origenVuelo}, ${destinoVuelo}, ${fechaVuelo}")
+
+                    // Actualiza el RecyclerView en el hilo principal (no deja hacerlo en una corrutina)
+                    withContext(Dispatchers.Main) {
+                        adaptadorRecycler.setData(listaVuelos)
+                    }
+
+                } catch (e: Exception) {
+                    Log.v("buscarvuelos", "${e.message}")
+                    view?.let { utilities.lanzarSnackBarCorto("Error cargar los resultados", it) };
                 }
-
-            } catch (e: Exception) {
-                Log.v("buscarvuelos", "${e.message}")
-                view?.let { utilities.lanzarSnackBarCorto("Error cargar los resultados", it) };
             }
         }
     }

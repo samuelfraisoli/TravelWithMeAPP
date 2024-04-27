@@ -155,6 +155,14 @@ class Utilities {
         return offsetDateTime
     }
 
+    fun parseStringISOTaLocalDate(string: String): LocalDate {
+        // Crear un formateador de fecha con el patrón adecuado (solo fecha, sin hora)
+        val formatter = DateTimeFormatter.ISO_LOCAL_DATE
+
+        // Parsear la cadena a LocalDate utilizando el formateador
+        return LocalDate.parse(string, formatter)
+    }
+
 
 
 

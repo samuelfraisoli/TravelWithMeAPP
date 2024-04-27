@@ -65,6 +65,9 @@ class HotelFragment : Fragment() {
         inicializarCarouselRecyclerView()
         //iniciarCorrutinaCarousel()
 
+        binding.direccion.text = hotel.direccion.direccionString
+        binding.telefono.text = hotel.detalles.telefono
+
         binding.textviewFecha.text = "${getString(R.string.Del)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_entrada_hotel)} ${getString(R.string.al)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_salida_hotel)}"
         binding.textviewDescripcionTexto.text = hotel.detalles.descripcion
 
@@ -76,11 +79,11 @@ class HotelFragment : Fragment() {
             intentAReseñas(hotel)
         }
 
+        val comodidadesFormateadas = hotel.detalles.comodidades.joinToString(separator = ", ", postfix = ".")
+        binding.textviewComodidadesTexto.text = comodidadesFormateadas
     }
 
-    private fun cargarElementosHotel() {
 
-    }
 
     // INTENTS
     private fun recogerIntent() {

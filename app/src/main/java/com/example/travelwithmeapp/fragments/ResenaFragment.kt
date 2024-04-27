@@ -52,7 +52,7 @@ class ResenaFragment : Fragment() {
         binding.buttonAPI.setOnClickListener() {
             CoroutineScope(Dispatchers.IO).launch {
                 //try {
-                val vuelos = travelWithMeApiManager.buscarHotelesConParametrosParent("Madrid", "01/02/2024", "05/02/2024")
+                val vuelos = travelWithMeApiManager.buscarHotelesConParametrosParent("Hotel1", "01/01/2024", "04/01/2024")
                 //}
                 //catch(e: Exception) {
                 //    Log.v("reseña, buscarvuelos", "${e.message}")

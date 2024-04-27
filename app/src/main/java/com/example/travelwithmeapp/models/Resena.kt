@@ -10,4 +10,5 @@ data class Resena(
     val fecha: OffsetDateTime = OffsetDateTime.now(),
     val titulo: String = "",
     val contenido: String = "",
+    val nota: Int = -1
     ) : Serializable
