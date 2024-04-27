@@ -50,9 +50,14 @@ class VueloFragment : Fragment() {
         utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "Tu vuelo a ${vuelo.getAeropuertoDestino().ciudad}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
         binding.duracion.text = vuelo.getDuracionTotalFormatoHHhMMm()
         binding.escalas.text = numeroEscalas(vuelo)
+        binding.escalas2.text = numeroEscalas(vuelo)
+        binding.tipoVuelo2.text = vuelo.tipo
         binding.tipoVuelo.text = vuelo.tipo
+        binding.equipajeDescipcion.alto.text =  "${vuelo.equipaje.alto} cm"
+        binding.equipajeDescipcion.ancho.text =  "${vuelo.equipaje.ancho} cm"
+        binding.equipajeDescipcion.peso.text = "${vuelo.equipaje.peso} cm"
         binding.favorito.setOnClickListener() {
-            utilities.lanzarDatePickerDialog(binding.duracion, requireContext())
+            añadirAFavoritos(vuelo)
         }
     }
 
@@ -84,6 +89,12 @@ class VueloFragment : Fragment() {
         recyclerView.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
+
+    fun añadirAFavoritos(vuelo: Vuelo) {
+
+    }
+
+
 
 
 

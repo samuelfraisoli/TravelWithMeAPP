@@ -12,7 +12,6 @@ import com.example.travelwithmeapp.models.Equipaje
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.TrayectoVuelo
 import com.example.travelwithmeapp.models.Vuelo
-import com.google.gson.Gson
 import kotlinx.coroutines.suspendCancellableCoroutine
 import org.json.JSONArray
 import org.json.JSONObject
@@ -22,10 +21,8 @@ import kotlin.coroutines.resumeWithException
 class TravelWithMeApiManager(var context: Context) {
     @RequiresApi(Build.VERSION_CODES.O)
     val utilities = Utilities()
-    val gson = Gson()
     private lateinit var volleyQueue : RequestQueue
     private val url = "http://10.0.2.2:8080/api"
-    private var vuelos = ArrayList<Vuelo>()
 
     // =======================================================================================================
     //  VUELOS
@@ -264,8 +261,6 @@ class TravelWithMeApiManager(var context: Context) {
         Log.v("jsonHoteles", "${jsonHoteles}")
 
         return ArrayList<Hotel>()
-
-
     }
 
     suspend fun getHotelesConParametrosCorrutina(nombre: String, fecha_entrada: String, fecha_salida: String): String {

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.VueloFragment">
+    tools:context=".fragments.HotelFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
 
         <include
             android:id="@+id/toolbar"
@@ -22,16 +22,10 @@
             app:layout_constraintHorizontal_bias="1.0">
         </include>
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar"
-            app:layout_constraintVertical_bias="0.0">
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
             <TextView
                 android:id="@+id/duracion"
@@ -63,29 +57,6 @@
                 android:textSize="25dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/favorito"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="125dp"
-                android:padding="5dp"
-
-                android:src="@drawable/favorite_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/titulo_vuelo"
-                app:layout_constraintEnd_toEndOf="@+id/trayectos"
-                app:layout_constraintStart_toEndOf="@+id/titulo_vuelo"
-                app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"></ImageView>
-
-            <ImageView
-                android:id="@+id/resena"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:src="@drawable/resena_icon"
-                app:layout_constraintBottom_toBottomOf="@+id/titulo_vuelo"
-                app:layout_constraintEnd_toStartOf="@+id/favorito"
-                app:layout_constraintTop_toTopOf="@+id/titulo_vuelo"></ImageView>
 
             <TextView
                 android:id="@+id/escalas"
@@ -119,6 +90,70 @@
                 app:layout_constraintTop_toBottomOf="@+id/trayectos" />
 
             <TextView
+                android:id="@+id/escalas2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 escalas"
+                app:layout_constraintStart_toStartOf="@+id/trayectos"
+                app:layout_constraintTop_toTopOf="@+id/favorito" />
+
+            <TextView
+                android:id="@+id/tipo_vuelo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="turista"
+                app:layout_constraintStart_toStartOf="@+id/trayectos"
+                app:layout_constraintTop_toBottomOf="@+id/escalas2" />
+
+            <TextView
+                android:id="@+id/precio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="100€"
+
+                android:textColor="@color/black"
+                android:textSize="30dp"
+
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonReservar"
+                app:layout_constraintStart_toStartOf="@+id/trayectos"
+                app:layout_constraintTop_toTopOf="@+id/buttonReservar" />
+
+            <ImageView
+                android:id="@+id/favorito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+
+                android:padding="5dp"
+                android:src="@drawable/favorite_icon"
+                app:layout_constraintTop_toBottomOf="@+id/divider3"
+                app:layout_constraintEnd_toEndOf="@+id/buttonReservar"></ImageView>
+
+
+            <Button
+                android:id="@+id/buttonReservar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:backgroundTint="@color/pink_apple"
+                android:text="Reservar"
+                app:layout_constraintEnd_toEndOf="@+id/trayectos"
+                app:layout_constraintStart_toStartOf="@+id/guideline17"
+                app:layout_constraintTop_toBottomOf="@+id/favorito" />
+
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonReservar" />
+
+            <TextView
                 android:id="@+id/EquipajeTitulo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -128,19 +163,34 @@
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/trayectos"
                 app:layout_constraintStart_toStartOf="@+id/trayectos"
-                app:layout_constraintTop_toBottomOf="@+id/divider3" />
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
             <include
                 android:id="@+id/equipajeDescipcion"
                 layout="@layout/constraint_layout_equipaje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="1.0">
-            </include>
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/EquipajeTitulo"></include>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
 </ScrollView>
+
+
+
+
