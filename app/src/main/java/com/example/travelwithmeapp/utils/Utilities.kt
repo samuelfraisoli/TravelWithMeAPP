@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
@@ -29,6 +30,12 @@ import java.util.Locale
 import kotlin.time.Duration
 
 class Utilities {
+
+    // =============================================================================================
+    // ELEMENTOS VISUALES
+    // =============================================================================================
+
+    // DATEPICKER
 
     /** Primero crea el objeto fechaSeleccionada, que almacenará la fecha que el usuario seleccione
      * (por ahora se inicializa con el valor del día actual para que no tenga valor null)
@@ -73,6 +80,8 @@ class Utilities {
         inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 
+    // TOOLBARS
+
     fun crearToolbarFragmSecundario(toolbar: Toolbar, titulo: String, textView: TextView, activity: FragmentActivity) {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
         val actionBar = (activity).supportActionBar
@@ -99,26 +108,36 @@ class Utilities {
         }
     }
 
+    // SNACKBARS Y DIALOGS
 
     fun lanzarSnackBarCorto(mensaje: String, view: View) {
         val snackbar = Snackbar.make(view, mensaje, Snackbar.LENGTH_SHORT)
         snackbar.show()
     }
 
-    //FECHAS
+    fun mostrarAlertaDialog(datos: String, context: Context) {
+        AlertDialog.Builder(context)
+            .setTitle("Error de autenticacion")
+            .setMessage(datos)
+            .setPositiveButton("Aceptar", null)
+            .create()
+            .show()
+    }
+
+    // =============================================================================================
+    // CONVERSORES DE FECHAS
+    // =============================================================================================
     fun formatearOffsetDateTimeDDMMMM(offsetDateTime: OffsetDateTime): String {
         // Crear un DateTimeFormatter con el patrón "dd MMMM" y el Locale español
         val formatter = DateTimeFormatter.ofPattern("dd MMMM").withLocale(Locale.getDefault())
         return offsetDateTime.format(formatter)
     }
 
-
     @RequiresApi(Build.VERSION_CODES.O)
     fun formatoOffsetDateTimeHHMM(offsetDateTime: OffsetDateTime): String {
         val formatoHora = DateTimeFormatter.ofPattern("HH:mm")
         return offsetDateTime.format(formatoHora)
     }
-
 
     /**
      * Solo sirve para formatos de fecha DD/MM/YYYY !!!
@@ -162,10 +181,4 @@ class Utilities {
         // Parsear la cadena a LocalDate utilizando el formateador
         return LocalDate.parse(string, formatter)
     }
-
-
-
-
-
-
  }

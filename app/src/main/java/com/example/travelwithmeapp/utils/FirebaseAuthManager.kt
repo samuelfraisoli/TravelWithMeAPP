@@ -1,18 +1,15 @@
 package com.example.travelwithmeapp.utils
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat.startActivityForResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.models.ProviderType
 import com.example.travelwithmeapp.models.User
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
@@ -106,11 +103,11 @@ class FirebaseAuthManager(val context: Context) {
                     user = User(uid, email, provider)
                     callback(user)
                 } else {
-                    mostrarAlertaDialog("No se pudo completar el login")
+                    utilities.mostrarAlertaDialog("No se pudo completar el login", context)
                 }
             }
             .addOnFailureListener {
-                mostrarAlertaDialog(it?.message ?: "Error")
+                utilities.mostrarAlertaDialog(it?.message ?: "Error", context)
             }
     }
 
@@ -140,7 +137,7 @@ class FirebaseAuthManager(val context: Context) {
                         }
                     }
                     .addOnFailureListener {
-                        mostrarAlertaDialog(it?.message ?: "Error")
+                        utilities.mostrarAlertaDialog(it?.message ?: "Error", context)
                     }
 
             }
@@ -164,28 +161,35 @@ class FirebaseAuthManager(val context: Context) {
                     user = User(uid, email, provider)
                     callback(user)
                 } else {
-                    mostrarAlertaDialog("No se pudo completar el registro")
+                    utilities.mostrarAlertaDialog("No se pudo completar el registro", context)
                 }
             }
             .addOnFailureListener {
-                mostrarAlertaDialog(it?.message ?: "Error")
+                utilities.mostrarAlertaDialog(it?.message ?: "Error", context)
             }
     }
 
 
     //OTRAS FUNCIONALIDADES
-    //todo crear
-    fun restablecerContraseña() {
+    fun enviarMailRestablecerContraseña(email: String, view: View, callback: (Boolean) -> Unit) {
+        if(email.isEmpty()) {
+            utilities.mostrarAlertaDialog("Rellena el campo de tu email para que te enviemos un correo con la nueva contraseña", context)
+        }
+        else {
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email)
+                .addOnSuccessListener {
+                    utilities.lanzarSnackBarCorto("Correo enviado", view)
+                    callback(true)
 
+                }
+                .addOnFailureListener {
+                    utilities.mostrarAlertaDialog("No se ha podido realizar el proceso", context)
+                }
+        }
     }
 
 
-    fun mostrarAlertaDialog(datos: String) {
-        AlertDialog.Builder(context)
-            .setTitle("Error de autenticacion")
-            .setMessage(datos)
-            .setPositiveButton("Aceptar", null)
-            .create()
-            .show()
-    }
+
+
+
 }

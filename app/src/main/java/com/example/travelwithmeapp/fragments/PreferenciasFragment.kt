@@ -1,21 +1,26 @@
 package com.example.travelwithmeapp.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
-import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.databinding.FragmentPlanificarBinding
+import androidx.fragment.app.Fragment
+import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.databinding.FragmentPreferenciasBinding
+import com.example.travelwithmeapp.utils.FirebaseAuthManager
+import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.example.travelwithmeapp.utils.Utilities
 
-class PreferenciasFragment : Fragment(), View.OnClickListener {
+class PreferenciasFragment : Fragment(){
 
     private lateinit var binding: FragmentPreferenciasBinding
     private lateinit var utilities: Utilities
+    private lateinit var firebaseAuthManager: FirebaseAuthManager
+    private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
+
+    private var uid: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,30 +38,39 @@ class PreferenciasFragment : Fragment(), View.OnClickListener {
     }
 
     fun inicializar() {
+        firebaseAuthManager = FirebaseAuthManager(requireContext())
+        firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
         utilities = Utilities()
-        binding.botonLimpiar.setOnClickListener(this)
         utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "Preferencias", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
+        binding.cambiarContrasena.setOnClickListener {
+           cambiarContrasena()
+        }
     }
 
-    //TODO rellenar con métodos del backend (autenticación)
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            binding.botonGuardar.id -> {
-                fun cambiarContraseña(){
-                    // Función Samu
-                }
+
+
+
+    fun cambiarContrasena() {
+        recogerUidActMain()
+        if(uid.isEmpty()) {
+            utilities.mostrarAlertaDialog("Error al procesar la solicitud", requireContext())
+            return
+        }
+        firebaseFirestoreManager.recogerDatosUsuario(uid) {user ->
+            if(user != null && user.email != null) {
+                firebaseAuthManager.enviarMailRestablecerContraseña(user.email, binding.root) {}
             }
-            binding.botonLimpiar.id -> {
-                limpiar()
+            else {
+                utilities.mostrarAlertaDialog("Error al procesar la solicitud", requireContext())
             }
         }
     }
 
-    fun limpiar() {
-        binding.contraseA.setText("")
-        binding.contraseA2.setText("")
-        binding.restContraseA.setText("")
-        binding.restContraseA2.setText("")
+    fun recogerUidActMain() {
+        if(activity != null && activity is MainActivity) {
+            uid = (activity as MainActivity).user.uid
+        }
     }
 }
+

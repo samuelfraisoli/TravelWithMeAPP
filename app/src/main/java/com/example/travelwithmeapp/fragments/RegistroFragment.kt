@@ -105,15 +105,15 @@ class RegistroFragment : Fragment(), View.OnClickListener {
             binding.contraseA.text.isEmpty() ||
             binding.confirmacionContraseA.text.isEmpty()
         ) {
-            firebaseAuthManager.mostrarAlertaDialog("Por favor complete todos los campos.")
+            utilities.mostrarAlertaDialog("Por favor complete todos los campos.", requireContext())
             return false
         }
         if (binding.contraseA.text.equals(binding.confirmacionContraseA.text)) {
-            firebaseAuthManager.mostrarAlertaDialog("Las contraseñas no coinciden")
+            utilities.mostrarAlertaDialog("Las contraseñas no coinciden", requireContext())
             return false
         }
         if (!binding.terminos.isChecked) {
-            firebaseAuthManager.mostrarAlertaDialog("Por favor acepte los términos y condiciones.")
+            utilities.mostrarAlertaDialog("Por favor acepte los términos y condiciones.", requireContext())
             return false
         }
         return true

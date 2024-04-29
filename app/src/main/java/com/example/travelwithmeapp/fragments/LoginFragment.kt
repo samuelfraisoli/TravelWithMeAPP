@@ -15,6 +15,7 @@ import com.example.travelwithmeapp.databinding.FragmentLoginBinding
 import com.example.travelwithmeapp.models.User
 import com.example.travelwithmeapp.utils.FirebaseAuthManager
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
+import com.example.travelwithmeapp.utils.Utilities
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
@@ -27,6 +28,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     private lateinit var password: Editable
 
     private lateinit var firebaseAuthManager: FirebaseAuthManager
+    private lateinit var utilities: Utilities
     private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
     private val CODIGO_GOOGLE = 100
 
@@ -45,6 +47,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
     fun inicializar() {
         firebaseAuthManager = FirebaseAuthManager(requireContext())
         firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
+        utilities = Utilities()
 
         email = binding.edittextCorreo.text
         password = binding.edittextPassword.text
@@ -69,7 +72,9 @@ class LoginFragment : Fragment(), View.OnClickListener {
             }
 
             binding.botonRestablecerContraseA.id -> {
-                firebaseAuthManager.restablecerContraseña()
+                restablecerContraseña()
+
+
             }
         }
     }
@@ -81,11 +86,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
     fun logearConCorreo() {
         if (email.isNotEmpty() && password.isNotEmpty()) {
             val user = User()
-                firebaseAuthManager.logearConCorreo(email.toString(), password.toString()) { user ->
-                    if (user != null) {
-                        intentAMainAct(user)
-                    }
+            firebaseAuthManager.logearConCorreo(email.toString(), password.toString()) { user ->
+                if (user != null) {
+                    intentAMainAct(user)
                 }
+            }
         }
     }
 
@@ -108,13 +113,14 @@ class LoginFragment : Fragment(), View.OnClickListener {
             googleClient.signOut()
             startActivityForResult(googleClient.signInIntent, CODIGO_GOOGLE)
         } catch (e: Exception) {
-            firebaseAuthManager.mostrarAlertaDialog(e.message ?: "Error de autenticacion")
+            utilities.mostrarAlertaDialog(e.message ?: "Error de autenticacion", requireContext())
 
         }
     }
 
     //todo completar
     fun restablecerContraseña() {
+        firebaseAuthManager.enviarMailRestablecerContraseña(email.toString(), binding.root) {}
     }
 
     /**

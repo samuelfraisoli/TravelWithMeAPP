@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PerfilFragment">
+    tools:context=".fragments.PerfilFragment"
+    android:theme="@style/EditTextApp">
 
     <View
         android:layout_width="match_parent"
@@ -28,86 +29,91 @@
 
     <TextView
         android:id="@+id/apellidosText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Apellidos"
+        android:text="Apellido"
         android:textSize="20sp"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/nombre"
         app:layout_constraintStart_toStartOf="@+id/nombre"
         app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
     <TextView
         android:id="@+id/correoText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Correo"
         android:textSize="20sp"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/apellido"
         app:layout_constraintStart_toStartOf="@+id/apellido"
         app:layout_constraintTop_toBottomOf="@+id/apellido" />
 
     <TextView
         android:id="@+id/fechaText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text="Fecha nacimiento"
         android:textSize="20sp"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/correo"
         app:layout_constraintStart_toStartOf="@+id/correo"
         app:layout_constraintTop_toBottomOf="@+id/correo" />
 
     <TextView
         android:id="@+id/nombreText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
         android:text="Nombre"
         android:textSize="20sp"
-        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline17" />
 
     <EditText
         android:id="@+id/nombre"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:hint="Introduce tu nombre"
         android:text="nombre"
         android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/nombreText"
         app:layout_constraintStart_toStartOf="@+id/nombreText"
         app:layout_constraintTop_toBottomOf="@+id/nombreText" />
 
     <EditText
         android:id="@+id/apellido"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:hint="Introduce tu primer apellido"
         android:text="apellido"
         android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/apellidosText"
         app:layout_constraintStart_toStartOf="@+id/apellidosText"
         app:layout_constraintTop_toBottomOf="@+id/apellidosText" />
 
     <EditText
         android:id="@+id/correo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:hint="Introduce tu correo electrónico"
         android:text="correo"
         android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/correoText"
         app:layout_constraintStart_toStartOf="@+id/correoText"
         app:layout_constraintTop_toBottomOf="@+id/correoText" />
 
     <EditText
         android:id="@+id/fecha_nacimiento"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:hint="Selecciona tu fecha de nacimiento"
         android:text="fecha_nacimiento"
         android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="@+id/fechaText"
         app:layout_constraintStart_toStartOf="@+id/fechaText"
         app:layout_constraintTop_toBottomOf="@+id/fechaText" />
 
@@ -115,10 +121,12 @@
         android:id="@+id/btn_guardarDatos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
         android:text="Guardar datos"
-        app:layout_constraintBottom_toTopOf="@+id/guideline18"
+        style="@style/BotonRed"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline17"
