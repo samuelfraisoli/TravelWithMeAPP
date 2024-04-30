@@ -24,279 +24,279 @@
 
         </include>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/carouselRecyclerView"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="20dp"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            tools:layout_editor_absoluteX="0dp">
 
-        <TextView
-            android:id="@+id/direccion"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
-            android:text="Calle Alcalá, 123, Madrid, España"
-            app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/carouselRecyclerView" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/carouselRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="horizontal"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                app:layoutManager="com.google.android.material.carousel.CarouselLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/telefono"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:text="666 666 666"
-            app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/direccion" />
+            <TextView
+                android:id="@+id/direccion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Calle Alcalá, 123, Madrid, España"
+                app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/carouselRecyclerView" />
 
-        <TextView
-            android:id="@+id/textviewFecha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Del 01/04/2024"
-            app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
-            app:layout_constraintTop_toTopOf="@+id/favorito" />
+            <TextView
+                android:id="@+id/telefono"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:text="666 666 666"
+                app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/direccion" />
 
-        <Button
-            android:id="@+id/buttonSitioWeb"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="5dp"
-            android:text="Sitio web"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toStartOf="@+id/guideline17"
+            <TextView
+                android:id="@+id/textviewFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Del 01/04/2024"
+                app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
+                app:layout_constraintTop_toTopOf="@+id/favorito" />
 
-
-            app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/telefono"
-            app:strokeColor="@color/elemento_no_seleccionado" />
-
-        <Button
-            android:id="@+id/buttonEscribirReseña"
-            style="?attr/materialButtonOutlinedStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/white"
-            android:text="Escribir Reseña"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/buttonSitioWeb"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/guideline17"
-            app:layout_constraintTop_toTopOf="@+id/buttonSitioWeb"
-            app:strokeColor="@color/elemento_no_seleccionado" />
-
-        <View
-            android:id="@+id/divider4"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonSitioWeb" />
+            <Button
+                android:id="@+id/buttonSitioWeb"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:text="Sitio web"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toStartOf="@+id/guideline17"
 
 
-        <TextView
-            android:id="@+id/precio"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="100€"
+                app:layout_constraintStart_toStartOf="@+id/carouselRecyclerView"
+                app:layout_constraintTop_toBottomOf="@+id/telefono"
+                app:strokeColor="@color/elemento_no_seleccionado" />
 
-            android:textColor="@color/black"
-            android:textSize="30dp"
+            <Button
+                android:id="@+id/buttonEscribirReseña"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="10dp"
+                android:backgroundTint="@color/white"
+                android:text="Escribir Reseña"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonSitioWeb"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline17"
+                app:layout_constraintTop_toTopOf="@+id/buttonSitioWeb"
+                app:strokeColor="@color/elemento_no_seleccionado" />
 
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/buttonReservar"
-            app:layout_constraintStart_toStartOf="@+id/nPersonas"
-            app:layout_constraintTop_toTopOf="@+id/buttonReservar" />
-
-        <TextView
-            android:id="@+id/nPersonas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1 persona"
-            app:layout_constraintStart_toStartOf="@+id/textviewFecha"
-            app:layout_constraintTop_toBottomOf="@+id/textviewFecha" />
-
-        <ImageView
-            android:id="@+id/favorito"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-
-            android:padding="5dp"
-            android:src="@drawable/favorite_icon"
-            app:layout_constraintEnd_toStartOf="@+id/resena"
-            app:layout_constraintTop_toBottomOf="@+id/divider4"></ImageView>
-
-        <ImageView
-            android:id="@+id/resena"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:src="@drawable/resena_icon"
-            app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
-            app:layout_constraintTop_toTopOf="@+id/favorito"></ImageView>
-
-        <Button
-            android:id="@+id/buttonReservar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:backgroundTint="@color/pink_apple"
-            android:text="Reservar"
-            app:layout_constraintEnd_toEndOf="@+id/buttonEscribirReseña"
-            app:layout_constraintHorizontal_bias="0.52"
-            app:layout_constraintStart_toStartOf="@+id/buttonEscribirReseña"
-            app:layout_constraintTop_toBottomOf="@+id/favorito" />
-
-        <View
-            android:id="@+id/divider5"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonReservar" />
-
-        <TextView
-            android:id="@+id/textviewDescripcionTitulo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Descripción"
-
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
-            app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
-            app:layout_constraintTop_toBottomOf="@+id/divider5" />
-
-        <TextView
-            android:id="@+id/textviewDescripcionTexto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Situado en una pintoresca ubicación entre exuberantes montañas y relucientes aguas cristalinas, nuestro hotel es un refugio de lujo y comodidad. Con una arquitectura elegante y moderna, ofrece una experiencia única que combina el encanto tradicional con las comodidades contemporáneas. Nuestras amplias habitaciones están diseñadas para brindar el máximo confort, con vistas impresionantes que cautivan los sentidos. Los huéspedes pueden disfrutar de una variedad de opciones gastronómicas en nuestros restaurantes de clase mundial, que ofrecen desde platos locales hasta cocina internacional de primera categoría"
-            app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTitulo"
-            app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTitulo"
-            app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTitulo" />
-
-        <TextView
-            android:id="@+id/textviewComodidadesTitulo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Comodidades"
-
-            android:textSize="17dp"
-            app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTexto"
-            app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTexto"
-            app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTexto" />
-
-        <TextView
-            android:id="@+id/textviewComodidadesTexto"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Situado en una pintoresca ubicación entre exuberantes montañas y relucientes aguas cristalinas, nuestro hotel es un refugio de lujo y comodidad. Con una arquitectura elegante y moderna, ofrece una experiencia única que combina el encanto tradicional con las comodidades contemporáneas. Nuestras amplias habitaciones están diseñadas para brindar el máximo confort, con vistas impresionantes que cautivan los sentidos. Los huéspedes pueden disfrutar de una variedad de opciones gastronómicas en nuestros restaurantes de clase mundial, que ofrecen desde platos locales hasta cocina internacional de primera categoría"
-            app:layout_constraintEnd_toEndOf="@+id/textviewComodidadesTitulo"
-            app:layout_constraintStart_toStartOf="@+id/textviewComodidadesTitulo"
-            app:layout_constraintTop_toBottomOf="@+id/textviewComodidadesTitulo"/>
-
-        <View
-            android:id="@+id/divider6"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textviewComodidadesTexto" />
-
-        <TextView
-            android:id="@+id/textviewMapaTitulo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Mapa"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTexto"
-            app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTexto"
-            app:layout_constraintTop_toBottomOf="@+id/divider6" />
-
-        <androidx.constraintlayout.utils.widget.MockView
-            android:id="@+id/mapViewHotel"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/textviewMapaTitulo"
-            app:layout_constraintStart_toStartOf="@+id/textviewMapaTitulo"
-            app:layout_constraintTop_toBottomOf="@+id/textviewMapaTitulo" />
-
-        <View
-            android:id="@+id/divider7"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="20dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mapViewHotel" />
-
-        <TextView
-            android:id="@+id/textviewReseñaTitulo"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Reseñas"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="@+id/mapViewHotel"
-            app:layout_constraintStart_toStartOf="@+id/mapViewHotel"
-            app:layout_constraintTop_toBottomOf="@+id/divider7" />
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSitioWeb" />
 
 
-        <androidx.constraintlayout.utils.widget.MockView
-            android:id="@+id/recyclerviewReseñas"
-            android:layout_width="0dp"
-            android:layout_height="200dp"
+            <TextView
+                android:id="@+id/precio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="100€"
 
-            android:layout_marginTop="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/textviewReseñaTitulo"
-            app:layout_constraintStart_toStartOf="@+id/textviewReseñaTitulo"
-            app:layout_constraintTop_toBottomOf="@+id/textviewReseñaTitulo"
-            app:layout_constraintVertical_bias="0.0" />
+                android:textColor="@color/black"
+                android:textSize="30dp"
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.50" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/buttonReservar"
+                app:layout_constraintStart_toStartOf="@+id/nPersonas"
+                app:layout_constraintTop_toTopOf="@+id/buttonReservar" />
+
+            <TextView
+                android:id="@+id/nPersonas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 persona"
+                app:layout_constraintStart_toStartOf="@+id/textviewFecha"
+                app:layout_constraintTop_toBottomOf="@+id/textviewFecha" />
+
+            <ImageView
+                android:id="@+id/favorito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+
+                android:padding="5dp"
+                android:src="@drawable/favorite_icon"
+                app:layout_constraintEnd_toStartOf="@+id/resena"
+                app:layout_constraintTop_toBottomOf="@+id/divider4"></ImageView>
+
+            <ImageView
+                android:id="@+id/resena"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:src="@drawable/resena_icon"
+                app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
+                app:layout_constraintTop_toTopOf="@+id/favorito"></ImageView>
+
+            <Button
+                android:id="@+id/buttonReservar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:backgroundTint="@color/pink_apple"
+                android:text="Reservar"
+                app:layout_constraintEnd_toEndOf="@+id/buttonEscribirReseña"
+                app:layout_constraintHorizontal_bias="0.52"
+                app:layout_constraintStart_toStartOf="@+id/buttonEscribirReseña"
+                app:layout_constraintTop_toBottomOf="@+id/favorito" />
+
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonReservar" />
+
+            <TextView
+                android:id="@+id/textviewDescripcionTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Descripción"
+
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
+                app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
+                app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+            <TextView
+                android:id="@+id/textviewDescripcionTexto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Situado en una pintoresca ubicación entre exuberantes montañas y relucientes aguas cristalinas, nuestro hotel es un refugio de lujo y comodidad. Con una arquitectura elegante y moderna, ofrece una experiencia única que combina el encanto tradicional con las comodidades contemporáneas. Nuestras amplias habitaciones están diseñadas para brindar el máximo confort, con vistas impresionantes que cautivan los sentidos. Los huéspedes pueden disfrutar de una variedad de opciones gastronómicas en nuestros restaurantes de clase mundial, que ofrecen desde platos locales hasta cocina internacional de primera categoría"
+                app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTitulo"
+                app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTitulo"
+                app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTitulo" />
+
+            <TextView
+                android:id="@+id/textviewComodidadesTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Comodidades"
+
+                android:textSize="17dp"
+                app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTexto"
+                app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTexto"
+                app:layout_constraintTop_toBottomOf="@+id/textviewDescripcionTexto" />
+
+            <TextView
+                android:id="@+id/textviewComodidadesTexto"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Situado en una pintoresca ubicación entre exuberantes montañas y relucientes aguas cristalinas, nuestro hotel es un refugio de lujo y comodidad. Con una arquitectura elegante y moderna, ofrece una experiencia única que combina el encanto tradicional con las comodidades contemporáneas. Nuestras amplias habitaciones están diseñadas para brindar el máximo confort, con vistas impresionantes que cautivan los sentidos. Los huéspedes pueden disfrutar de una variedad de opciones gastronómicas en nuestros restaurantes de clase mundial, que ofrecen desde platos locales hasta cocina internacional de primera categoría"
+                app:layout_constraintEnd_toEndOf="@+id/textviewComodidadesTitulo"
+                app:layout_constraintStart_toStartOf="@+id/textviewComodidadesTitulo"
+                app:layout_constraintTop_toBottomOf="@+id/textviewComodidadesTitulo" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textviewComodidadesTexto" />
+
+            <TextView
+                android:id="@+id/textviewMapaTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Mapa"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTexto"
+                app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTexto"
+                app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+            <androidx.constraintlayout.utils.widget.MockView
+                android:id="@+id/mapViewHotel"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textviewMapaTitulo"
+                app:layout_constraintStart_toStartOf="@+id/textviewMapaTitulo"
+                app:layout_constraintTop_toBottomOf="@+id/textviewMapaTitulo" />
+
+            <View
+                android:id="@+id/divider7"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="?android:attr/listDivider"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mapViewHotel" />
+
+            <TextView
+                android:id="@+id/textviewReseñaTitulo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Reseñas"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/mapViewHotel"
+                app:layout_constraintStart_toStartOf="@+id/mapViewHotel"
+                app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_resena_hotel"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textviewReseñaTitulo"
+                app:layout_constraintStart_toStartOf="@+id/textviewReseñaTitulo"
+                app:layout_constraintTop_toBottomOf="@+id/textviewReseñaTitulo"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
