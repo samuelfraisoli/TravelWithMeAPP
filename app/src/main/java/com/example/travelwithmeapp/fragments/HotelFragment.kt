@@ -132,6 +132,9 @@ class HotelFragment : Fragment() {
 
 
 
+    fun configurarEstrellasNota() {
+
+    }
 
 
     //private fun iniciarCorrutinaCarousel() {
