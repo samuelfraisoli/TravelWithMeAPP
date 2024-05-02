@@ -163,6 +163,7 @@ class MockData {
         return hotelPhotos
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun listaPruebaHoteles(): ArrayList<Hotel> {
 
         val hotelPhotos = listaFotosHoteles()
@@ -194,8 +195,9 @@ class MockData {
                         id = 1,
                         idUsuario = 1001,
                         fecha = OffsetDateTime.now(),
-                        titulo = "Estancia agradable",
-                        contenido = "Me encantó mi estancia en el Hotel Sol."
+                        titulo = "Javier Cuesta Soto",
+                        contenido = "Me encantó mi estancia en el Hotel Sol.",
+                        nota = 1
                     )
                 )
             ),

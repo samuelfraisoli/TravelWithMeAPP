@@ -133,6 +133,11 @@ class Utilities {
         return offsetDateTime.format(formatter)
     }
 
+    fun formatearOffsetDateTimeDDMMYYYY(offsetDateTime: OffsetDateTime): String {
+        val formatter = DateTimeFormatter.ofPattern("dd MMMM YYYY").withLocale(Locale.getDefault())
+        return offsetDateTime.format(formatter)
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun formatoOffsetDateTimeHHMM(offsetDateTime: OffsetDateTime): String {
         val formatoHora = DateTimeFormatter.ofPattern("HH:mm")
