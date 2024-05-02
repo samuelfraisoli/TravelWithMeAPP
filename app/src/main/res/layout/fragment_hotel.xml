@@ -188,7 +188,7 @@
                 android:layout_marginTop="20dp"
                 android:text="Descripción"
 
-                android:textSize="20dp"
+                android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
                 app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
                 app:layout_constraintTop_toBottomOf="@+id/divider5" />
@@ -241,7 +241,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Mapa"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="@+id/textviewDescripcionTexto"
                 app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTexto"
                 app:layout_constraintTop_toBottomOf="@+id/divider6" />
@@ -271,7 +271,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Reseñas"
-                android:textSize="20dp"
+                android:textSize="25dp"
                 app:layout_constraintEnd_toEndOf="@+id/mapViewHotel"
                 app:layout_constraintStart_toStartOf="@+id/mapViewHotel"
                 app:layout_constraintTop_toBottomOf="@+id/divider7" />

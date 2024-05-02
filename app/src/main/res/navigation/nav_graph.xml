@@ -14,9 +14,7 @@
         android:label="fragment_busqueda"
         tools:layout="@layout/fragment_explorar">
 
-        <action
-            android:id="@+id/action_explorarFragment_to_resenaFragment"
-            app:destination="@id/resenaFragment" />
+
         <action
             android:id="@+id/action_explorarFragment_to_cosasQueHacerFragment"
             app:destination="@id/cosasQueHacerFragment" />
@@ -74,21 +72,19 @@
 
     </fragment>
 
-    <fragment
-        android:id="@+id/planificarFragment"
-        android:name="com.example.travelwithmeapp.fragments.PlanificarFragment"
-        android:label="fragment_busqueda"
-        tools:layout="@layout/fragment_planificar">
-        <action
-            android:id="@+id/action_planificarFragment_to_planificarFavoritosFragment"
-            app:destination="@id/planificarFavoritosFragment" />
-    </fragment>
 
     <fragment
         android:id="@+id/resenaFragment"
         android:name="com.example.travelwithmeapp.fragments.ResenaFragment"
         android:label="fragment_busqueda"
-        tools:layout="@layout/fragment_resena" />
+        tools:layout="@layout/fragment_resena" >
+        <action
+            android:id="@+id/action_resenaFragment_to_hotelFragment"
+            app:destination="@id/hotelFragment" />
+        <argument
+            android:name="hotel"
+            app:argType="com.example.travelwithmeapp.models.Hotel" />
+    </fragment>
 
 
     <fragment
@@ -107,6 +103,9 @@
             android:name="fecha_salida_hotel"
             app:argType="string"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_hotelFragment_to_resenaFragment"
+            app:destination="@id/resenaFragment" />
     </fragment>
 
     <fragment
@@ -192,8 +191,6 @@
         android:name="com.example.travelwithmeapp.fragments.PlanificarFavoritosFragment"
         android:label="fragment_planificar_favoritos"
         tools:layout="@layout/fragment_planificar_favoritos">
-        <action android:id="@+id/action_planificarFavoritosFragment_to_planificarFragment"
-            app:destination="@id/planificarFragment" />
     </fragment>
 
     <fragment
