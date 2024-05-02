@@ -38,13 +38,13 @@
             android:id="@+id/text_nombre_plan_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="Visita El Museo del Prado"
             android:layout_marginLeft="12dp"
+            android:layout_marginTop="8dp"
+            android:text="Visita El Museo del Prado"
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/imagen"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/text_hora_plan_fav" />
 
 
         <TextView
@@ -62,19 +62,18 @@
             android:id="@+id/text_descripcion_plan_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
             android:text="Tesoro artístico, historia increíble."
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/text_precio_plan_fav"
-            app:layout_constraintVertical_bias="0.937" />
+            app:layout_constraintStart_toStartOf="@+id/text_nombre_plan_fav"
+            app:layout_constraintTop_toBottomOf="@+id/text_nombre_plan_fav" />
 
         <TextView
             android:id="@+id/text_precio_plan_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
             android:text="35€"
-            android:layout_marginTop="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imagen"

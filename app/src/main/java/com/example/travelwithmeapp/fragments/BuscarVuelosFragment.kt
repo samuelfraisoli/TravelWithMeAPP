@@ -60,6 +60,19 @@ class BuscarVuelosFragment : Fragment() {
         inicializar()
     }
 
+
+
+
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun inicializar() {
+        travelWithMeApiManager = TravelWithMeApiManager(requireContext())
+        configurarRecycler()
+        recogerIntent()
+        buscarVuelos(origenVuelo, destinoVuelo, fechaVuelo)
+        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "vuelos", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
+    }
+
     //INTENTS
     private fun recogerIntent() {
         val bundle = arguments
@@ -74,17 +87,6 @@ class BuscarVuelosFragment : Fragment() {
         val bundle = Bundle()
         bundle.putSerializable("vuelo", vuelo)
         findNavController()?.navigate(R.id.action_buscarVuelosFragment_to_vueloFragment, bundle)
-    }
-
-
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun inicializar() {
-        travelWithMeApiManager = TravelWithMeApiManager(requireContext())
-        recogerIntent()
-        buscarVuelos(origenVuelo, destinoVuelo, fechaVuelo)
-        configurarRecycler()
-        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "vuelos", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
     }
 
 

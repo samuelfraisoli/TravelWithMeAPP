@@ -16,16 +16,9 @@
     </item>
 
     <item
-        android:id="@+id/planificarFragment"
-        android:icon="@drawable/plane_icon"
-        android:title="@string/planificar"
-        app:showAsAction="always">
-    </item>
-
-    <item
-        android:id="@+id/resenaFragment"
-        android:icon="@drawable/write_icon"
-        android:title="@string/resena"
+        android:id="@+id/planificarFavoritosFragment"
+        android:icon="@drawable/favorite_icon"
+        android:title="@string/favoritos"
         app:showAsAction="always">
     </item>
 

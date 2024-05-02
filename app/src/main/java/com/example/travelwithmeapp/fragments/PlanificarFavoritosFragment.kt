@@ -41,9 +41,6 @@ class PlanificarFavoritosFragment : Fragment() {
         setupRecyclerView() // PRUEBA PARA VER COMO QUEDAN LOS FAVS, BORRAR EN EL FUTURO
         cargarDatos() // PRUEBA PARA VER COMO QUEDAN LOS FAVS, BORRAR EN EL FUTURO
 
-        binding.buttonPlanes.setOnClickListener {
-            findNavController().navigate(R.id.action_planificarFavoritosFragment_to_planificarFragment)
-        }
     }
 
     fun inicializar() {
@@ -51,7 +48,7 @@ class PlanificarFavoritosFragment : Fragment() {
 
         utilities.crearToolbarMenuPrincipal(
             binding.toolbar.toolbarLayout,
-            "Mis planes favoritos",
+            "Favoritos",
             binding.toolbar.toolbarLayoutTitle,
             activity as AppCompatActivity
         )
