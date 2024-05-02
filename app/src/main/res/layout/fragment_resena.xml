@@ -6,86 +6,66 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ResenaFragment">
 
-    <TextView
-        android:id="@+id/vuelo"
+
+    <RatingBar
+        android:id="@+id/rating_bar_resenas"
+        style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:text="vuelo"
-        app:layout_constraintEnd_toEndOf="@+id/correo"
-        app:layout_constraintHorizontal_bias="0.457"
-        app:layout_constraintStart_toStartOf="@+id/correo"
-        app:layout_constraintTop_toBottomOf="@+id/fecha_nacimiento" />
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/layout_toolbar_menu_principal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="fragment reseña"
+        android:text="¡Valora tu experiencia!"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintHorizontal_bias="0.137"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.096" />
 
-    <TextView
-        android:id="@+id/fecha_nacimiento"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="fecha_nacimiento"
-        app:layout_constraintEnd_toEndOf="@+id/correo"
-        app:layout_constraintStart_toStartOf="@+id/correo"
-        app:layout_constraintTop_toBottomOf="@+id/correo" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="380dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="10sp"
+        app:cardCornerRadius="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rating_bar_resenas">
 
-    <TextView
-        android:id="@+id/correo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="correo"
-        app:layout_constraintEnd_toEndOf="@+id/apellido"
-        app:layout_constraintStart_toStartOf="@+id/apellido"
-        app:layout_constraintTop_toBottomOf="@+id/apellido" />
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="380dp"
+            android:layout_height="150dp"
+            android:gravity="start"
+            android:hint="Comparte detalles de tu experiencia en este sitio"
+            android:layout_margin="10dp"
+            android:background="@android:color/transparent"
+            android:imeOptions="actionDone"
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="265dp" />
 
-    <TextView
-        android:id="@+id/nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="nombre"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-    <TextView
-        android:id="@+id/apellido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="apellido"
-        app:layout_constraintEnd_toEndOf="@+id/nombre"
-        app:layout_constraintStart_toStartOf="@+id/nombre"
-        app:layout_constraintTop_toBottomOf="@+id/nombre" />
+    </androidx.cardview.widget.CardView>
 
     <Button
-        android:id="@+id/buttonAPI"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="peticion API"
-        app:layout_constraintEnd_toEndOf="@+id/vuelo"
-        app:layout_constraintStart_toStartOf="@+id/vuelo"
-        app:layout_constraintTop_toBottomOf="@+id/vuelo" />
-
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Publicar"
+        android:backgroundTint="#FF2D55"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        app:layout_constraintVertical_bias="0.793" />
 </androidx.constraintlayout.widget.ConstraintLayout>

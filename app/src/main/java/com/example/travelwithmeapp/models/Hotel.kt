@@ -10,7 +10,6 @@ data class Hotel (
     var nombre: String = "",
     var fotos: ArrayList<String> = ArrayList(),
     var fechasLibres: ArrayList<LocalDate> = ArrayList(),
-
     var direccion: Direccion = Direccion(),
     var detalles: DetallesHotel = DetallesHotel(),
     var resena: ArrayList<Resena> = ArrayList()
