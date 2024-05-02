@@ -29,66 +29,37 @@
             android:text="Hace una semana"
             android:textColor="#8F7F69"
             android:textSize="9sp"
-            app:layout_constraintBottom_toBottomOf="@+id/icono_estrellas4"
-            app:layout_constraintStart_toEndOf="@+id/icono_estrellas4"
-            app:layout_constraintTop_toTopOf="@+id/icono_estrellas4" />
+            app:layout_constraintBottom_toBottomOf="@+id/ratingBar"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar"
+            app:layout_constraintTop_toTopOf="@+id/ratingBar" />
 
         <TextView
             android:id="@+id/text_descripcion_plan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:justificationMode="inter_word"
             android:text="Reemplaza tuDataset con la variable que estás utilizando para almacenar los datos que se mostrarán en el RecyclerView. Esto debería solucionar el error que estás experimentando. Si el problema persiste o necesitas más ayuda, por favor avísame."
             android:textSize="11sp"
-            android:justificationMode="inter_word"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/icono_estrellas5"
-            app:layout_constraintTop_toBottomOf="@+id/icono_estrellas5"/>
+            app:layout_constraintStart_toStartOf="@+id/ratingBar"
+            app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
-        <ImageView
-            android:id="@+id/icono_estrellas2"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:src="@drawable/estrella_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/icono_estrellas5"
-            app:layout_constraintStart_toEndOf="@+id/icono_estrellas5"
-            app:layout_constraintTop_toTopOf="@+id/icono_estrellas5" />
-
-        <ImageView
-            android:id="@+id/icono_estrellas"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:src="@drawable/estrella_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/icono_estrellas2"
-            app:layout_constraintStart_toEndOf="@+id/icono_estrellas2"
-            app:layout_constraintTop_toTopOf="@+id/icono_estrellas2" />
-
-        <ImageView
-            android:id="@+id/icono_estrellas3"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:src="@drawable/estrella_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/icono_estrellas"
-            app:layout_constraintStart_toEndOf="@+id/icono_estrellas"
-            app:layout_constraintTop_toTopOf="@+id/icono_estrellas" />
-
-        <ImageView
-            android:id="@+id/icono_estrellas4"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:src="@drawable/estrella_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/icono_estrellas3"
-            app:layout_constraintStart_toEndOf="@+id/icono_estrellas3"
-            app:layout_constraintTop_toTopOf="@+id/icono_estrellas3" />
-
-        <ImageView
-            android:id="@+id/icono_estrellas5"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/estrella_icon"
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:numStars="5"
+            android:rating="4.5"
+            android:stepSize="1"
+            app:layout_constraintBottom_toTopOf="@+id/text_descripcion_plan"
             app:layout_constraintStart_toStartOf="@+id/text_nombre_plan"
             app:layout_constraintTop_toBottomOf="@+id/text_nombre_plan" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

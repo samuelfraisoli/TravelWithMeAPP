@@ -41,7 +41,8 @@
         android:id="@+id/textPerfil"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="136dp"
         android:backgroundTint="@color/fui_transparent"
         android:clickable="true"
         android:drawableLeft="@drawable/perfil_icon"
@@ -53,8 +54,6 @@
         android:textColor="#FBF9F9"
         android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/guideline13" />
 
     <Button
@@ -74,20 +73,6 @@
         android:textSize="15dp"
         app:layout_constraintStart_toStartOf="@+id/textPerfil"
         app:layout_constraintTop_toBottomOf="@id/textPerfil" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="185dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:text="Documentación"
-        android:textColor="#FBF9F9"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitle" />
 
     <Button
         android:id="@+id/cerrarSesion"
@@ -113,7 +98,6 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textTitle" />
 
