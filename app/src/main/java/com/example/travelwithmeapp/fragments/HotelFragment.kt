@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -109,9 +110,11 @@ class HotelFragment : Fragment() {
     }
 
     private fun intentAReseñas(hotel: Hotel) {
-        //todo completar
-    }
+        val bundle = Bundle()
+        bundle.putSerializable("hotel", hotel)
+        findNavController()?.navigate(R.id.action_hotelFragment_to_resenaFragment, bundle)
 
+    }
 
     // CAROUSEL
     private fun inicializarCarouselRecyclerView() {
