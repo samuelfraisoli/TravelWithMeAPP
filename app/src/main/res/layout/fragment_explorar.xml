@@ -22,8 +22,11 @@
             <View
                 android:id="@+id/color_superior_explorar"
                 android:layout_width="match_parent"
-                android:layout_height="238dp"
+
+                android:layout_height="0dp"
+                android:layout_marginBottom="-30dp"
                 android:background="@color/pink_apple"
+                app:layout_constraintBottom_toBottomOf="@+id/boton_explorar_hoteles"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,17 +36,14 @@
                 android:id="@+id/textview_explorar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="15dp"
-                android:padding="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="30dp"
                 android:text="Explorar"
+                android:textColor="@color/white"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toTopOf="@+id/boton_explorar_hoteles"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.606" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textoHotelesDestacados"
@@ -164,77 +164,38 @@
 
                 android:layout_width="0dp"
                 android:layout_height="55dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/white"
-                android:drawableTint="@color/red_apple"
-                android:textColor="@color/red_apple"
-                android:layout_marginBottom="24dp"
                 android:drawableLeft="@drawable/cama_icon"
+                android:drawableTint="@color/red_apple"
+
                 android:gravity="center|left"
                 android:text="Hoteles"
-
-                app:layout_constraintBottom_toTopOf="@+id/guideline8"
+                android:textColor="@color/red_apple"
                 app:layout_constraintEnd_toStartOf="@+id/guideline10"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textview_explorar" />
 
             <Button
                 android:id="@+id/boton_explorar_vuelos"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="10dp"
-                android:drawableLeft="@drawable/plane2_icon"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="20dp"
                 android:backgroundTint="@color/white"
+                android:drawableLeft="@drawable/plane2_icon"
                 android:drawableTint="@color/red_apple"
-                android:textColor="@color/red_apple"
                 android:gravity="center|left"
                 android:text="Vuelos"
-                app:layout_constraintEnd_toStartOf="@+id/guideline10"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/boton_explorar_hoteles" />
-
-            <Button
-                android:id="@+id/boton_foros"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:drawableLeft="@drawable/foro_icon"
-                android:gravity="center"
-                android:text="Tus certificados"
-                android:backgroundTint="@color/white"
-                android:drawableTint="@color/red_apple"
                 android:textColor="@color/red_apple"
+                app:layout_constraintBottom_toBottomOf="@+id/boton_explorar_hoteles"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/boton_explorar_vuelos"
-                app:layout_constraintTop_toBottomOf="@+id/boton_explorar_cosas_que_hacer" />
+                app:layout_constraintStart_toStartOf="@+id/guideline10"
+                app:layout_constraintTop_toTopOf="@+id/boton_explorar_hoteles" />
 
-            <Button
-                android:id="@+id/boton_explorar_cosas_que_hacer"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="24dp"
-                android:drawableLeft="@drawable/hacer_icon"
-                android:gravity="center|left"
-                android:text="Crea tu plan personalizado"
-                android:backgroundTint="@color/white"
-                android:drawableTint="@color/red_apple"
-                android:textColor="@color/red_apple"
-                app:layout_constraintBottom_toTopOf="@+id/guideline8"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline10" />
-
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="175dp" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline10"
@@ -243,12 +204,7 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.5" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_begin="231dp" />
+
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline12"

@@ -47,14 +47,6 @@ class ExplorarFragment : Fragment() {
             findNavController().navigate(R.id.action_explorarFragment_to_buscarFragment, bundle)
         }
 
-        binding.botonForos.setOnClickListener {
-            findNavController().navigate(R.id.action_explorarFragment_to_resenaFragment)
-        }
-
-        binding.botonExplorarCosasQueHacer.setOnClickListener {
-            findNavController().navigate(R.id.action_explorarFragment_to_cosasQueHacerFragment)
-        }
-
         rellenarListaImagenes()
         inicializarCarouselRecyclerView()
     }

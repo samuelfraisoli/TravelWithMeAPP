@@ -2,7 +2,6 @@ package com.example.travelwithmeapp.models
 
 import java.io.Serializable
 import java.time.OffsetDateTime
-import java.util.Date
 
 data class Resena(
     var id: Long = -1,
