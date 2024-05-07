@@ -12,6 +12,7 @@
         style="?android:attr/ratingBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:progressTint="#E6DD26"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="15dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rating_bar_resenas">
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editText_texto_resena"
             android:layout_width="380dp"
             android:layout_height="150dp"
             android:gravity="start"
@@ -52,10 +53,10 @@
             android:inputType="textMultiLine"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="265dp" />
-
     </androidx.cardview.widget.CardView>
 
     <Button
+        android:id="@+id/button_resena"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"

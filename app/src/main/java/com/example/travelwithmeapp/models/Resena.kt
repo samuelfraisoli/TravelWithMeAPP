@@ -7,7 +7,7 @@ import java.time.OffsetDateTime
 
 data class Resena @RequiresApi(Build.VERSION_CODES.O) constructor(
     var id: Long = -1,
-    val idUsuario: Long = -1,
+    val idUsuario: Int = -1,
     val fecha: OffsetDateTime = OffsetDateTime.now(),
     val titulo: String = "",
     val contenido: String = "",
