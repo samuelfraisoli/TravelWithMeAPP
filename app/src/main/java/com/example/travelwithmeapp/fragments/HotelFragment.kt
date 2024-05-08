@@ -4,28 +4,30 @@ import ResenaHotelAdapter
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.adapters.CarouselAdapter
 import com.example.travelwithmeapp.databinding.FragmentHotelBinding
-
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.Utilities
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.carousel.CarouselSnapHelper
 import java.time.OffsetDateTime
 
 
-
-class HotelFragment : Fragment() {
+class HotelFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentHotelBinding
     private var listaImagenes: ArrayList<String> = ArrayList()
     private lateinit var utilities: Utilities
@@ -34,6 +36,8 @@ class HotelFragment : Fragment() {
     private lateinit var hotel: Hotel
     private lateinit var fecha_entrada_hotel: OffsetDateTime
     private lateinit var fecha_salida_hotel: OffsetDateTime
+
+    private lateinit var mapview: MapView
 
     //private var contadorImagenCarousel = 0;
     //private lateinit var jobCorrutina: Job
@@ -50,6 +54,25 @@ class HotelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         inicializar()
+
+        mapview = binding.mapViewHotel
+        mapview.onCreate(savedInstanceState)
+        mapview.getMapAsync(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapview.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapview.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapview.onLowMemory()
     }
 
     override fun onStop() {
@@ -68,7 +91,6 @@ class HotelFragment : Fragment() {
         //iniciarCorrutinaCarousel()
         configuarRecycler()
 
-
         binding.direccion.text = hotel.direccion.direccionString
         binding.telefono.text = hotel.detalles.telefono
 
@@ -86,9 +108,6 @@ class HotelFragment : Fragment() {
         val comodidadesFormateadas = hotel.detalles.comodidades.joinToString(separator = ", ", postfix = ".")
         binding.textviewComodidadesTexto.text = comodidadesFormateadas
     }
-
-
-
 
 
     // INTENTS
@@ -132,11 +151,18 @@ class HotelFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
-
-
-
-    fun configurarEstrellasNota() {
-
+    //MAPA
+    /**
+     * Cuando el mapa se carga, la interfaz OnMapReadyCallback llama a este método que coloca un marcador en la dirección, y mueve la cámara a esa ubicación también
+     */
+    override fun onMapReady(googleMap: GoogleMap) {
+        val sydney = LatLng(-33.852, 151.211)
+        googleMap.addMarker(
+            MarkerOptions()
+                .position(sydney)
+                .title("Marker in Sydney")
+        )
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
 
@@ -155,18 +181,5 @@ class HotelFragment : Fragment() {
     //        }
     //    }
     //}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
