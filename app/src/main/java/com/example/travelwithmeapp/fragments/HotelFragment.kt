@@ -41,9 +41,6 @@ class HotelFragment : Fragment() {
     lateinit var planificarFavoritosAdapter: PlanificarFavoritosAdapter // Adaptador para la lista de hoteles favoritos
     private  lateinit var sharedViewModel: SharedViewModel
 
-    //private var contadorImagenCarousel = 0;
-    //private lateinit var jobCorrutina: Job
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,36 +59,15 @@ class HotelFragment : Fragment() {
         planificarFavoritosAdapter = PlanificarFavoritosAdapter(listaHotelesFav){}
     }
 
-    override fun onStop() {
-        super.onStop()
-        //jobCorrutina.cancel()
-    }
-
 
     private fun inicializar() {
         utilities = Utilities()
         recogerIntent()
         utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "${hotel.nombre}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
-
         listaImagenes.addAll(hotel.fotos)
-        inicializarCarouselRecyclerView()
-        //iniciarCorrutinaCarousel()
+
         configuarRecycler()
 
-
-        binding.direccion.text = hotel.direccion.direccionString
-        binding.telefono.text = hotel.detalles.telefono
-
-        binding.textviewFecha.text = "${getString(R.string.Del)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_entrada_hotel)} ${getString(R.string.al)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_salida_hotel)}"
-        binding.textviewDescripcionTexto.text = hotel.detalles.descripcion
-
-        binding.buttonSitioWeb.setOnClickListener() {
-            intentASitioWeb(hotel.detalles.web)
-        }
-
-        binding.buttonEscribirReseA.setOnClickListener() {
-            intentAReseñas(hotel)
-        }
 
         val comodidadesFormateadas = hotel.detalles.comodidades.joinToString(separator = ", ", postfix = ".")
         binding.textviewComodidadesTexto.text = comodidadesFormateadas
@@ -115,7 +91,6 @@ class HotelFragment : Fragment() {
             planificarFavoritosAdapter.notifyDataSetChanged()
         }
     }
-
 
     // INTENTS
     private fun recogerIntent() {
@@ -149,7 +124,6 @@ class HotelFragment : Fragment() {
     }
 
 
-
     private fun configuarRecycler() {
         recyclerResena = binding.recyclerResenaHotel
         adaptadorResena = ResenaHotelAdapter(hotel.resena)
@@ -157,9 +131,4 @@ class HotelFragment : Fragment() {
         recyclerResena.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
-
-    fun obtenerHotelesFavoritos(): ArrayList<Hotel> {
-        return listaHotelesFav
-    }
-
 }

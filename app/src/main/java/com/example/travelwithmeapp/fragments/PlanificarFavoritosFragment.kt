@@ -40,7 +40,6 @@ class PlanificarFavoritosFragment : Fragment() {
 
     //private var listaHoteles = ArrayList<Hotel>()
     private var listaHotelesFav = ArrayList<Hotel>()
-
     private var mockdata = MockData()
     private var utilities = Utilities()
     private lateinit var travelWithMeApiManager: TravelWithMeApiManager
@@ -62,42 +61,26 @@ class PlanificarFavoritosFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var destino_hotel = arguments?.getString("destino_hotel").toString()
-        var fecha_entrada_hotel = arguments?.getString("fecha_entrada_hotel").toString()
-        var fecha_salida_hotel = arguments?.getString("destino_hotel").toString()
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         sharedViewModel.listaHotelesFav.observe(viewLifecycleOwner, {
             listaHotelesFav -> adaptadorRecycler.setData(listaHotelesFav)
 
         })
-        Log.v("destino_hotel", "$destino_hotel")
         hotelFragment = HotelFragment()
         inicializar()
     }
-
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun inicializar() {
         travelWithMeApiManager = TravelWithMeApiManager(requireContext())
         utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "hoteles", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
-        recogerIntent()
+
         configurarRecycler()
-        cargarHotelesFavoritos()
-
     }
 
 
 
-    fun recogerIntent() {
-        val bundle = arguments
-        if (bundle != null) {
-            destino_hotel = bundle.getString("destino_hotel") ?: ""
-            fecha_entrada_hotel = bundle.getString("fecha_entrada_hotel") ?: ""
-            fecha_salida_hotel = bundle.getString("fecha_salida_hotel") ?: ""
-            Log.v("bundle", "$destino_hotel, $fecha_entrada_hotel, $fecha_salida_hotel")
-        }
-    }
 
     /**
      * Configura el recycler con su adaptador
@@ -128,13 +111,4 @@ class PlanificarFavoritosFragment : Fragment() {
         findNavController()?.navigate(R.id.action_buscarHotelesFragment_to_hotelFragment, bundle)
 
     }
-
-    fun cargarHotelesFavoritos() {
-    // Obtener los hoteles favoritos
-    listaHotelesFav = hotelFragment.obtenerHotelesFavoritos()
-
-    // Notificar al adaptador que los datos han cambiado
-    adaptadorRecycler.notifyDataSetChanged()
-}
-
 }

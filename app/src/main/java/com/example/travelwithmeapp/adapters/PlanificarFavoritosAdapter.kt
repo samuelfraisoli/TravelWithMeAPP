@@ -65,8 +65,4 @@ class PlanificarFavoritosAdapter(
     override fun getItemCount(): Int {
         return listaHotelesFav.size
     }
-
-    fun obtenerHotelesFavoritos(): ArrayList<Hotel> {
-        return listaHotelesFav
-    }
 }
