@@ -1,66 +1,72 @@
 package com.example.travelwithmeapp.adapters
 
-import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.models.Plan
+import coil.load
+import coil.transform.RoundedCornersTransformation
+import com.example.travelwithmeapp.databinding.ViewholderPlanificarFavoritosBinding
+import com.example.travelwithmeapp.models.Hotel
 
-class PlanificarFavoritosAdapter (private val context: Context, private val listaPlanesFav: ArrayList<Plan>) :
-    RecyclerView.Adapter<PlanificarFavoritosAdapter.PlanViewHolder>(){
+class PlanificarFavoritosAdapter(
+    private val listaHotelesFav: ArrayList<Hotel>,
+    private val lambda: (Hotel) -> Unit)
+    : RecyclerView.Adapter<PlanificarFavoritosAdapter.HotelViewHolder>() {
 
-    inner class PlanViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        // Parseo datos recyclerview
-        val horaTextView: TextView = itemView.findViewById(R.id.text_hora_plan_fav) // datos texto viewholder
-        val nombreTextView: TextView = itemView.findViewById(R.id.text_nombre_plan_fav)
-        val descripcionTextView: TextView = itemView.findViewById(R.id.text_descripcion_plan_fav)
-        val precioTextView: TextView = itemView.findViewById(R.id.text_precio_plan_fav)
-
-        // Gestión de visibilidad y de pulsación de icono_fav del fragment planes
-        val iconoRellenoFav: ImageView = itemView.findViewById(R.id.icono_relleno_fav)
-        val iconoVacioFav: ImageView = itemView.findViewById(R.id.icono_vacio_fav)
-
-        init {
-            iconoRellenoFav.setOnClickListener {
-                iconoRellenoFav.visibility = View.INVISIBLE
-                iconoVacioFav.visibility = View.VISIBLE
-
-                val plan = listaPlanesFav[adapterPosition]
-                onFavoritoClickListener?.onFavoritoClick(plan)
+    inner class HotelViewHolder(val itemBinding: ViewholderPlanificarFavoritosBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
+        fun bindItem(hotel: Hotel) {
+            itemBinding.textviewNombre.text = hotel.nombre
+            itemBinding.textViewProvinciaPais.text = "${hotel.direccion.ciudad}, ${hotel.direccion.pais}"
+            if(hotel.fotos.size > 0) {
+                try {
+                    itemBinding.imagen.load(hotel.fotos[0]) {
+                        transformations(RoundedCornersTransformation(20f))
+                    }
+                }
+                catch(e: Exception) {
+                    Log.v("Error al cargar imagen", "${e.message}")
+                }
             }
-            iconoVacioFav.setOnClickListener {
-                iconoVacioFav.visibility = View.INVISIBLE
-                iconoRellenoFav.visibility = View.VISIBLE
 
-                val plan = listaPlanesFav[adapterPosition]
-                onFavoritoClickListener?.onFavoritoClick(plan)
+
+
+            itemBinding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    lambda(listaHotelesFav[position])
+                }
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanViewHolder {
-        val itemView = LayoutInflater.from(context).inflate(R.layout.viewholder_planificar_favoritos, parent, false)
-        return PlanViewHolder(itemView)
+    fun setData(nuevaLista: ArrayList<Hotel>) {
+        listaHotelesFav.clear()
+        listaHotelesFav.addAll(nuevaLista)
+        notifyDataSetChanged() // Notificar al RecyclerView de que los datos han cambiado
     }
 
-    override fun onBindViewHolder(holder: PlanViewHolder, position: Int) {
-        val currentPlan = listaPlanesFav[position]
-        holder.horaTextView.text = currentPlan.horaPlan
-        holder.nombreTextView.text = currentPlan.nombrePlan
-        holder.descripcionTextView.text = currentPlan.descripcionPlan
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HotelViewHolder {
+        return HotelViewHolder(
+            ViewholderPlanificarFavoritosBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: HotelViewHolder, position: Int) {
+        val hotel = listaHotelesFav[position]
+        holder.bindItem(hotel)
     }
 
     override fun getItemCount(): Int {
-        return listaPlanesFav.size
+        return listaHotelesFav.size
     }
 
-    interface OnFavoritoClickListener {
-        fun onFavoritoClick(plan: Plan)
+    fun obtenerHotelesFavoritos(): ArrayList<Hotel> {
+        return listaHotelesFav
     }
-
-    var onFavoritoClickListener: PlanificarAdapter.OnFavoritoClickListener? = null
 }

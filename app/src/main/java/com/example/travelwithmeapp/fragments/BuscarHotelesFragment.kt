@@ -128,6 +128,7 @@ class BuscarHotelesFragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun buscarHoteles() {
             //todo cambiar para que coja los datos de la api
             //hoteles = lanzarPeticionApi(origen, destino, fecha

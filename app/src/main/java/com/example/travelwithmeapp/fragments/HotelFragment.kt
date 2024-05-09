@@ -1,6 +1,7 @@
 package com.example.travelwithmeapp.fragments
 
 import ResenaHotelAdapter
+import SharedViewModel
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,12 +11,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.adapters.CarouselAdapter
+import com.example.travelwithmeapp.adapters.PlanificarFavoritosAdapter
 import com.example.travelwithmeapp.databinding.FragmentHotelBinding
 
 import com.example.travelwithmeapp.models.Hotel
@@ -34,6 +37,9 @@ class HotelFragment : Fragment() {
     private lateinit var hotel: Hotel
     private lateinit var fecha_entrada_hotel: OffsetDateTime
     private lateinit var fecha_salida_hotel: OffsetDateTime
+    private var listaHotelesFav = ArrayList<Hotel>() // Lista de hoteles favoritos
+    lateinit var planificarFavoritosAdapter: PlanificarFavoritosAdapter // Adaptador para la lista de hoteles favoritos
+    private  lateinit var sharedViewModel: SharedViewModel
 
     //private var contadorImagenCarousel = 0;
     //private lateinit var jobCorrutina: Job
@@ -50,6 +56,10 @@ class HotelFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         inicializar()
+        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
+
+        // Inicializa planificarFavoritosAdapter aquí
+        planificarFavoritosAdapter = PlanificarFavoritosAdapter(listaHotelesFav){}
     }
 
     override fun onStop() {
@@ -85,10 +95,26 @@ class HotelFragment : Fragment() {
 
         val comodidadesFormateadas = hotel.detalles.comodidades.joinToString(separator = ", ", postfix = ".")
         binding.textviewComodidadesTexto.text = comodidadesFormateadas
+
+        // Pulsación de botones de favorito
+        binding.noFavorito.setOnClickListener() {
+            binding.noFavorito.visibility = View.INVISIBLE
+            binding.favorito.visibility = View.VISIBLE
+            // Añade el hotel actual a la lista de hoteles favoritos
+            sharedViewModel.addHotel(hotel)
+            // Notifica al adaptador del RecyclerView que los datos han cambiado
+            planificarFavoritosAdapter.notifyDataSetChanged()
+        }
+
+        binding.favorito.setOnClickListener() {
+            binding.favorito.visibility = View.INVISIBLE
+            binding.noFavorito.visibility = View.VISIBLE
+            // Elimina el hotel actual de la lista de hoteles favoritos
+            sharedViewModel.removeHotel(hotel)
+            // Notifica al adaptador del RecyclerView que los datos han cambiado
+            planificarFavoritosAdapter.notifyDataSetChanged()
+        }
     }
-
-
-
 
 
     // INTENTS
@@ -132,41 +158,8 @@ class HotelFragment : Fragment() {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
-
-
-
-    fun configurarEstrellasNota() {
-
+    fun obtenerHotelesFavoritos(): ArrayList<Hotel> {
+        return listaHotelesFav
     }
-
-
-    //private fun iniciarCorrutinaCarousel() {
-    //    jobCorrutina = CoroutineScope(Dispatchers.Main).launch {
-    //        while (isActive) {
-    //            delay(3000)
-    //            binding.carouselRecyclerView.
-    //            binding.carouselRecyclerView.smoothScrollToPosition(contadorImagenCarousel)
-    //            contadorImagenCarousel++
-//
-    //            if(contadorImagenCarousel == listaImagenes.size) {
-    //                contadorImagenCarousel = 0
-//
-    //            }
-    //        }
-    //    }
-    //}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
