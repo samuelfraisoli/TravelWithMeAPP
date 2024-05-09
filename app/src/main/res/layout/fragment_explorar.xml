@@ -107,6 +107,7 @@
                         android:textSize="25sp" />
 
                     <Button
+                        android:id="@+id/boton_ver_mapa"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -165,9 +166,9 @@
 
                 android:layout_width="0dp"
                 android:layout_height="55dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="10dp"
                 android:backgroundTint="@color/white"
                 android:drawableLeft="@drawable/cama_icon"
                 android:drawableTint="@color/red_apple"
@@ -184,8 +185,8 @@
                 android:id="@+id/boton_explorar_vuelos"
                 android:layout_width="0dp"
                 android:layout_height="55dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="30dp"
                 android:backgroundTint="@color/white"
                 android:drawableLeft="@drawable/plane2_icon"
                 android:drawableTint="@color/red_apple"

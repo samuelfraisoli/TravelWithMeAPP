@@ -10,26 +10,28 @@
 
     <TextView
         android:id="@+id/mensajeBienvenida"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="¡Bienvenido al registro para nuevos usuarios!"
-        android:textColor="@color/red_app"
+        android:textColor="@color/pink_apple"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:id="@+id/nombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:hint="Nombre"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintEnd_toEndOf="@+id/mensajeBienvenida"
+        app:layout_constraintStart_toStartOf="@+id/mensajeBienvenida"
+        app:layout_constraintTop_toBottomOf="@+id/mensajeBienvenida" />
 
     <EditText
         android:id="@+id/apellidos"
@@ -37,31 +39,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Apellido"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/nombre"
+        app:layout_constraintStart_toStartOf="@+id/nombre"
         app:layout_constraintTop_toBottomOf="@+id/nombre" />
 
     <EditText
         android:id="@+id/fecha_nacimiento"
-        android:editable="false"
-        android:inputType="none"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:editable="false"
         android:hint="Fecha de nacimiento"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="none"
+        app:layout_constraintEnd_toEndOf="@+id/apellidos"
+        app:layout_constraintStart_toStartOf="@+id/apellidos"
         app:layout_constraintTop_toBottomOf="@+id/apellidos" />
 
     <EditText
         android:id="@+id/telefono"
-        android:inputType="number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Teléfono móvil"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/fecha_nacimiento"
+        app:layout_constraintStart_toStartOf="@+id/fecha_nacimiento"
         app:layout_constraintTop_toBottomOf="@+id/fecha_nacimiento" />
 
     <EditText
@@ -70,8 +72,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:hint="Correo electrónico"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/telefono"
+        app:layout_constraintStart_toStartOf="@+id/telefono"
         app:layout_constraintTop_toBottomOf="@+id/telefono" />
 
 
@@ -82,8 +84,8 @@
         android:layout_marginTop="10dp"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/correo"
+        app:layout_constraintStart_toStartOf="@+id/correo"
         app:layout_constraintTop_toBottomOf="@+id/correo" />
 
     <EditText
@@ -93,67 +95,56 @@
         android:layout_marginTop="10dp"
         android:hint="Confirmar contraseña"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/contraseña"
+        app:layout_constraintStart_toStartOf="@+id/contraseña"
         app:layout_constraintTop_toBottomOf="@+id/contraseña" />
 
     <CheckBox
         android:id="@+id/terminos"
-        android:backgroundTint="@color/pink_apple"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/pink_apple"
         android:text="Acepto los términos y condiciones."
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmacion_contraseña" />
+        app:layout_constraintBottom_toTopOf="@+id/boton_limpiar"
+        app:layout_constraintEnd_toEndOf="@+id/confirmacion_contraseña"
+        app:layout_constraintStart_toStartOf="@+id/confirmacion_contraseña" />
 
 
     <Button
         android:id="@+id/boton_limpiar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="30dp"
         android:backgroundTint="@color/gray_2_apple"
         android:text="Limpiar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline3"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="@+id/terminos" />
+
 
     <Button
         android:id="@+id/boton_registrar"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="16dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="10dp"
         android:layout_marginBottom="30dp"
         android:backgroundTint="@color/pink_apple"
         android:text="Registrar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/boton_limpiar" />
-
+        app:layout_constraintBottom_toBottomOf="@+id/boton_limpiar"
+        app:layout_constraintEnd_toEndOf="@+id/terminos"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="@+id/boton_limpiar"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.121751025" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.87" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5" />
+        app:layout_constraintGuide_percent="0.50" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

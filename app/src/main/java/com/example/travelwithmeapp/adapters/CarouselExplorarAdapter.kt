@@ -8,12 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.databinding.ViewholderCarouselBinding
 import com.example.travelwithmeapp.models.Hotel
 
-class CarouselAdapter(
-    val lista: List<String>)
- : RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>() {
+class CarouselExplorarAdapter (
+    val lista: List<Hotel>,
+    val lambda: (Hotel) -> Unit)
+    : RecyclerView.Adapter<CarouselExplorarAdapter.CarouselViewHolder>() {
     inner class CarouselViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val carouselImageView: AppCompatImageView =
             view.findViewById(R.id.carouselImageView)
@@ -21,6 +21,13 @@ class CarouselAdapter(
         fun bind(imageUrl: String) {
             carouselImageView.load(imageUrl) {
                 transformations(RoundedCornersTransformation(20f))
+            }
+
+            carouselImageView.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    lambda(lista.get(position))
+                }
             }
         }
     }
@@ -38,7 +45,7 @@ class CarouselAdapter(
     }
 
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
-        val imagen = lista.get(position)
-        holder.bind(imagen)
+        val hotel = lista.get(position)
+        holder.bind(hotel.fotos.get(0))
     }
 }

@@ -34,8 +34,8 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
     private lateinit var recyclerResena: RecyclerView
     private lateinit var adaptadorResena: ResenaHotelAdapter
     private lateinit var hotel: Hotel
-    private lateinit var fecha_entrada_hotel: OffsetDateTime
-    private lateinit var fecha_salida_hotel: OffsetDateTime
+    private var fecha_entrada_hotel: OffsetDateTime? = null
+    private var fecha_salida_hotel: OffsetDateTime? = null
 
     private lateinit var mapview: MapView
 
@@ -94,7 +94,11 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         binding.direccion.text = hotel.direccion.direccionString
         binding.telefono.text = hotel.detalles.telefono
 
-        binding.textviewFecha.text = "${getString(R.string.Del)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_entrada_hotel)} ${getString(R.string.al)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_salida_hotel)}"
+        if(fecha_entrada_hotel != null && fecha_salida_hotel != null) {
+            binding.textviewFecha.text = "${getString(R.string.Del)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_entrada_hotel!!)} " +
+                    " ${getString(R.string.al)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_salida_hotel!!)}"
+        }
+
         binding.textviewDescripcionTexto.text = hotel.detalles.descripcion
 
         binding.buttonSitioWeb.setOnClickListener() {
@@ -109,16 +113,19 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         binding.textviewComodidadesTexto.text = comodidadesFormateadas
     }
 
-
     // INTENTS
     private fun recogerIntent() {
         val bundle = arguments
         if (bundle != null) {
             hotel = bundle.getSerializable("hotel") as Hotel
-            var fecha_entrada_string = bundle.getString("fecha_entrada_hotel")!!
-            fecha_entrada_hotel = utilities.parseStringAOffsetDateDDMMYYYY(fecha_entrada_string)
-            var fecha_salida_string = bundle.getString("fecha_salida_hotel")!!
-            fecha_salida_hotel = utilities.parseStringAOffsetDateDDMMYYYY(fecha_salida_string)
+            var fecha_entrada_string = bundle.getString("fecha_entrada_hotel")
+            if(fecha_entrada_string != null) {
+                fecha_entrada_hotel = utilities.parseStringAOffsetDateDDMMYYYY(fecha_entrada_string)
+            }
+            var fecha_salida_string = bundle.getString("fecha_salida_hotel")
+            if(fecha_salida_string != null) {
+                fecha_salida_hotel = utilities.parseStringAOffsetDateDDMMYYYY(fecha_salida_string)
+            }
         }
     }
 
@@ -132,7 +139,6 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         val bundle = Bundle()
         bundle.putSerializable("hotel", hotel)
         findNavController()?.navigate(R.id.action_hotelFragment_to_resenaFragment, bundle)
-
     }
 
     // CAROUSEL
@@ -140,8 +146,6 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         binding.carouselRecyclerView.adapter = CarouselAdapter(listaImagenes)
         var snaphelper = CarouselSnapHelper().attachToRecyclerView(binding.carouselRecyclerView)
     }
-
-
 
     private fun configuarRecycler() {
         recyclerResena = binding.recyclerResenaHotel
@@ -156,13 +160,19 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
      * Cuando el mapa se carga, la interfaz OnMapReadyCallback llama a este método que coloca un marcador en la dirección, y mueve la cámara a esa ubicación también
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        val sydney = LatLng(-33.852, 151.211)
+        //todo cambiar con localización del hotel
+        var localizacionPzaSol = LatLng(40.4166667, -3.7038889)
+
         googleMap.addMarker(
             MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney")
+                .position(localizacionPzaSol)
+                .title(hotel.nombre)
         )
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        val zoomLevel = 15.0f
+        googleMap.setMaxZoomPreference(googleMap.maxZoomLevel)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localizacionPzaSol, zoomLevel))
+        googleMap.uiSettings.isZoomControlsEnabled = true
     }
 
 
