@@ -5,4 +5,13 @@ plugins {
 
     //google services (firebase)
     id("com.google.gms.google-services") version "4.4.1" apply false
+
+
+}
+
+//secrets plugin (para que no se vean las claves de API al subirlo a github)
+buildscript {
+    dependencies {
+        classpath("com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1")
+    }
 }

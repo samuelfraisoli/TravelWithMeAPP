@@ -4,6 +4,10 @@ plugins {
 
     //google services (firebase)
     id("com.google.gms.google-services")
+
+    //secrets plugin (para que no se vean las claves de API al subirlo a github)
+    //envía la clave de la api de google maps desde local.properties al android.manifest
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
