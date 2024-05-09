@@ -30,9 +30,13 @@
         <item name="backgroundTint">@color/edittext_color</item>
     </style>
 
-    <style name="ThemeOverlay.App.Dialog" parent="@style/ThemeOverlay.MaterialComponents.Dialog">
-        <item name="colorSecondary">@color/cyan_app</item>
-        <item name="colorPrimary">@color/black</item>
+    <style name="ThemeOverlay.App.Dialog" parent="@style/ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorSecondary">@color/blue_apple</item>
+        <item name="colorPrimary">@color/blue_apple</item>
+    </style>
+
+    <style name="MaterialDatePicker" parent="@style/ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorPrimary">@color/blue_apple</item>
     </style>
 
     <style name="WhiteCheck">

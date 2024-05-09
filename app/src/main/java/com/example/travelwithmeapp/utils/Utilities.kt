@@ -1,6 +1,5 @@
 package com.example.travelwithmeapp.utils
 
-import android.app.DatePickerDialog
 import android.content.Context
 
 import android.icu.text.SimpleDateFormat
@@ -17,8 +16,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.models.Vuelo
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDate
 import java.time.LocalTime
@@ -27,7 +29,6 @@ import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
-import kotlin.time.Duration
 
 class Utilities {
 
@@ -37,48 +38,99 @@ class Utilities {
 
     // DATEPICKER
 
-    /** Primero crea el objeto fechaSeleccionada, que almacenará la fecha que el usuario seleccione
-     * (por ahora se inicializa con el valor del día actual para que no tenga valor null)
-     * Luego usa la clase Calendar para coger el año, mes y día actuales.
-     * Luego crea un datePickerDialog, un diálogo con un calendario para seleccionar una fecha
-     * Inicializa ese calendario con el año, mes y día que había recogido
-     * Le añade un OnDateSetListener, que escucha cuándo el usuario selecciona una fecha
-     * Guarda el año, mes y día que selecciona en la variable fechaSeleccionada
-     * Finalmente retorna la fecha que ha seleccionado el usuario en el dialog
+    /**
+     * Crea un datepicker que deja elegir dos fechas con un rango entre ellas
      */
-    fun lanzarDatePickerDialog(view: View, context: Context): Calendar {
-        cerrarTeclado(view, context)
-        var fechaSeleccionada = Calendar.getInstance()
-        var calendar = Calendar.getInstance()
-        var ano = calendar.get(Calendar.YEAR)
-        var mes = calendar.get(Calendar.MONTH)
-        var dia = calendar.get(Calendar.DAY_OF_MONTH)
+    fun lanzarDatePickerRango(fragmentManager: FragmentManager, editTextFechaInicio: EditText, editTextFechaFin: EditText) {
+        //constraints que limitan al calendario a no poder elegir días que sean anteriores al actual
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointForward.now())
+                //pongo que el calendario semanal empiece en lunes
+                .setFirstDayOfWeek(Calendar.MONDAY)
 
-        var datePickerDialog = DatePickerDialog(
-            context, R.style.ThemeOverlay_App_Dialog,
-            DatePickerDialog.OnDateSetListener { _, anoSeleccionado, mesSeleccionado, diaSeleccionado ->
-                fechaSeleccionada = Calendar.getInstance()
-                fechaSeleccionada.set(anoSeleccionado, mesSeleccionado, diaSeleccionado)
-                view as EditText
-                view.setText(
-                    SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(
-                        fechaSeleccionada.time
-                    )
-                )
-            },
-            ano,
-            mes,
-            dia
-        )
-        datePickerDialog.show()
-        return fechaSeleccionada
+
+        //calendario
+        val dateRangePicker =
+            MaterialDatePicker.Builder.dateRangePicker()
+                .setTitleText("")
+                //añado las constraints
+                .setCalendarConstraints(constraintsBuilder.build())
+                .setTheme(R.style.MaterialDatePicker)
+                .build()
+
+        //listener que recoge las fechas, las convierte a String y las pega en los edittext
+        dateRangePicker.addOnPositiveButtonClickListener { seleccion ->
+            val startDate = seleccion.first
+            val endDate = seleccion.second
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val startDateString = dateFormat.format(Date(startDate))
+            val endDateString = dateFormat.format(Date(endDate))
+            editTextFechaInicio.setText(startDateString)
+            editTextFechaFin.setText(endDateString)
+        }
+
+        dateRangePicker.show(fragmentManager, "date_picker")
+
     }
 
-    private fun cerrarTeclado(view: View, context: Context) {
-        val inputMethodManager =
-            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.hideSoftInputFromWindow(view?.windowToken, 0)
+
+    /**
+     * Crea un datepicker que deja elegir una fecha sin limitaciones
+     */
+    fun lanzarDatePicker(fragmentManager: FragmentManager, editText: EditText) {
+
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setFirstDayOfWeek(Calendar.MONDAY)
+
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("")
+                .setTheme(R.style.MaterialDatePicker)
+                .setCalendarConstraints(constraintsBuilder.build())
+                .build()
+
+        datePicker.addOnPositiveButtonClickListener { seleccion ->
+            val date = seleccion
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val dateString = dateFormat.format(Date(date))
+
+            editText.setText(dateString)
+        }
+
+        datePicker.show(fragmentManager, "date_picker")
     }
+
+    /**
+     * Crea un datepicker que deja elegir una sola fecha pero no permite que sea anterior al dia actual
+     */
+    fun lanzarDatePickerConstraintHoy(fragmentManager: FragmentManager, editText: EditText) {
+
+        val constraintsBuilder =
+            CalendarConstraints.Builder()
+                .setValidator(DateValidatorPointForward.now())
+                //pongo que el calendario semanal empiece en lunes
+                .setFirstDayOfWeek(Calendar.MONDAY)
+
+        val datePicker =
+            MaterialDatePicker.Builder.datePicker()
+                .setTitleText("")
+                .setTheme(R.style.MaterialDatePicker)
+                .setCalendarConstraints(constraintsBuilder.build())
+                .build()
+
+        datePicker.addOnPositiveButtonClickListener { seleccion ->
+            val date = seleccion
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val dateString = dateFormat.format(Date(date))
+
+            editText.setText(dateString)
+        }
+
+        datePicker.show(fragmentManager, "date_picker")
+    }
+
 
     // TOOLBARS
 

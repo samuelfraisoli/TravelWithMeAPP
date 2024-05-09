@@ -53,7 +53,7 @@ class RegistroFragment : Fragment(), View.OnClickListener {
         binding.botonRegistrar.setOnClickListener(this)
         binding.fechaNacimiento.setOnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
-                utilities.lanzarDatePickerDialog(view, requireContext())
+                utilities.lanzarDatePicker(childFragmentManager, binding.fechaNacimiento)
             }
         }
     }
