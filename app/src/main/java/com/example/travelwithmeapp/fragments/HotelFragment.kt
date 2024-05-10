@@ -29,13 +29,15 @@ import java.time.OffsetDateTime
 
 class HotelFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentHotelBinding
-    private var listaImagenes: ArrayList<String> = ArrayList()
-    private lateinit var utilities: Utilities
+    private var utilities = Utilities()
     private lateinit var recyclerResena: RecyclerView
     private lateinit var adaptadorResena: ResenaHotelAdapter
+
     private lateinit var hotel: Hotel
     private var fecha_entrada_hotel: OffsetDateTime? = null
     private var fecha_salida_hotel: OffsetDateTime? = null
+
+    private var listaImagenes: ArrayList<String> = ArrayList()
 
     private lateinit var mapview: MapView
 
@@ -82,15 +84,33 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
 
 
     private fun inicializar() {
-        utilities = Utilities()
         recogerIntent()
-        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "${hotel.nombre}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
 
+        //carousel
         listaImagenes.addAll(hotel.fotos)
         inicializarCarouselRecyclerView()
         //iniciarCorrutinaCarousel()
         configuarRecycler()
 
+        //otros elementos visuales
+        inicializarTextosYBotones()
+
+
+
+
+
+
+
+
+
+
+    }
+
+    private fun inicializarTextosYBotones() {
+        //toolbar
+        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "${hotel.nombre}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
+
+        //textos
         binding.direccion.text = hotel.direccion.direccionString
         binding.telefono.text = hotel.detalles.telefono
 
@@ -98,20 +118,19 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
             binding.textviewFecha.text = "${getString(R.string.Del)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_entrada_hotel!!)} " +
                     " ${getString(R.string.al)} ${utilities.formatearOffsetDateTimeDDMMMM(fecha_salida_hotel!!)}"
         }
-
+        val comodidadesFormateadas = hotel.detalles.comodidades.joinToString(separator = ", ", postfix = ".")
+        binding.textviewComodidadesTexto.text = comodidadesFormateadas
         binding.textviewDescripcionTexto.text = hotel.detalles.descripcion
 
+        //botones
         binding.buttonSitioWeb.setOnClickListener() {
             intentASitioWeb(hotel.detalles.web)
         }
-
         binding.buttonEscribirReseA.setOnClickListener() {
             intentAReseñas(hotel)
         }
-
-        val comodidadesFormateadas = hotel.detalles.comodidades.joinToString(separator = ", ", postfix = ".")
-        binding.textviewComodidadesTexto.text = comodidadesFormateadas
     }
+
 
     // INTENTS
     private fun recogerIntent() {
@@ -141,12 +160,15 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         findNavController()?.navigate(R.id.action_hotelFragment_to_resenaFragment, bundle)
     }
 
+
     // CAROUSEL
     private fun inicializarCarouselRecyclerView() {
         binding.carouselRecyclerView.adapter = CarouselAdapter(listaImagenes)
         var snaphelper = CarouselSnapHelper().attachToRecyclerView(binding.carouselRecyclerView)
     }
 
+
+    // RECYCLER RESEÑAS
     private fun configuarRecycler() {
         recyclerResena = binding.recyclerResenaHotel
         adaptadorResena = ResenaHotelAdapter(hotel.resena)
@@ -155,9 +177,10 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
+
     //MAPA
-    /**
-     * Cuando el mapa se carga, la interfaz OnMapReadyCallback llama a este método que coloca un marcador en la dirección, y mueve la cámara a esa ubicación también
+    /** Cuando el mapa se carga, la interfaz OnMapReadyCallback llama a este método que coloca un marcador
+     *  en la dirección, y mueve la cámara a esa ubicación también
      */
     override fun onMapReady(googleMap: GoogleMap) {
         //todo cambiar con localización del hotel
