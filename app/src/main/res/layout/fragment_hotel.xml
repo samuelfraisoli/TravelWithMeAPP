@@ -69,9 +69,10 @@
                 android:id="@+id/textviewFecha"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Del 01/04/2024"
-                app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
-                app:layout_constraintTop_toTopOf="@+id/favorito" />
+                app:layout_constraintBottom_toBottomOf="@+id/nPersonas"
+                app:layout_constraintEnd_toEndOf="@+id/buttonReservar"
+                app:layout_constraintStart_toStartOf="@+id/buttonReservar"
+                app:layout_constraintTop_toTopOf="@+id/nPersonas" />
 
             <Button
                 android:id="@+id/buttonSitioWeb"
@@ -121,6 +122,8 @@
                 android:id="@+id/precio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+
+                android:layout_marginTop="10dp"
                 android:text="100€"
 
                 android:textColor="@color/black"
@@ -135,17 +138,21 @@
                 android:id="@+id/nPersonas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:text="1 persona"
-                app:layout_constraintStart_toStartOf="@+id/textviewFecha"
-                app:layout_constraintTop_toBottomOf="@+id/textviewFecha" />
+                app:layout_constraintStart_toStartOf="@+id/buttonSitioWeb"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
             <ImageView
                 android:id="@+id/favorito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="17dp"
                 android:padding="5dp"
                 android:src="@drawable/favorite_icon"
+                app:layout_constraintEnd_toEndOf="@+id/buttonEscribirReseña"
+                app:layout_constraintTop_toTopOf="@+id/direccion"></ImageView>
                 android:visibility="invisible"
                 app:layout_constraintEnd_toStartOf="@+id/resena"
                 app:layout_constraintTop_toBottomOf="@+id/divider4"></ImageView>
@@ -176,10 +183,11 @@
                 android:layout_marginTop="17dp"
                 android:backgroundTint="@color/pink_apple"
                 android:text="Reservar"
+                app:layout_constraintBottom_toBottomOf="@+id/precio"
                 app:layout_constraintEnd_toEndOf="@+id/buttonEscribirReseña"
                 app:layout_constraintHorizontal_bias="0.52"
                 app:layout_constraintStart_toStartOf="@+id/buttonEscribirReseña"
-                app:layout_constraintTop_toBottomOf="@+id/favorito" />
+                app:layout_constraintTop_toTopOf="@+id/precio" />
 
             <View
                 android:id="@+id/divider5"
@@ -256,14 +264,23 @@
                 app:layout_constraintStart_toStartOf="@+id/textviewDescripcionTexto"
                 app:layout_constraintTop_toBottomOf="@+id/divider6" />
 
-            <androidx.constraintlayout.utils.widget.MockView
-                android:id="@+id/mapViewHotel"
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewMapa"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="20dp"
+                app:cardCornerRadius="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/textviewMapaTitulo"
                 app:layout_constraintStart_toStartOf="@+id/textviewMapaTitulo"
-                app:layout_constraintTop_toBottomOf="@+id/textviewMapaTitulo" />
+                app:layout_constraintTop_toBottomOf="@+id/textviewMapaTitulo">
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapViewHotel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            </androidx.cardview.widget.CardView>
 
             <View
                 android:id="@+id/divider7"
@@ -273,7 +290,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapViewHotel" />
+                app:layout_constraintTop_toBottomOf="@+id/cardViewMapa" />
 
             <TextView
                 android:id="@+id/textviewReseñaTitulo"
@@ -282,8 +299,8 @@
                 android:layout_marginTop="20dp"
                 android:text="Reseñas"
                 android:textSize="25dp"
-                app:layout_constraintEnd_toEndOf="@+id/mapViewHotel"
-                app:layout_constraintStart_toStartOf="@+id/mapViewHotel"
+                app:layout_constraintEnd_toEndOf="@+id/cardViewMapa"
+                app:layout_constraintStart_toStartOf="@+id/cardViewMapa"
                 app:layout_constraintTop_toBottomOf="@+id/divider7" />
 
 

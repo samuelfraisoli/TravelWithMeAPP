@@ -7,78 +7,102 @@
     android:layout_height="match_parent"
     tools:context=".fragments.CuentaFragment">
 
-    <!-- Encabezado -->
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar_menu_principal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="436dp"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/gradient_red_blue"
         app:layout_constraintBottom_toBottomOf="@id/main"
         app:layout_constraintEnd_toEndOf="@id/main"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/main"
-        app:layout_constraintTop_toTopOf="@id/main"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/materialDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        app:dividerColor="@color/gray_app"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconoPerfil" />
+
+    <ImageView
+        android:id="@+id/iconoPerfil"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/perfil_icon"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"></ImageView>
 
     <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="wrap_content"
+        android:id="@+id/textPreferencias"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="60dp"
-        android:text="Cuenta"
-        android:textColor="#FBF9F9"
-        android:textSize="30dp"
-        android:textStyle="bold"
+        android:layout_marginStart="20dp"
+        android:text="Preferencias"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iconoPreferencias"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iconoPreferencias"
+        app:layout_constraintTop_toTopOf="@+id/iconoPreferencias"></TextView>
+
+    <ImageView
+        android:id="@+id/iconoPreferencias"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ajustes_icon"
+        app:layout_constraintStart_toStartOf="@+id/iconoPerfil"
+        app:layout_constraintTop_toBottomOf="@+id/materialDivider"
+        app:tint="@color/white"></ImageView>
+
+    <TextView
+        android:id="@+id/textPerfil"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="Perfil"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iconoPerfil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iconoPerfil"
+        app:layout_constraintTop_toTopOf="@+id/iconoPerfil"></TextView>
+
+
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/materialDivider2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        app:dividerColor="@color/gray_app"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/textPerfil"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="136dp"
-        android:backgroundTint="@color/fui_transparent"
-        android:clickable="true"
-        android:drawableLeft="@drawable/perfil_icon"
-        android:drawablePadding="14dp"
-        android:drawableTint="@color/white"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:text="Perfil"
-        android:textColor="#FBF9F9"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline13" />
-
-    <Button
-        android:id="@+id/textPreferencias"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="@color/fui_transparent"
-        android:clickable="true"
-        android:drawableLeft="@drawable/ajustes_icon"
-        android:drawablePadding="4dp"
-        android:drawableTint="@color/white"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:text="Preferencias"
-        android:textColor="#FBF9F9"
-        android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="@+id/textPerfil"
-        app:layout_constraintTop_toBottomOf="@id/textPerfil" />
+        app:layout_constraintTop_toBottomOf="@+id/iconoPreferencias" />
 
     <Button
         android:id="@+id/cerrarSesion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@color/white"
         android:text="Cerrar Sesión"
         android:textColor="@color/red_app"
@@ -87,26 +111,11 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25171" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textTitle" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.8" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

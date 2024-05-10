@@ -12,7 +12,8 @@
 
 
     <ImageView
-        android:layout_width="436dp"
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/gradient_red_blue"
@@ -39,9 +40,9 @@
         android:id="@+id/cardview_icono"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardElevation="100dp"
         app:cardBackgroundColor="@android:color/transparent"
-        app:layout_constraintBottom_toTopOf="@+id/guideline7"
+        app:cardElevation="100dp"
+        app:layout_constraintBottom_toTopOf="@+id/edittext_correo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_titulo">
@@ -59,62 +60,63 @@
         android:id="@+id/edittext_correo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="25dp"
+        android:layout_marginBottom="10dp"
         android:backgroundTint="@android:color/transparent"
         android:drawableLeft="@drawable/account_icon"
-        android:hint="Introduce tu correo"
         android:drawablePadding="5dp"
         android:drawableTint="@color/white"
-        android:textColorHint="@color/gray_5_apple"
-        android:textColor="@color/white"
+        android:hint="Introduce tu correo"
         android:paddingLeft="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_icono"
-        app:layout_constraintVertical_bias="0.124"/>
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray_5_apple"
+        app:layout_constraintBottom_toTopOf="@+id/edittext_password"
+        app:layout_constraintEnd_toEndOf="@+id/edittext_password"
+        app:layout_constraintStart_toStartOf="@+id/edittext_password" />
 
     <EditText
         android:id="@+id/edittext_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="@android:color/transparent"
         android:drawableLeft="@drawable/pass_icon"
         android:drawablePadding="5dp"
         android:drawableTint="@color/white"
-        android:textColor="@color/white"
         android:hint="Introduce tu contraseña"
         android:inputType="textPassword"
         android:paddingLeft="5dp"
-        android:textColorHint="@color/gray_5_apple"
+        android:textColor="@color/white"
 
-        app:layout_constraintEnd_toEndOf="@+id/edittext_correo"
-        app:layout_constraintStart_toStartOf="@+id/edittext_correo"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_correo" />
+        android:textColorHint="@color/gray_5_apple"
+        app:layout_constraintBottom_toTopOf="@+id/boton_login"
+        app:layout_constraintEnd_toEndOf="@+id/boton_registrar"
+        app:layout_constraintStart_toStartOf="@+id/boton_login" />
 
     <Button
         android:id="@+id/boton_login"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="7dp"
-        android:backgroundTint="#FB315B"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/white"
         android:text="@string/texto_boton_login"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/boton_login_google"
         app:layout_constraintEnd_toStartOf="@+id/guideline22"
         app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/edittext_password"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_password" />
+        app:layout_constraintStart_toStartOf="@+id/boton_login_google" />
 
     <Button
         android:id="@+id/boton_registrar"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginStart="7dp"
-
-        android:backgroundTint="#FB315B"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/white"
         android:text="@string/texto_boton_registrarse"
-        app:layout_constraintEnd_toEndOf="@+id/edittext_password"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/boton_restablecer_contraseña"
+        app:layout_constraintEnd_toEndOf="@id/boton_restablecer_contraseña"
         app:layout_constraintStart_toStartOf="@+id/guideline22"
         app:layout_constraintTop_toTopOf="@+id/boton_login" />
 
@@ -122,28 +124,30 @@
         android:id="@+id/boton_login_google"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/white"
         android:drawableLeft="@drawable/google_icon"
-        android:textColor="@color/gray_app"
         android:gravity="center|left"
         android:text="Login con google"
-        android:backgroundTint="@color/white"
+        android:textColor="@color/pink_apple"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/boton_login"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/boton_login"
-        app:layout_constraintTop_toBottomOf="@+id/boton_login" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/boton_restablecer_contraseña"
         android:layout_width="0dp"
         android:layout_height="55dp"
-        android:layout_marginTop="8dp"
-        android:backgroundTint="#34ABE4"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/blue_apple"
         android:text="restablecer contraseña"
-        app:layout_constraintEnd_toEndOf="@+id/boton_registrar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/boton_registrar"
-        app:layout_constraintTop_toBottomOf="@+id/boton_registrar" />
+        app:layout_constraintStart_toStartOf="@+id/boton_registrar" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline6"

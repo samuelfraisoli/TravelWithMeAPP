@@ -14,7 +14,6 @@ class ExampleUnitTest {
 
     @Test
     fun test() {
-        val openAIManager = OpenAIManager()
-        openAIManager.procesarSolicitud("hola")
+
     }
 }

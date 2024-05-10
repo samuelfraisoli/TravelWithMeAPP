@@ -30,6 +30,15 @@
         <argument
             android:name="eleccion"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_explorarFragment_to_hotelFragment"
+            app:destination="@id/hotelFragment" />
+        <argument
+            android:name="hotel"
+            app:argType="com.example.travelwithmeapp.models.Hotel" />
+        <action
+            android:id="@+id/action_explorarFragment_to_mapaPuntosInteresFragment"
+            app:destination="@id/mapaPuntosInteresFragment" />
     </fragment>
 
     <fragment
@@ -202,6 +211,11 @@
         android:label="fragment_preferencias"
         tools:layout="@layout/fragment_preferencias" >
     </fragment>
+    <fragment
+        android:id="@+id/mapaPuntosInteresFragment"
+        android:name="com.example.travelwithmeapp.fragments.MapaPuntosInteresFragment"
+        android:label="fragment_mapa_puntos_interes"
+        tools:layout="@layout/fragment_mapa_puntos_interes" />
 
 
 </navigation>

@@ -1,24 +1,17 @@
 package com.example.travelwithmeapp.fragments
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import android.widget.ImageView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentBuscarBinding
 import com.example.travelwithmeapp.utils.Utilities
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 
 class BuscarFragment : Fragment() {
@@ -59,13 +52,13 @@ class BuscarFragment : Fragment() {
             }
         }
         binding.fechaVuelo.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) { utilities.lanzarDatePickerDialog(view, requireContext()) }
+            if (hasFocus) { utilities.lanzarDatePickerConstraintHoy(childFragmentManager, binding.fechaVuelo) }
         }
         binding.fechaEntradaHotel.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) { utilities.lanzarDatePickerDialog(view, requireContext()) }
+            if (hasFocus) { utilities.lanzarDatePickerRango(childFragmentManager, binding.fechaEntradaHotel, binding.fechaSalidaHotel)}
         }
         binding.fechaSalidaHotel.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) { utilities.lanzarDatePickerDialog(view, requireContext()) }
+            if (hasFocus) { utilities.lanzarDatePickerRango(childFragmentManager, binding.fechaEntradaHotel, binding.fechaSalidaHotel) }
         }
         binding.buttonComenzar.setOnClickListener() {
             when(busquedaFlag) {
