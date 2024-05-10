@@ -42,10 +42,8 @@ class PlanificarFavoritosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recogerHotelesFavDb()
-
-
         inicializar()
+        recogerHotelesFavDb()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
