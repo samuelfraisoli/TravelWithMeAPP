@@ -55,9 +55,6 @@ class VueloFragment : Fragment() {
         binding.equipajeDescipcion.alto.text =  "${vuelo.equipaje.alto} cm"
         binding.equipajeDescipcion.ancho.text =  "${vuelo.equipaje.ancho} cm"
         binding.equipajeDescipcion.peso.text = "${vuelo.equipaje.peso} cm"
-        binding.favorito.setOnClickListener() {
-            añadirAFavoritos(vuelo)
-        }
     }
 
     fun recogerIntent() {
@@ -89,9 +86,6 @@ class VueloFragment : Fragment() {
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
-    fun añadirAFavoritos(vuelo: Vuelo) {
-
-    }
 
 
 

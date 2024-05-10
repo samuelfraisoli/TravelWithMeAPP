@@ -128,11 +128,9 @@
 
                 android:textColor="@color/black"
                 android:textSize="30dp"
-
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/buttonReservar"
                 app:layout_constraintStart_toStartOf="@+id/nPersonas"
-                app:layout_constraintTop_toTopOf="@+id/buttonReservar" />
+                app:layout_constraintTop_toBottomOf="@+id/nPersonas" />
 
             <TextView
                 android:id="@+id/nPersonas"
@@ -144,30 +142,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
             <ImageView
-                android:id="@+id/favorito"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="17dp"
-                android:padding="5dp"
-                android:src="@drawable/favorite_icon"
-                android:visibility="invisible"
-               ></ImageView>
-
-            <ImageView
                 android:id="@+id/no_favorito"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17dp"
+
                 android:padding="5dp"
                 android:src="@drawable/nofavorite_icon"
-                ></ImageView>
+                app:layout_constraintEnd_toEndOf="@+id/buttonEscribirReseña"
+                app:layout_constraintTop_toTopOf="@+id/direccion"></ImageView>
+
+            <ImageView
+                android:id="@+id/favorito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:padding="5dp"
+                android:src="@drawable/favorite_icon"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/buttonEscribirReseña"
+                app:layout_constraintTop_toTopOf="@+id/direccion"></ImageView>
+
 
 
             <Button
                 android:id="@+id/buttonReservar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17dp"
                 android:backgroundTint="@color/pink_apple"
                 android:text="Reservar"
                 app:layout_constraintBottom_toBottomOf="@+id/precio"
@@ -261,11 +261,11 @@
                 app:layout_constraintStart_toStartOf="@+id/textviewMapaTitulo"
                 app:layout_constraintTop_toBottomOf="@+id/textviewMapaTitulo">
 
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/mapViewHotel"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapViewHotel"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
 
             </androidx.cardview.widget.CardView>
 
@@ -314,6 +314,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+
+
 </ScrollView>
-
-
