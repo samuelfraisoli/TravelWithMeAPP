@@ -73,23 +73,7 @@ class HotelFragment : Fragment() {
         binding.textviewComodidadesTexto.text = comodidadesFormateadas
 
         // Pulsación de botones de favorito
-        binding.noFavorito.setOnClickListener() {
-            binding.noFavorito.visibility = View.INVISIBLE
-            binding.favorito.visibility = View.VISIBLE
-            // Añade el hotel actual a la lista de hoteles favoritos
-            sharedViewModel.addHotel(hotel)
-            // Notifica al adaptador del RecyclerView que los datos han cambiado
-            planificarFavoritosAdapter.notifyDataSetChanged()
-        }
-
-        binding.favorito.setOnClickListener() {
-            binding.favorito.visibility = View.INVISIBLE
-            binding.noFavorito.visibility = View.VISIBLE
-            // Elimina el hotel actual de la lista de hoteles favoritos
-            sharedViewModel.removeHotel(hotel)
-            // Notifica al adaptador del RecyclerView que los datos han cambiado
-            planificarFavoritosAdapter.notifyDataSetChanged()
-        }
+        gestionBotonFavoritos()
     }
 
     // INTENTS
@@ -130,5 +114,25 @@ class HotelFragment : Fragment() {
         recyclerResena.adapter = adaptadorResena
         recyclerResena.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun gestionBotonFavoritos() {
+        binding.noFavorito.setOnClickListener() {
+            binding.noFavorito.visibility = View.INVISIBLE
+            binding.favorito.visibility = View.VISIBLE
+            // Añade el hotel actual a la lista de hoteles favoritos
+            sharedViewModel.addHotel(hotel)
+            // Notifica al adaptador del RecyclerView que los datos han cambiado
+            planificarFavoritosAdapter.notifyDataSetChanged()
+        }
+
+        binding.favorito.setOnClickListener() {
+            binding.favorito.visibility = View.INVISIBLE
+            binding.noFavorito.visibility = View.VISIBLE
+            // Elimina el hotel actual de la lista de hoteles favoritos
+            sharedViewModel.removeHotel(hotel)
+            // Notifica al adaptador del RecyclerView que los datos han cambiado
+            planificarFavoritosAdapter.notifyDataSetChanged()
+        }
     }
 }
