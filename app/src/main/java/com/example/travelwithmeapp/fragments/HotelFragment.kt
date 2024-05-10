@@ -35,8 +35,8 @@ class HotelFragment : Fragment() {
     private lateinit var recyclerResena: RecyclerView
     private lateinit var adaptadorResena: ResenaHotelAdapter
     private lateinit var hotel: Hotel
-    private lateinit var fecha_entrada_hotel: OffsetDateTime
-    private lateinit var fecha_salida_hotel: OffsetDateTime
+    private var fecha_entrada_hotel: OffsetDateTime? = null
+    private var fecha_salida_hotel: OffsetDateTime? = null
     private var listaHotelesFav = ArrayList<Hotel>() // Lista de hoteles favoritos
     lateinit var planificarFavoritosAdapter: PlanificarFavoritosAdapter // Adaptador para la lista de hoteles favoritos
     private  lateinit var sharedViewModel: SharedViewModel
@@ -66,6 +66,8 @@ class HotelFragment : Fragment() {
         utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "${hotel.nombre}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
         listaImagenes.addAll(hotel.fotos)
 
+        inicializarCarouselRecyclerView()
+
         configuarRecycler()
 
 
@@ -78,15 +80,15 @@ class HotelFragment : Fragment() {
 
     // INTENTS
     private fun recogerIntent() {
-        val bundle = arguments
-        if (bundle != null) {
-            hotel = bundle.getSerializable("hotel") as Hotel
-            var fecha_entrada_string = bundle.getString("fecha_entrada_hotel")!!
-            fecha_entrada_hotel = utilities.parseStringAOffsetDateDDMMYYYY(fecha_entrada_string)
-            var fecha_salida_string = bundle.getString("fecha_salida_hotel")!!
-            fecha_salida_hotel = utilities.parseStringAOffsetDateDDMMYYYY(fecha_salida_string)
-        }
+    val bundle = arguments
+    if (bundle != null) {
+        hotel = bundle.getSerializable("hotel") as Hotel
+        var fecha_entrada_string = bundle.getString("fecha_entrada_hotel")
+        fecha_entrada_hotel = if (fecha_entrada_string != null) utilities.parseStringAOffsetDateDDMMYYYY(fecha_entrada_string) else null
+        var fecha_salida_string = bundle.getString("fecha_salida_hotel")
+        fecha_salida_hotel = if (fecha_salida_string != null) utilities.parseStringAOffsetDateDDMMYYYY(fecha_salida_string) else null
     }
+}
 
     private fun intentASitioWeb(url: String) {
         // Crea un Intent implícito con la acción ACTION_VIEW y la URL del sitio web

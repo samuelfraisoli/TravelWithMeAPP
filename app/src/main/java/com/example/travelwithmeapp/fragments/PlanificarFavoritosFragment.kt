@@ -61,6 +61,12 @@ class PlanificarFavoritosFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var destino_hotel = arguments?.getString("destino_hotel").toString()
+        var fecha_entrada_hotel = arguments?.getString("fecha_entrada_hotel").toString()
+        var fecha_salida_hotel = arguments?.getString("destino_hotel").toString()
+        Log.v("destino_hotel", "$destino_hotel")
+
         sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         sharedViewModel.listaHotelesFav.observe(viewLifecycleOwner, {
             listaHotelesFav -> adaptadorRecycler.setData(listaHotelesFav)
@@ -75,11 +81,19 @@ class PlanificarFavoritosFragment : Fragment() {
     fun inicializar() {
         travelWithMeApiManager = TravelWithMeApiManager(requireContext())
         utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "hoteles", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
-
+        recogerIntent()
         configurarRecycler()
     }
 
-
+    fun recogerIntent() {
+        val bundle = arguments
+        if (bundle != null) {
+            destino_hotel = bundle.getString("destino_hotel") ?: ""
+            fecha_entrada_hotel = bundle.getString("fecha_entrada_hotel") ?: ""
+            fecha_salida_hotel = bundle.getString("fecha_salida_hotel") ?: ""
+            Log.v("bundle", "$destino_hotel, $fecha_entrada_hotel, $fecha_salida_hotel")
+        }
+    }
 
 
     /**
@@ -106,9 +120,6 @@ class PlanificarFavoritosFragment : Fragment() {
     fun intentAHotelFrag(hotel: Hotel) {
         val bundle = Bundle()
         bundle.putSerializable("hotel", hotel)
-        bundle.putString("fecha_entrada_hotel", fecha_entrada_hotel)
-        bundle.putString("fecha_salida_hotel", fecha_salida_hotel)
-        findNavController()?.navigate(R.id.action_buscarHotelesFragment_to_hotelFragment, bundle)
-
+        findNavController()?.navigate(R.id.action_planificarFavoritosFragment_to_hotelFragment, bundle)
     }
 }
