@@ -1,7 +1,6 @@
 package com.example.travelwithmeapp.fragments
 
 import ResenaHotelAdapter
-import SharedViewModel
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -30,16 +29,16 @@ import java.time.OffsetDateTime
 
 class HotelFragment : Fragment() {
     private lateinit var binding: FragmentHotelBinding
-    private var listaImagenes: ArrayList<String> = ArrayList()
     private lateinit var utilities: Utilities
     private lateinit var recyclerResena: RecyclerView
     private lateinit var adaptadorResena: ResenaHotelAdapter
+
     private lateinit var hotel: Hotel
     private var fecha_entrada_hotel: OffsetDateTime? = null
     private var fecha_salida_hotel: OffsetDateTime? = null
+
+    private var listaImagenes: ArrayList<String> = ArrayList()  //lista imágenes carousel
     private var listaHotelesFav = ArrayList<Hotel>() // Lista de hoteles favoritos
-    lateinit var planificarFavoritosAdapter: PlanificarFavoritosAdapter // Adaptador para la lista de hoteles favoritos
-    private  lateinit var sharedViewModel: SharedViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,11 +51,8 @@ class HotelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        inicializar()
-        sharedViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
 
-        // Inicializa planificarFavoritosAdapter aquí
-        planificarFavoritosAdapter = PlanificarFavoritosAdapter(listaHotelesFav){}
+        inicializar()
     }
 
 
@@ -67,7 +63,6 @@ class HotelFragment : Fragment() {
         listaImagenes.addAll(hotel.fotos)
 
         inicializarCarouselRecyclerView()
-
         configuarRecycler()
 
 
@@ -78,6 +73,7 @@ class HotelFragment : Fragment() {
         gestionBotonFavoritos()
     }
 
+
     // INTENTS
     private fun recogerIntent() {
     val bundle = arguments
@@ -87,21 +83,20 @@ class HotelFragment : Fragment() {
         fecha_entrada_hotel = if (fecha_entrada_string != null) utilities.parseStringAOffsetDateDDMMYYYY(fecha_entrada_string) else null
         var fecha_salida_string = bundle.getString("fecha_salida_hotel")
         fecha_salida_hotel = if (fecha_salida_string != null) utilities.parseStringAOffsetDateDDMMYYYY(fecha_salida_string) else null
+        }
     }
-}
-
     private fun intentASitioWeb(url: String) {
         // Crea un Intent implícito con la acción ACTION_VIEW y la URL del sitio web
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
-
     private fun intentAReseñas(hotel: Hotel) {
         val bundle = Bundle()
         bundle.putSerializable("hotel", hotel)
         findNavController()?.navigate(R.id.action_hotelFragment_to_resenaFragment, bundle)
 
     }
+
 
     // CAROUSEL
     private fun inicializarCarouselRecyclerView() {
@@ -110,31 +105,29 @@ class HotelFragment : Fragment() {
     }
 
 
+    // RECYCLER RESEÑAS
     private fun configuarRecycler() {
         recyclerResena = binding.recyclerResenaHotel
         adaptadorResena = ResenaHotelAdapter(hotel.resena)
         recyclerResena.adapter = adaptadorResena
-        recyclerResena.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerResena.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
+
+    // BOTÓN FAVORITOS
     private fun gestionBotonFavoritos() {
         binding.noFavorito.setOnClickListener() {
             binding.noFavorito.visibility = View.INVISIBLE
             binding.favorito.visibility = View.VISIBLE
-            // Añade el hotel actual a la lista de hoteles favoritos
-            sharedViewModel.addHotel(hotel)
-            // Notifica al adaptador del RecyclerView que los datos han cambiado
-            planificarFavoritosAdapter.notifyDataSetChanged()
+
+            //TODO añadir funcion para subir hotel a favoritos a la bd
         }
 
         binding.favorito.setOnClickListener() {
             binding.favorito.visibility = View.INVISIBLE
             binding.noFavorito.visibility = View.VISIBLE
-            // Elimina el hotel actual de la lista de hoteles favoritos
-            sharedViewModel.removeHotel(hotel)
-            // Notifica al adaptador del RecyclerView que los datos han cambiado
-            planificarFavoritosAdapter.notifyDataSetChanged()
+
+            //TODO añadir funcion para eliminar hotel de la bd
         }
     }
 }
