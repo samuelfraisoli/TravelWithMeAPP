@@ -195,18 +195,17 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
      *  en la dirección, y mueve la cámara a esa ubicación también
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        //todo cambiar con localización del hotel
-        var localizacionPzaSol = LatLng(40.4166667, -3.7038889)
+        var localizacionHotel = LatLng(hotel.direccion.latitud, hotel.direccion.longitud)
 
         googleMap.addMarker(
             MarkerOptions()
-                .position(localizacionPzaSol)
+                .position(localizacionHotel)
                 .title(hotel.nombre)
         )
 
         val zoomLevel = 15.0f
         googleMap.setMaxZoomPreference(googleMap.maxZoomLevel)
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localizacionPzaSol, zoomLevel))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localizacionHotel, zoomLevel))
         googleMap.uiSettings.isZoomControlsEnabled = true
     }
 

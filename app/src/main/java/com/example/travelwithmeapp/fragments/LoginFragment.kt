@@ -118,7 +118,7 @@ class LoginFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    //todo completar
+
     fun restablecerContraseña() {
         firebaseAuthManager.enviarMailRestablecerContraseña(email.toString(), binding.root) {}
     }
@@ -134,9 +134,13 @@ class LoginFragment : Fragment(), View.OnClickListener {
         if (requestCode == CODIGO_GOOGLE) {
             firebaseAuthManager.procesarDatosActivityLoginGoogle(data) { user ->
                 if (user != null) {
-                    firebaseFirestoreManager.guardarDatosUsuario(user) {
-                        if (it == true) {
-                            intentAMainAct(user)
+                    firebaseFirestoreManager.crearDocumentoUsuario(user) {response ->
+                        if(response) {
+                            firebaseFirestoreManager.crearUsuario(user) {response ->
+                                if(response) {
+                                    intentAMainAct(user)
+                                }
+                            }
                         }
                     }
                 }

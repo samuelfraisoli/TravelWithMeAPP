@@ -3,6 +3,7 @@ package com.example.travelwithmeapp.utils
 import android.content.Context
 import android.view.View
 import com.example.travelwithmeapp.models.User
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FieldValue
 
@@ -10,8 +11,38 @@ class FirebaseFirestoreManager(var context: Context, var view: View) {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
     private val utilities = Utilities()
 
+    /**
+     * Crea el documento en la base de datos, donde se almacenan los otros documentos que almacenan los datos del usuario.
+     * Solo crea el documento si no existe, si no, lo deja igual
+     */
+    fun crearDocumentoUsuario(user: User, callback: (Boolean) -> Unit) {
+        val userDocRef = firebaseFirestore.collection("users").document(user.uid)
 
-    fun guardarDatosUsuario(user: User, callback: (Boolean) -> Unit) {
+        userDocRef.get().addOnSuccessListener { userDoc ->
+            if (!userDoc.exists()) {
+                // El documento del usuario no existe, lo creamos
+                userDocRef.set(hashMapOf("created_at" to FieldValue.serverTimestamp()))
+                    .addOnCompleteListener { userCreationTask ->
+                        if (userCreationTask.isSuccessful) {
+                            callback(true)
+                        } else {
+                            callback(false)
+                        }
+                    }
+            } else {
+                // El documento del usuario ya existe
+                callback(true)
+            }
+        }.addOnFailureListener {
+            callback(false)
+        }
+    }
+
+    /**
+     * Función que guarda los datos del usuario por primera vez en el documento info.
+     */
+
+    fun crearUsuario(user: User, callback: (Boolean) -> Unit) {
         val userData = hashMapOf<String, Any>(
             "email" to user.email,
             "provider" to user.provider,
@@ -21,22 +52,55 @@ class FirebaseFirestoreManager(var context: Context, var view: View) {
             "telephone" to user.telephone
         )
 
-        firebaseFirestore.collection("users").document(user.uid).collection("datosUsuario").document("info")
-            .update(userData)
-            .addOnSuccessListener {
-                utilities.lanzarSnackBarCorto(
-                    "Datos actualizados correctamente en la BD",
-                    view
-                )
-                callback(true)
-            }
-            .addOnFailureListener { e ->
-                if (e.message != null) {
-                    utilities.lanzarSnackBarCorto(e.message!!, view)
+        val userDocRef = firebaseFirestore.collection("users").document(user.uid)
+        val datosUsuarioDocRef = userDocRef.collection("datosUsuario").document("info")
+
+        datosUsuarioDocRef.get().addOnSuccessListener { datosUsuarioDoc ->
+            datosUsuarioDocRef.set(userData)
+                .addOnSuccessListener {
+                    callback(true)
+                }
+                .addOnFailureListener {
                     callback(false)
                 }
             }
+        }
+
+
+    fun actualizarDatosUsuario(user: User, callback: (Boolean) -> Unit) {
+        val userData = hashMapOf<String, Any>(
+            "email" to user.email,
+            "provider" to user.provider,
+            "name" to user.name,
+            "surname" to user.surname,
+            "birthdate" to user.birthdate,
+            "telephone" to user.telephone
+        )
+
+        val userDocRef = firebaseFirestore.collection("users").document(user.uid)
+        val datosUsuarioDocRef = userDocRef.collection("datosUsuario").document("info")
+
+        datosUsuarioDocRef.get().addOnSuccessListener { datosUsuarioDoc ->
+            if (datosUsuarioDoc.exists()) {
+                datosUsuarioDocRef.update(userData)
+                    .addOnSuccessListener {
+                        callback(true)
+
+                    }
+                    .addOnFailureListener {
+                        callback(false)
+                    }
+            }
+            else {
+                callback(false)
+            }
+        }.addOnFailureListener {
+            callback(false)
+        }
     }
+
+
+
 
     fun recogerDatosUsuario(uid: String, callback: (User?) -> Unit) {
         firebaseFirestore.collection("users").document(uid).collection("datosUsuario").document("info").get()
