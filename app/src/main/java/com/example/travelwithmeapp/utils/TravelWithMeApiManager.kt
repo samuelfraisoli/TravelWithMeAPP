@@ -601,6 +601,8 @@ class TravelWithMeApiManager(var context: Context) {
         direccion.ciudad = jsonObject.getString("ciudad")
         direccion.pais = jsonObject.getString("pais")
         direccion.codPostal = jsonObject.getString("codPostal")
+        direccion.latitud = jsonObject.getDouble("latitud")
+        direccion.longitud = jsonObject.getDouble("longitud")
 
         return direccion
     }

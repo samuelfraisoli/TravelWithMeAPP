@@ -13,7 +13,7 @@ import com.example.travelwithmeapp.utils.Utilities
 import com.example.travelwithmeapp.models.User
 
 
-class PerfilFragment : Fragment(), View.OnClickListener {
+class PerfilFragment : Fragment() {
     private lateinit var binding: FragmentPerfilBinding
     private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
     private lateinit var utilities: Utilities
@@ -43,10 +43,17 @@ class PerfilFragment : Fragment(), View.OnClickListener {
     fun inicializar() {
         firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
         utilities = Utilities()
-        binding.btnGuardarDatos.setOnClickListener(this)
+        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "Información personal", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
         recogerUidActMain()
         recogerDatosUsuario()
-        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "Información personal", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
+
+        binding.fechaNacimiento.setOnClickListener {
+            utilities.lanzarDatePicker(childFragmentManager, binding.fechaNacimiento)
+        }
+
+        binding.btnGuardarDatos.setOnClickListener {
+            guardarDatosDb()
+        }
     }
 
 
@@ -79,25 +86,20 @@ class PerfilFragment : Fragment(), View.OnClickListener {
                 binding.apellido.setText(userRecogido.surname)
                 binding.correo.setText(userRecogido.email)
                 binding.fechaNacimiento.setText(userRecogido.birthdate)
-
-
             }
         }
     }
 
+    fun guardarDatosDb() {
+        userRecogido = User(uid)
+        userRecogido.name = binding.nombre.text.toString()
+        userRecogido.surname = binding.apellido.text.toString()
+        userRecogido.email = binding.correo.text.toString()
+        userRecogido.birthdate = binding.fechaNacimiento.text.toString()
 
-    override fun onClick(v: View) {
-        when (v?.id) {
-            binding.btnGuardarDatos.id -> {
-                userRecogido = User(uid)
-                userRecogido.name = binding.nombre.text.toString()
-                userRecogido.surname = binding.apellido.text.toString()
-                userRecogido.email = binding.correo.text.toString()
-                userRecogido.birthdate = binding.fechaNacimiento.text.toString()
-
-                firebaseFirestoreManager.guardarDatosUsuario(userRecogido){
-                }
-            }
+        firebaseFirestoreManager.actualizarDatosUsuario(userRecogido){
         }
+
     }
+
 }

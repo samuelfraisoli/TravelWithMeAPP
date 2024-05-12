@@ -15,6 +15,8 @@ data class Direccion(
     var ciudad: String = "",
     var pais: String = "",
     var codPostal: String = "",
+    var latitud: Double = 0.0,
+    var longitud: Double = 0.0
 ) : Serializable
 
 

@@ -154,8 +154,14 @@ class RegistroFragment : Fragment(), View.OnClickListener {
      * Eso determina si se han podido subir los datos a la DB correctamente o no*/
     suspend fun subirUsuarioADB(): Boolean {
         return suspendCancellableCoroutine { continuation ->
-            firebaseFirestoreManager.guardarDatosUsuario(user) { booleanCallback ->
-                continuation.resume(booleanCallback == true)
+            firebaseFirestoreManager.crearDocumentoUsuario(user) {respuesta ->
+                if(respuesta) {
+                    firebaseFirestoreManager.crearUsuario(user) {respuesta ->
+                        if(respuesta) {
+                            continuation.resume(respuesta == true)
+                        }
+                    }
+                }
             }
         }
     }

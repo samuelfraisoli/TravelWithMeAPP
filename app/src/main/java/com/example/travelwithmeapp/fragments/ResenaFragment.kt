@@ -101,13 +101,20 @@ class ResenaFragment : Fragment() {
         }
     }
 
+
+
     fun recogerDatosUsuarioDb() {
+        if(uid == null ) {
+            return
+        }
         firebaseFirestoreManager.recogerDatosUsuario(uid) { userRecibido ->
             if(userRecibido != null) {
-                user = userRecibido
+                user = User()
+                user.name = userRecibido.name
             }
         }
     }
+
 
     // INTENTS
     private fun recogerIntent() {
@@ -116,6 +123,4 @@ class ResenaFragment : Fragment() {
             hotel = bundle.getSerializable("hotel") as Hotel
         }
     }
-
-
 }
