@@ -190,10 +190,10 @@ class MockData {
                     telefono = "123456789",
                     comodidades = arrayListOf("Piscina", "Gimnasio", "Restaurante")
                 ),
-                resena = arrayListOf(
+                resenas = arrayListOf(
                     Resena(
-                        id = 1,
-                        idUsuario = 1001,
+                        id = "1",
+                        idUsuario = "1001",
                         fecha = OffsetDateTime.now(),
                         titulo = "Javier Cuesta Soto",
                         contenido = "Me encantó mi estancia en el Hotel Sol.",
@@ -221,10 +221,10 @@ class MockData {
                     telefono = "987654321",
                     comodidades = arrayListOf("Spa", "Restaurante", "Terraza")
                 ),
-                resena = arrayListOf(
+                resenas = arrayListOf(
                     Resena(
-                        id = 2,
-                        idUsuario = 1002,
+                        id = "2",
+                        idUsuario = "1002",
                         fecha = OffsetDateTime.now(),
                         titulo = "Servicio excelente",
                         contenido = "El personal del hotel fue muy amable y servicial."
@@ -252,10 +252,10 @@ class MockData {
                     telefono = "543210987",
                     comodidades = arrayListOf("Piscina en la azotea", "Bar", "Spa")
                 ),
-                resena = arrayListOf(
+                resenas = arrayListOf(
                     Resena(
-                        id = 3,
-                        idUsuario = 1003,
+                        id = "3",
+                        idUsuario = "1003",
                         fecha = OffsetDateTime.now(),
                         titulo = "Experiencia inolvidable",
                         contenido = "El hotel tiene vistas espectaculares desde la piscina en la azotea."
@@ -282,10 +282,10 @@ class MockData {
                     telefono = "234567890",
                     comodidades = arrayListOf("Piscina", "Restaurante", "Gimnasio")
                 ),
-                resena = arrayListOf(
+                resenas = arrayListOf(
                     Resena(
-                        id = 4,
-                        idUsuario = 1004,
+                        id = "4",
+                        idUsuario = "1004",
                         fecha = OffsetDateTime.now(),
                         titulo = "Ubicación inmejorable",
                         contenido = "El hotel está justo frente al mar, con acceso directo a la playa."
@@ -312,10 +312,10 @@ class MockData {
                     telefono = "876543210",
                     comodidades = arrayListOf("Senderismo", "Spa", "Restaurante")
                 ),
-                resena = arrayListOf(
+                resenas = arrayListOf(
                     Resena(
-                        id = 5,
-                        idUsuario = 1005,
+                        id = "5",
+                        idUsuario = "1005",
                         fecha = OffsetDateTime.now(),
                         titulo = "Naturaleza en estado puro",
                         contenido = "El hotel ofrece acceso a hermosos senderos de montaña."

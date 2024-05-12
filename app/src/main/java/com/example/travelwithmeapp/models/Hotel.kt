@@ -12,5 +12,5 @@ data class Hotel (
     var fechasLibres: ArrayList<LocalDate> = ArrayList(),
     var direccion: Direccion = Direccion(),
     var detalles: DetallesHotel = DetallesHotel(),
-    var resena: ArrayList<Resena> = ArrayList()
+    var resenas: ArrayList<Resena> = ArrayList()
 ) : Serializable

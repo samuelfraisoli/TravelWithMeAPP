@@ -4,6 +4,7 @@ import ResenaHotelAdapter
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
+import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.adapters.CarouselAdapter
 import com.example.travelwithmeapp.databinding.FragmentHotelBinding
 import com.example.travelwithmeapp.models.Hotel
+import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.example.travelwithmeapp.utils.Utilities
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -30,11 +33,16 @@ import java.time.OffsetDateTime
 class HotelFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentHotelBinding
     private var utilities = Utilities()
+    private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager;
+
     private lateinit var recyclerResena: RecyclerView
     private lateinit var adaptadorResena: ResenaHotelAdapter
     private lateinit var hotel: Hotel
     private var fecha_entrada_hotel: OffsetDateTime? = null
     private var fecha_salida_hotel: OffsetDateTime? = null
+
+    private var uid = ""
+    private var hotelFavorito = false
 
 
 
@@ -83,8 +91,10 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
 
 
     private fun inicializar() {
+        firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
         utilities = Utilities()
         recogerIntent()
+        recogerUidActMain()
 
         //carousel
         listaImagenes.addAll(hotel.fotos)
@@ -95,16 +105,8 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         //otros elementos visuales
         inicializarTextosYBotones()
 
-        gestionBotonFavoritos()
-
-
-
-
-
-
-
-
-
+        //gestión de favoritos
+        comprobarHotelFavorito()
 
     }
 
@@ -130,6 +132,15 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         }
         binding.buttonEscribirReseA.setOnClickListener() {
             intentAReseñas(hotel)
+        }
+        binding.favorito.setOnClickListener() {
+            Log.v("", "favorito clicado")
+            clickBotonFavorito()
+
+        }
+        binding.noFavorito.setOnClickListener() {
+            Log.v("", "no favorito clicado")
+            clickBotonFavorito()
         }
     }
 
@@ -173,7 +184,7 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
     // RECYCLER RESEÑAS
     private fun configuarRecycler() {
         recyclerResena = binding.recyclerResenaHotel
-        adaptadorResena = ResenaHotelAdapter(hotel.resena)
+        adaptadorResena = ResenaHotelAdapter(hotel.resenas)
         recyclerResena.adapter = adaptadorResena
         recyclerResena.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -200,19 +211,64 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
     }
 
     // BOTÓN FAVORITOS
-    private fun gestionBotonFavoritos() {
-        binding.noFavorito.setOnClickListener() {
-            binding.noFavorito.visibility = View.INVISIBLE
-            binding.favorito.visibility = View.VISIBLE
-
-            //TODO añadir funcion para subir hotel a favoritos a la bd
+    fun clickBotonFavorito() {
+        if(!hotelFavorito) {
+            botonFavoritoSeleccionado()
+            añadirHotelFavorito()
         }
+        else {
+            botonFavoritoNoSeleccionado()
+            eliminarHotelFavorito()
+        }
+    }
 
-        binding.favorito.setOnClickListener() {
-            binding.favorito.visibility = View.INVISIBLE
-            binding.noFavorito.visibility = View.VISIBLE
 
-            //TODO añadir funcion para eliminar hotel de la bd
+    fun botonFavoritoSeleccionado() {
+        binding.favorito.visibility = View.VISIBLE
+        binding.noFavorito.visibility = View.INVISIBLE
+        hotelFavorito = true
+    }
+
+    fun botonFavoritoNoSeleccionado() {
+        binding.favorito.visibility = View.INVISIBLE
+        binding.noFavorito.visibility = View.VISIBLE
+        hotelFavorito = false
+    }
+
+    fun comprobarHotelFavorito() {
+        if(uid == null) {
+            return
+        }
+        firebaseFirestoreManager.comprobarFavorito(uid, hotel.id.toString()) {
+            if(it) {
+                botonFavoritoSeleccionado()
+                hotelFavorito = true
+            }
+            else {
+                botonFavoritoNoSeleccionado()
+                hotelFavorito = false
+            }
+        }
+    }
+
+    fun añadirHotelFavorito() {
+        if(uid == null) {
+            return
+        }
+        firebaseFirestoreManager.añadirFavorito(uid, hotel.id.toString()) {}
+    }
+
+    fun eliminarHotelFavorito() {
+        if(uid == null) {
+            return
+        }
+        firebaseFirestoreManager.eliminarFavorito(uid, hotel.id.toString()) {}
+    }
+
+
+    fun recogerUidActMain() {
+        if(activity != null && activity is MainActivity) {
+            uid = (activity as MainActivity).user.uid
         }
     }
 

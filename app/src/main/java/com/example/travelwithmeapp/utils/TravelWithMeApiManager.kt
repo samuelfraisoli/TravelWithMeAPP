@@ -1,10 +1,12 @@
 package com.example.travelwithmeapp.utils
+
 import android.content.Context
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.android.volley.Request
 import com.android.volley.RequestQueue
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.travelwithmeapp.models.Aeropuerto
@@ -12,6 +14,7 @@ import com.example.travelwithmeapp.models.DetallesHotel
 import com.example.travelwithmeapp.models.Direccion
 import com.example.travelwithmeapp.models.Equipaje
 import com.example.travelwithmeapp.models.Hotel
+import com.example.travelwithmeapp.models.Resena
 import com.example.travelwithmeapp.models.TrayectoVuelo
 import com.example.travelwithmeapp.models.Vuelo
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -23,7 +26,7 @@ import kotlin.coroutines.resumeWithException
 class TravelWithMeApiManager(var context: Context) {
     @RequiresApi(Build.VERSION_CODES.O)
     val utilities = Utilities()
-    private lateinit var volleyQueue : RequestQueue
+    private lateinit var volleyQueue: RequestQueue
     private val url = "http://10.0.2.2:8080/api"
 
     // =======================================================================================================
@@ -32,12 +35,16 @@ class TravelWithMeApiManager(var context: Context) {
 
     // CORRUTINAS
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun buscarVuelosConParametrosParent(origen: String, destino: String, fecha: String) : ArrayList<Vuelo> {
+    suspend fun buscarVuelosConParametrosParent(
+        origen: String,
+        destino: String,
+        fecha: String
+    ): ArrayList<Vuelo> {
         val vuelos: ArrayList<Vuelo>
         val jsonVuelos = getVuelosConParametrosCorrutina(origen, destino, fecha)
         vuelos = parsearJsonVuelos(jsonVuelos)
 
-        for(vuelo: Vuelo in vuelos) {
+        for (vuelo: Vuelo in vuelos) {
             val jsonTrayectosVuelo = getTrayectosVueloPorIdVueloCorrutina(vuelo.id)
             val trayectos = parsearJsonTrayectos(jsonTrayectosVuelo)
 
@@ -45,7 +52,7 @@ class TravelWithMeApiManager(var context: Context) {
             val equipaje = parsearJsonEquipaje(jsonEquipaje)
             vuelo.equipaje = equipaje
 
-            for(trayecto: TrayectoVuelo in trayectos) {
+            for (trayecto: TrayectoVuelo in trayectos) {
                 val jsonOrigen = getAeropuertoPorIdCorrutina(trayecto.origen.id)
                 val jsonDestino = getAeropuertoPorIdCorrutina(trayecto.destino.id)
 
@@ -61,10 +68,17 @@ class TravelWithMeApiManager(var context: Context) {
         return vuelos
     }
 
-    suspend fun getVuelosConParametrosCorrutina(origen: String, destino: String, fecha: String): String {
+    suspend fun getVuelosConParametrosCorrutina(
+        origen: String,
+        destino: String,
+        fecha: String
+    ): String {
         return suspendCancellableCoroutine { continuation ->
-            Log.v("getVuelosConParametros","${origen}, ${destino}, ${fecha}")
-            Log.v("getVuelosConParametros", "${url}/vuelos/filtrados?origen=${origen}&destino=${destino}&fecha=${fecha}")
+            Log.v("getVuelosConParametros", "${origen}, ${destino}, ${fecha}")
+            Log.v(
+                "getVuelosConParametros",
+                "${url}/vuelos/filtrados?origen=${origen}&destino=${destino}&fecha=${fecha}"
+            )
             val url = "${url}/vuelos/filtrados?origen=${origen}&destino=${destino}&fecha=${fecha}"
             val stringRequest = StringRequest(
                 Request.Method.GET, url,
@@ -145,7 +159,7 @@ class TravelWithMeApiManager(var context: Context) {
         }
     }
 
-    suspend fun getAeropuertoPorIdCorrutina(id: Long) : String {
+    suspend fun getAeropuertoPorIdCorrutina(id: Long): String {
         return suspendCancellableCoroutine { continuation ->
             val url = "${url}/aeropuertos/${id}"
 
@@ -172,7 +186,7 @@ class TravelWithMeApiManager(var context: Context) {
     // =============================================================================================
     // PARSEAR JSONS
     @RequiresApi(Build.VERSION_CODES.O)
-    fun parsearJsonVuelos(json: String) : ArrayList<Vuelo> {
+    fun parsearJsonVuelos(json: String): ArrayList<Vuelo> {
         val vuelos = ArrayList<Vuelo>()
         val jsonArray = JSONArray(json)
         for (i in 0 until jsonArray.length()) {
@@ -209,7 +223,7 @@ class TravelWithMeApiManager(var context: Context) {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun parsearJsonTrayectos(json: String) : ArrayList<TrayectoVuelo> {
+    fun parsearJsonTrayectos(json: String): ArrayList<TrayectoVuelo> {
         val trayectos = ArrayList<TrayectoVuelo>()
         val jsonArray = JSONArray(json)
 
@@ -221,11 +235,15 @@ class TravelWithMeApiManager(var context: Context) {
             trayecto.id_trayecto = jsonObject.getString("idTrayecto")
             trayecto.aerolinea = jsonObject.getString("aerolinea")
             trayecto.tipo = jsonObject.getString("tipo")
-            trayecto.fechaSalida = utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaSalida"))
-            trayecto.fechaLlegada = utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaLlegada"))
+            trayecto.fechaSalida =
+                utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaSalida"))
+            trayecto.fechaLlegada =
+                utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaLlegada"))
             trayecto.escala = jsonObject.getBoolean("escala")
-            trayecto.fechaInicioEscala = utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaInicioEscala"))
-            trayecto.fechaFinEscala = utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaFinEscala"))
+            trayecto.fechaInicioEscala =
+                utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaInicioEscala"))
+            trayecto.fechaFinEscala =
+                utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaFinEscala"))
             trayecto.terminalSalida = jsonObject.getString("terminalSalida")
             trayecto.terminalLlegada = jsonObject.getString("terminalLlegada")
             //trayecto.vuelo.id = jsonObject.getInt("vuelo")  //no hay una propiedad vuelo dentro de trayecto, aqui es al revés
@@ -257,13 +275,13 @@ class TravelWithMeApiManager(var context: Context) {
     // =======================================================================================================
 
     @RequiresApi(Build.VERSION_CODES.O)
-    suspend fun buscarHotelesConParametrosParent(nombre: String, fecha_entrada: String, fecha_salida: String) : ArrayList<Hotel> {
+    suspend fun buscarHotelesConParametrosParent(nombre: String, fecha_entrada: String, fecha_salida: String): ArrayList<Hotel> {
         var hoteles = ArrayList<Hotel>()
         val jsonHoteles = getHotelesConParametrosCorrutina(nombre, fecha_entrada, fecha_salida)
         Log.v("jsonHoteles", "${jsonHoteles}")
         hoteles = parsearJsonHoteles(jsonHoteles)
 
-        for(hotel: Hotel in hoteles) {
+        for (hotel: Hotel in hoteles) {
             var jsonDireccion = getDireccionPorIdCorrutina(hotel.direccion.id)
             val direccion = parsearJsonDireccion(jsonDireccion)
             hotel.direccion = direccion
@@ -271,16 +289,80 @@ class TravelWithMeApiManager(var context: Context) {
             var jsonDetalles = getDetallesHotelPorIDCorrutina(hotel.detalles.id)
             val detallesHotel = parsearJsonDetalles(jsonDetalles)
             hotel.detalles = detallesHotel
+
+            var jsonResenas = getResenasPorIdHotelCorrutina(hotel.id)
+            val resenas = parsearJsonResenas(jsonResenas)
+            hotel.resenas =  resenas
         }
 
         return hoteles
     }
 
-    suspend fun getHotelesConParametrosCorrutina(nombre: String, fecha_entrada: String, fecha_salida: String): String {
+    @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun buscarHotelPorIdParent(id: Long): Hotel {
+
+        val jsonHotel = getHotelesPorIdCorrutina(id)
+        Log.v("jsonHotel", "${jsonHotel}")
+        var hotel = parsearJsonHotel(jsonHotel)
+
+        var jsonDireccion = getDireccionPorIdCorrutina(hotel.direccion.id)
+        val direccion = parsearJsonDireccion(jsonDireccion)
+        hotel.direccion = direccion
+
+        var jsonDetalles = getDetallesHotelPorIDCorrutina(hotel.detalles.id)
+        val detallesHotel = parsearJsonDetalles(jsonDetalles)
+        hotel.detalles = detallesHotel
+
+        var jsonResenas = getResenasPorIdHotelCorrutina(hotel.id)
+        val resenas = parsearJsonResenas(jsonResenas)
+        hotel.resenas =  resenas
+
+        return hotel
+    }
+
+
+    suspend fun getHotelesPorIdCorrutina(id: Long): String {
         return suspendCancellableCoroutine { continuation ->
-            Log.v("getHotelesConParametros","${nombre}, ${fecha_entrada}, ${fecha_salida}")
-            Log.v("getHotelesConParametros", "${url}/hotels/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}")
-            val url = "${url}/hotels/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}"
+            Log.v("getHotelesPorId", "${id}")
+
+            val url = "${url}/hotels/$id"
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                { response ->
+                    Log.v("getHotelesPorId", "recibido correctamente")
+                    Log.v("getHotelesPorId", "${response.toString()}")
+                    // Parsear el JSON y luego reanudar la corrutina con el resultado
+                    continuation.resume(response.toString())
+                },
+                { error ->
+                    Log.v("getHotelesPorId", "los datos no se han recibido")
+                    Log.v("getHotelesPorId", "${error}")
+                    // Manejar el error y reanudar la corrutina con una excepción
+                    continuation.resumeWithException(error)
+                }
+            )
+            Volley.newRequestQueue(context).add(stringRequest)
+
+            // Cancelar la solicitud de red si la corrutina es cancelada
+            continuation.invokeOnCancellation {
+                stringRequest.cancel()
+            }
+        }
+    }
+
+    suspend fun getHotelesConParametrosCorrutina(
+        nombre: String,
+        fecha_entrada: String,
+        fecha_salida: String
+    ): String {
+        return suspendCancellableCoroutine { continuation ->
+            Log.v("getHotelesConParametros", "${nombre}, ${fecha_entrada}, ${fecha_salida}")
+            Log.v(
+                "getHotelesConParametros",
+                "${url}/hotels/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}"
+            )
+            val url =
+                "${url}/hotels/filtrados?nombre=${nombre}&fecha_entrada=${fecha_entrada}&fecha_salida=${fecha_salida}"
             val stringRequest = StringRequest(
                 Request.Method.GET, url,
                 { response ->
@@ -335,8 +417,8 @@ class TravelWithMeApiManager(var context: Context) {
 
     suspend fun getDetallesHotelPorIDCorrutina(id: Long): String {
         return suspendCancellableCoroutine { continuation ->
-            Log.v("getHotelDetailsPorID",  "${url}/detallesHotels/$id")
-            val url =  "${url}/detallesHotels/$id"
+            Log.v("getHotelDetailsPorID", "${url}/detallesHotels/$id")
+            val url = "${url}/detallesHotels/$id"
             val stringRequest = StringRequest(
                 Request.Method.GET, url,
                 { response ->
@@ -361,17 +443,91 @@ class TravelWithMeApiManager(var context: Context) {
         }
     }
 
+    suspend fun getResenasPorIdHotelCorrutina(id: Long): String {
+        return suspendCancellableCoroutine { continuation ->
+            Log.v("getResenasPorIdHotel", "${url}/resenas/filtradasIdHotel?idHotel=$id")
+            val url = "${url}/resenas/filtradasIdHotel?idHotel=$id"
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                { response ->
+                    Log.v("getResenasPorIdHotel", "recibido correctamente")
+                    Log.v("getResenasPorIdHotel", "${response.toString()}")
+                    // Parsear el JSON y luego reanudar la corrutina con el resultado
+                    continuation.resume(response.toString())
+                },
+                { error ->
+                    Log.v("getResenasPorIdHotel", "los datos no se han recibido")
+                    Log.v("getResenasPorIdHotel", "${error}")
+                    // Manejar el error y reanudar la corrutina con una excepción
+                    continuation.resumeWithException(error)
+                }
+            )
+            Volley.newRequestQueue(context).add(stringRequest)
 
+            // Cancelar la solicitud de red si la corrutina es cancelada
+            continuation.invokeOnCancellation {
+                stringRequest.cancel()
+            }
+        }
 
+    }
 
+    suspend fun postResenaCorrutina(resena: Resena, idHotel: Long): Long {
+        Log.v("postResena", "${url}/resenas")
+        return suspendCancellableCoroutine { continuation ->
+            val jsonBody = JSONObject().apply {
+                put("idUsuario", resena.idUsuario)
+                put("fecha", resena.fecha)
+                put("titulo", resena.titulo)
+                put("contenido", resena.contenido)
+                put("nota", resena.nota.toString())
+                put("hotel", idHotel.toString())
+            }
 
+            val url = "${url}/resenas"
+
+            val request = object : StringRequest(
+                Method.POST, url,
+                { response ->
+                    Log.v("postResena", "enviado correctamente")
+                    Log.v("postResena", response)
+
+                    val idResena = response.toLongOrNull()
+                    if (idResena != null) {
+                        continuation.resume(idResena)
+                    } else {
+                        continuation.resumeWithException(Exception("No se pudo obtener el ID de la reseña"))
+                    }
+                },
+                { error ->
+                    Log.v("postResena", "los datos no se han enviado")
+                    Log.v("postResena", "$error")
+                    continuation.resumeWithException(error)
+                }
+            ) {
+                override fun getBodyContentType(): String {
+                    return "application/json; charset=utf-8"
+                }
+
+                override fun getBody(): ByteArray {
+                    return jsonBody.toString().toByteArray()
+                }
+            }
+
+            Volley.newRequestQueue(context).add(request)
+
+            continuation.invokeOnCancellation {
+                request.cancel()
+            }
+        }
+    }
 
 
     // =============================================================================================
     // PARSEAR JSONS
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun parsearJsonHoteles(json: String) : ArrayList<Hotel> {
+    fun parsearJsonHoteles(json: String): ArrayList<Hotel> {
         var hoteles: ArrayList<Hotel> = ArrayList()
         val jsonArray = JSONArray(json)
 
@@ -383,7 +539,7 @@ class TravelWithMeApiManager(var context: Context) {
             hotel.id = jsonObject.getLong("id")
             hotel.nombre = jsonObject.getString("nombre")
             var fotos = jsonObject.getJSONArray("fotos")
-            if(fotos.length() > 0) {
+            if (fotos.length() > 0) {
                 for (j in 0 until fotos.length()) {
                     hotel.fotos.add(fotos.getString(j))
                 }
@@ -406,6 +562,34 @@ class TravelWithMeApiManager(var context: Context) {
         return hoteles
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun parsearJsonHotel(json: String): Hotel {
+
+        var hotel: Hotel = Hotel()
+        val jsonObject = JSONObject(json)
+
+        hotel.id = jsonObject.getLong("id")
+        hotel.nombre = jsonObject.getString("nombre")
+        var fotos = jsonObject.getJSONArray("fotos")
+        if (fotos.length() > 0) {
+            for (j in 0 until fotos.length()) {
+                hotel.fotos.add(fotos.getString(j))
+            }
+        }
+
+        var fechasLibres = jsonObject.getJSONArray("fechasLibres")
+        for (j in 0 until fechasLibres.length()) {
+            val fechaString = fechasLibres.getString(j)
+            val fechaLocalDate = utilities.parseStringISOTaLocalDate(fechaString)
+            hotel.fechasLibres.add(fechaLocalDate)
+        }
+
+        hotel.direccion.id = jsonObject.getLong("direccion")
+        hotel.detalles.id = jsonObject.getLong("detallesHotel")
+
+        return hotel
+    }
+
     fun parsearJsonDireccion(json: String): Direccion {
         var direccion: Direccion = Direccion()
 
@@ -421,7 +605,7 @@ class TravelWithMeApiManager(var context: Context) {
         return direccion
     }
 
-    fun parsearJsonDetalles(json: String) : DetallesHotel {
+    fun parsearJsonDetalles(json: String): DetallesHotel {
         var detallesHotel = DetallesHotel()
         val jsonObject = JSONObject(json)
 
@@ -431,7 +615,7 @@ class TravelWithMeApiManager(var context: Context) {
         detallesHotel.telefono = jsonObject.getString("telefono")
         var comodidadesArray = jsonObject.getJSONArray("comodidades")
 
-        if(comodidadesArray.length() > 0) {
+        if (comodidadesArray.length() > 0) {
             for (i in 0 until comodidadesArray.length()) {
                 detallesHotel.comodidades.add(comodidadesArray.getString(i))
             }
@@ -439,7 +623,30 @@ class TravelWithMeApiManager(var context: Context) {
         return detallesHotel
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun parsearJsonResenas(json: String): ArrayList<Resena> {
+        // Parsear el string JSON a un JSONArray
+        var resenas = ArrayList<Resena>()
+        val jsonArray = JSONArray(json)
 
+        // Iterar sobre cada objeto en el JSONArray
+        for (i in 0 until jsonArray.length()) {
+            var resena = Resena()
+            val jsonObject = jsonArray.getJSONObject(i)
+
+            // Obtener los valores de cada propiedad del objeto
+            resena.id = jsonObject.getString("id")
+            resena.idUsuario = jsonObject.getString("idUsuario")
+            var fecha = jsonObject.getString("fecha")
+            resena.fecha = utilities.parseStringISOAOffsetDateTime(fecha)
+            resena.titulo = jsonObject.getString("titulo")
+            resena.contenido = jsonObject.getString("contenido")
+            resena.nota = jsonObject.getInt("nota")
+
+            resenas.add(resena)
+        }
+        return resenas
+    }
 }
 
 

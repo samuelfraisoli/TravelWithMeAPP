@@ -294,7 +294,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_resena_hotel"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textviewReseñaTitulo"

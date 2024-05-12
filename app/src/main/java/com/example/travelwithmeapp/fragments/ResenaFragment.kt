@@ -7,14 +7,32 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.travelwithmeapp.databinding.FragmentResenaBinding
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
+import com.example.travelwithmeapp.activities.MainActivity
+import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.Resena
+import com.example.travelwithmeapp.models.User
+import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
+import com.example.travelwithmeapp.utils.TravelWithMeApiManager
+import com.example.travelwithmeapp.utils.Utilities
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.time.OffsetDateTime
 
 class ResenaFragment : Fragment() {
     private lateinit var binding: FragmentResenaBinding
-    private var rating: Double = 0.0 // Variable donde almacenamos la nota
-    private lateinit var resena: Resena // Variable para almacenar el objeto Resena
+    private lateinit var travelWithMeApiManager: TravelWithMeApiManager
+    private lateinit var utilities: Utilities
+    private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager
+
+    private lateinit var resena: Resena
+    private lateinit var hotel: Hotel
+    private lateinit var uid: String
+    private lateinit var user: User
+    private var rating: Double = 0.0
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,28 +48,74 @@ class ResenaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonResena.setOnClickListener {
-            almacenarResena()
-        }
+
+        inicializar()
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun almacenarResena() {
+    fun inicializar() {
+        travelWithMeApiManager = TravelWithMeApiManager(requireContext())
+        utilities = Utilities()
+        firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
+
+        recogerIntent()
+        recogerUserActMain()
+        recogerDatosUsuarioDb()
+
+        binding.buttonResena.setOnClickListener {
+            if(user != null) {
+                crearResena()
+                enviarResena()
+            }
+        }
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun crearResena() {
         // Recoger la calificación de la RatingBar
-        val rating = binding.ratingBarResenas.rating.toDouble()
+        val rating = binding.ratingBarResenas.rating.toInt()
 
         // Recoger el texto de la reseña del EditText
         val textoResena = binding.editTextTextoResena.text.toString()
 
-        // Crear un nuevo objeto Resena con la nota y el texto de la reseña
         resena = Resena(
-            idUsuario = 1, // Aquí puedes poner el id del usuario que crea la reseña
+            idUsuario = user.uid,
             fecha = OffsetDateTime.now(),
-            titulo = "Título de la reseña", // Aquí puedes poner el título de la reseña
+            titulo = user.name,
             contenido = textoResena,
-            nota = rating.toInt()
+            nota = rating
         )
-
-        // Guardar la reseña en la base de datos
     }
+
+    fun enviarResena() {
+        CoroutineScope(Dispatchers.IO).launch {
+                travelWithMeApiManager.postResenaCorrutina(resena, hotel.id)
+        }
+    }
+
+    fun recogerUserActMain() {
+        if(activity != null && activity is MainActivity) {
+            uid = (activity as MainActivity).user.uid
+        }
+    }
+
+    fun recogerDatosUsuarioDb() {
+        firebaseFirestoreManager.recogerDatosUsuario(uid) { userRecibido ->
+            if(userRecibido != null) {
+                user = userRecibido
+            }
+        }
+    }
+
+    // INTENTS
+    private fun recogerIntent() {
+        val bundle = arguments
+        if (bundle != null) {
+            hotel = bundle.getSerializable("hotel") as Hotel
+        }
+    }
+
+
 }

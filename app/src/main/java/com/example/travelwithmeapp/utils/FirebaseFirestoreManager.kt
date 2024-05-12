@@ -12,19 +12,20 @@ class FirebaseFirestoreManager(var context: Context, var view: View) {
 
 
     fun guardarDatosUsuario(user: User, callback: (Boolean) -> Unit) {
-        firebaseFirestore.collection("users").document(user.uid).set(
-            hashMapOf(
-                "email" to user.email,
-                "provider" to user.provider,
-                "name" to user.name,
-                "surname" to user.surname,
-                "birthdate" to user.birthdate,
-                "telephone" to user.telephone
-            )
+        val userData = hashMapOf<String, Any>(
+            "email" to user.email,
+            "provider" to user.provider,
+            "name" to user.name,
+            "surname" to user.surname,
+            "birthdate" to user.birthdate,
+            "telephone" to user.telephone
         )
+
+        firebaseFirestore.collection("users").document(user.uid).collection("datosUsuario").document("info")
+            .update(userData)
             .addOnSuccessListener {
                 utilities.lanzarSnackBarCorto(
-                    "Datos guardados correctamente en la BD",
+                    "Datos actualizados correctamente en la BD",
                     view
                 )
                 callback(true)
@@ -38,7 +39,7 @@ class FirebaseFirestoreManager(var context: Context, var view: View) {
     }
 
     fun recogerDatosUsuario(uid: String, callback: (User?) -> Unit) {
-        firebaseFirestore.collection("users").document(uid).get()
+        firebaseFirestore.collection("users").document(uid).collection("datosUsuario").document("info").get()
             .addOnSuccessListener {
                 val user = User()
                 user.email = it.get("email") as String
@@ -49,7 +50,7 @@ class FirebaseFirestoreManager(var context: Context, var view: View) {
                 callback(user)
             }
             .addOnFailureListener { e ->
-                utilities.lanzarSnackBarCorto("Error al recuperar los datos. ${e}",view)
+                utilities.lanzarSnackBarCorto("Error al recuperar los datos. ${e}", view)
                 callback(null)
             }
     }
@@ -81,4 +82,156 @@ class FirebaseFirestoreManager(var context: Context, var view: View) {
             }
 
     }
+
+    /**
+     * Pide la id del usuario, y la lista de ids de los hoteles favoritos.
+     * REEMPLAZA TODOS LOS FAVORITOS POR ESTA LISTA
+     */
+    fun sobreescribirFavoritos(uid: String, favoritos: ArrayList<String>, callback: (Boolean) -> Unit) {
+        val favoritosData = hashMapOf<String, Any>()
+        for (i in 0 until favoritos.size) {
+            favoritosData[i.toString()] = favoritos[i]
+
+            firebaseFirestore.collection("users").document(uid).collection("favoritos")
+                .document("lista")
+                .set(favoritosData)
+                .addOnSuccessListener {
+                    utilities.lanzarSnackBarCorto(
+                        "Favoritos guardados correctamente en la BD",
+                        view
+                    )
+                    callback(true)
+                }
+                .addOnFailureListener { e ->
+                    if (e.message != null) {
+                        utilities.lanzarSnackBarCorto(e.message!!, view)
+                        callback(false)
+                    }
+                }
+        }
+    }
+
+
+    fun recogerFavoritos(uid: String, callback: (ArrayList<String>?) -> Unit) {
+        firebaseFirestore.collection("users").document(uid).collection("favoritos")
+            .document("lista")
+            .get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val favoritosData = document.data
+                    if (favoritosData != null) {
+                        val favoritos = ArrayList<String>()
+                        for (key in favoritosData.keys) {
+                            val favorito = favoritosData[key] as? String
+                            if (favorito != null) {
+                                favoritos.add(favorito)
+                            }
+                        }
+                        callback(favoritos)
+                    } else {
+                        callback(null)
+                    }
+                } else {
+                    callback(null)
+                }
+            }
+            .addOnFailureListener { e ->
+                callback(null)
+            }
+    }
+
+    fun añadirFavorito(uid: String, nuevoFavorito: String, callback: (Boolean) -> Unit) {
+        val favoritosRef = firebaseFirestore.collection("users").document(uid).collection("favoritos").document("lista")
+
+        favoritosRef.get()
+            .addOnSuccessListener { documentSnapshot ->
+                val favoritosData = if (documentSnapshot.exists()) {
+                    documentSnapshot.data as MutableMap<String, Any>
+                } else {
+                    hashMapOf<String, Any>()
+                }
+
+                val newIndex = favoritosData.size.toString()
+                favoritosData[newIndex] = nuevoFavorito
+
+                favoritosRef.set(favoritosData)
+                    .addOnSuccessListener {
+                        utilities.lanzarSnackBarCorto(
+                            "Favorito guardado correctamente en la BD",
+                            view
+                        )
+                        callback(true)
+                    }
+                    .addOnFailureListener { e ->
+                        if (e.message != null) {
+                            utilities.lanzarSnackBarCorto(e.message!!, view)
+                            callback(false)
+                        }
+                    }
+            }
+            .addOnFailureListener { e ->
+                if (e.message != null) {
+                    utilities.lanzarSnackBarCorto(e.message!!, view)
+                    callback(false)
+                }
+            }
+    }
+
+    fun eliminarFavorito(uid: String, favoritoAEliminar: String, callback: (Boolean) -> Unit) {
+        val favoritosRef = firebaseFirestore.collection("users").document(uid).collection("favoritos").document("lista")
+
+        favoritosRef.get()
+            .addOnSuccessListener { documentSnapshot ->
+                if (documentSnapshot.exists()) {
+                    val favoritosData = documentSnapshot.data ?: hashMapOf<String, Any>()
+
+                    // Eliminar el favorito de los datos
+                    val favoritosModificados = favoritosData.filterValues { it != favoritoAEliminar }
+
+                    // Guardar los favoritos modificados de nuevo en la base de datos
+                    favoritosRef.set(favoritosModificados)
+                        .addOnSuccessListener {
+                            utilities.lanzarSnackBarCorto(
+                                "Favorito eliminado correctamente de la BD",
+                                view
+                            )
+                            callback(true)
+                        }
+                        .addOnFailureListener { e ->
+                            if (e.message != null) {
+                                utilities.lanzarSnackBarCorto(e.message!!, view)
+                                callback(false)
+                            }
+                        }
+                } else {
+                    utilities.lanzarSnackBarCorto("No se encontró la lista de favoritos", view)
+                    callback(false)
+                }
+            }
+            .addOnFailureListener { e ->
+                if (e.message != null) {
+                    utilities.lanzarSnackBarCorto(e.message!!, view)
+                    callback(false)
+                }
+            }
+    }
+
+    fun comprobarFavorito(uid: String, idHotel: String, callback: (Boolean) -> Unit) {
+        recogerFavoritos(uid) {listaHotelesFavoritos ->
+            var hotelEncontrado = false
+            if(listaHotelesFavoritos != null) {
+                for(idHotelFavorito in listaHotelesFavoritos) {
+                    if(idHotelFavorito.equals(idHotel)) {
+                        hotelEncontrado = true
+                        callback(true)
+                        break
+                    }
+                }
+                if(!hotelEncontrado) {
+                    callback(false)
+                }
+            }
+        }
+    }
+
 }
