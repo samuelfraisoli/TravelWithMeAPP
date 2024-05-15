@@ -52,15 +52,17 @@ class BuscarVuelosAdapter(
         val horaSalida = vuelo.getPrimerTrayecto().fechaSalida.toLocalTime()
         val horaLlegada = vuelo.getUltimoTrayecto().fechaLlegada.toLocalTime()
 
-        if(horaLlegada.isBefore(LocalTime.of(19,0)) && horaSalida.isAfter(LocalTime.of(7,0))) {
+        if (horaSalida.isAfter(LocalTime.of(7, 0)) && horaLlegada.isBefore(LocalTime.of(19, 0))) {
+            // Horario diurno
             itemBinding.imagen.setImageResource(R.drawable.sun_icon)
             ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#FFCC00")));
-        }
-        else if(horaLlegada.isAfter(LocalTime.of(19,0)) && horaSalida.isBefore(LocalTime.of(7,0))) {
-            itemBinding.imagen.setImageResource(R.drawable.moon_icon)
+        } else if ((horaSalida.isAfter(LocalTime.of(19, 0)) || horaSalida.isBefore(LocalTime.of(7, 0))) &&
+            (horaLlegada.isBefore(LocalTime.of(7, 0)) || horaLlegada.isAfter(horaSalida))) {
+            // Horario nocturno
+            itemBinding.imagen.setImageResource(R.drawable.moon_icon);
             ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#5856D6")));
-        }
-        else {
+        } else {
+            // Fuera de los horarios diurno y nocturno
             itemBinding.imagen.setImageResource(R.drawable.sun_moon_icon)
             ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#FF3B30")));
         }

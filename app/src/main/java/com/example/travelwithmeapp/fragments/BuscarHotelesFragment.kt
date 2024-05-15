@@ -84,7 +84,6 @@ class BuscarHotelesFragment : Fragment() {
         else {
             CoroutineScope(Dispatchers.IO).launch {
                 try {
-
                     listaHoteles = travelWithMeApiManager.buscarHotelesConParametrosParent(nombre, fechaEntrada, fechaSalida)
                     Log.v("buscarHotelesConParametrosParent", "${nombre}, ${fechaEntrada}, ${fechaSalida}")
 

@@ -130,13 +130,15 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         binding.buttonSitioWeb.setOnClickListener() {
             intentASitioWeb(hotel.detalles.web)
         }
+        binding.buttonReservar.setOnClickListener() {
+            intentASitioWeb(hotel.detalles.web)
+        }
         binding.buttonEscribirReseA.setOnClickListener() {
             intentAReseñas(hotel)
         }
         binding.favorito.setOnClickListener() {
             Log.v("", "favorito clicado")
             clickBotonFavorito()
-
         }
         binding.noFavorito.setOnClickListener() {
             Log.v("", "no favorito clicado")

@@ -1,5 +1,6 @@
 package com.example.travelwithmeapp.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.models.Hotel
 
 class CarouselExplorarAdapter (
-    val lista: List<Hotel>,
+    val lista: ArrayList<Hotel>,
     val lambda: (Hotel) -> Unit)
     : RecyclerView.Adapter<CarouselExplorarAdapter.CarouselViewHolder>() {
     inner class CarouselViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -30,6 +31,12 @@ class CarouselExplorarAdapter (
                 }
             }
         }
+    }
+    fun setData(nuevaLista: ArrayList<Hotel>) {
+        Log.v("carousel setdata", "carousel setdata")
+        lista.clear()
+        lista.addAll(nuevaLista)
+        notifyDataSetChanged() // Notificar al RecyclerView de que los datos han cambiado
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {

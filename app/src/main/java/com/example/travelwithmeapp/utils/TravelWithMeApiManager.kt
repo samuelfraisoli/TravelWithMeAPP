@@ -240,11 +240,13 @@ class TravelWithMeApiManager(var context: Context) {
             trayecto.fechaLlegada =
                 utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaLlegada"))
             trayecto.escala = jsonObject.getBoolean("escala")
-            trayecto.fechaInicioEscala =
-                utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaInicioEscala"))
-            trayecto.fechaFinEscala =
-                utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaFinEscala"))
-            trayecto.terminalSalida = jsonObject.getString("terminalSalida")
+            if(trayecto.escala == true) {
+                trayecto.fechaInicioEscala =
+                    utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaInicioEscala"))
+                trayecto.fechaFinEscala =
+                    utilities.parseStringISOAOffsetDateTime(jsonObject.getString("fechaFinEscala"))
+                trayecto.terminalSalida = jsonObject.getString("terminalSalida")
+            }
             trayecto.terminalLlegada = jsonObject.getString("terminalLlegada")
             //trayecto.vuelo.id = jsonObject.getInt("vuelo")  //no hay una propiedad vuelo dentro de trayecto, aqui es al revés
             trayecto.origen.id = jsonObject.getInt("origen").toLong()
@@ -320,6 +322,79 @@ class TravelWithMeApiManager(var context: Context) {
         return hotel
     }
 
+    suspend fun buscarDiezHotelesRandom(): ArrayList<Hotel>{
+        var hoteles = ArrayList<Hotel>()
+        val jsonHoteles = getAllHotelesCorrutina()
+        hoteles = parsearJsonHoteles(jsonHoteles)
+        Log.v("", "${hoteles.get(0).fotos.get(0)}")
+
+        //Genera 10 números random para coger 10 hoteles random
+        // Crea una lista para almacenar los índices únicos
+        val indicesUnicos = mutableListOf<Int>()
+
+        // Crea un conjunto para rastrear los índices generados
+        val indicesGenerados = mutableSetOf<Int>()
+
+        // Genera números aleatorios únicos hasta que tengamos la cantidad deseada
+        while (indicesUnicos.size < 10) {
+            val indice = (0 until hoteles.size).random()
+            if (indice !in indicesGenerados) {
+                indicesUnicos.add(indice)
+                indicesGenerados.add(indice)
+            }
+        }
+
+        var listaHotelesRandom = ArrayList<Hotel>()
+
+        indicesUnicos.forEach { indice ->
+            listaHotelesRandom.add(hoteles[indice])
+        }
+
+        for (hotel: Hotel in listaHotelesRandom) {
+            var jsonDireccion = getDireccionPorIdCorrutina(hotel.direccion.id)
+            val direccion = parsearJsonDireccion(jsonDireccion)
+            hotel.direccion = direccion
+
+            var jsonDetalles = getDetallesHotelPorIDCorrutina(hotel.detalles.id)
+            val detallesHotel = parsearJsonDetalles(jsonDetalles)
+            hotel.detalles = detallesHotel
+
+            var jsonResenas = getResenasPorIdHotelCorrutina(hotel.id)
+            val resenas = parsearJsonResenas(jsonResenas)
+            hotel.resenas =  resenas
+        }
+
+        return listaHotelesRandom
+    }
+
+    suspend fun getAllHotelesCorrutina(): String {
+        return suspendCancellableCoroutine { continuation ->
+
+            val url = "${url}/hotels"
+            val stringRequest = StringRequest(
+                Request.Method.GET, url,
+                { response ->
+                    Log.v("getAllHoteles", "recibido correctamente")
+                    Log.v("getAllHoteles", "${response.toString()}")
+                    // Parsear el JSON y luego reanudar la corrutina con el resultado
+                    continuation.resume(response.toString())
+                },
+                { error ->
+                    Log.v("getAllHoteles", "los datos no se han recibido")
+                    Log.v("getAllHoteles", "${error}")
+                    // Manejar el error y reanudar la corrutina con una excepción
+                    continuation.resumeWithException(error)
+                }
+            )
+            Volley.newRequestQueue(context).add(stringRequest)
+
+            // Cancelar la solicitud de red si la corrutina es cancelada
+            continuation.invokeOnCancellation {
+                stringRequest.cancel()
+            }
+        }
+
+    }
 
     suspend fun getHotelesPorIdCorrutina(id: Long): String {
         return suspendCancellableCoroutine { continuation ->
