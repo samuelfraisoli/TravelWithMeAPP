@@ -2,18 +2,18 @@
     <string name="app_name" translatable="false">TravelWithMeApp</string>
     <string name="prefs_file" translatable="false">com.example.firebaseprueba.PREFERENCE_FILE_KEY</string>
     <string name="texto_principal_login" translatable="false">Travel With Me App</string>
-    <string name="texto_boton_login">Login</string>
-    <string name="texto_boton_registrarse">Registrar usuario</string>
-    <string name="explorar">explorar</string>
-    <string name="buscar">buscar</string>
-    <string name="favoritos">favoritos</string>
-    <string name="resena">reseñas</string>
-    <string name="cuenta">cuenta</string>
-    <string name="vuelos">vuelos</string>
-    <string name="hoteles">hoteles</string>
-    <string name="Del">Del</string>
-    <string name="al">al</string>
-    <string name="perfil">Perfil</string>
+    <string name="texto_boton_login" translatable="false">Login</string>
+    <string name="texto_boton_registrarse" translatable="false">Registrar usuario</string>
+    <string name="explorar" translatable="false">explorar</string>
+    <string name="buscar" translatable="false">buscar</string>
+    <string name="favoritos" translatable="false">favoritos</string>
+    <string name="resena" translatable="false">reseñas</string>
+    <string name="cuenta" translatable="false">cuenta</string>
+    <string name="vuelos" translatable="false">vuelos</string>
+    <string name="hoteles" translatable="false">hoteles</string>
+    <string name="Del" translatable="false">Del</string>
+    <string name="al" translatable="false">al</string>
+    <string name="perfil" translatable="false">Perfil</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
 </resources>

@@ -273,14 +273,6 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-
-
-
-
-
-
-
-
     //private fun iniciarCorrutinaCarousel() {
     //    jobCorrutina = CoroutineScope(Dispatchers.Main).launch {
     //        while (isActive) {
@@ -296,18 +288,5 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
     //        }
     //    }
     //}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

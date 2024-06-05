@@ -220,10 +220,6 @@ class FirebaseFirestoreManager(var context: Context, var view: View) {
 
                 favoritosRef.set(favoritosData)
                     .addOnSuccessListener {
-                        utilities.lanzarSnackBarCorto(
-                            "Favorito guardado correctamente en la BD",
-                            view
-                        )
                         callback(true)
                     }
                     .addOnFailureListener { e ->
@@ -255,10 +251,6 @@ class FirebaseFirestoreManager(var context: Context, var view: View) {
                     // Guardar los favoritos modificados de nuevo en la base de datos
                     favoritosRef.set(favoritosModificados)
                         .addOnSuccessListener {
-                            utilities.lanzarSnackBarCorto(
-                                "Favorito eliminado correctamente de la BD",
-                                view
-                            )
                             callback(true)
                         }
                         .addOnFailureListener { e ->

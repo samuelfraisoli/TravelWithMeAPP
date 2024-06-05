@@ -9,6 +9,8 @@ import com.example.travelwithmeapp.databinding.FragmentResenaBinding
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.navigation.fragment.findNavController
+import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.activities.MainActivity
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.Resena
@@ -19,6 +21,7 @@ import com.example.travelwithmeapp.utils.Utilities
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.OffsetDateTime
 
 class ResenaFragment : Fragment() {
@@ -92,6 +95,9 @@ class ResenaFragment : Fragment() {
     fun enviarResena() {
         CoroutineScope(Dispatchers.IO).launch {
                 travelWithMeApiManager.postResenaCorrutina(resena, hotel.id)
+            withContext(Dispatchers.Main) {
+                intentAHotelesFragment()
+            }
         }
     }
 
@@ -122,5 +128,12 @@ class ResenaFragment : Fragment() {
         if (bundle != null) {
             hotel = bundle.getSerializable("hotel") as Hotel
         }
+    }
+
+    private fun intentAHotelesFragment() {
+        val bundle = Bundle()
+        bundle.putSerializable("hotel", hotel)
+        findNavController()?.navigate(R.id.action_resenaFragment_to_hotelFragment, bundle)
+
     }
 }
