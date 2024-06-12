@@ -3,11 +3,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ViewholderResenaHotelBinding
+import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.Resena
 import com.example.travelwithmeapp.utils.Utilities
 
 class ResenaHotelAdapter(
-    private val lista: List<Resena>,
+    private val lista: ArrayList<Resena>,
 ) : RecyclerView.Adapter<ResenaHotelAdapter.ResenaHolder>() {
     private val utilities = Utilities()
 
@@ -17,6 +18,7 @@ class ResenaHotelAdapter(
             itemBinding.textNombrePlan.text = resena.titulo
             itemBinding.horaFechaResena.text = utilities.formatearOffsetDateTimeDDMMYYYY(resena.fecha)
             itemBinding.textDescripcionPlan.text = resena.contenido
+            itemBinding.ratingBar.rating = resena.nota
 
         }
     }
@@ -33,6 +35,12 @@ class ResenaHotelAdapter(
     override fun onBindViewHolder(holder: ResenaHotelAdapter.ResenaHolder, position: Int) {
         val resena = lista[position]
         holder.bindItem(resena)
+    }
+
+    fun setData(nuevaLista: ArrayList<Resena>) {
+        lista.clear()
+        lista.addAll(nuevaLista)
+        notifyDataSetChanged() // Notificar al RecyclerView de que los datos han cambiado
     }
 
     override fun getItemCount(): Int {

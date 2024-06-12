@@ -76,7 +76,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textview_nombre" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/textViewPrecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -84,8 +84,8 @@
             android:textSize="15dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/textView3"
-            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+            app:layout_constraintStart_toStartOf="@+id/textViewDescripcion"
+            app:layout_constraintTop_toBottomOf="@+id/textViewDescripcion" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -99,7 +99,7 @@
             app:srcCompat="@drawable/location_icon" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textViewDescripcion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -120,8 +120,8 @@
             android:textSize="15dp"
             android:textColor="@color/elemento_no_seleccionado"
 
-            app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toTopOf="@+id/textView5" />
+            app:layout_constraintStart_toEndOf="@+id/textViewPrecio"
+            app:layout_constraintTop_toTopOf="@+id/textViewPrecio" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

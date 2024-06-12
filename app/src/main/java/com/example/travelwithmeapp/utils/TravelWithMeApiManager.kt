@@ -509,6 +509,8 @@ class TravelWithMeApiManager(var context: Context) {
                     continuation.resumeWithException(error)
                 }
             )
+
+
             Volley.newRequestQueue(context).add(stringRequest)
 
             // Cancelar la solicitud de red si la corrutina es cancelada
@@ -697,6 +699,8 @@ class TravelWithMeApiManager(var context: Context) {
                 detallesHotel.comodidades.add(comodidadesArray.getString(i))
             }
         }
+        detallesHotel.precio = jsonObject.getDouble("precio")
+
         return detallesHotel
     }
 
@@ -718,7 +722,7 @@ class TravelWithMeApiManager(var context: Context) {
             resena.fecha = utilities.parseStringISOAOffsetDateTime(fecha)
             resena.titulo = jsonObject.getString("titulo")
             resena.contenido = jsonObject.getString("contenido")
-            resena.nota = jsonObject.getInt("nota")
+            resena.nota = jsonObject.getDouble("nota").toFloat()
 
             resenas.add(resena)
         }

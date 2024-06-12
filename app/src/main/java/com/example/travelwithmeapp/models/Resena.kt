@@ -11,5 +11,5 @@ data class Resena @RequiresApi(Build.VERSION_CODES.O) constructor(
     var fecha: OffsetDateTime = OffsetDateTime.now(),
     var titulo: String = "",
     var contenido: String = "",
-    var nota: Int = -1
+    var nota: Float = 1.0F
     ) : Serializable

@@ -197,7 +197,7 @@ class MockData {
                         fecha = OffsetDateTime.now(),
                         titulo = "Javier Cuesta Soto",
                         contenido = "Me encantó mi estancia en el Hotel Sol.",
-                        nota = 1
+                        nota = 5.0F
                     )
                 )
             ),
@@ -227,7 +227,9 @@ class MockData {
                         idUsuario = "1002",
                         fecha = OffsetDateTime.now(),
                         titulo = "Servicio excelente",
-                        contenido = "El personal del hotel fue muy amable y servicial."
+                        contenido = "El personal del hotel fue muy amable y servicial.",
+                        nota = 5.0F
+
                     )
                 )
             ),
@@ -258,7 +260,8 @@ class MockData {
                         idUsuario = "1003",
                         fecha = OffsetDateTime.now(),
                         titulo = "Experiencia inolvidable",
-                        contenido = "El hotel tiene vistas espectaculares desde la piscina en la azotea."
+                        contenido = "El hotel tiene vistas espectaculares desde la piscina en la azotea.",
+                        nota = 5.0F
                     )
                 )
             ),
@@ -288,7 +291,8 @@ class MockData {
                         idUsuario = "1004",
                         fecha = OffsetDateTime.now(),
                         titulo = "Ubicación inmejorable",
-                        contenido = "El hotel está justo frente al mar, con acceso directo a la playa."
+                        contenido = "El hotel está justo frente al mar, con acceso directo a la playa.",
+                        nota = 5.0F
                     )
                 )
             ),
@@ -318,7 +322,8 @@ class MockData {
                         idUsuario = "1005",
                         fecha = OffsetDateTime.now(),
                         titulo = "Naturaleza en estado puro",
-                        contenido = "El hotel ofrece acceso a hermosos senderos de montaña."
+                        contenido = "El hotel ofrece acceso a hermosos senderos de montaña.",
+                        nota = 5.0F
                     )
                 )
             )

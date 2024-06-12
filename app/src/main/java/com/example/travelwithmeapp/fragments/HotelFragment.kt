@@ -3,11 +3,13 @@ package com.example.travelwithmeapp.fragments
 import ResenaHotelAdapter
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,7 @@ import com.example.travelwithmeapp.adapters.CarouselAdapter
 import com.example.travelwithmeapp.databinding.FragmentHotelBinding
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
+import com.example.travelwithmeapp.utils.TravelWithMeApiManager
 import com.example.travelwithmeapp.utils.Utilities
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -27,6 +30,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.carousel.CarouselSnapHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.time.OffsetDateTime
 
 
@@ -34,6 +41,7 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentHotelBinding
     private var utilities = Utilities()
     private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager;
+    private lateinit var travelWithMeApiManager: TravelWithMeApiManager;
 
     private lateinit var recyclerResena: RecyclerView
     private lateinit var adaptadorResena: ResenaHotelAdapter
@@ -92,6 +100,7 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
 
     private fun inicializar() {
         firebaseFirestoreManager = FirebaseFirestoreManager(requireContext(), binding.root)
+        travelWithMeApiManager = TravelWithMeApiManager(requireContext())
         utilities = Utilities()
         recogerIntent()
         recogerUidActMain()
@@ -110,6 +119,7 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun inicializarTextosYBotones() {
         //toolbar
         utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "${hotel.nombre}", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
@@ -125,6 +135,12 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         val comodidadesFormateadas = hotel.detalles.comodidades.joinToString(separator = ", ", postfix = ".")
         binding.textviewComodidadesTexto.text = comodidadesFormateadas
         binding.textviewDescripcionTexto.text = hotel.detalles.descripcion
+        binding.precio.text = "${utilities.quitarDecimalesSiAcabaEnCero(hotel.detalles.precio)}€"
+
+
+        //recargar las reseñas
+        recargarResenasHotel(hotel.id)
+
 
         //botones
         binding.buttonSitioWeb.setOnClickListener() {
@@ -173,6 +189,26 @@ class HotelFragment : Fragment(), OnMapReadyCallback {
         val bundle = Bundle()
         bundle.putSerializable("hotel", hotel)
         findNavController()?.navigate(R.id.action_hotelFragment_to_resenaFragment, bundle)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun recargarResenasHotel(id: Long) {
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                var hotelRecogido = travelWithMeApiManager.buscarHotelPorIdParent(id)
+                hotel.resenas = hotelRecogido.resenas
+
+                // Actualiza el RecyclerView en el hilo principal (no deja hacerlo en una corrutina)
+                withContext(Dispatchers.Main) {
+                    adaptadorResena.setData(hotel.resenas)
+                }
+
+            } catch (e: Exception) {
+                Log.v("recargarResenasHotel", "${e.message}")
+                view?.let { utilities.lanzarSnackBarCorto("Error cargar las reseñas", it) };
+            }
+        }
     }
 
 

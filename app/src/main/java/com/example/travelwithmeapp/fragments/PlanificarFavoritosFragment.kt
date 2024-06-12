@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.activities.MainActivity
-import com.example.travelwithmeapp.adapters.PlanificarFavoritosAdapter
+import com.example.travelwithmeapp.adapters.BuscarHotelesAdapter
 import com.example.travelwithmeapp.databinding.FragmentPlanificarFavoritosBinding
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
@@ -29,7 +29,7 @@ import kotlinx.coroutines.withContext
 class PlanificarFavoritosFragment : Fragment() {
     private lateinit var binding: FragmentPlanificarFavoritosBinding
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adaptadorRecycler: PlanificarFavoritosAdapter
+    private lateinit var adaptadorRecycler: BuscarHotelesAdapter
 
     private var listaIdsHoteles = ArrayList<String>()
     private var listaHotelesFav = ArrayList<Hotel>()
@@ -122,7 +122,7 @@ class PlanificarFavoritosFragment : Fragment() {
     // RECYCLER
     fun configurarRecycler() {
         recyclerView = binding.recyclerFavoritos
-        adaptadorRecycler = PlanificarFavoritosAdapter(listaHotelesFav) { hotel ->
+        adaptadorRecycler = BuscarHotelesAdapter(listaHotelesFav) { hotel ->
             intentAHotelFrag(hotel)
         }
         recyclerView.adapter = adaptadorRecycler

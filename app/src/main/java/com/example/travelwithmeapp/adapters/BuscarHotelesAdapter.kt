@@ -8,6 +8,7 @@ import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.example.travelwithmeapp.databinding.ViewholderBuscarhotelBinding
 import com.example.travelwithmeapp.models.Hotel
+import com.example.travelwithmeapp.utils.Utilities
 
 
 class BuscarHotelesAdapter(
@@ -15,11 +16,16 @@ class BuscarHotelesAdapter(
     val lambda: (Hotel) -> Unit)
     : RecyclerView.Adapter<BuscarHotelesAdapter.HotelHolder>() {
 
+    val utilities = Utilities()
+
     inner class HotelHolder(val itemBinding: ViewholderBuscarhotelBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
         fun bindItem(hotel: Hotel) {
             itemBinding.textviewNombre.text = hotel.nombre
             itemBinding.textViewProvinciaPais.text = "${hotel.direccion.ciudad}, ${hotel.direccion.pais}"
+            itemBinding.textViewDescripcion.text = hotel.detalles.descripcion
+
+            itemBinding.textViewPrecio.text = "${utilities.quitarDecimalesSiAcabaEnCero(hotel.detalles.precio)}€"
             if(hotel.fotos.size > 0) {
                 try {
                     itemBinding.imagen.load(hotel?.fotos?.get(0)) {

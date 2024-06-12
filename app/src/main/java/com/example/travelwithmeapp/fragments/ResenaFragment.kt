@@ -9,6 +9,7 @@ import com.example.travelwithmeapp.databinding.FragmentResenaBinding
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.activities.MainActivity
@@ -66,6 +67,8 @@ class ResenaFragment : Fragment() {
         recogerUserActMain()
         recogerDatosUsuarioDb()
 
+        utilities.crearToolbarFragmSecundario(binding.toolbar.toolbarLayout, "¡Valora tu experiencia!", binding.toolbar.toolbarLayoutTitle, activity as AppCompatActivity)
+
         binding.buttonResena.setOnClickListener {
             if(user != null) {
                 crearResena()
@@ -75,10 +78,13 @@ class ResenaFragment : Fragment() {
 
     }
 
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     fun crearResena() {
         // Recoger la calificación de la RatingBar
-        val rating = binding.ratingBarResenas.rating.toInt()
+        val rating = binding.ratingBarResenas.rating
+        Log.v("rating", rating.toString())
 
         // Recoger el texto de la reseña del EditText
         val textoResena = binding.editTextTextoResena.text.toString()
@@ -96,7 +102,7 @@ class ResenaFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
                 travelWithMeApiManager.postResenaCorrutina(resena, hotel.id)
             withContext(Dispatchers.Main) {
-                intentAHotelesFragment()
+                requireActivity().onBackPressed()
             }
         }
     }

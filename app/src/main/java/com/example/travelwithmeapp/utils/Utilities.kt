@@ -238,4 +238,17 @@ class Utilities {
         // Parsear la cadena a LocalDate utilizando el formateador
         return LocalDate.parse(string, formatter)
     }
+
+    // =============================================================================================
+    // QUITAR DECIMALES A LOS PRECIOS
+    // =============================================================================================
+
+
+    fun quitarDecimalesSiAcabaEnCero(double: Double): String {
+        if (double % 1 == 0.0) {
+            return double.toInt().toString()
+        } else {
+            return double.toString()
+        }
+    }
  }
