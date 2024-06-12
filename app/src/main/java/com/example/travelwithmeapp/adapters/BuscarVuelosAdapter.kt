@@ -9,7 +9,6 @@ import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ViewholderBuscarvueloBinding
-import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.Vuelo
 import com.example.travelwithmeapp.utils.Utilities
 import java.time.LocalTime
@@ -20,6 +19,8 @@ class BuscarVuelosAdapter(
     val lista: ArrayList<Vuelo>,
     val lambda: (Vuelo) -> Unit)
     : RecyclerView.Adapter<BuscarVuelosAdapter.BuscarVueloHolder>() {
+
+    val utilities = Utilities()
 
     inner class BuscarVueloHolder(val itemBinding: ViewholderBuscarvueloBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
@@ -52,21 +53,39 @@ class BuscarVuelosAdapter(
         val horaSalida = vuelo.getPrimerTrayecto().fechaSalida.toLocalTime()
         val horaLlegada = vuelo.getUltimoTrayecto().fechaLlegada.toLocalTime()
 
-        if (horaSalida.isAfter(LocalTime.of(7, 0)) && horaLlegada.isBefore(LocalTime.of(19, 0))) {
-            // Horario diurno
+        //compruebo si la salida y la llegada son por la mañana o por la noche
+        val horaAmanecer = LocalTime.of(7, 0)
+        val horaAtardecer = LocalTime.of(19, 0)
+        var salidaDiurnaFlag: Boolean;
+        var llegadaDiurnaFlag: Boolean;
+
+        if(utilities.horaEstaEntre(horaSalida, horaAmanecer, horaAtardecer)) {
+            salidaDiurnaFlag = true;
+        }
+        else {
+            salidaDiurnaFlag = false;
+        }
+
+        if(utilities.horaEstaEntre(horaLlegada, horaAmanecer, horaAtardecer)) {
+            llegadaDiurnaFlag = true;
+        }
+        else {
+            llegadaDiurnaFlag = false;
+        }
+
+        //dependiendo de si el vuelo es por el dia o por la noche, le doy un icono
+        if(salidaDiurnaFlag && llegadaDiurnaFlag) {
             itemBinding.imagen.setImageResource(R.drawable.sun_icon)
             ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#FFCC00")));
-        } else if ((horaSalida.isAfter(LocalTime.of(19, 0)) || horaSalida.isBefore(LocalTime.of(7, 0))) &&
-            (horaLlegada.isBefore(LocalTime.of(7, 0)) || horaLlegada.isAfter(horaSalida))) {
-            // Horario nocturno
+        }
+        else if(!salidaDiurnaFlag && !llegadaDiurnaFlag) {
             itemBinding.imagen.setImageResource(R.drawable.moon_icon);
             ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#5856D6")));
-        } else {
-            // Fuera de los horarios diurno y nocturno
+        }
+        else {
             itemBinding.imagen.setImageResource(R.drawable.sun_moon_icon)
             ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#FF3B30")));
         }
-
     }
 
     fun setData(nuevaLista: ArrayList<Vuelo>) {

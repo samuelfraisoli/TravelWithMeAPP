@@ -49,24 +49,14 @@
                 app:layout_constraintTop_toTopOf="@+id/duracion" />
 
             <TextView
-                android:id="@+id/titulo_vuelo"
+                android:id="@+id/escalas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:text="Tu vuelo a Barcelona"
-                android:textSize="25dp"
+                android:text="2 escalas"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/escalas"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="2 escalas"
-                app:layout_constraintStart_toStartOf="@+id/titulo_vuelo"
-                app:layout_constraintTop_toBottomOf="@+id/titulo_vuelo" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/trayectos"

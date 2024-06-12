@@ -52,9 +52,10 @@ class VueloFragment : Fragment() {
         binding.escalas2.text = numeroEscalas(vuelo)
         binding.tipoVuelo2.text = vuelo.tipo
         binding.tipoVuelo.text = vuelo.tipo
+        binding.precio.text = "${utilities.quitarDecimalesSiAcabaEnCero(vuelo.precio)}€"
         binding.equipajeDescipcion.alto.text =  "${vuelo.equipaje.alto} cm"
         binding.equipajeDescipcion.ancho.text =  "${vuelo.equipaje.ancho} cm"
-        binding.equipajeDescipcion.peso.text = "${vuelo.equipaje.peso} cm"
+        binding.equipajeDescipcion.peso.text = "${vuelo.equipaje.peso} kg"
     }
 
     fun recogerIntent() {

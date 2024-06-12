@@ -177,7 +177,7 @@ class Utilities {
     }
 
     // =============================================================================================
-    // CONVERSORES DE FECHAS
+    // FECHAS
     // =============================================================================================
     fun formatearOffsetDateTimeDDMMMM(offsetDateTime: OffsetDateTime): String {
         // Crear un DateTimeFormatter con el patrón "dd MMMM" y el Locale español
@@ -237,6 +237,14 @@ class Utilities {
 
         // Parsear la cadena a LocalDate utilizando el formateador
         return LocalDate.parse(string, formatter)
+    }
+
+    fun horaEstaEntre(
+        hora: LocalTime,
+        horaInicio: LocalTime,
+        horaFin: LocalTime
+    ): Boolean {
+        return !hora.isBefore(horaInicio) && !hora.isAfter(horaFin)
     }
 
     // =============================================================================================
