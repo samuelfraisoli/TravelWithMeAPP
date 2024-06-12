@@ -74,7 +74,7 @@ data class Vuelo(
     }
 
     fun getNumeroEscalas() : String {
-        if(trayectos.size == 1 && trayectos.size == 0) {
+        if(trayectos.size == 1 || trayectos.size == 0) {
             return "Sin escalas" }
         else if(trayectos.size == 2) {
             return "1 escala" }
