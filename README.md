@@ -23,7 +23,7 @@ Este Trabajo de Fin de Grado (TFG) ha sido desarrollado por:
 - Javier Cuesta
 
 
-![Texto alternativo](https://imgur.com/Qv2KlxE)
+![Texto alternativo](https://i.imgur.com/Qv2KlxE.png)
 
 
 
