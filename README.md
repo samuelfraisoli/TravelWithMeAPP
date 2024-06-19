@@ -19,6 +19,7 @@ https://appetize.io/app/5omyjxid5beyss4yfxqu2kxpem?device=pixel7&osVersion=13.0
 
 Este Trabajo de Fin de Grado (TFG) ha sido desarrollado por:
 - Samuel Fraisolí
-- Javier Cuesta
 - Matías Martínez
+- Javier Cuesta
+
 
