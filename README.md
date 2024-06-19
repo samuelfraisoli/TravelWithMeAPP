@@ -2,7 +2,6 @@
 TravelWithMeApp es una aplicación de reserva de vuelos y hoteles. Está diseñada para ayudarte a planificar tus viajes, permitiéndote buscar y filtrar vuelos y alojamientos.
 
 
-
 ## Características
 - **Reserva de Vuelos**: Encuentra y reserva vuelos a tus destinos favoritos.
 - **Reserva de Hoteles**: Busca y filtra hoteles para encontrar el alojamiento perfecto.
@@ -13,6 +12,13 @@ TravelWithMeApp es una aplicación de reserva de vuelos y hoteles. Está diseña
 - **Área de gestión de usuarios**: Edita tus datos siempre que quieras desde nuestra área de gestión de usuarios.
 
 
-
 ## Link para probar la APP
 https://appetize.io/app/5omyjxid5beyss4yfxqu2kxpem?device=pixel7&osVersion=13.0
+
+## Desarrolladores
+
+Este Trabajo de Fin de Grado (TFG) ha sido desarrollado por:
+- Samuel Fraisolí
+- Javier Cuesta
+- Matías Martínez
+
