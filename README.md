@@ -25,5 +25,11 @@ Este Trabajo de Fin de Grado (TFG) ha sido desarrollado por:
 
 ![Texto alternativo](https://i.imgur.com/Qv2KlxE.png)
 
+![Texto alternativo](https://i.imgur.com/scdmZDu.png)
+
+![Texto alternativo](https://i.imgur.com/P0ottSR.png)
+
+![Texto alternativo](https://i.imgur.com/u3sJs4U.png)
+
 
 
