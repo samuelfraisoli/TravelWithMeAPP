@@ -16,6 +16,11 @@ import com.example.travelwithmeapp.utils.FirebaseAuthManager
 import com.example.travelwithmeapp.utils.Utilities
 import com.google.firebase.auth.FirebaseAuth
 
+/**
+ * Fragment that shows a menu to access account preferences
+ *
+ * @author Javier Cuesta
+ */
 
 class CuentaFragment : Fragment() {
     private lateinit var binding: FragmentCuentaBinding

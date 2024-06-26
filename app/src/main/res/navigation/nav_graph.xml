@@ -16,9 +16,6 @@
 
 
         <action
-            android:id="@+id/action_explorarFragment_to_cosasQueHacerFragment"
-            app:destination="@id/cosasQueHacerFragment" />
-        <action
             android:id="@+id/action_explorarFragment_to_buscarFragment"
             app:destination="@id/buscarFragment" />
         <argument
@@ -40,12 +37,6 @@
             android:id="@+id/action_explorarFragment_to_mapaPuntosInteresFragment"
             app:destination="@id/mapaPuntosInteresFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/cosasQueHacerFragment"
-        android:name="com.example.travelwithmeapp.fragments.CosasQueHacerFragment"
-        android:label="fragment_cosas_que_hacer"
-        tools:layout="@layout/fragment_cosas_que_hacer"></fragment>
 
     <fragment
         android:id="@+id/buscarFragment"

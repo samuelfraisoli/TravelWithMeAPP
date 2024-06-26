@@ -7,6 +7,14 @@ import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.Resena
 import com.example.travelwithmeapp.utils.Utilities
 
+/**
+ * Adapter for reviews recyclerview on HotelFragment
+ *
+ * @author Matías Martínez
+ * @author Javier Cuesta
+ * @author Samuel Fraisoli
+ */
+
 class ResenaHotelAdapter(
     private val lista: ArrayList<Resena>,
 ) : RecyclerView.Adapter<ResenaHotelAdapter.ResenaHolder>() {
@@ -19,7 +27,6 @@ class ResenaHotelAdapter(
             itemBinding.horaFechaResena.text = utilities.formatearOffsetDateTimeDDMMYYYY(resena.fecha)
             itemBinding.textDescripcionPlan.text = resena.contenido
             itemBinding.ratingBar.rating = resena.nota
-
         }
     }
 

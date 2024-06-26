@@ -30,6 +30,13 @@ import java.time.format.DateTimeFormatter
 import java.util.Date
 import java.util.Locale
 
+/**
+ * A collection of utility functions for various tasks such as managing date pickers, creating toolbars,
+ * displaying snackbar messages, handling dialogs, formatting dates, and manipulating prices.
+ *
+ * @author Samuel Fraisoli
+ */
+
 class Utilities {
 
     // =============================================================================================

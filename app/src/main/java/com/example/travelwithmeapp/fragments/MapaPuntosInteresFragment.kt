@@ -24,6 +24,12 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
+/**
+ * Fragments that shows a map with the user location and points of interest near them
+ *
+ * @author Samuel Fraisoli
+ */
+
 class MapaPuntosInteresFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentMapaPuntosInteresBinding
     private lateinit var utilities: Utilities

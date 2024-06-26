@@ -26,6 +26,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Date
 
+/**
+ * Fragment that shows a clicable list of flights based on origin, destination and dates
+ *
+ * @author Samuel Fraisoli
+ */
 
 class BuscarVuelosFragment : Fragment() {
     private lateinit var binding: FragmentBuscarVuelosBinding

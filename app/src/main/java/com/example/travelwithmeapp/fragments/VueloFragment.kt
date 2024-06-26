@@ -17,6 +17,11 @@ import com.example.travelwithmeapp.models.Vuelo
 import com.example.travelwithmeapp.utils.TravelWithMeApiManager
 import com.example.travelwithmeapp.utils.Utilities
 
+/**
+ * Fragment to display details of a flight including duration, stops, and luggage information.
+ *
+ * @author Samuel Fraisoli
+ */
 
 class VueloFragment : Fragment() {
     private lateinit var binding: FragmentVueloBinding

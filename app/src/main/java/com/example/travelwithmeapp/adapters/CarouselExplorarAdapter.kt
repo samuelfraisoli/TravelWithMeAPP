@@ -11,6 +11,12 @@ import coil.transform.RoundedCornersTransformation
 import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.models.Hotel
 
+/**
+ * Adapter for photo carousel of ExplorarFragment
+ *
+ * @author Samuel Fraisoli
+ */
+
 class CarouselExplorarAdapter (
     val lista: ArrayList<Hotel>,
     val lambda: (Hotel) -> Unit)

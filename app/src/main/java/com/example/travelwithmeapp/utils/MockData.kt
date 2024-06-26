@@ -13,6 +13,13 @@ import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.ZoneOffset
 
+/**
+ * Class responsible for providing mock data generation for flights, hotels, and hotel photos.
+ * This class is used for testing and demo purposes.
+ *
+ * @author Samuel Fraisoli
+ */
+
 class MockData {
     @RequiresApi(Build.VERSION_CODES.O)
     fun listaPruebaVuelos(): ArrayList<Vuelo> {

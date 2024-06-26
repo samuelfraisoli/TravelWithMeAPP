@@ -23,6 +23,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Fragment that shows the main fragment of the app
+ *
+ * @author Matías Martínez
+ */
+
+
 class ExplorarFragment : Fragment() {
     private var mockData = MockData()
     private lateinit var binding: FragmentExplorarBinding

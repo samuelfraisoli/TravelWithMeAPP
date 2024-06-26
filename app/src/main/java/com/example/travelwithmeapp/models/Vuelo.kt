@@ -7,11 +7,22 @@ import java.time.Duration
 import java.time.OffsetDateTime
 
 /**
- * id -> la id con la que lo guardamos en la BD
- * id_vuelo -> la id que le da la aerolínea (ej. C3451)
- * tipo -> turista, business, etc
+ * Data class representing flight information.
  *
+ * @property id Unique identifier of the flight (in our database).
+ * @property id_vuelo Flight identifier string given by the airline.
+ * @property aerolinea Airline operating the flight.
+ * @property precio Price of the flight.
+ * @property tipo Type of flight (e.g., turista, business).
+ * @property origen Departure location of the flight.
+ * @property destino Destination location of the flight.
+ * @property fecha Departure date and time of the flight.
+ * @property trayectos List of flight segments or legs.
+ * @property equipaje Details of the baggage allowance for the flight.
+ *
+ * @author Samuel Fraisoli
  */
+
 data class Vuelo(
     var id: Long = -1,
     var id_vuelo: String = "",

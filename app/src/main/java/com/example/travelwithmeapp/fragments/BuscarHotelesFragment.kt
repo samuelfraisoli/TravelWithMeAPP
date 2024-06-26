@@ -24,6 +24,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+/**
+ * Fragment that shows a clicable list of hotels based on a destination and dates
+ *
+ * @author Samuel Fraisoli
+ */
 
 class BuscarHotelesFragment : Fragment() {
     private lateinit var binding: FragmentBuscarHotelesBinding

@@ -4,6 +4,19 @@ import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.util.Date
 
+/**
+ * Data class representing hotel details.
+ *
+ * @property id The unique identifier of the hotel.
+ * @property nombre The name of the hotel.
+ * @property fotos List of URLs to hotel photos.
+ * @property fechasLibres List of available dates for booking.
+ * @property direccion The address details of the hotel.
+ * @property detalles The additional details of the hotel.
+ * @property resenas List of reviews for the hotel.
+ *
+ * @author Samuel Fraisoli
+ */
 
 data class Hotel (
     var id: Long = -1,

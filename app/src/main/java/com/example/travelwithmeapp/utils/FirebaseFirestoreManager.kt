@@ -7,6 +7,15 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FieldValue
 
+/**
+ * Class responsible for managing Firestore database operations related to user data.
+ *
+ * @property context Context of the activity.
+ * @property view View to display UI components like Snackbars.
+ *
+ * @author Samuel Fraisoli
+ */
+
 class FirebaseFirestoreManager(var context: Context, var view: View) {
     private val firebaseFirestore = FirebaseFirestore.getInstance()
     private val utilities = Utilities()

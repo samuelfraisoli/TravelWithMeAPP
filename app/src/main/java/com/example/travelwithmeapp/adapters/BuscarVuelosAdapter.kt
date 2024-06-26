@@ -14,6 +14,11 @@ import com.example.travelwithmeapp.utils.Utilities
 import java.time.LocalTime
 
 
+/**
+ * Adapter for recyclerview in BuscarVuelosFragment
+ *
+ * @author Samuel Fraisoli
+ */
 
 class BuscarVuelosAdapter(
     val lista: ArrayList<Vuelo>,

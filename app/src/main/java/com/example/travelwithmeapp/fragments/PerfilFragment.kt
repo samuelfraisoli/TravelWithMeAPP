@@ -12,6 +12,12 @@ import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.example.travelwithmeapp.utils.Utilities
 import com.example.travelwithmeapp.models.User
 
+/**
+ *  Fragment for managing user profile information.
+ *
+ * @author Javier Cuesta
+ */
+
 
 class PerfilFragment : Fragment() {
     private lateinit var binding: FragmentPerfilBinding

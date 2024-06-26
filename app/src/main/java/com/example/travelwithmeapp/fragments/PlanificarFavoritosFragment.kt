@@ -25,7 +25,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+/**
+ *  Fragment for displaying favorite hotels planned by the user.
+ *
+ * @author Matías Martínez
+ */
 class PlanificarFavoritosFragment : Fragment() {
     private lateinit var binding: FragmentPlanificarFavoritosBinding
     private lateinit var recyclerView: RecyclerView

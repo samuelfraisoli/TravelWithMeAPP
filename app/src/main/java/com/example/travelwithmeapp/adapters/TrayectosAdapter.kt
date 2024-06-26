@@ -15,6 +15,12 @@ import com.example.travelwithmeapp.utils.Utilities
 import java.util.Locale
 
 
+/**
+ * Adapter for recyclerview of flight routes in a flight, of VueloFragment
+ *
+ * @author Samuel Fraisoli
+ */
+
 class TrayectosAdapter(
     val lista: List<TrayectoVuelo>
     )

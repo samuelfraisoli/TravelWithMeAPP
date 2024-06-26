@@ -13,6 +13,12 @@ import com.example.travelwithmeapp.utils.FirebaseAuthManager
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.example.travelwithmeapp.utils.Utilities
 
+/**
+ * Fragment for managing user preferences.
+ *
+ * @author Javier Cuesta
+ */
+
 class PreferenciasFragment : Fragment(){
 
     private lateinit var binding: FragmentPreferenciasBinding

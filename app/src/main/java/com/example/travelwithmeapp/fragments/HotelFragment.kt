@@ -36,6 +36,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.OffsetDateTime
 
+/**
+ * Fragment for displaying details of a specific hotel, including its location, amenities,
+ * reviews, and options to book or view its website.
+ *
+ * @author Samuel Fraisoli
+ */
 
 class HotelFragment : Fragment(), OnMapReadyCallback {
     private lateinit var binding: FragmentHotelBinding

@@ -6,9 +6,25 @@ import java.io.Serializable
 import java.time.OffsetDateTime
 
 /**
- * id -> la id con la que lo guardamos en la BD
- * id_trayecto -> la id que le da la aerolínea (ej. C3451)
+ * Data class representing a flight segment or itinerary.
+ *
+ * @property id Unique identifier of the flight segment (in our database).
+ * @property id_trayecto Identifier of the flight segment given by the airline.
+ * @property aerolinea Airline associated with the flight segment.
+ * @property tipo Type of flight segment (e.g., direct, connecting).
+ * @property fechaSalida Departure date and time of the flight segment.
+ * @property fechaLlegada Arrival date and time of the flight segment.
+ * @property escala Indicates if there is a layover (true) or not (false).
+ * @property fechaInicioEscala Start date and time of the layover.
+ * @property fechaFinEscala End date and time of the layover.
+ * @property terminalSalida Departure terminal of the flight segment.
+ * @property terminalLlegada Arrival terminal of the flight segment.
+ * @property origen Departure airport of the flight segment.
+ * @property destino Arrival airport of the flight segment.
+ *
+ * @author Samuel Fraisoli
  */
+
 data class TrayectoVuelo @RequiresApi(Build.VERSION_CODES.O) constructor(
     var id: Long = -1,
     var id_trayecto: String = "",

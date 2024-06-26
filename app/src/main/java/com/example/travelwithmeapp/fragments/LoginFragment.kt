@@ -19,7 +19,13 @@ import com.example.travelwithmeapp.utils.Utilities
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 
-
+/**
+ * Fragment for handling user login functionality, including email/password login,
+ * Google login, and password reset.
+ *
+ * @author Samuel Fraisoli
+ * @author Matías Martínez
+ */
 
 class LoginFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentLoginBinding
