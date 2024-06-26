@@ -7,6 +7,14 @@ import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.models.Resena
 import com.example.travelwithmeapp.utils.Utilities
 
+/**
+ * Adapter for reviews recyclerview on HotelFragment
+ *
+ * @author Matías Martínez
+ * @author Javier Cuesta
+ * @author Samuel Fraisoli
+ */
+
 class ResenaHotelAdapter(
     private val lista: ArrayList<Resena>,
 ) : RecyclerView.Adapter<ResenaHotelAdapter.ResenaHolder>() {

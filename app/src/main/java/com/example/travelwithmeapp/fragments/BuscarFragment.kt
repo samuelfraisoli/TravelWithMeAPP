@@ -13,6 +13,11 @@ import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.FragmentBuscarBinding
 import com.example.travelwithmeapp.utils.Utilities
 
+/**
+ * Fragment for searching flights or hotels
+ *
+ * @author Samuel Fraisoli
+ */
 
 class BuscarFragment : Fragment() {
     private lateinit var binding: FragmentBuscarBinding

@@ -11,6 +11,12 @@ import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.databinding.ViewholderCarouselBinding
 import com.example.travelwithmeapp.models.Hotel
 
+/**
+ * Adapter for photo carousels of the application
+ *
+ * @author Samuel Fraisoli
+ */
+
 class CarouselAdapter(
     val lista: List<String>)
  : RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>() {

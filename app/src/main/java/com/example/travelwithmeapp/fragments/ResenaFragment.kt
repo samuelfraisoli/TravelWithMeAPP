@@ -25,6 +25,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.time.OffsetDateTime
 
+/**
+ * Fragment for submitting reviews for hotels.
+ *
+ * @author Matías Martínez
+ * @author Javier Cuesta
+ */
 class ResenaFragment : Fragment() {
     private lateinit var binding: FragmentResenaBinding
     private lateinit var travelWithMeApiManager: TravelWithMeApiManager

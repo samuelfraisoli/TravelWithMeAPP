@@ -24,7 +24,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
+/**
+ * Adapter for recyclerview of flight routes in a flight, of VueloFragment
+ *
+ * @author Samuel Fraisoli
+ */
 class BuscarHotelesFragment : Fragment() {
     private lateinit var binding: FragmentBuscarHotelesBinding
     private lateinit var recyclerView: RecyclerView

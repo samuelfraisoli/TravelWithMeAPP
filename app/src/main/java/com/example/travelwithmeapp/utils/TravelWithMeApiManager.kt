@@ -23,6 +23,13 @@ import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
+/**
+ * Class responsible for managing API interactions with TravelWithMeAPI related to travel information retrieval such as flights and hotels.
+ * Uses Volley for network requests and coroutines for asynchronous operations.
+ *
+ * @author Samuel Fraisoli
+ */
+
 class TravelWithMeApiManager(var context: Context) {
     @RequiresApi(Build.VERSION_CODES.O)
     val utilities = Utilities()

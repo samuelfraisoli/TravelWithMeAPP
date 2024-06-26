@@ -12,6 +12,11 @@ import com.example.travelwithmeapp.models.User
 import com.example.travelwithmeapp.utils.FirebaseFirestoreManager
 import com.example.travelwithmeapp.utils.FirebaseAuthManager
 
+/**
+ * Main activity of the application
+ *
+ * @author Samuel Fraisolí
+ */
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

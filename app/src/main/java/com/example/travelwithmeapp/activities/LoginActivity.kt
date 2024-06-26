@@ -9,7 +9,9 @@ import com.example.travelwithmeapp.models.User
 import com.example.travelwithmeapp.utils.FirebaseAuthManager
 
 /**
+ * Activity for handling user login
  *
+ * @author Samuel Fraisolí
  */
 
 class LoginActivity : AppCompatActivity() {

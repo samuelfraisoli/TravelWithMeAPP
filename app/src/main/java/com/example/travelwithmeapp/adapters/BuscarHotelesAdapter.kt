@@ -10,6 +10,11 @@ import com.example.travelwithmeapp.databinding.ViewholderBuscarhotelBinding
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.Utilities
 
+/**
+ * Adapter for recyclerview in BuscarHotelesFragment
+ *
+ * @author Samuel Fraisoli
+ */
 
 class BuscarHotelesAdapter(
     val lista: ArrayList<Hotel>,

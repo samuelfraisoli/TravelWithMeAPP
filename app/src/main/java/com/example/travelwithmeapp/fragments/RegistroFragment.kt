@@ -22,6 +22,12 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
+/**
+ * Fragment responsible for user registration.
+ *
+ * @author Javier Cuesta
+ * @author Samuel Fraisoli
+ */
 
 class RegistroFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentRegistroBinding
