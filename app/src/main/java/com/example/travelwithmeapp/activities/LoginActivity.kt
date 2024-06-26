@@ -8,12 +8,13 @@ import com.example.travelwithmeapp.databinding.ActivityLoginBinding
 import com.example.travelwithmeapp.models.User
 import com.example.travelwithmeapp.utils.FirebaseAuthManager
 
+/**
+ *
+ */
+
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-
-    private lateinit var email: Editable
-    private lateinit var password: Editable
     private lateinit var firebaseAuthManager: FirebaseAuthManager
 
     private val CODIGO_GOOGLE = 100
