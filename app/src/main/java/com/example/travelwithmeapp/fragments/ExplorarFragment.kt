@@ -7,11 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.travelwithmeapp.R
-import com.example.travelwithmeapp.adapters.CarouselAdapter
-import com.example.travelwithmeapp.adapters.CarouselExplorarAdapter
+import com.example.travelwithmeapp.adapters.CarouselClicableAdapter
 import com.example.travelwithmeapp.databinding.FragmentExplorarBinding
 import com.example.travelwithmeapp.models.Hotel
 import com.example.travelwithmeapp.utils.MockData
@@ -37,7 +34,7 @@ class ExplorarFragment : Fragment() {
     private lateinit var utilities: Utilities
 
     private var listaHotelesDestacados: ArrayList<Hotel> = ArrayList()
-    private lateinit var carouselExplorarAdapter: CarouselExplorarAdapter
+    private lateinit var carouselClicableAdapter: CarouselClicableAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,7 +81,7 @@ class ExplorarFragment : Fragment() {
 
                 // Actualiza el RecyclerView en el hilo principal (no deja hacerlo en una corrutina)
                 withContext(Dispatchers.Main) {
-                    carouselExplorarAdapter.setData(listaHotelesDestacados)
+                    carouselClicableAdapter.setData(listaHotelesDestacados)
                 }
 
             } catch (e: Exception) {
@@ -98,10 +95,10 @@ class ExplorarFragment : Fragment() {
     }
 
     private fun inicializarCarouselRecyclerView() {
-        carouselExplorarAdapter = CarouselExplorarAdapter(listaHotelesDestacados) {
+        carouselClicableAdapter = CarouselClicableAdapter(listaHotelesDestacados) {
                 hotel -> intentAHotelFrag(hotel)
         }
-        binding.carouselRecyclerView.adapter = carouselExplorarAdapter
+        binding.carouselRecyclerView.adapter = carouselClicableAdapter
 
         var snaphelper = CarouselSnapHelper().attachToRecyclerView(binding.carouselRecyclerView)
     }

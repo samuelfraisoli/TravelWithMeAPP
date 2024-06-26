@@ -15,11 +15,14 @@ import java.time.LocalTime
 
 
 /**
- * Adapter for recyclerview in BuscarVuelosFragment
+ * Adapter class for displaying flights in a RecyclerView for search results.
+ * Handles binding flight data to the UI and capturing click events.
+ *
+ * @property lista The list of flights to display.
+ * @property lambda The lambda function to execute when a flight item is clicked.
  *
  * @author Samuel Fraisoli
  */
-
 class BuscarVuelosAdapter(
     val lista: ArrayList<Vuelo>,
     val lambda: (Vuelo) -> Unit)
@@ -27,9 +30,18 @@ class BuscarVuelosAdapter(
 
     val utilities = Utilities()
 
+    /**
+     * Inner ViewHolder class to hold and bind views for each flight item.
+     * @param itemBinding The ViewholderBuscarvueloBinding object for the flight item layout.
+     */
     inner class BuscarVueloHolder(val itemBinding: ViewholderBuscarvueloBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
             val utilities = Utilities()
+
+        /**
+         * Binds flight data to the views within the ViewHolder.
+         * @param vuelo The Vuelo object containing data to bind.
+         */
         @RequiresApi(Build.VERSION_CODES.O)
         fun bindItem(vuelo: Vuelo) {
 
@@ -42,7 +54,7 @@ class BuscarVuelosAdapter(
             itemBinding.tiempoVuelo.text = vuelo.getDuracionTotalFormatoHHhMMm()
             itemBinding.hora.text = "${utilities.formatoOffsetDateTimeHHMM(vuelo.getPrimerTrayecto().fechaSalida)} - ${utilities.formatoOffsetDateTimeHHMM(vuelo.getUltimoTrayecto().fechaLlegada)}"
 
-            //añado un onclicklistener a cada viewgholder
+            // Set OnClickListener to handle click events on each ViewHolder
             itemBinding.root.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -52,13 +64,29 @@ class BuscarVuelosAdapter(
         }
     }
 
+    /**
+     * Sets new data to be displayed in the RecyclerView.
+     * @param nuevaLista The new list of flights to display.
+     */
+    fun setData(nuevaLista: ArrayList<Vuelo>) {
+        lista.clear()
+        lista.addAll(nuevaLista)
+        notifyDataSetChanged() // Notificar al RecyclerView de que los datos han cambiado
+    }
+
+    /**
+     * Chooses the appropriate icon for the flight based on departure and arrival times.
+     *
+     * @param vuelo The Vuelo object representing the flight.
+     * @param itemBinding The ViewholderBuscarvueloBinding object for the flight item layout.
+     */
     fun elegirIcono(vuelo: Vuelo, itemBinding: ViewholderBuscarvueloBinding) {
         var imagenId = 0
-        //convierte los objetos offsetDateTime a la hora en su zona horaria (si eran las 14:00 UTC+2, ahora lo pasa a ser solo las 14:00)
+        // Converts OffsetDateTime objects to local times (e.g., from 14:00 UTC+2 to just 14:00)
         val horaSalida = vuelo.getPrimerTrayecto().fechaSalida.toLocalTime()
         val horaLlegada = vuelo.getUltimoTrayecto().fechaLlegada.toLocalTime()
 
-        //compruebo si la salida y la llegada son por la mañana o por la noche
+        // Checks if departure and arrival times are in the morning or evening
         val horaAmanecer = LocalTime.of(7, 0)
         val horaAtardecer = LocalTime.of(19, 0)
         var salidaDiurnaFlag: Boolean;
@@ -78,7 +106,7 @@ class BuscarVuelosAdapter(
             llegadaDiurnaFlag = false;
         }
 
-        //dependiendo de si el vuelo es por el dia o por la noche, le doy un icono
+        // Sets appropriate icon based on whether the flight is daytime or nighttime
         if(salidaDiurnaFlag && llegadaDiurnaFlag) {
             itemBinding.imagen.setImageResource(R.drawable.sun_icon)
             ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#FFCC00")));
@@ -91,12 +119,6 @@ class BuscarVuelosAdapter(
             itemBinding.imagen.setImageResource(R.drawable.sun_moon_icon)
             ImageViewCompat.setImageTintList(itemBinding.imagen, ColorStateList.valueOf(Color.parseColor("#FF3B30")));
         }
-    }
-
-    fun setData(nuevaLista: ArrayList<Vuelo>) {
-        lista.clear()
-        lista.addAll(nuevaLista)
-        notifyDataSetChanged() // Notificar al RecyclerView de que los datos han cambiado
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuscarVueloHolder {

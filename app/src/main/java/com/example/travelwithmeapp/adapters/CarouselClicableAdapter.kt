@@ -12,24 +12,37 @@ import com.example.travelwithmeapp.R
 import com.example.travelwithmeapp.models.Hotel
 
 /**
- * Adapter for photo carousel of ExplorarFragment
+ * Adapter class for displaying hotel images in a clicable carousel.
+ *
+ * @property lista The list of hotels to display in the carousel.
+ * @property lambda Lambda function to handle click events on carousel images.
  *
  * @author Samuel Fraisoli
  */
 
-class CarouselExplorarAdapter (
+class CarouselClicableAdapter (
     val lista: ArrayList<Hotel>,
     val lambda: (Hotel) -> Unit)
-    : RecyclerView.Adapter<CarouselExplorarAdapter.CarouselViewHolder>() {
+    : RecyclerView.Adapter<CarouselClicableAdapter.CarouselViewHolder>() {
+
+    /**
+     * ViewHolder class for holding and binding hotel image views.
+     * @param view The view containing the carousel image layout.
+     */
     inner class CarouselViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val carouselImageView: AppCompatImageView =
             view.findViewById(R.id.carouselImageView)
 
+        /**
+         * Binds a hotel image URL to the ImageView using Coil library with rounded corners transformation.
+         * @param imageUrl The URL of the hotel image to load and display.
+         */
         fun bind(imageUrl: String) {
             carouselImageView.load(imageUrl) {
                 transformations(RoundedCornersTransformation(20f))
             }
 
+            // Set click listener to handle hotel item click events
             carouselImageView.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
@@ -38,11 +51,15 @@ class CarouselExplorarAdapter (
             }
         }
     }
+
+    /**
+     * Updates the data set with a new list of hotels.
+     * @param nuevaLista The new list of hotels to update the carousel with.
+     */
     fun setData(nuevaLista: ArrayList<Hotel>) {
-        Log.v("carousel setdata", "carousel setdata")
         lista.clear()
         lista.addAll(nuevaLista)
-        notifyDataSetChanged() // Notificar al RecyclerView de que los datos han cambiado
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {

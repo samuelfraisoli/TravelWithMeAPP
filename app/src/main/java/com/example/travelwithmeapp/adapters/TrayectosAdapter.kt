@@ -15,13 +15,8 @@ import com.example.travelwithmeapp.utils.Utilities
 import java.util.Locale
 
 /**
- * Adapter for recyclerview of flight routes in a flight, of VueloFragment
- *
- * @author Samuel Fraisoli
- */
-
-/**
- * Adapter for recyclerview of flight routes in a flight, of VueloFragment
+ * Adapter class for displaying flight segments (trayectos) in a RecyclerView.
+ * @property lista The list of flight segments to display.
  *
  * @author Samuel Fraisoli
  */
@@ -35,8 +30,12 @@ class TrayectosAdapter(
 
     inner class TrayectoHolder(val itemBinding: ViewholderTrayectoBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
-
         var utilities = Utilities()
+
+        /**
+         * Binds flight segment data to the UI elements in the ViewHolder.
+         * @param trayectoVuelo The flight segment object containing data to bind.
+         */
         @RequiresApi(Build.VERSION_CODES.O)
         fun bindItem(trayectoVuelo: TrayectoVuelo) {
             itemBinding.letrasTrayectoOrigen.text = trayectoVuelo.origen.ciudadAbrev
@@ -51,22 +50,17 @@ class TrayectosAdapter(
                 itemBinding.iconoAerolinea.load(trayectoVuelo.aerolinea) {
                     placeholder(R.drawable.plane2_icon)
                     error(R.drawable.plane2_icon)
-                    ImageViewCompat.setImageTintList(itemBinding.iconoAerolinea, ColorStateList.valueOf(
-                        Color.parseColor("#FFA3A3A3")));
+                    ImageViewCompat.setImageTintList(itemBinding.iconoAerolinea, ColorStateList.valueOf(Color.parseColor("#FFA3A3A3")));
                 }
 
-
-
                 itemBinding.letrasTrayectoDestino.text = trayectoVuelo.destino.ciudadAbrev
-                itemBinding.fechaLlegada.text =
-                    utilities.formatearOffsetDateTimeDDMMMM(trayectoVuelo.fechaLlegada)
+                itemBinding.fechaLlegada.text = utilities.formatearOffsetDateTimeDDMMMM(trayectoVuelo.fechaLlegada)
                 itemBinding.horaLlegada.text = utilities.formatoOffsetDateTimeHHMM(trayectoVuelo.fechaLlegada)
                 itemBinding.aeropuertoDestino.text = trayectoVuelo.destino.nombre
                 itemBinding.terminalDestino.text = trayectoVuelo.terminalLlegada
 
                 if (trayectoVuelo.escala) {
-                    itemBinding.tiempoEscala.text =
-                        "ESCALA: ${trayectoVuelo.getDuracionEscalaHHhMMm()}"
+                    itemBinding.tiempoEscala.text = "ESCALA: ${trayectoVuelo.getDuracionEscalaHHhMMm()}"
                 }
             }
         }

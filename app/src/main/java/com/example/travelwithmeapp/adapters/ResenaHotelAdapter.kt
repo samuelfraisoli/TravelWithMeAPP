@@ -8,7 +8,9 @@ import com.example.travelwithmeapp.models.Resena
 import com.example.travelwithmeapp.utils.Utilities
 
 /**
- * Adapter for reviews recyclerview on HotelFragment
+ * Adapter class for displaying hotel reviews in a RecyclerView.
+ *
+ * @property lista The list of reviews to display.
  *
  * @author Matías Martínez
  * @author Javier Cuesta
@@ -20,14 +22,33 @@ class ResenaHotelAdapter(
 ) : RecyclerView.Adapter<ResenaHotelAdapter.ResenaHolder>() {
     private val utilities = Utilities()
 
+    /**
+     * ViewHolder class for holding and binding review item views.
+     * @param itemBinding The View Binding object for the review item layout.
+     */
     inner class ResenaHolder(private val itemBinding: ViewholderResenaHotelBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
+
+        /**
+         * Binds review data to the UI elements in the ViewHolder.
+         * @param resena The review object containing data to bind.
+         */
         fun bindItem(resena: Resena) {
             itemBinding.textNombrePlan.text = resena.titulo
             itemBinding.horaFechaResena.text = utilities.formatearOffsetDateTimeDDMMYYYY(resena.fecha)
             itemBinding.textDescripcionPlan.text = resena.contenido
             itemBinding.ratingBar.rating = resena.nota
         }
+    }
+
+    /**
+     * Updates the data set with a new list of reviews.
+     * @param nuevaLista The new list of reviews to update the RecyclerView with.
+     */
+    fun setData(nuevaLista: ArrayList<Resena>) {
+        lista.clear()
+        lista.addAll(nuevaLista)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(
@@ -42,12 +63,6 @@ class ResenaHotelAdapter(
     override fun onBindViewHolder(holder: ResenaHotelAdapter.ResenaHolder, position: Int) {
         val resena = lista[position]
         holder.bindItem(resena)
-    }
-
-    fun setData(nuevaLista: ArrayList<Resena>) {
-        lista.clear()
-        lista.addAll(nuevaLista)
-        notifyDataSetChanged() // Notificar al RecyclerView de que los datos han cambiado
     }
 
     override fun getItemCount(): Int {

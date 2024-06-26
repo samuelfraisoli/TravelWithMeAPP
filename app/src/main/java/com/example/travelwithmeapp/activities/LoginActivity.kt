@@ -8,7 +8,7 @@ import com.example.travelwithmeapp.models.User
 import com.example.travelwithmeapp.utils.FirebaseAuthManager
 
 /**
- * Activity for handling user login
+ * "Activity where fragments for login initiation are launched. Checks whether the session is started or not."
  *
  * @author Samuel Fraisolí
  */
@@ -20,7 +20,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -30,7 +29,6 @@ class LoginActivity : AppCompatActivity() {
 
     fun inicializar() {
         firebaseAuthManager = FirebaseAuthManager(this)
-
     }
 
     fun comprobarSesion() {

@@ -46,7 +46,6 @@ class BuscarHotelesFragment : Fragment() {
     private lateinit var travelWithMeApiManager: TravelWithMeApiManager
 
 
-    private lateinit var hotelClicado: Hotel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,15 +60,17 @@ class BuscarHotelesFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var destino_hotel = arguments?.getString("destino_hotel").toString()
-        var fecha_entrada_hotel = arguments?.getString("fecha_entrada_hotel").toString()
-        var fecha_salida_hotel = arguments?.getString("destino_hotel").toString()
+        destino_hotel = arguments?.getString("destino_hotel").toString()
+        fecha_entrada_hotel = arguments?.getString("fecha_entrada_hotel").toString()
+        fecha_salida_hotel = arguments?.getString("destino_hotel").toString()
         Log.v("destino_hotel", "$destino_hotel")
         inicializar()
     }
 
 
-
+    /**
+     * Initializes the fragment by setting up necessary components and configurations.
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun inicializar() {
         travelWithMeApiManager = TravelWithMeApiManager(requireContext())
@@ -79,12 +80,16 @@ class BuscarHotelesFragment : Fragment() {
         buscarHoteles(destino_hotel, fecha_entrada_hotel, fecha_salida_hotel)
     }
 
+    /**
+     * Searches for hotels based on the provided parameters.
+     * Testing - When the user writes PRUEBA in the edittext, gets Hotel data from the class mockdata
+     * Normal mode - Gets hoteldata from the API
+     */
     @RequiresApi(Build.VERSION_CODES.O)
     fun buscarHoteles(nombre: String, fechaEntrada: String, fechaSalida: String) {
         if(nombre.equals("PRUEBA")) {
             listaHoteles = mockdata.listaPruebaHoteles()
             adaptadorRecycler.setData(listaHoteles)
-
         }
         else {
             CoroutineScope(Dispatchers.IO).launch {
@@ -105,6 +110,9 @@ class BuscarHotelesFragment : Fragment() {
         }
     }
 
+    /**
+     * Retrieves intent data passed to the fragment.
+     */
     fun recogerIntent() {
         val bundle = arguments
         if (bundle != null) {
@@ -116,12 +124,12 @@ class BuscarHotelesFragment : Fragment() {
     }
 
     /**
-     * Configura el recycler con su adaptador
-     * Al crear el adaptador se le pasa la lista de los hoteles y una lambda
-     * La lambda se ha declarado en el constructor del adapter (Hotel -> Unit), es la acción que se va a ejecutar cuando el
-     * usuario clique en un viewHolder
-     * - El dato Hotel es el hotel de la lista sobre el que se hará click
-     * - Una vez que se ejecute la lambda, pasará ese objeto Hotel, y se ejecutará la función cambiarFragment*/
+     * Configures the RecyclerView with its adapter.
+     * The adapter is created with a list of hotels and a lambda function.
+     * The lambda function is defined in the adapter's constructor (Hotel -> Unit), which is the action executed when a viewHolder is clicked.
+     * - The Hotel object is the hotel in the list that will be clicked.
+     * - When the lambda is executed, it passes the Hotel object and executes the cambiarFragment function.
+     */
     fun configurarRecycler() {
         recyclerView = binding.recyclerBusquedaFrag
         adaptadorRecycler = BuscarHotelesAdapter(listaHoteles) { hotel ->
@@ -135,9 +143,10 @@ class BuscarHotelesFragment : Fragment() {
 
 
 
-    /**pasa al fragment HotelFragment, y le pasa los datos del hotel seleccionado para mostrarlos en el fragment
-     * No llama a su propio navegador, si no al del fragment padre "BuscarFragment". De esta forma es capaz de salir del tablayout en el que
-     * está este fragment y buscarVuelosFragment*/
+    /**
+     * Navigates to the HotelFragment, passing the selected hotel's data to display in the fragment.
+     * It calls the parent fragment's navigator (BuscarFragment), allowing it to exit the TabLayout where this fragment and BuscarVuelosFragment reside.
+     */
     fun intentAHotelFrag(hotel: Hotel) {
         val bundle = Bundle()
         bundle.putSerializable("hotel", hotel)

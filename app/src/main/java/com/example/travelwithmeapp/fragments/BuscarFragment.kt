@@ -14,15 +14,16 @@ import com.example.travelwithmeapp.databinding.FragmentBuscarBinding
 import com.example.travelwithmeapp.utils.Utilities
 
 /**
- * Fragment for searching flights or hotels
- *
+ * Fragment class for handling the search functionality.
+ * Allows the user to search for flights or hotels based on selected criteria.
+
  * @author Samuel Fraisoli
  */
 
 class BuscarFragment : Fragment() {
     private lateinit var binding: FragmentBuscarBinding
     private var backgroundActual: ImageView? = null
-    //es un int, que va a determinar si el usuario quiere buscar vuelos (1), hoteles (2), o no ha seleccionado nada (0)
+    // A flag to determine if the user wants to search for flights (1), hotels (2), or has not selected anything (0)
     private var busquedaFlag = 0
     private lateinit var utilities: Utilities
 
@@ -40,6 +41,9 @@ class BuscarFragment : Fragment() {
         inicializar()
     }
 
+    /**
+     * Initializes the fragment by setting up the UI components and event listeners.
+     */
     fun inicializar() {
         utilities = Utilities()
         cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 0)
@@ -73,7 +77,15 @@ class BuscarFragment : Fragment() {
         }
     }
 
-    //VERIFICAR EDITTEXT
+    /**
+     * ============================
+     * FUNCTIONS FOR VERIFYING DATA
+     * ============================
+     */
+
+    /**
+     * Verifies if the required hotel search fields are filled.
+     */
     fun verificarDatosHoteles() : Boolean {
         if(
             binding.destinoHotel.text.isNotEmpty() &&
@@ -84,6 +96,9 @@ class BuscarFragment : Fragment() {
         else {return false}
     }
 
+    /**
+     * Verifies if the required flight search fields are filled.
+     */
     fun verificarDatosVuelos() : Boolean {
         if(
             binding.origenVuelo.text.isNotEmpty() &&
@@ -94,7 +109,15 @@ class BuscarFragment : Fragment() {
         else {return false}
     }
 
-    //INTENTS
+    /**
+     * ============================
+     * INTENTS
+     * ============================
+     */
+
+    /**
+     * Retrieves the intent data if the fragment is launched from another part of the app.
+     */
     fun recogerIntentExplorar() {
         val bundle = arguments
         val eleccion = bundle?.getInt("eleccion") ?: 0
@@ -104,6 +127,10 @@ class BuscarFragment : Fragment() {
             2 -> mostrarPantallaHoteles()
         }
     }
+
+    /**
+     * Sends an intent to BuscarHoteles with hotel filters
+     */
     fun intentABuscarHoteles() {
         val bundle = Bundle()
         bundle.putString("destino_hotel", binding.destinoHotel.text.toString())
@@ -112,6 +139,9 @@ class BuscarFragment : Fragment() {
         findNavController()?.navigate(R.id.action_buscarFragment_to_buscarHotelesFragment, bundle)
     }
 
+    /**
+     * Sends an intent to BuscarVuelos with flight filters
+     */
     fun intentABuscarVuelos() {
         val bundle = Bundle()
         bundle.putString("origen_vuelo", binding.origenVuelo.text.toString())
@@ -121,7 +151,15 @@ class BuscarFragment : Fragment() {
     }
 
 
-    //EFECTOS
+    /**
+     * ============================
+     * UI CHANGES
+     * ============================
+     */
+
+    /**
+     * Displays the flight search screen and updates the UI accordingly.
+     */
     fun mostrarPantallaVuelos() {
         cambiarFondo("vuelos")
         busquedaFlag = 1
@@ -129,6 +167,9 @@ class BuscarFragment : Fragment() {
         cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutHoteles, 0)
     }
 
+    /**
+     * Displays the hotel search screen and updates the UI accordingly.
+     */
     fun mostrarPantallaHoteles() {
         cambiarFondo("hoteles")
         busquedaFlag = 2
@@ -136,6 +177,12 @@ class BuscarFragment : Fragment() {
         cambiarVisibilidadChildrenViewGroup(binding.constraintLayoutVuelos, 0)
     }
 
+    /**
+     * Changes the visibility of all children in a ViewGroup.
+     *
+     * @param viewGroup The ViewGroup whose children should be shown or hidden.
+     * @param funcionalidad The visibility flag: 0 to hide, 1 to show.
+     */
     fun cambiarVisibilidadChildrenViewGroup(viewGroup: ViewGroup, funcionalidad: Int) {
         when(funcionalidad) {
             0 -> viewGroup.visibility = View.GONE
@@ -150,6 +197,10 @@ class BuscarFragment : Fragment() {
         }
     }
 
+    /**
+     * Changes the background image based on the type (flights or hotels).
+     * @param tipo The type of search (either "vuelos" for flights or "hoteles" for hotels).
+     */
     fun cambiarFondo(tipo: String) {
         var imagen: ImageView? = null
         when(tipo) {
@@ -159,26 +210,19 @@ class BuscarFragment : Fragment() {
 
         imagen?.let {
             backgroundActual?.let {
-                //hago que la imagen que quiero que sea el fondo, se superponga al fondo que había antes
+                // Make the new background image overlay the previous one
                 imagen.elevation = backgroundActual!!.elevation
                 backgroundActual!!.elevation = backgroundActual!!.elevation -1
             }
 
-            //la imagen aparece con un fade in
+            // Apply a fade-in animation to the new background image
             val fadeIn = AlphaAnimation(0f, 1f)
-            fadeIn.duration = 1000 // Duración de la animación en milisegundos
+            fadeIn.duration = 1000
             imagen.startAnimation(fadeIn)
-
-            //cuando ha terminado el fade in, hago la imagen visible
             imagen.visibility = View.VISIBLE
-
-            //convierto la imagen que he hecho visible al background actual
             backgroundActual = imagen
         }
-
     }
-
-
 }
 
 

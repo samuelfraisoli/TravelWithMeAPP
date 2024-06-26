@@ -13,7 +13,6 @@ import com.example.travelwithmeapp.models.User
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 
-
 /**
  * Class responsible for managing Firebase Authentication related operations.
  *

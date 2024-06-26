@@ -12,18 +12,27 @@ import com.example.travelwithmeapp.databinding.ViewholderCarouselBinding
 import com.example.travelwithmeapp.models.Hotel
 
 /**
- * Adapter for photo carousels of the application
+ * Adapter class for displaying images in a carousel.
+ * @property lista The list of image URLs to display.
  *
  * @author Samuel Fraisoli
  */
-
 class CarouselAdapter(
     val lista: List<String>)
  : RecyclerView.Adapter<CarouselAdapter.CarouselViewHolder>() {
+
+    /**
+     * ViewHolder class for holding and binding image views.
+     * @param view The view containing the image carousel layout.
+     */
     inner class CarouselViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val carouselImageView: AppCompatImageView =
             view.findViewById(R.id.carouselImageView)
 
+        /**
+         * Binds an image URL to the ImageView using Coil library with rounded corners transformation.
+         * @param imageUrl The URL of the image to load and display.
+         */
         fun bind(imageUrl: String) {
             carouselImageView.load(imageUrl) {
                 transformations(RoundedCornersTransformation(20f))
