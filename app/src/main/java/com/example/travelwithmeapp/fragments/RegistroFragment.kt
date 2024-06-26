@@ -28,7 +28,6 @@ import kotlin.coroutines.suspendCoroutine
  * @author Javier Cuesta
  * @author Samuel Fraisoli
  */
-
 class RegistroFragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentRegistroBinding
 

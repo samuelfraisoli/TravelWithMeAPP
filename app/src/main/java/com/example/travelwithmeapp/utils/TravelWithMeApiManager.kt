@@ -29,7 +29,6 @@ import kotlin.coroutines.resumeWithException
  *
  * @author Samuel Fraisoli
  */
-
 class TravelWithMeApiManager(var context: Context) {
     @RequiresApi(Build.VERSION_CODES.O)
     val utilities = Utilities()

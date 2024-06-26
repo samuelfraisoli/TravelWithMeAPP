@@ -7,6 +7,8 @@ package com.example.travelwithmeapp.models
  * - NULL: Default value indicating no specific provider.
  * - BASIC: Represents basic email/password authentication.
  * - GOOGLE: Represents authentication via Google Sign-In.
+ *
+ * @author Samuel Fraisoli
  */
 
 enum class ProviderType {

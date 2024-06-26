@@ -27,7 +27,6 @@ class ResenaHotelAdapter(
             itemBinding.horaFechaResena.text = utilities.formatearOffsetDateTimeDDMMYYYY(resena.fecha)
             itemBinding.textDescripcionPlan.text = resena.contenido
             itemBinding.ratingBar.rating = resena.nota
-
         }
     }
 

@@ -14,6 +14,8 @@ import java.io.Serializable
  * @property codPostal The postal code of the address.
  * @property latitud The latitude coordinate of the address.
  * @property longitud The longitude coordinate of the address.
+ *
+ * @author Samuel Fraisoli
  */
 
 data class Direccion(

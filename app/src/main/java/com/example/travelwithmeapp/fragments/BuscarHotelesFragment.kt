@@ -25,10 +25,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * Adapter for recyclerview of flight routes in a flight, of VueloFragment
+ * Fragment that shows a clicable list of hotels based on a destination and dates
  *
  * @author Samuel Fraisoli
  */
+
 class BuscarHotelesFragment : Fragment() {
     private lateinit var binding: FragmentBuscarHotelesBinding
     private lateinit var recyclerView: RecyclerView

@@ -10,6 +10,8 @@ import java.io.Serializable
  * @property alto The height of the luggage.
  * @property ancho The width of the luggage.
  * @property precio The price associated with the luggage.
+ *
+ * @author Samuel Fraisoli
  */
 
 data class Equipaje(

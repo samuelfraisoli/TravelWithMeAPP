@@ -29,6 +29,7 @@ import kotlinx.coroutines.withContext
  * @author Matías Martínez
  */
 
+
 class ExplorarFragment : Fragment() {
     private var mockData = MockData()
     private lateinit var binding: FragmentExplorarBinding

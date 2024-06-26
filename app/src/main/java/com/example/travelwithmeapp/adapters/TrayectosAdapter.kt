@@ -20,6 +20,12 @@ import java.util.Locale
  * @author Samuel Fraisoli
  */
 
+/**
+ * Adapter for recyclerview of flight routes in a flight, of VueloFragment
+ *
+ * @author Samuel Fraisoli
+ */
+
 class TrayectosAdapter(
     val lista: List<TrayectoVuelo>
     )

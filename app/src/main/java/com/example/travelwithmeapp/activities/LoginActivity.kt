@@ -2,7 +2,6 @@ package com.example.travelwithmeapp.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import androidx.appcompat.app.AppCompatActivity
 import com.example.travelwithmeapp.databinding.ActivityLoginBinding
 import com.example.travelwithmeapp.models.User
@@ -19,7 +18,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var firebaseAuthManager: FirebaseAuthManager
 
-    private val CODIGO_GOOGLE = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

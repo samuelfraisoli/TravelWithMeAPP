@@ -14,6 +14,7 @@ import java.io.Serializable
  *
  * @author Samuel Fraisoli
  */
+
 data class User(
     var uid: String = "",
     var email: String = "",

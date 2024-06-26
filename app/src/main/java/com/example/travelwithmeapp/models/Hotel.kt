@@ -14,6 +14,8 @@ import java.util.Date
  * @property direccion The address details of the hotel.
  * @property detalles The additional details of the hotel.
  * @property resenas List of reviews for the hotel.
+ *
+ * @author Samuel Fraisoli
  */
 
 data class Hotel (

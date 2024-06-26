@@ -13,10 +13,12 @@ import com.example.travelwithmeapp.utils.Utilities
 import com.example.travelwithmeapp.models.User
 
 /**
- * Fragments that shows a map with the user location and points of interest near them
+ *  Fragment for managing user profile information.
  *
- * @author Samuel Fraisoli
+ * @author Javier Cuesta
  */
+
+
 class PerfilFragment : Fragment() {
     private lateinit var binding: FragmentPerfilBinding
     private lateinit var firebaseFirestoreManager: FirebaseFirestoreManager

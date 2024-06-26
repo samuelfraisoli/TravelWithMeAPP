@@ -28,7 +28,7 @@ import kotlinx.coroutines.withContext
 /**
  *  Fragment for displaying favorite hotels planned by the user.
  *
- *  @author Matías Martínez
+ * @author Matías Martínez
  */
 class PlanificarFavoritosFragment : Fragment() {
     private lateinit var binding: FragmentPlanificarFavoritosBinding

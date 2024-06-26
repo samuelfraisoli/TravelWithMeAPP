@@ -13,6 +13,7 @@ import com.example.travelwithmeapp.models.Vuelo
 import com.example.travelwithmeapp.utils.Utilities
 import java.time.LocalTime
 
+
 /**
  * Adapter for recyclerview in BuscarVuelosFragment
  *

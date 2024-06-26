@@ -14,7 +14,10 @@ import java.time.OffsetDateTime
  * @property titulo The title of the review.
  * @property contenido The content or text of the review.
  * @property nota The rating given in the review, default is 1.0.
+ *
+ * @author Samuel Fraisoli
  */
+
 
 data class Resena @RequiresApi(Build.VERSION_CODES.O) constructor(
     var id: String = "",

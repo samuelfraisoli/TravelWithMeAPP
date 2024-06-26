@@ -11,6 +11,8 @@ import java.io.Serializable
  * @property telefono The contact phone number of the hotel.
  * @property comodidades List of amenities available at the hotel.
  * @property precio The price of staying at the hotel.
+ *
+ * @author Samuel Fraisoli
  */
 
 data class DetallesHotel(
