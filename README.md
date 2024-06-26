@@ -15,7 +15,7 @@ TravelWithMeApp es una aplicación de reserva de vuelos y hoteles. Está diseña
 ## Tecnologías
 - **Firebase Auth** como sistema de autenticación de usuarios.
 - **Firebase Firestore** como base de datos donde guardamos los datos personales de nuestros usuarios y sus listas de favoritos
-- **API REST Propia** **TravelWithMeAPI** desarrollada en Java Spring y Angular. Desde nuestra API Se sirven los datos de vuelos y hoteles a nuestra aplicación y también puede ser usada por terceros.
+- **API REST Propia**, **TravelWithMeAPI** desarrollada en Java Spring y Angular. Desde nuestra API Se sirven los datos de vuelos y hoteles a nuestra aplicación y también puede ser usada por terceros.
 - **Despliegue en AWS** de nuestra API y base de datos
 - **Corrutinas de Kotlin** para realizar tareas asíncronas sin paralizar la aplicación.
 - **Biblioteca Volley** para gestionar las solicitudes HTTP
